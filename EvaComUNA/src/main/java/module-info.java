@@ -3,8 +3,9 @@ module cr.ac.una.evacomuna {
     requires javafx.fxml;
     requires java.base;
     requires java.logging;
-
-    opens cr.ac.una.evacomuna to javafx.fxml,java.base,com.jfoenix,javafx.graphics;
+    requires com.jfoenix;
+    
+    opens cr.ac.una.evacomuna to javafx.fxml,java.base,com.jfoenix;
     opens cr.ac.una.evacomuna.controller to javafx.fxml;
     opens cr.ac.una.evacomuna.util to javafx.fxml;
     

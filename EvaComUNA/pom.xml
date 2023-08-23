@@ -176,6 +176,59 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--Jlink plugin agragar modulos cuando se necesiten -->
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jlink-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>create-runtime-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jlink</goal>
+                        </goals>
+                        <configuration>
+                            <launcher>myapp=cr.ac.una.evacomuna/cr.ac.una.evacomuna.App</launcher>
+                            <stripDebug>true</stripDebug>
+                            <compress>2</compress>
+                            <noHeaderFiles>true</noHeaderFiles>
+                            <noManPages>true</noManPages>
+                            <modulePaths>
+                                ${project.build.directory}/modules
+                            </modulePaths>
+                            <outputDirectory>
+                                ${project.build.directory}/image
+                            </outputDirectory>
+                            <addModules>
+                                <addModule>javafx.controls</addModule>
+                                <addModule>javafx.fxml</addModule>
+                                <addModule>com.jfoenix</addModule>
+                            </addModules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jlink-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <stripDebug>true</stripDebug>
+                    <compress>2</compress>
+                    <addModules>ALL-MODULE-PATH</addModules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-runtime-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jlink</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+
         </plugins>
     </build>
 </project>
