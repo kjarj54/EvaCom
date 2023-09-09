@@ -130,7 +130,7 @@ CREATE TABLE TAR_USUARIO(
   usu_version Number DEFAULT 1 NOT NULL,
   pue_id Number,
   CONSTRAINT TAR_USUARIO_CK01 CHECK (usu_activo in ('A','I')),
-  CONSTRAINT TAR_USUARIO_CK02 CHECK (usu_admin in ("S","N"))
+  CONSTRAINT TAR_USUARIO_CK02 CHECK (usu_admin in ('S','N'))
 )
 ;
 
@@ -184,7 +184,7 @@ CREATE TABLE TAR_PUESTO(
   pue_nombre Varchar2(30 ) NOT NULL,
   pue_estado Varchar2(1 ) DEFAULT 'A' NOT NULL,
   pue_version Number DEFAULT 1 NOT NULL,
-  CONSTRAINT TAR_PUESTO_CK01 CHECK (pue_estado in ("A","I"))
+  CONSTRAINT TAR_PUESTO_CK01 CHECK (pue_estado in ('A','I'))
 )
 ;
 
@@ -211,7 +211,7 @@ CREATE TABLE TAR_COMPETENCIA(
   com_nombre Varchar2(30 ) NOT NULL,
   com_estado Varchar2(1 ) DEFAULT 'A' NOT NULL,
   com_version Number DEFAULT 1 NOT NULL,
-  CONSTRAINT TAR_COMPETENCIA_CK01 CHECK (com_estado in ("A","I"))
+  CONSTRAINT TAR_COMPETENCIA_CK01 CHECK (com_estado in ('A','I'))
 )
 ;
 
@@ -269,7 +269,7 @@ CREATE TABLE TAR_PROCESOEVALUACION(
   pro_titulo Varchar2(100 ) NOT NULL,
   pro_estado Varchar2(1 ) NOT NULL,
   pro_version Number DEFAULT 1 NOT NULL,
-  CONSTRAINT TAR_PROCESOEVALUACION_CK01 CHECK (pro_estado in ("C","A","R","F"))
+  CONSTRAINT TAR_PROCESOEVALUACION_CK01 CHECK (pro_estado in ('C','A','R','F'))
 )
 ;
 
@@ -377,7 +377,7 @@ COMMENT ON COLUMN TAR_TRABAJADOREVALUAR.tra_version IS 'version del registro del
 CREATE TABLE TAR_COMPETENCIAEVALUAR(
   coe_id Number NOT NULL,
   coe_calificacion Varchar2(5 ),
-  coe_version Number NOT NULL,
+  coe_version Number DEFAULT 1 NOT NULL,
   evalu_id Number,
   com_id Number
 )
