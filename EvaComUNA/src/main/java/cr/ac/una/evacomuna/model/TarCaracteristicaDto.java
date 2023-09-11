@@ -7,7 +7,7 @@ package cr.ac.una.evacomuna.model;
 /**
  *
  * @author kevin
- */
+ *//*
 public class TarCaracteristicaDto {
     private Long carId;
     private String carDescripcion;
@@ -63,3 +63,4 @@ public class TarCaracteristicaDto {
     
     
 }
+*/

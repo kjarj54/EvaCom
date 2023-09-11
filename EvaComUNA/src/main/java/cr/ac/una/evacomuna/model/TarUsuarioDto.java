@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  *
  * @author kevin
- */
+ 
 public class TarUsuarioDto {
     private Long usuId;
     private String usuNombre;
@@ -151,3 +151,4 @@ public class TarUsuarioDto {
     
     
 }
+*/

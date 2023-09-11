@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  *
  * @author kevin
- */
+ *
 public class TarParametrosDto {
     private Long parId;
     private String parNombre;
@@ -111,4 +111,4 @@ public class TarParametrosDto {
     
     
     
-}
+}*/

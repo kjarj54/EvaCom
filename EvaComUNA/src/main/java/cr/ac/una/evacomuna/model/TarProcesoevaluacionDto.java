@@ -72,7 +72,7 @@ public class TarProcesoevaluacionDto {
     }
 
     public void setProEstado(String proEstado) {
-        this.proEstado.set(proEstado.equals("a"));//cambiar
+        this.proEstado.set(proEstado);
     }
 
     public Long getProVersion() {

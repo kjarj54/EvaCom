@@ -7,7 +7,7 @@ package cr.ac.una.evacomuna.model;
 /**
  *
  * @author kevin
- */
+ 
 public class TarEvaluadorDto {
     private Long evaluId;
     private String evaluRetroalimentacion;
@@ -58,3 +58,4 @@ public class TarEvaluadorDto {
     
     
 }
+*/

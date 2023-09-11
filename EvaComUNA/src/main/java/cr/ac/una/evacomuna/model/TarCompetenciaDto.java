@@ -7,7 +7,7 @@ package cr.ac.una.evacomuna.model;
 /**
  *
  * @author kevin
- */
+ *//*
 public class TarCompetenciaDto {
 
     private Long comId;
@@ -68,3 +68,4 @@ public class TarCompetenciaDto {
     }
 
 }
+*/

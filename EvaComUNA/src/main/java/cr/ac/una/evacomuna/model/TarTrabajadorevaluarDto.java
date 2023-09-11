@@ -7,7 +7,7 @@ package cr.ac.una.evacomuna.model;
 /**
  *
  * @author kevin
- */
+ *
 public class TarTrabajadorevaluarDto {
     private Long traId;
     private String traResultado;
@@ -16,9 +16,6 @@ public class TarTrabajadorevaluarDto {
     
     
     public TarTrabajadorevaluarDto() {
-        this.modificado = false;
-    }
-    public TarTrabajadorevaluarDto(TarTrabajadorevaluar tarTrabajadorevaluar) {
         this.traId = tarTrabajadorevaluar.getTraId();
         this.traResultado = tarTrabajadorevaluar.getTraResultado();
         this.traVersion = tarTrabajadorevaluar.getTraVersion();
@@ -58,3 +55,4 @@ public class TarTrabajadorevaluarDto {
     
     
 }
+*/

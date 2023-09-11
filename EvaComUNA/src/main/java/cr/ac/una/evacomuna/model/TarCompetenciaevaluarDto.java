@@ -7,7 +7,7 @@ package cr.ac.una.evacomuna.model;
 /**
  *
  * @author kevin
- */
+ *//*
 public class TarCompetenciaevaluarDto {
     private Long coeId;
     private String coeCalificacion;
@@ -59,3 +59,4 @@ public class TarCompetenciaevaluarDto {
     
     
 }
+*/
