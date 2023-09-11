@@ -73,11 +73,16 @@ public class TarPuesto implements Serializable {
         this.pueId = pueId;
     }
 
-    public TarPuesto(Long pueId, String pueNombre, String pueEstado, Long pueVersion) {
-        this.pueId = pueId;
-        this.pueNombre = pueNombre;
-        this.pueEstado = pueEstado;
-        this.pueVersion = pueVersion;
+    public TarPuesto(TarPuestoDto tarPuestoDto ) {
+        this.pueId = tarPuestoDto.getPueId();
+        actaulizar(tarPuestoDto);
+        
+    }
+    
+    public void actaulizar(TarPuestoDto tarPuestoDto){
+        this.pueNombre = tarPuestoDto.getPueNombre();
+        this.pueEstado = tarPuestoDto.getPueEstado();
+        this.pueVersion = tarPuestoDto.getPueVersion();
     }
 
     public Long getPueId() {

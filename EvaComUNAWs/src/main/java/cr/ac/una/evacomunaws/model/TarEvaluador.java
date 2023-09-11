@@ -5,8 +5,6 @@
 package cr.ac.una.evacomunaws.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -67,9 +65,13 @@ public class TarEvaluador implements Serializable {
         this.evaluId = evaluId;
     }
 
-    public TarEvaluador(Long evaluId, Long evaluVersion) {
-        this.evaluId = evaluId;
-        this.evaluVersion = evaluVersion;
+    public TarEvaluador(TarEvaluadorDto tarEvaluadorDto) {
+        this.evaluId = tarEvaluadorDto.getEvaluId();
+        actualizar(tarEvaluadorDto);
+    }
+    public void actualizar(TarEvaluadorDto tarEvaluadorDto){
+        this.evaluRetroalimentacion = tarEvaluadorDto.getEvaluRetroalimentacion();
+        this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
     }
 
     public Long getEvaluId() {

@@ -5,8 +5,6 @@
 package cr.ac.una.evacomunaws.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -63,9 +61,14 @@ public class TarCompetenciaevaluar implements Serializable {
         this.coeId = coeId;
     }
 
-    public TarCompetenciaevaluar(Long coeId, Long coeVersion) {
-        this.coeId = coeId;
-        this.coeVersion = coeVersion;
+    public TarCompetenciaevaluar(TarCompetenciaevaluarDto tarCompetenciaevaluarDto) {
+        this.coeId = tarCompetenciaevaluarDto.getCoeId();
+        actualizar(tarCompetenciaevaluarDto);
+    }
+    
+    public void actualizar(TarCompetenciaevaluarDto tarCompetenciaevaluarDto){
+        this.coeCalificacion = tarCompetenciaevaluarDto.getCoeCalificacion();
+        this.coeVersion = tarCompetenciaevaluarDto.getCoeVersion();
     }
 
     public Long getCoeId() {

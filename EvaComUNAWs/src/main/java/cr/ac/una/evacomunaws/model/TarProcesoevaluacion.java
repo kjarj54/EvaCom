@@ -72,13 +72,17 @@ public class TarProcesoevaluacion implements Serializable {
         this.proId = proId;
     }
 
-    public TarProcesoevaluacion(Long proId, LocalDate proFini, LocalDate proFfin, String proTitulo, String proEstado, Long proVersion) {
-        this.proId = proId;
-        this.proFini = proFini;
-        this.proFfin = proFfin;
-        this.proTitulo = proTitulo;
-        this.proEstado = proEstado;
-        this.proVersion = proVersion;
+    public TarProcesoevaluacion(TarProcesoevaluacionDto tarProcesoevaluacionDto) {
+        this.proId = tarProcesoevaluacionDto.getProId();
+        actualizar(tarProcesoevaluacionDto);
+    }
+    
+    public void actualizar(TarProcesoevaluacionDto tarProcesoevaluacionDto){
+        this.proFini = tarProcesoevaluacionDto.getProFini();
+        this.proFfin = tarProcesoevaluacionDto.getProFfin();
+        this.proTitulo = tarProcesoevaluacionDto.getProTitulo();
+        this.proEstado = tarProcesoevaluacionDto.getProEstado();
+        this.proVersion = tarProcesoevaluacionDto.getProVersion();
     }
 
     public Long getProId() {

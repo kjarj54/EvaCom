@@ -101,16 +101,24 @@ public class TarUsuario implements Serializable {
         this.usuId = usuId;
     }
 
-    public TarUsuario(Long usuId, String usuNombre, String usuApellido, String usuCedula, String usuCorreo, String usuClave, String usuActivo, String usuAdmin, Long usuVersion) {
-        this.usuId = usuId;
-        this.usuNombre = usuNombre;
-        this.usuApellido = usuApellido;
-        this.usuCedula = usuCedula;
-        this.usuCorreo = usuCorreo;
-        this.usuClave = usuClave;
-        this.usuActivo = usuActivo;
-        this.usuAdmin = usuAdmin;
-        this.usuVersion = usuVersion;
+    public TarUsuario(TarUsuarioDto tarUsuarioDto) {
+        this.usuId = tarUsuarioDto.getUsuId();
+        actualizar(tarUsuarioDto);
+    }
+    
+    public void actualizar(TarUsuarioDto tarUsuarioDto){
+        this.usuNombre = tarUsuarioDto.getUsuNombre();
+        this.usuApellido = tarUsuarioDto.getUsuApellido();
+        this.usuCedula = tarUsuarioDto.getUsuCedula();
+        this.usuCorreo = tarUsuarioDto.getUsuCorreo();
+        this.usuClave = tarUsuarioDto.getUsuClave();
+        this.usuActivo = tarUsuarioDto.getUsuActivo();
+        this.usuAdmin = tarUsuarioDto.getUsuAdmin();
+        this.usuCelular = tarUsuarioDto.getUsuCelular();
+        this.usuTelefono = tarUsuarioDto.getUsuTelefono();
+        this.usuVersion = tarUsuarioDto.getUsuVersion();
+        this.usuFoto = tarUsuarioDto.getUsuFoto();
+        
     }
 
     public Long getUsuId() {

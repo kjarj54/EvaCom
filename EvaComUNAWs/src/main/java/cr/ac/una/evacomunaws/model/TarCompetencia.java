@@ -70,12 +70,16 @@ public class TarCompetencia implements Serializable {
     public TarCompetencia(Long comId) {
         this.comId = comId;
     }
-
-    public TarCompetencia(Long comId, String comNombre, String comEstado, Long comVersion) {
-        this.comId = comId;
-        this.comNombre = comNombre;
-        this.comEstado = comEstado;
-        this.comVersion = comVersion;
+    
+    public TarCompetencia(TarCompetenciaDto tarCompetenciaDto) {
+        this.comId = tarCompetenciaDto.getComId();
+        actualizar(tarCompetenciaDto);
+    }
+    
+    public void actualizar(TarCompetenciaDto tarCompetenciaDto) {
+        this.comNombre = tarCompetenciaDto.getComNombre();
+        this.comEstado = tarCompetenciaDto.getComEstado();
+        this.comVersion = tarCompetenciaDto.getComVersion();
     }
 
     public Long getComId() {

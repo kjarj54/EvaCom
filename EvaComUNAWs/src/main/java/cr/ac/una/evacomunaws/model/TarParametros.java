@@ -73,11 +73,19 @@ public class TarParametros implements Serializable {
         this.parId = parId;
     }
 
-    public TarParametros(Long parId, Long parVersion) {
+    public TarParametros(TarParametrosDto tarParametrosDto) {
         this.parId = parId;
-        this.parVersion = parVersion;
+        actualizar(tarParametrosDto);
     }
-
+    public void actualizar(TarParametrosDto tarParametrosDto ){
+        this.parClave = tarParametrosDto.getParClave();
+        this.parDescripcion = tarParametrosDto.getParDescripcion();
+        this.parEmail = tarParametrosDto.getParEmail();
+        this.parHtml = tarParametrosDto.getParHtml();
+        this.parLogo = tarParametrosDto.getParLogo();
+        this.parNombre = tarParametrosDto.getParNombre();
+        this.parVersion = tarParametrosDto.getParVersion();
+    }
     public Long getParId() {
         return parId;
     }
