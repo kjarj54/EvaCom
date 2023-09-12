@@ -4,11 +4,10 @@
  */
 package cr.ac.una.evacomunaws.service;
 
-import cr.ac.una.evacomunaws.model.TarCaracteristicaDto;
-import cr.ac.una.evacomunaws.model.TarCompetencia;
-import cr.ac.una.evacomunaws.model.TarCompetenciaDto;
-import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import cr.ac.una.evacomunaws.util.Respuesta;
+import cr.ac.una.evacomunaws.model.TarCompetenciaevaluar;
+import cr.ac.una.evacomunaws.model.TarCompetenciaevaluarDto;
+import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -28,42 +27,43 @@ import java.util.logging.Logger;
  */
 @Stateless
 @LocalBean
-public class TarCompetenciaService {
-    private static final Logger LOG = Logger.getLogger(TarCompetenciaService.class.getName());
+public class TarCompetenciaevaluarService {
+
+    private static final Logger LOG = Logger.getLogger(TarCompetenciaevaluarService.class.getName());
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
     
-    public Respuesta guardarCompetencia(TarCompetenciaDto tarCompetenciaDto) {
+    public Respuesta guardarCompetenciaEvaluar(TarCompetenciaevaluarDto tarCompetenicaevaluarDto) {
         try {
-            TarCompetencia competencia;
-            if (tarCompetenciaDto.getComId() != null && tarCompetenciaDto.getComId() > 0) {
-                competencia = em.find(TarCompetencia.class, tarCompetenciaDto.getComId());
-                if (competencia == null) {
+            TarCompetenciaevaluar competenciaEvaluar;
+            if (tarCompetenicaevaluarDto.getCoeId()!= null && tarCompetenicaevaluarDto.getCoeId()> 0) {
+                competenciaEvaluar = em.find(TarCompetenciaevaluar.class, tarCompetenicaevaluarDto.getCoeId());
+                if (competenciaEvaluar == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competencia a modificar.", "guardarCompetencia NoResultException");
                 }
-                competencia.actualizar(tarCompetenciaDto);
-                competencia = em.merge(competencia);
+                competenciaEvaluar.actualizar(tarCompetenicaevaluarDto);
+                competenciaEvaluar = em.merge(competenciaEvaluar);
             } else {
-                competencia = new TarCompetencia(tarCompetenciaDto);
-                em.persist(competencia);
+                competenciaEvaluar = new TarCompetenciaevaluar(tarCompetenicaevaluarDto);
+                em.persist(competenciaEvaluar);
             }
             em.flush();
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaDto(competencia));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaevaluarDto(competenciaEvaluar));
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "Ocurrio un error al guardar la competencia.", ex);
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la competencia.", "guardarCompetencia " + ex.getMessage());
         }
     }
     
-    public Respuesta eliminarCompetencia(Long id) {
+    public Respuesta eliminarCompetenciaEvaluar(Long id) {
         try {
-            TarCompetencia competencia;
+            TarCompetenciaevaluar competenciaEvaluar;
             if (id != null && id > 0) {
-                competencia = em.find(TarCompetencia.class, id);
-                if (competencia == null) {
+                competenciaEvaluar = em.find(TarCompetenciaevaluar.class, id);
+                if (competenciaEvaluar == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competencia a eliminar.", "eliminarCompetencia NoResultException");
                 }
-                em.remove(competencia);
+                em.remove(competenciaEvaluar);
             } else {
                 return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "Debe cargar la competencia a eliminar.", "eliminarCompetencia NoResultException");
             }
@@ -78,16 +78,16 @@ public class TarCompetenciaService {
         }
     }
     
-    public Respuesta getCompetencias() {
+    public Respuesta getCompetenciasEvaluar() {
         try {
-            Query qryCompetencia = em.createNamedQuery("", TarCompetencia.class);
-            List<TarCompetencia> competencias = qryCompetencia.getResultList();
-            List<TarCompetenciaDto> competenciaDto = new ArrayList<>();
-            for (TarCompetencia competencia : competencias) {
-                competenciaDto.add(new TarCompetenciaDto(competencia));
+            Query qryCompetencia = em.createNamedQuery("", TarCompetenciaevaluar.class);
+            List<TarCompetenciaevaluar> competenciasEvaluar = qryCompetencia.getResultList();
+            List<TarCompetenciaevaluarDto> competenciaEvaluarDto = new ArrayList<>();
+            for (TarCompetenciaevaluar competenciaEvaluar : competenciasEvaluar) {
+                competenciaEvaluarDto.add(new TarCompetenciaevaluarDto(competenciaEvaluar));
             }
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", competenciaDto);
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", competenciaEvaluarDto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen competencias con los criterios ingresados.", "getCompetencias NoResultException");
@@ -97,12 +97,12 @@ public class TarCompetenciaService {
         }
     }
     
-    public Respuesta getCompetencia(Long id) {
+    public Respuesta getCompetenciaEvaluar(Long id) {
         try {
-            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findBy", TarCompetencia.class);
+            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findBy", TarCompetenciaevaluar.class);
             qryCompetencia.setParameter("id", id);
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaDto((TarCompetencia) qryCompetencia.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaevaluarDto((TarCompetenciaevaluar) qryCompetencia.getSingleResult()));
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe una competencia con el código ingresado.", "getCompetencia NoResultException");
