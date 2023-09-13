@@ -80,7 +80,7 @@ public class TarCompetenciaService {
     
     public Respuesta getCompetencias() {
         try {
-            Query qryCompetencia = em.createNamedQuery("", TarCompetencia.class);
+            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findAll", TarCompetencia.class);
             List<TarCompetencia> competencias = qryCompetencia.getResultList();
             List<TarCompetenciaDto> competenciaDto = new ArrayList<>();
             for (TarCompetencia competencia : competencias) {
@@ -97,10 +97,10 @@ public class TarCompetenciaService {
         }
     }
     
-    public Respuesta getCompetencia(Long id) {
+    public Respuesta getCompetencia(Long comId) {
         try {
-            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findBy", TarCompetencia.class);
-            qryCompetencia.setParameter("id", id);
+            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findByComId", TarCompetencia.class);
+            qryCompetencia.setParameter("comId", comId);
 
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaDto((TarCompetencia) qryCompetencia.getSingleResult()));
 

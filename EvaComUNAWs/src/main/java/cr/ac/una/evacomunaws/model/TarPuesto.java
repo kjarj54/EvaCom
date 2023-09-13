@@ -75,11 +75,11 @@ public class TarPuesto implements Serializable {
 
     public TarPuesto(TarPuestoDto tarPuestoDto ) {
         this.pueId = tarPuestoDto.getPueId();
-        actaulizar(tarPuestoDto);
+        actualizar(tarPuestoDto);
         
     }
     
-    public void actaulizar(TarPuestoDto tarPuestoDto){
+    public void actualizar(TarPuestoDto tarPuestoDto){
         this.pueNombre = tarPuestoDto.getPueNombre();
         this.pueEstado = tarPuestoDto.getPueEstado();
         this.pueVersion = tarPuestoDto.getPueVersion();

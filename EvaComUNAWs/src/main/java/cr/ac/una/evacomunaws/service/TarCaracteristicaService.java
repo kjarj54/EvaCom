@@ -52,7 +52,7 @@ public class TarCaracteristicaService {
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Caracteristica", new TarCaracteristicaDto(caracteristica));
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "Ocurrio un error al guardar la caracteristica.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la caracteristica.", "guardarEmpleado " + ex.getMessage());
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la caracteristica.", "guardarCaracteristica " + ex.getMessage());
         }
     }
     
@@ -78,10 +78,10 @@ public class TarCaracteristicaService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar la caracteristica.", "eliminarCaracteristica " + ex.getMessage());
         }
     }
-    
+    //TODO
     public Respuesta getCaracteristicas() {
         try {
-            Query qryCaracteristica = em.createNamedQuery("", TarCaracteristica.class);
+            Query qryCaracteristica = em.createNamedQuery("TarCaracteristica.findAll", TarCaracteristica.class);
             List<TarCaracteristica> caracteristicas = qryCaracteristica.getResultList();
             List<TarCaracteristicaDto> caracteristicaDto = new ArrayList<>();
             for (TarCaracteristica caracteristica : caracteristicas) {
@@ -98,21 +98,21 @@ public class TarCaracteristicaService {
         }
     }
     
-    public Respuesta getCaracteristica(Long id) {
+    public Respuesta getCaracteristica(Long carId) {
         try {
             Query qryCaracteristica = em.createNamedQuery("TarCaracteristica.findByCarId", TarCaracteristica.class);
-            qryCaracteristica.setParameter("id", id);
+            qryCaracteristica.setParameter("carId", carId);
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Empleado", new TarCaracteristicaDto((TarCaracteristica) qryCaracteristica.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Caracteristica", new TarCaracteristicaDto((TarCaracteristica) qryCaracteristica.getSingleResult()));
 
         } catch (NoResultException ex) {
-            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un empleado con el código ingresado.", "getEmpleado NoResultException");
+            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe una caracteristica con el código ingresado.", "getCaracteristica NoResultException");
         } catch (NonUniqueResultException ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el empleado.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el empleado.", "getEmpleado NonUniqueResultException");
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar la caracteristica.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la caracteristica.", "getCaracteristica NonUniqueResultException");
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el empleado.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el empleado.", "getEmpleado " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar la caracteristica.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la caracteristica.", "getCaracteristica " + ex.getMessage());
         }
     }
     

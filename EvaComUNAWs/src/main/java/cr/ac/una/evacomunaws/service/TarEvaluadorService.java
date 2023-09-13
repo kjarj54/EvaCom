@@ -38,7 +38,7 @@ public class TarEvaluadorService {
             if (tarEvaluadorDto.getEvaluId()!= null && tarEvaluadorDto.getEvaluId()> 0) {
                 evaluador = em.find(TarEvaluador.class, tarEvaluadorDto.getEvaluId());
                 if (evaluador == null) {
-                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "guardarCaracteristica NoResultException");
+                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el evaluador a modificar.", "guardarEvaluador NoResultException");
                 }
                 evaluador.actualizar(tarEvaluadorDto);
                 evaluador = em.merge(evaluador);
@@ -47,10 +47,10 @@ public class TarEvaluadorService {
                 em.persist(evaluador);
             }
             em.flush();
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "TarUsuario", new TarEvaluadorDto(evaluador));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Evaluador", new TarEvaluadorDto(evaluador));
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al guardar el usuario.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el usuario.", "guardarUsuario " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al guardar el evaluador.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el evaluador.", "guardarEvaluador " + ex.getMessage());
         }
     }
     
@@ -60,57 +60,57 @@ public class TarEvaluadorService {
             if (id != null && id > 0) {
                 evaluador = em.find(TarEvaluador.class, id);
                 if (evaluador == null) {
-                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a eliminar.", "eliminarUsuario NoResultException");
+                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el evaluador a eliminar.", "eliminarEvaluador NoResultException");
                 }
                 em.remove(evaluador);
             } else {
-                return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "Debe cargar el usuario a eliminar.", "eliminarUsuario NoResultException");
+                return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "Debe cargar el evaluador a eliminar.", "eliminarEvaluador NoResultException");
             }
             em.flush();
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "");
         } catch (Exception ex) {
             if (ex.getCause() != null && ex.getCause().getCause().getClass() == SQLIntegrityConstraintViolationException.class) {
-                return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "No se puede eliminar el usuario porque tiene relaciones con otros registros.", "eliminarUsuario " + ex.getMessage());
+                return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "No se puede eliminar el evaluador porque tiene relaciones con otros registros.", "eliminarEvaluador " + ex.getMessage());
             }
             LOG.log(Level.SEVERE, "Ocurrio un error al guardar la caracteristica.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar el usuario.", "eliminarUsuario " + ex.getMessage());
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar el evaluador.", "eliminarEvaluador " + ex.getMessage());
         }
     }
-    
+    //TODO
     public Respuesta getEvaluadores() {
         try {
-            Query qryEvaluador = em.createNamedQuery("", TarEvaluador.class);
+            Query qryEvaluador = em.createNamedQuery("TarEvaluador.findAll", TarEvaluador.class);
             List<TarEvaluador> evaluadores = qryEvaluador.getResultList();
             List<TarEvaluadorDto> evaluadorDto = new ArrayList<>();
             for (TarEvaluador evaluador : evaluadores) {
                 evaluadorDto.add(new TarEvaluadorDto(evaluador));
             }
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", evaluadorDto);
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Evaluadores", evaluadorDto);
 
         } catch (NoResultException ex) {
-            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen usuarios con los criterios ingresados.", "getUsuarios NoResultException");
+            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen evaluadores con los criterios ingresados.", "getEvaluadores NoResultException");
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar usuarios.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar usuarios.", "getUsuarios " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar evaluadores.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar evaluadores.", "getEvaluadores " + ex.getMessage());
         }
     }
     
-    public Respuesta getEvaluador(Long id) {
+    public Respuesta getEvaluador(Long evaluId) {
         try {
-            Query qryCaracteristica = em.createNamedQuery("TarUsuario.findBy", TarEvaluador.class);
-            qryCaracteristica.setParameter("id", id);
+            Query qryCaracteristica = em.createNamedQuery("TarEvaluador.findByEvaluId", TarEvaluador.class);
+            qryCaracteristica.setParameter("evaluId", evaluId);
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Empleado", new TarEvaluadorDto((TarEvaluador) qryCaracteristica.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Evaluador", new TarEvaluadorDto((TarEvaluador) qryCaracteristica.getSingleResult()));
 
         } catch (NoResultException ex) {
-            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un usuario con el código ingresado.", "getUsuario NoResultException");
+            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un evaluador con el código ingresado.", "getEvaluador NoResultException");
         } catch (NonUniqueResultException ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el usuario.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el usuario.", "getUsuario NonUniqueResultException");
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el evaluador.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el evaluador.", "getEvaluador NonUniqueResultException");
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el usuario.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el usuario.", "getUsuario " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el evaluador.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el evaluador.", "getEvaluador " + ex.getMessage());
         }
     }
 }

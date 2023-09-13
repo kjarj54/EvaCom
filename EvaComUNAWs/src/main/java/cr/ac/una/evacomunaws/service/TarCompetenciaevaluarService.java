@@ -39,7 +39,7 @@ public class TarCompetenciaevaluarService {
             if (tarCompetenicaevaluarDto.getCoeId()!= null && tarCompetenicaevaluarDto.getCoeId()> 0) {
                 competenciaEvaluar = em.find(TarCompetenciaevaluar.class, tarCompetenicaevaluarDto.getCoeId());
                 if (competenciaEvaluar == null) {
-                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competencia a modificar.", "guardarCompetencia NoResultException");
+                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competenciaevaluar a modificar.", "guardarCompetenciaEvaluar NoResultException");
                 }
                 competenciaEvaluar.actualizar(tarCompetenicaevaluarDto);
                 competenciaEvaluar = em.merge(competenciaEvaluar);
@@ -48,10 +48,10 @@ public class TarCompetenciaevaluarService {
                 em.persist(competenciaEvaluar);
             }
             em.flush();
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaevaluarDto(competenciaEvaluar));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "CompetenciaEvaluar", new TarCompetenciaevaluarDto(competenciaEvaluar));
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al guardar la competencia.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la competencia.", "guardarCompetencia " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al guardar la competenciaevaluar.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la competenciaevaluar.", "guardarCompetenciaEvaluar " + ex.getMessage());
         }
     }
     
@@ -61,57 +61,57 @@ public class TarCompetenciaevaluarService {
             if (id != null && id > 0) {
                 competenciaEvaluar = em.find(TarCompetenciaevaluar.class, id);
                 if (competenciaEvaluar == null) {
-                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competencia a eliminar.", "eliminarCompetencia NoResultException");
+                    return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competenciaevaluar a eliminar.", "eliminarCompetenciaEvaluar NoResultException");
                 }
                 em.remove(competenciaEvaluar);
             } else {
-                return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "Debe cargar la competencia a eliminar.", "eliminarCompetencia NoResultException");
+                return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "Debe cargar la competenciaevaluar a eliminar.", "eliminarCompetenciaEvaluar NoResultException");
             }
             em.flush();
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "");
         } catch (Exception ex) {
             if (ex.getCause() != null && ex.getCause().getCause().getClass() == SQLIntegrityConstraintViolationException.class) {
-                return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "No se puede eliminar la competencia porque tiene relaciones con otros registros.", "eliminarCompetencia " + ex.getMessage());
+                return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "No se puede eliminar la competenciaevaluar porque tiene relaciones con otros registros.", "eliminarCompetenciaEvaluar " + ex.getMessage());
             }
-            LOG.log(Level.SEVERE, "Ocurrio un error al guardar la competencia.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar la competencia.", "eliminarCompetencia " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al guardar la competenciaevaluar.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar la competenciaevaluar.", "eliminarCompetenciaEvaluar " + ex.getMessage());
         }
     }
     
     public Respuesta getCompetenciasEvaluar() {
         try {
-            Query qryCompetencia = em.createNamedQuery("", TarCompetenciaevaluar.class);
+            Query qryCompetencia = em.createNamedQuery("TarCompetenciaevaluar.findAll", TarCompetenciaevaluar.class);
             List<TarCompetenciaevaluar> competenciasEvaluar = qryCompetencia.getResultList();
             List<TarCompetenciaevaluarDto> competenciaEvaluarDto = new ArrayList<>();
             for (TarCompetenciaevaluar competenciaEvaluar : competenciasEvaluar) {
                 competenciaEvaluarDto.add(new TarCompetenciaevaluarDto(competenciaEvaluar));
             }
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", competenciaEvaluarDto);
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "CompetenciaEvaluar", competenciaEvaluarDto);
 
         } catch (NoResultException ex) {
-            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen competencias con los criterios ingresados.", "getCompetencias NoResultException");
+            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen competencias con los criterios ingresados.", "getCompetenciasEvaluar NoResultException");
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar la competencias.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la competencias.", "getCompetencias " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar la competenciasevaluar.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la competenciasevaluar.", "getCompetenciasEvaluar " + ex.getMessage());
         }
     }
     
-    public Respuesta getCompetenciaEvaluar(Long id) {
+    public Respuesta getCompetenciaEvaluar(Long coeId) {
         try {
-            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findBy", TarCompetenciaevaluar.class);
-            qryCompetencia.setParameter("id", id);
+            Query qryCompetencia = em.createNamedQuery("TarCompetencia.findByCoeId", TarCompetenciaevaluar.class);
+            qryCompetencia.setParameter("coeId", coeId);
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Competencia", new TarCompetenciaevaluarDto((TarCompetenciaevaluar) qryCompetencia.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "CompetenciaEvaluar", new TarCompetenciaevaluarDto((TarCompetenciaevaluar) qryCompetencia.getSingleResult()));
 
         } catch (NoResultException ex) {
-            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe una competencia con el código ingresado.", "getCompetencia NoResultException");
+            return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe una competenciaevaluar con el código ingresado.", "getCompetenciaEvaluar NoResultException");
         } catch (NonUniqueResultException ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el empleado.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el competencia.", "getCompetencia NonUniqueResultException");
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar la competenciaevaluar.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la competenciaevaluar.", "getCompetenciaEvaluar NonUniqueResultException");
         } catch (Exception ex) {
-            LOG.log(Level.SEVERE, "Ocurrio un error al consultar el empleado.", ex);
-            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el competencia.", "getCompetencia " + ex.getMessage());
+            LOG.log(Level.SEVERE, "Ocurrio un error al consultar la competenciaevaluar.", ex);
+            return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la competenciaevaluar.", "getCompetenciaEvaluar " + ex.getMessage());
         }
     }
 }

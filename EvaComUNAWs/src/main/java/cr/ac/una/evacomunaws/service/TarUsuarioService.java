@@ -101,7 +101,7 @@ public class TarUsuarioService {
     
     public Respuesta getUsuarios() {
         try {
-            Query qryUsuario = em.createNamedQuery("", TarUsuario.class);
+            Query qryUsuario = em.createNamedQuery("TarUsuario.findAll", TarUsuario.class);
             List<TarUsuario> usuarios = qryUsuario.getResultList();
             List<TarUsuarioDto> usuarioDto = new ArrayList<>();
             for (TarUsuario usuario : usuarios) {
@@ -118,12 +118,12 @@ public class TarUsuarioService {
         }
     }
     
-    public Respuesta getUsuario(Long id) {
+    public Respuesta getUsuario(Long usuId) {
         try {
-            Query qryCaracteristica = em.createNamedQuery("TarUsuario.findBy", TarUsuario.class);
-            qryCaracteristica.setParameter("id", id);
+            Query qryCaracteristica = em.createNamedQuery("TarUsuario.findByUsuId", TarUsuario.class);
+            qryCaracteristica.setParameter("usuId", usuId);
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Empleado", new TarUsuarioDto((TarUsuario) qryCaracteristica.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", new TarUsuarioDto((TarUsuario) qryCaracteristica.getSingleResult()));
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un usuario con el código ingresado.", "getUsuario NoResultException");
