@@ -21,6 +21,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.QueryHint;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
@@ -40,7 +41,10 @@ import jakarta.persistence.Version;
     @NamedQuery(name = "TarUsuario.findByUsuCorreo", query = "SELECT t FROM TarUsuario t WHERE t.usuCorreo = :usuCorreo"),
     @NamedQuery(name = "TarUsuario.findByUsuTelefono", query = "SELECT t FROM TarUsuario t WHERE t.usuTelefono = :usuTelefono"),
     @NamedQuery(name = "TarUsuario.findByUsuCelular", query = "SELECT t FROM TarUsuario t WHERE t.usuCelular = :usuCelular"),
+    @NamedQuery(name = "TarUsuario.findByUsuUsu", query = "SELECT t FROM TarUsuario t WHERE t.usuUsu = :usuUsu"),
     @NamedQuery(name = "TarUsuario.findByUsuClave", query = "SELECT t FROM TarUsuario t WHERE t.usuClave = :usuClave"),
+    @NamedQuery(name = "TarUsuario.findByUsuClaveUsuario", query = "SELECT t FROM TarUsuario t WHERE t.usuUsu = :usuUsu and t.usuClave = :usuClave", hints = @QueryHint(name = "eclipselink.refresh", value = "true")),
+    @NamedQuery(name = "TarUsuario.findByUsuTempclave", query = "SELECT t FROM TarUsuario t WHERE t.usuTempclave = :usuTempclave"),
     @NamedQuery(name = "TarUsuario.findByUsuActivo", query = "SELECT t FROM TarUsuario t WHERE t.usuActivo = :usuActivo"),
     @NamedQuery(name = "TarUsuario.findByUsuAdmin", query = "SELECT t FROM TarUsuario t WHERE t.usuAdmin = :usuAdmin"),
     @NamedQuery(name = "TarUsuario.findByUsuVersion", query = "SELECT t FROM TarUsuario t WHERE t.usuVersion = :usuVersion")})
@@ -74,8 +78,13 @@ public class TarUsuario implements Serializable {
     @Column(name = "USU_FOTO")
     private Serializable usuFoto;
     @Basic(optional = false)
+    @Column(name = "USU_USU")
+    private String usuUsu;
+    @Basic(optional = false)
     @Column(name = "USU_CLAVE")
     private String usuClave;
+    @Column(name = "USU_TEMPCLAVE")
+    private String usuTempclave;
     @Basic(optional = false)
     @Column(name = "USU_ACTIVO")
     private String usuActivo;
@@ -118,6 +127,8 @@ public class TarUsuario implements Serializable {
         this.usuTelefono = tarUsuarioDto.getUsuTelefono();
         this.usuVersion = tarUsuarioDto.getUsuVersion();
         this.usuFoto = tarUsuarioDto.getUsuFoto();
+        this.usuTempclave = tarUsuarioDto.getUsuTempclave();
+        this.usuUsu = tarUsuarioDto.getUsuUsu();
         
     }
 
@@ -192,6 +203,23 @@ public class TarUsuario implements Serializable {
     public void setUsuClave(String usuClave) {
         this.usuClave = usuClave;
     }
+
+    public String getUsuUsu() {
+        return usuUsu;
+    }
+
+    public void setUsuUsu(String usuUsu) {
+        this.usuUsu = usuUsu;
+    }
+
+    public String getUsuTempclave() {
+        return usuTempclave;
+    }
+
+    public void setUsuTempclave(String usuTempclave) {
+        this.usuTempclave = usuTempclave;
+    }
+    
 
     public String getUsuActivo() {
         return usuActivo;

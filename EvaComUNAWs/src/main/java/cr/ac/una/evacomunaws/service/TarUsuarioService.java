@@ -33,13 +33,13 @@ public class TarUsuarioService {
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
     
-    public Respuesta validarUsuario(String usuario, String clave) {
+    public Respuesta validarUsuario(String usuUsu, String usuClave) {
         try {
-            Query qryActividad = em.createNamedQuery("TarUsuario.", TarUsuario.class);
-            qryActividad.setParameter("usuario", usuario);
-            qryActividad.setParameter("clave", clave);
+            Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuClaveUsuario", TarUsuario.class);
+            qryActividad.setParameter("usuUsu", usuUsu);
+            qryActividad.setParameter("usuClave", usuClave);
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "TarUsuario", new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult()));
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un usuario con las credenciales ingresadas.", "validarUsuario NoResultException");

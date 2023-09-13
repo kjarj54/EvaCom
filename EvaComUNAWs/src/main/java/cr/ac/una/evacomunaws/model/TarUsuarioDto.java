@@ -19,7 +19,9 @@ public class TarUsuarioDto {
     private Long usuTelefono;
     private Long usuCelular;
     private Serializable usuFoto;
+    private String usuUsu;
     private String usuClave;
+    private String usuTempclave;
     private String usuActivo;
     private String usuAdmin;
     private Long usuVersion;
@@ -43,6 +45,8 @@ public class TarUsuarioDto {
         this.usuActivo = tarUsuario.getUsuActivo();
         this.usuAdmin = tarUsuario.getUsuAdmin();
         this.usuVersion = tarUsuario.getUsuVersion();
+        this.usuUsu = tarUsuario.getUsuUsu();
+        this.usuTempclave = tarUsuario.getUsuTempclave();
     }
 
     public Long getUsuId() {
@@ -147,6 +151,22 @@ public class TarUsuarioDto {
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
+    }
+
+    public String getUsuUsu() {
+        return usuUsu;
+    }
+
+    public void setUsuUsu(String usuUsu) {
+        this.usuUsu = usuUsu;
+    }
+
+    public String getUsuTempclave() {
+        return usuTempclave;
+    }
+
+    public void setUsuTempclave(String usuTempclave) {
+        this.usuTempclave = usuTempclave;
     }
     
     
