@@ -91,6 +91,22 @@ public class EvaComUNAWs {
             return false;
         }
     }
+     @WebMethod(operationName = "getUsuarioClass")
+    public TarUsuarioDto getUsuarioClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarUsuarioService.getUsuario(id);
+            if (!res.getEstado()) {
+                return TarUsuarioDto.class.cast(res);//TODO
+            }
+            TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("Usuario");
+            return tarUsuarioDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarUsuarioDto.class.cast(ex);//TODO
+        }
+    }
+    
+    
     
     /*******************************************************************************************
      * 

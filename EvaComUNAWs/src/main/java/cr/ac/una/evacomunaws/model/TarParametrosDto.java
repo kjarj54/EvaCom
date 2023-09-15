@@ -15,8 +15,8 @@ public class TarParametrosDto {
     private String parNombre;
     private String parEmail;
     private String parClave;
-    private Serializable parHtml;
-    private Serializable parLogo;
+    private Byte[] parHtml;
+    private Byte[] parLogo;
     private String parDescripcion;
     private Long parVersion;
     private Boolean modificado;
@@ -30,8 +30,8 @@ public class TarParametrosDto {
         this.parNombre = tarParametros.getParNombre();
         this.parEmail = tarParametros.getParEmail();
         this.parClave = tarParametros.getParClave();
-        this.parHtml = tarParametros.getParHtml();
-        this.parLogo = tarParametros.getParLogo();
+        this.parHtml = (Byte[]) tarParametros.getParHtml();
+        this.parLogo = (Byte[]) tarParametros.getParLogo();
         this.parDescripcion = tarParametros.getParDescripcion();
         this.parVersion = tarParametros.getParVersion();
     }
@@ -72,7 +72,7 @@ public class TarParametrosDto {
         return parHtml;
     }
 
-    public void setParHtml(Serializable parHtml) {
+    public void setParHtml(Byte[] parHtml) {
         this.parHtml = parHtml;
     }
 
@@ -80,7 +80,7 @@ public class TarParametrosDto {
         return parLogo;
     }
 
-    public void setParLogo(Serializable parLogo) {
+    public void setParLogo(Byte[] parLogo) {
         this.parLogo = parLogo;
     }
 

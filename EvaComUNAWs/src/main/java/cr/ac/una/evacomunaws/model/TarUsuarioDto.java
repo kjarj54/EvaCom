@@ -4,13 +4,13 @@
  */
 package cr.ac.una.evacomunaws.model;
 
-import java.io.Serializable;
 
 /**
  *
  * @author kevin
  */
 public class TarUsuarioDto {
+
     private Long usuId;
     private String usuNombre;
     private String usuApellido;
@@ -18,7 +18,7 @@ public class TarUsuarioDto {
     private String usuCorreo;
     private Long usuTelefono;
     private Long usuCelular;
-    private Serializable usuFoto;
+    private Byte[] usuFoto;
     private String usuUsu;
     private String usuClave;
     private String usuTempclave;
@@ -26,12 +26,12 @@ public class TarUsuarioDto {
     private String usuAdmin;
     private Long usuVersion;
     private Boolean modificado;
-    
+
     public TarUsuarioDto() {
         this.modificado = false;
-        
+
     }
-    
+
     public TarUsuarioDto(TarUsuario tarUsuario) {
         this.usuId = tarUsuario.getUsuId();
         this.usuNombre = tarUsuario.getUsuNombre();
@@ -40,7 +40,7 @@ public class TarUsuarioDto {
         this.usuCorreo = tarUsuario.getUsuCorreo();
         this.usuTelefono = tarUsuario.getUsuTelefono();
         this.usuCelular = tarUsuario.getUsuCelular();
-        this.usuFoto = tarUsuario.getUsuFoto();
+        this.usuFoto = (Byte[]) tarUsuario.getUsuFoto();
         this.usuClave = tarUsuario.getUsuClave();
         this.usuActivo = tarUsuario.getUsuActivo();
         this.usuAdmin = tarUsuario.getUsuAdmin();
@@ -105,11 +105,11 @@ public class TarUsuarioDto {
         this.usuCelular = usuCelular;
     }
 
-    public Serializable getUsuFoto() {
+    public Byte[] getUsuFoto() {
         return usuFoto;
     }
 
-    public void setUsuFoto(Serializable usuFoto) {
+    public void setUsuFoto(Byte[] usuFoto) {
         this.usuFoto = usuFoto;
     }
 
@@ -168,6 +168,5 @@ public class TarUsuarioDto {
     public void setUsuTempclave(String usuTempclave) {
         this.usuTempclave = usuTempclave;
     }
-    
-    
+
 }

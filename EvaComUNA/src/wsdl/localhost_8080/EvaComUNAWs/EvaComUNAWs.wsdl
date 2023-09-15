@@ -16,6 +16,12 @@
 <message name="getUsuarioResponse">
 <part name="parameters" element="tns:getUsuarioResponse"/>
 </message>
+<message name="getUsuarioClass">
+<part name="parameters" element="tns:getUsuarioClass"/>
+</message>
+<message name="getUsuarioClassResponse">
+<part name="parameters" element="tns:getUsuarioClassResponse"/>
+</message>
 <portType name="EvaComUNAWs">
 <operation name="hello">
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/helloRequest" message="tns:hello"/>
@@ -24,6 +30,10 @@
 <operation name="getUsuario">
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioRequest" message="tns:getUsuario"/>
 <output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioResponse" message="tns:getUsuarioResponse"/>
+</operation>
+<operation name="getUsuarioClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioClassRequest" message="tns:getUsuarioClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioClassResponse" message="tns:getUsuarioClassResponse"/>
 </operation>
 </portType>
 <binding name="EvaComUNAWsPortBinding" type="tns:EvaComUNAWs">
@@ -38,6 +48,15 @@
 </output>
 </operation>
 <operation name="getUsuario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getUsuarioClass">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

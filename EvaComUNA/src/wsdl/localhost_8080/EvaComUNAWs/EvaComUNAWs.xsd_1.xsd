@@ -2,6 +2,10 @@
 
 <xs:element name="getUsuario" type="tns:getUsuario"/>
 
+<xs:element name="getUsuarioClass" type="tns:getUsuarioClass"/>
+
+<xs:element name="getUsuarioClassResponse" type="tns:getUsuarioClassResponse"/>
+
 <xs:element name="getUsuarioResponse" type="tns:getUsuarioResponse"/>
 
 <xs:element name="hello" type="tns:hello"/>
@@ -30,6 +34,38 @@
 <xs:complexType name="getUsuarioResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUsuarioClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUsuarioClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarUsuarioDto">
+<xs:sequence>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="usuActivo" type="xs:string" minOccurs="0"/>
+<xs:element name="usuAdmin" type="xs:string" minOccurs="0"/>
+<xs:element name="usuApellido" type="xs:string" minOccurs="0"/>
+<xs:element name="usuCedula" type="xs:string" minOccurs="0"/>
+<xs:element name="usuCelular" type="xs:long" minOccurs="0"/>
+<xs:element name="usuClave" type="xs:string" minOccurs="0"/>
+<xs:element name="usuCorreo" type="xs:string" minOccurs="0"/>
+<xs:element name="usuFoto" type="xs:byte" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="usuId" type="xs:long" minOccurs="0"/>
+<xs:element name="usuNombre" type="xs:string" minOccurs="0"/>
+<xs:element name="usuTelefono" type="xs:long" minOccurs="0"/>
+<xs:element name="usuTempclave" type="xs:string" minOccurs="0"/>
+<xs:element name="usuUsu" type="xs:string" minOccurs="0"/>
+<xs:element name="usuVersion" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
