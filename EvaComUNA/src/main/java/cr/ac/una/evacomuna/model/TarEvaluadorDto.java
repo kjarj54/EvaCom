@@ -4,40 +4,44 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author kevin
- 
+ */
 public class TarEvaluadorDto {
-    private Long evaluId;
-    private String evaluRetroalimentacion;
+
+    public SimpleStringProperty evaluId;
+    public SimpleStringProperty evaluRetroalimentacion;
     private Long evaluVersion;
     private Boolean modificado;
-    
+
     public TarEvaluadorDto() {
+        this.evaluId = new SimpleStringProperty();
+        this.evaluRetroalimentacion = new SimpleStringProperty();
         this.modificado = false;
-    }
-    
-    public TarEvaluadorDto(TarEvaluador tarEvaluador) {
-        this.evaluId = tarEvaluador.getEvaluId();
-        this.evaluRetroalimentacion = tarEvaluador.getEvaluRetroalimentacion();
-        this.evaluVersion = tarEvaluador.getEvaluVersion();
+
     }
 
     public Long getEvaluId() {
-        return evaluId;
+        if (this.evaluId.get() != null && !this.evaluId.get().isEmpty()) {
+            return Long.valueOf(this.evaluId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setEvaluId(Long evaluId) {
-        this.evaluId = evaluId;
+        this.evaluId.set(evaluId.toString());
     }
 
     public String getEvaluRetroalimentacion() {
-        return evaluRetroalimentacion;
+        return evaluRetroalimentacion.get();
     }
 
     public void setEvaluRetroalimentacion(String evaluRetroalimentacion) {
-        this.evaluRetroalimentacion = evaluRetroalimentacion;
+        this.evaluRetroalimentacion.set(evaluRetroalimentacion);
     }
 
     public Long getEvaluVersion() {
@@ -55,7 +59,5 @@ public class TarEvaluadorDto {
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
-    
-    
+
 }
-*/

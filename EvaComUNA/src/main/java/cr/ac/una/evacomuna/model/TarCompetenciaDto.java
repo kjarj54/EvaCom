@@ -4,51 +4,55 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author kevin
- *//*
+ */
 public class TarCompetenciaDto {
 
-    private Long comId;
-    private String comNombre;
-    private String comEstado;
+    public SimpleStringProperty comId;
+    public SimpleStringProperty comNombre;
+    public SimpleBooleanProperty comEstado;
     private Long comVersion;
     private Boolean modificado;
 
+
     public TarCompetenciaDto() {
+        this.comId = new SimpleStringProperty();
+        this.comNombre = new SimpleStringProperty();
+        this.comEstado = new SimpleBooleanProperty(false);
         this.modificado = false;
     }
 
-    public TarCompetenciaDto(TarCompetencia tarCompetencia) {
-        this.comId = tarCompetencia.getComId();
-        this.comNombre = tarCompetencia.getComNombre();
-        this.comEstado = tarCompetencia.getComEstado();
-        this.comVersion = tarCompetencia.getComVersion();
-    }
-
     public Long getComId() {
-        return comId;
+        if (this.comId.get() != null && !this.comId.get().isEmpty()) {
+            return Long.valueOf(this.comId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setComId(Long comId) {
-        this.comId = comId;
+        this.comId.set(comId.toString());
     }
 
     public String getComNombre() {
-        return comNombre;
+        return comNombre.get();
     }
 
     public void setComNombre(String comNombre) {
-        this.comNombre = comNombre;
+        this.comNombre.set(comNombre);
     }
 
     public String getComEstado() {
-        return comEstado;
+        return comEstado.get()?"A":"I";
     }
 
     public void setComEstado(String comEstado) {
-        this.comEstado = comEstado;
+        this.comEstado.set(comEstado.equals("A"));
     }
 
     public Long getComVersion() {
@@ -68,4 +72,3 @@ public class TarCompetenciaDto {
     }
 
 }
-*/

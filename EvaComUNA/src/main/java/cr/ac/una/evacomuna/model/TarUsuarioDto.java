@@ -5,44 +5,43 @@
 package cr.ac.una.evacomuna.model;
 
 import java.io.Serializable;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
  * @author kevin
- 
+*
 public class TarUsuarioDto {
-    private Long usuId;
-    private String usuNombre;
-    private String usuApellido;
-    private String usuCedula;
-    private String usuCorreo;
-    private Long usuTelefono;
-    private Long usuCelular;
-    private Serializable usuFoto;
-    private String usuClave;
-    private String usuActivo;
-    private String usuAdmin;
+    public SimpleStringProperty usuId;
+    public SimpleStringProperty usuNombre;
+    public SimpleStringProperty usuApellido;
+    public SimpleStringProperty usuCedula;
+    public SimpleStringProperty usuCorreo;
+    public SimpleStringProperty usuTelefono;
+    public SimpleStringProperty usuCelular;
+    public Byte[] usuFoto;
+    public String usuUsu;
+    public SimpleStringProperty usuClave;
+    public SimpleStringProperty usuTempclave;
+    public String usuActivo;
+    public String usuAdmin;
     private Long usuVersion;
     private Boolean modificado;
     
-    public TarUsuarioDto() {
-        this.modificado = false;
-        
-    }
     
-    public TarUsuarioDto(TarUsuario tarUsuario) {
-        this.usuId = tarUsuario.getUsuId();
-        this.usuNombre = tarUsuario.getUsuNombre();
-        this.usuApellido = tarUsuario.getUsuApellido();
-        this.usuCedula = tarUsuario.getUsuCedula();
-        this.usuCorreo = tarUsuario.getUsuCorreo();
-        this.usuTelefono = tarUsuario.getUsuTelefono();
-        this.usuCelular = tarUsuario.getUsuCelular();
-        this.usuFoto = tarUsuario.getUsuFoto();
-        this.usuClave = tarUsuario.getUsuClave();
-        this.usuActivo = tarUsuario.getUsuActivo();
-        this.usuAdmin = tarUsuario.getUsuAdmin();
-        this.usuVersion = tarUsuario.getUsuVersion();
+    public TarUsuarioDto() {
+        this.usuId = ();
+        this.usuNombre = ();
+        this.usuApellido = ();
+        this.usuCedula = ();
+        this.usuCorreo = ();
+        this.usuTelefono = ();
+        this.usuCelular = ();
+        this.usuFoto = ();
+        this.usuClave = ();
+        this.usuActivo = ();
+        this.usuAdmin = ();
+        this.modificado = false;
     }
 
     public Long getUsuId() {

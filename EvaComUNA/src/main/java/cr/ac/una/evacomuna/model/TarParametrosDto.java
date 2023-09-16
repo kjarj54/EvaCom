@@ -5,91 +5,96 @@
 package cr.ac.una.evacomuna.model;
 
 import java.io.Serializable;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
  * @author kevin
- *
+ */
 public class TarParametrosDto {
-    private Long parId;
-    private String parNombre;
-    private String parEmail;
-    private String parClave;
-    private Serializable parHtml;
-    private Serializable parLogo;
-    private String parDescripcion;
+    public SimpleStringProperty  parId;
+    public SimpleStringProperty  parNombre;
+    public SimpleStringProperty  parEmail;
+    public SimpleStringProperty  parClave;
+    public ObjectProperty<byte[]> parHtml;
+    public ObjectProperty<byte[]> parLogo;
+    public SimpleStringProperty  parDescripcion;
     private Long parVersion;
     private Boolean modificado;
     
-    public TarParametrosDto() {
-        this.modificado = false;
-    }
     
-    public TarParametrosDto(TarParametros tarParametros) {
-        this.parId = tarParametros.getParId();
-        this.parNombre = tarParametros.getParNombre();
-        this.parEmail = tarParametros.getParEmail();
-        this.parClave = tarParametros.getParClave();
-        this.parHtml = tarParametros.getParHtml();
-        this.parLogo = tarParametros.getParLogo();
-        this.parDescripcion = tarParametros.getParDescripcion();
-        this.parVersion = tarParametros.getParVersion();
+    
+    public TarParametrosDto() {
+        this.parId = new SimpleStringProperty();
+        this.parNombre = new SimpleStringProperty();
+        this.parEmail = new SimpleStringProperty();
+        this.parClave = new SimpleStringProperty();
+        this.parHtml = new SimpleObjectProperty();
+        this.parLogo = new SimpleObjectProperty();
+        this.parDescripcion = new SimpleStringProperty();
+        this.modificado = false;
     }
 
     public Long getParId() {
-        return parId;
+        if (this.parId.get() != null && !this.parId.get().isEmpty()) {
+            return Long.valueOf(this.parId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setParId(Long parId) {
-        this.parId = parId;
+        this.parId.set(parId.toString());
     }
 
     public String getParNombre() {
-        return parNombre;
+        return parNombre.get();
     }
 
     public void setParNombre(String parNombre) {
-        this.parNombre = parNombre;
+        this.parNombre.set(parNombre);
     }
 
     public String getParEmail() {
-        return parEmail;
+        return parEmail.get();
     }
 
     public void setParEmail(String parEmail) {
-        this.parEmail = parEmail;
+        this.parEmail.set(parEmail);
     }
 
     public String getParClave() {
-        return parClave;
+        return parClave.get();
     }
 
     public void setParClave(String parClave) {
-        this.parClave = parClave;
+        this.parClave.set(parClave);
     }
 
-    public Serializable getParHtml() {
-        return parHtml;
+    public byte[] getParHtml() {
+        return parHtml.get();
     }
 
-    public void setParHtml(Serializable parHtml) {
-        this.parHtml = parHtml;
+    public void setParHtml(byte[] parHtml) {
+        this.parHtml.set(parHtml);
     }
 
-    public Serializable getParLogo() {
-        return parLogo;
+    public byte[] getParLogo() {
+        return parLogo.get();
     }
 
-    public void setParLogo(Serializable parLogo) {
-        this.parLogo = parLogo;
+    public void setParLogo(byte[] parLogo) {
+        this.parLogo.set(parLogo);
     }
 
     public String getParDescripcion() {
-        return parDescripcion;
+        return parDescripcion.get();
     }
 
     public void setParDescripcion(String parDescripcion) {
-        this.parDescripcion = parDescripcion;
+        this.parDescripcion.set(parDescripcion);
     }
 
     public Long getParVersion() {
@@ -111,4 +116,4 @@ public class TarParametrosDto {
     
     
     
-}*/
+}

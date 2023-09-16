@@ -4,26 +4,23 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author kevin
- *//*
+ */
 public class TarCaracteristicaDto {
-    private Long carId;
-    private String carDescripcion;
+    public SimpleStringProperty carId;
+    public SimpleStringProperty carDescripcion;
     private Long carVersion;
     private Boolean modificado;
     
 
     public TarCaracteristicaDto() {
+        this.carId = new SimpleStringProperty();
+        this.carDescripcion = new SimpleStringProperty();
         this.modificado = false;
-    }
-
-    public TarCaracteristicaDto(TarCaracteristica tarCaracteristica) {
-        this();
-        this.carId = tarCaracteristica.getCarId();
-        this.carDescripcion = tarCaracteristica.getCarDescripcion();
-        this.carVersion = tarCaracteristica.getCarVersion();
     }
 
     
@@ -37,19 +34,23 @@ public class TarCaracteristicaDto {
     }  
     
     public Long getCarId() {
-        return carId;
+        if (this.carId.get() != null && !this.carId.get().isEmpty()) {
+            return Long.valueOf(this.carId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setCarId(Long carId) {
-        this.carId = carId;
+        this.carId.set(carId.toString());
     }
 
     public String getCarDescripcion() {
-        return carDescripcion;
+        return carDescripcion.get();
     }
 
     public void setCarDescripcion(String carDescripcion) {
-        this.carDescripcion = carDescripcion;
+        this.carDescripcion.set(carDescripcion);
     }
 
     public Long getCarVersion() {
@@ -63,4 +64,3 @@ public class TarCaracteristicaDto {
     
     
 }
-*/
