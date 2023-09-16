@@ -4,50 +4,53 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author kevin
- *
+ */
 public class TarPuestoDto {
-    private Long pueId;
-    private String pueNombre;
-    private String pueEstado;
+    public SimpleStringProperty pueId;
+    public SimpleStringProperty pueNombre;
+    public SimpleStringProperty pueEstado;
     private Long pueVersion;
     private Boolean modificado;
     
+       
     public TarPuestoDto() {
+        this.pueId = new SimpleStringProperty();
+        this.pueNombre = new SimpleStringProperty();
+        this.pueEstado = new SimpleStringProperty();
         this.modificado = false;
-    }
-    
-    public TarPuestoDto(TarPuesto tarPuesto) {
-        this.pueId = tarPuesto.getPueId();
-        this.pueNombre = tarPuesto.getPueNombre();
-        this.pueEstado = tarPuesto.getPueEstado();
-        this.pueVersion = tarPuesto.getPueVersion();
     }
 
     public Long getPueId() {
-        return pueId;
+        if (this.pueId.get() != null && !this.pueId.get().isEmpty()) {
+            return Long.valueOf(this.pueId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setPueId(Long pueId) {
-        this.pueId = pueId;
+        this.pueId.set(pueId.toString());
     }
 
     public String getPueNombre() {
-        return pueNombre;
+        return pueNombre.get();
     }
 
     public void setPueNombre(String pueNombre) {
-        this.pueNombre = pueNombre;
+        this.pueNombre.set(pueNombre);
     }
 
     public String getPueEstado() {
-        return pueEstado;
+        return pueEstado.get();
     }
 
     public void setPueEstado(String pueEstado) {
-        this.pueEstado = pueEstado;
+        this.pueEstado.set(pueEstado);
     }
 
     public Long getPueVersion() {
@@ -68,4 +71,3 @@ public class TarPuestoDto {
      
     
 }
-*/

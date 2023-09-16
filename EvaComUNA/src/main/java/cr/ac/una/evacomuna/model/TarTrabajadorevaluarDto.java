@@ -4,37 +4,43 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author kevin
- *
+ */
 public class TarTrabajadorevaluarDto {
-    private Long traId;
-    private String traResultado;
+    public SimpleStringProperty traId;
+    public SimpleStringProperty traResultado;
     private Long traVersion;
     private Boolean modificado;
     
     
     public TarTrabajadorevaluarDto() {
-        this.traId = tarTrabajadorevaluar.getTraId();
-        this.traResultado = tarTrabajadorevaluar.getTraResultado();
-        this.traVersion = tarTrabajadorevaluar.getTraVersion();
+        this.traId = new SimpleStringProperty();
+        this.traResultado = new SimpleStringProperty();
+        this.modificado = false;
     }
 
     public Long getTraId() {
-        return traId;
+        if (this.traId.get() != null && !this.traId.get().isEmpty()) {
+            return Long.valueOf(this.traId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setTraId(Long traId) {
-        this.traId = traId;
+        this.traId.set(traId.toString());
     }
 
     public String getTraResultado() {
-        return traResultado;
+        return traResultado.get();
     }
 
     public void setTraResultado(String traResultado) {
-        this.traResultado = traResultado;
+        this.traResultado.set(traResultado);
     }
 
     public Long getTraVersion() {
@@ -55,4 +61,3 @@ public class TarTrabajadorevaluarDto {
     
     
 }
-*/

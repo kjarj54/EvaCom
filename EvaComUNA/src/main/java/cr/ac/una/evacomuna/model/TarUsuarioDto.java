@@ -5,13 +5,17 @@
 package cr.ac.una.evacomuna.model;
 
 import java.io.Serializable;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
  * @author kevin
-*
+ */
 public class TarUsuarioDto {
+
     public SimpleStringProperty usuId;
     public SimpleStringProperty usuNombre;
     public SimpleStringProperty usuApellido;
@@ -19,117 +23,131 @@ public class TarUsuarioDto {
     public SimpleStringProperty usuCorreo;
     public SimpleStringProperty usuTelefono;
     public SimpleStringProperty usuCelular;
-    public Byte[] usuFoto;
-    public String usuUsu;
+    public ObjectProperty<byte[]> usuFoto;
+    public SimpleStringProperty usuUsu;
     public SimpleStringProperty usuClave;
     public SimpleStringProperty usuTempclave;
-    public String usuActivo;
-    public String usuAdmin;
+    public SimpleBooleanProperty usuActivo;
+    public SimpleBooleanProperty usuAdmin;
     private Long usuVersion;
     private Boolean modificado;
-    
-    
+
     public TarUsuarioDto() {
-        this.usuId = ();
-        this.usuNombre = ();
-        this.usuApellido = ();
-        this.usuCedula = ();
-        this.usuCorreo = ();
-        this.usuTelefono = ();
-        this.usuCelular = ();
-        this.usuFoto = ();
-        this.usuClave = ();
-        this.usuActivo = ();
-        this.usuAdmin = ();
+        this.usuId = new SimpleStringProperty();
+        this.usuNombre = new SimpleStringProperty();
+        this.usuApellido = new SimpleStringProperty();
+        this.usuCedula = new SimpleStringProperty();
+        this.usuCorreo = new SimpleStringProperty();
+        this.usuTelefono = new SimpleStringProperty();
+        this.usuCelular = new SimpleStringProperty();
+        this.usuFoto = new SimpleObjectProperty();
+        this.usuClave = new SimpleStringProperty();
+        this.usuTempclave = new SimpleStringProperty();
+        this.usuUsu = new SimpleStringProperty();
+        this.usuActivo = new SimpleBooleanProperty(false);
+        this.usuAdmin = new SimpleBooleanProperty(false);
         this.modificado = false;
     }
 
     public Long getUsuId() {
-        return usuId;
+        if (this.usuId.get() != null && !this.usuId.get().isEmpty()) {
+            return Long.valueOf(this.usuId.get());
+        } else {
+            return null;
+        }
     }
 
     public void setUsuId(Long usuId) {
-        this.usuId = usuId;
+        this.usuId.set(usuId.toString());
     }
 
     public String getUsuNombre() {
-        return usuNombre;
+        return usuNombre.get();
     }
 
     public void setUsuNombre(String usuNombre) {
-        this.usuNombre = usuNombre;
+        this.usuNombre.set(usuNombre);
     }
 
     public String getUsuApellido() {
-        return usuApellido;
+        return usuApellido.get();
     }
 
     public void setUsuApellido(String usuApellido) {
-        this.usuApellido = usuApellido;
+        this.usuApellido.set(usuApellido);
     }
 
     public String getUsuCedula() {
-        return usuCedula;
+        return usuCedula.get();
     }
 
     public void setUsuCedula(String usuCedula) {
-        this.usuCedula = usuCedula;
+        this.usuCedula.set(usuCedula);
     }
 
     public String getUsuCorreo() {
-        return usuCorreo;
+        return usuCorreo.get();
     }
 
     public void setUsuCorreo(String usuCorreo) {
-        this.usuCorreo = usuCorreo;
+        this.usuCorreo.set(usuCorreo);
     }
 
     public Long getUsuTelefono() {
-        return usuTelefono;
+        if (this.usuTelefono.get() != null && !this.usuTelefono.get().isEmpty()) {
+            return Long.valueOf(this.usuTelefono.get());
+        } else {
+            return null;
+        }
     }
 
     public void setUsuTelefono(Long usuTelefono) {
-        this.usuTelefono = usuTelefono;
+        this.usuTelefono.set(usuTelefono.toString());
+        
     }
 
     public Long getUsuCelular() {
-        return usuCelular;
+        if (this.usuCelular.get() != null && !this.usuCelular.get().isEmpty()) {
+            return Long.valueOf(this.usuCelular.get());
+        } else {
+            return null;
+        }
     }
 
     public void setUsuCelular(Long usuCelular) {
-        this.usuCelular = usuCelular;
+        this.usuCelular.set(usuCelular.toString());
     }
 
-    public Serializable getUsuFoto() {
-        return usuFoto;
+    public byte[] getUsuFoto() {
+        return usuFoto.get();
     }
 
-    public void setUsuFoto(Serializable usuFoto) {
-        this.usuFoto = usuFoto;
+    public void setUsuFoto(byte[] usuFoto) {
+        this.usuFoto.set(usuFoto);
     }
 
     public String getUsuClave() {
-        return usuClave;
+        return usuClave.get();
     }
 
     public void setUsuClave(String usuClave) {
-        this.usuClave = usuClave;
+        this.usuClave.set(usuClave);
     }
 
     public String getUsuActivo() {
-        return usuActivo;
+        return usuActivo.get()?"A":"I";
     }
 
     public void setUsuActivo(String usuActivo) {
-        this.usuActivo = usuActivo;
+        this.usuActivo.set(usuActivo.equals("I"));
     }
 
     public String getUsuAdmin() {
-        return usuAdmin;
+        return usuAdmin.get()?"S":"N";
     }
 
     public void setUsuAdmin(String usuAdmin) {
-        this.usuAdmin = usuAdmin;
+        this.usuAdmin.set(usuAdmin.equals("S"));
     }
 
     public Long getUsuVersion() {
@@ -147,7 +165,5 @@ public class TarUsuarioDto {
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
-    
-    
+
 }
-*/
