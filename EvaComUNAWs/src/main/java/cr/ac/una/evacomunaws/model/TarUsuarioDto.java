@@ -32,7 +32,7 @@ public class TarUsuarioDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
-    private TarPuestoDto pueId;
+    private TarPuestoDto pueId = null;
 
     public TarUsuarioDto() {
         this.modificado = false;

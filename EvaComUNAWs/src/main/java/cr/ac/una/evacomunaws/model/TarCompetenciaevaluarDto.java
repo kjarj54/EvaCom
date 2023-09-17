@@ -9,25 +9,30 @@ package cr.ac.una.evacomunaws.model;
  * @author kevin
  */
 public class TarCompetenciaevaluarDto {
+
     private Long coeId;
     private String coeCalificacion;
     private Long coeVersion;
     private Boolean modficado;
-    private TarCompetenciaDto comId;
-    private TarEvaluadorDto evaluId;
-    
+    private TarCompetenciaDto comId = null;
+    private TarEvaluadorDto evaluId = null;
+
     public TarCompetenciaevaluarDto() {
         this.modficado = false;
         this.comId = new TarCompetenciaDto();
         this.evaluId = new TarEvaluadorDto();
     }
-    
+
     public TarCompetenciaevaluarDto(TarCompetenciaevaluar tarCompetenciaevaluar) {
         this.coeId = tarCompetenciaevaluar.getCoeId();
         this.coeCalificacion = tarCompetenciaevaluar.getCoeCalificacion();
         this.coeVersion = tarCompetenciaevaluar.getCoeVersion();
-        this.comId = new TarCompetenciaDto(tarCompetenciaevaluar.getComId());
-        this.evaluId = new TarEvaluadorDto(tarCompetenciaevaluar.getEvaluId());
+        if (tarCompetenciaevaluar.getComId() != null) {
+            this.comId = new TarCompetenciaDto(tarCompetenciaevaluar.getComId());
+        }
+        if (tarCompetenciaevaluar.getEvaluId() != null) {
+            this.evaluId = new TarEvaluadorDto(tarCompetenciaevaluar.getEvaluId());
+        }
     }
 
     public Long getCoeId() {
@@ -77,7 +82,5 @@ public class TarCompetenciaevaluarDto {
     public void setEvaluId(TarEvaluadorDto evaluId) {
         this.evaluId = evaluId;
     }
-    
-    
-    
+
 }

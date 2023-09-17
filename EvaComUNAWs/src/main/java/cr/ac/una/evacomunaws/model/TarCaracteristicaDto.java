@@ -9,12 +9,12 @@ package cr.ac.una.evacomunaws.model;
  * @author kevin
  */
 public class TarCaracteristicaDto {
+
     private Long carId;
     private String carDescripcion;
     private Long carVersion;
     private Boolean modificado;
-    private TarCompetenciaDto comId;
-    
+    private TarCompetenciaDto comId = null;
 
     public TarCaracteristicaDto() {
         this.modificado = false;
@@ -26,19 +26,19 @@ public class TarCaracteristicaDto {
         this.carId = tarCaracteristica.getCarId();
         this.carDescripcion = tarCaracteristica.getCarDescripcion();
         this.carVersion = tarCaracteristica.getCarVersion();
-        this.comId = new TarCompetenciaDto(tarCaracteristica.getComId());
+        if (tarCaracteristica.getComId() != null) {
+            this.comId = new TarCompetenciaDto(tarCaracteristica.getComId());
+        }
     }
 
-    
-    
     public Boolean getModificado() {
         return modificado;
     }
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
-    }  
-    
+    }
+
     public Long getCarId() {
         return carId;
     }
@@ -70,7 +70,5 @@ public class TarCaracteristicaDto {
     public void setComId(TarCompetenciaDto comId) {
         this.comId = comId;
     }
-    
-    
-    
+
 }

@@ -11,25 +11,30 @@ import java.util.List;
  * @author kevin
  */
 public class TarTrabajadorevaluarDto {
+
     private Long traId;
     private String traResultado;
     private Long traVersion;
     private Boolean modificado;
     List<TarEvaluadorDto> tarEvaluadorList;
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
-    private TarProcesoevaluacionDto proId;
-    private TarUsuarioDto usuId;
-    
-    
+    private TarProcesoevaluacionDto proId = null;
+    private TarUsuarioDto usuId = null;
+
     public TarTrabajadorevaluarDto() {
         this.modificado = false;
     }
+
     public TarTrabajadorevaluarDto(TarTrabajadorevaluar tarTrabajadorevaluar) {
         this.traId = tarTrabajadorevaluar.getTraId();
         this.traResultado = tarTrabajadorevaluar.getTraResultado();
         this.traVersion = tarTrabajadorevaluar.getTraVersion();
-        this.usuId = new TarUsuarioDto(tarTrabajadorevaluar.getUsuId());
-        this.proId = new TarProcesoevaluacionDto(tarTrabajadorevaluar.getProId());
+        if (tarTrabajadorevaluar.getUsuId() != null) {
+            this.usuId = new TarUsuarioDto(tarTrabajadorevaluar.getUsuId());
+        }
+        if (tarTrabajadorevaluar.getProId() != null) {
+            this.proId = new TarProcesoevaluacionDto(tarTrabajadorevaluar.getProId());
+        }
     }
 
     public Long getTraId() {
@@ -95,6 +100,5 @@ public class TarTrabajadorevaluarDto {
     public void setTarEvaluadorListEliminados(List<TarEvaluadorDto> tarEvaluadorListEliminados) {
         this.tarEvaluadorListEliminados = tarEvaluadorListEliminados;
     }
-    
-    
+
 }

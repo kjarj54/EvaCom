@@ -12,15 +12,16 @@ import java.util.List;
  * @author kevin
  */
 public class TarEvaluadorDto {
+
     private Long evaluId;
     private String evaluRetroalimentacion;
     private Long evaluVersion;
     private Boolean modificado;
-    private TarTrabajadorevaluarDto traId;
-    private TarUsuarioDto usuId;
+    private TarTrabajadorevaluarDto traId = null;
+    private TarUsuarioDto usuId = null;
     List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
     List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados;
-    
+
     public TarEvaluadorDto() {
         this.modificado = false;
         this.traId = new TarTrabajadorevaluarDto();
@@ -28,13 +29,17 @@ public class TarEvaluadorDto {
         tarCompetenciaevaluarList = new ArrayList<>();
         tarCompetenciaevaluarListEliminados = new ArrayList<>();
     }
-    
+
     public TarEvaluadorDto(TarEvaluador tarEvaluador) {
         this.evaluId = tarEvaluador.getEvaluId();
         this.evaluRetroalimentacion = tarEvaluador.getEvaluRetroalimentacion();
         this.evaluVersion = tarEvaluador.getEvaluVersion();
-        this.traId = new TarTrabajadorevaluarDto(tarEvaluador.getTraId());
-        this.usuId = new TarUsuarioDto(tarEvaluador.getUsuId());
+        if (tarEvaluador.getTraId() != null) {
+            this.traId = new TarTrabajadorevaluarDto(tarEvaluador.getTraId());
+        }
+        if (tarEvaluador.getUsuId() != null) {
+            this.usuId = new TarUsuarioDto(tarEvaluador.getUsuId());
+        }
     }
 
     public Long getEvaluId() {
@@ -100,6 +105,5 @@ public class TarEvaluadorDto {
     public void setTarCompetenciaevaluarListEliminados(List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados) {
         this.tarCompetenciaevaluarListEliminados = tarCompetenciaevaluarListEliminados;
     }
-    
-    
+
 }
