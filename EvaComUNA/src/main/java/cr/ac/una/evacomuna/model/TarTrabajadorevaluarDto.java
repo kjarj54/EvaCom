@@ -4,7 +4,10 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 
 /**
  *
@@ -15,12 +18,21 @@ public class TarTrabajadorevaluarDto {
     public SimpleStringProperty traResultado;
     private Long traVersion;
     private Boolean modificado;
+    List<TarEvaluadorDto> tarEvaluadorList;
+    List<TarEvaluadorDto> tarEvaluadorListEliminados;
+    public TarProcesoevaluacionDto proId;
+    public TarUsuarioDto usuId;
     
     
     public TarTrabajadorevaluarDto() {
         this.traId = new SimpleStringProperty();
         this.traResultado = new SimpleStringProperty();
         this.modificado = false;
+        this.proId = new TarProcesoevaluacionDto();
+        this.usuId = new TarUsuarioDto();
+        tarEvaluadorList = FXCollections.observableArrayList();
+        tarEvaluadorListEliminados = new ArrayList<>();
+        
     }
 
     public Long getTraId() {
@@ -57,6 +69,38 @@ public class TarTrabajadorevaluarDto {
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
+    }
+
+    public List<TarEvaluadorDto> getTarEvaluadorList() {
+        return tarEvaluadorList;
+    }
+
+    public void setTarEvaluadorList(List<TarEvaluadorDto> tarEvaluadorList) {
+        this.tarEvaluadorList = tarEvaluadorList;
+    }
+
+    public List<TarEvaluadorDto> getTarEvaluadorListEliminados() {
+        return tarEvaluadorListEliminados;
+    }
+
+    public void setTarEvaluadorListEliminados(List<TarEvaluadorDto> tarEvaluadorListEliminados) {
+        this.tarEvaluadorListEliminados = tarEvaluadorListEliminados;
+    }
+
+    public TarProcesoevaluacionDto getProId() {
+        return proId;
+    }
+
+    public void setProId(TarProcesoevaluacionDto proId) {
+        this.proId = proId;
+    }
+
+    public TarUsuarioDto getUsuId() {
+        return usuId;
+    }
+
+    public void setUsuId(TarUsuarioDto usuId) {
+        this.usuId = usuId;
     }
     
     

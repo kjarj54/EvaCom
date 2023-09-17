@@ -4,6 +4,9 @@
  */
 package cr.ac.una.evacomunaws.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author kevin
@@ -14,9 +17,17 @@ public class TarPuestoDto {
     private String pueEstado;
     private Long pueVersion;
     private Boolean modificado;
+    List<TarCompetenciaDto> tarCompetenciaList;
+    List<TarCompetenciaDto> tarCompetenciaListEliminados;
+    List<TarUsuarioDto> tarUsuarioList;
+    List<TarUsuarioDto> tarUsuarioListEliminados;
     
     public TarPuestoDto() {
         this.modificado = false;
+        tarCompetenciaList = new ArrayList<>();
+        tarCompetenciaListEliminados = new ArrayList<>();
+        tarUsuarioList = new ArrayList<>();
+        tarUsuarioListEliminados = new ArrayList<>();
     }
     
     public TarPuestoDto(TarPuesto tarPuesto) {
@@ -64,6 +75,38 @@ public class TarPuestoDto {
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
+    }
+
+    public List<TarCompetenciaDto> getTarCompetenciaList() {
+        return tarCompetenciaList;
+    }
+
+    public void setTarCompetenciaList(List<TarCompetenciaDto> tarCompetenciaList) {
+        this.tarCompetenciaList = tarCompetenciaList;
+    }
+
+    public List<TarCompetenciaDto> getTarCompetenciaListEliminados() {
+        return tarCompetenciaListEliminados;
+    }
+
+    public void setTarCompetenciaListEliminados(List<TarCompetenciaDto> tarCompetenciaListEliminados) {
+        this.tarCompetenciaListEliminados = tarCompetenciaListEliminados;
+    }
+
+    public List<TarUsuarioDto> getTarUsuarioList() {
+        return tarUsuarioList;
+    }
+
+    public void setTarUsuarioList(List<TarUsuarioDto> tarUsuarioList) {
+        this.tarUsuarioList = tarUsuarioList;
+    }
+
+    public List<TarUsuarioDto> getTarUsuarioListEliminados() {
+        return tarUsuarioListEliminados;
+    }
+
+    public void setTarUsuarioListEliminados(List<TarUsuarioDto> tarUsuarioListEliminados) {
+        this.tarUsuarioListEliminados = tarUsuarioListEliminados;
     }
      
     

@@ -75,6 +75,8 @@ public class TarTrabajadorevaluar implements Serializable {
     public void actualizar(TarTrabajadorevaluarDto tarTrabajadorevaluarDto){
         this.traResultado = tarTrabajadorevaluarDto.getTraResultado();
         this.traVersion = tarTrabajadorevaluarDto.getTraVersion();
+        this.usuId = new TarUsuario(tarTrabajadorevaluarDto.getUsuId());
+        this.proId = new TarProcesoevaluacion(tarTrabajadorevaluarDto.getProId());
     }
 
     public Long getTraId() {

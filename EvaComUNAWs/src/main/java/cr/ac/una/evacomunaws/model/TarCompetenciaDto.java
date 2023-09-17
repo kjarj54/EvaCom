@@ -4,6 +4,9 @@
  */
 package cr.ac.una.evacomunaws.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author kevin
@@ -15,9 +18,21 @@ public class TarCompetenciaDto {
     private String comEstado;
     private Long comVersion;
     private Boolean modificado;
+    List<TarPuestoDto> tarPuestoList;
+    List<TarPuestoDto> tarPuestoEliminados;
+    List<TarCaracteristicaDto> tarCaracteristicaList;
+    List<TarCaracteristicaDto> tarCaracteristicaEliminados;
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarElimimados;
 
     public TarCompetenciaDto() {
         this.modificado = false;
+        tarCaracteristicaList = new ArrayList<>();
+        tarCaracteristicaEliminados = new ArrayList<>();
+        tarPuestoList = new ArrayList<>();
+        tarPuestoEliminados = new ArrayList<>();
+        tarCompetenciaevaluarList = new ArrayList<>();
+        tarCompetenciaevaluarElimimados = new ArrayList<>();  
     }
 
     public TarCompetenciaDto(TarCompetencia tarCompetencia) {
@@ -67,4 +82,53 @@ public class TarCompetenciaDto {
         this.modificado = modificado;
     }
 
+    public List<TarPuestoDto> getTarPuestoList() {
+        return tarPuestoList;
+    }
+
+    public void setTarPuestoList(List<TarPuestoDto> tarPuestoList) {
+        this.tarPuestoList = tarPuestoList;
+    }
+
+    public List<TarPuestoDto> getTarPuestoEliminados() {
+        return tarPuestoEliminados;
+    }
+
+    public void setTarPuestoEliminados(List<TarPuestoDto> tarPuestoEliminados) {
+        this.tarPuestoEliminados = tarPuestoEliminados;
+    }
+
+    public List<TarCaracteristicaDto> getTarCaracteristicaList() {
+        return tarCaracteristicaList;
+    }
+
+    public void setTarCaracteristicaList(List<TarCaracteristicaDto> tarCaracteristicaList) {
+        this.tarCaracteristicaList = tarCaracteristicaList;
+    }
+
+    public List<TarCaracteristicaDto> getTarCaracteristicaEliminados() {
+        return tarCaracteristicaEliminados;
+    }
+
+    public void setTarCaracteristicaEliminados(List<TarCaracteristicaDto> tarCaracteristicaEliminados) {
+        this.tarCaracteristicaEliminados = tarCaracteristicaEliminados;
+    }
+
+    public List<TarCompetenciaevaluarDto> getTarCompetenciaevaluarList() {
+        return tarCompetenciaevaluarList;
+    }
+
+    public void setTarCompetenciaevaluarList(List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList) {
+        this.tarCompetenciaevaluarList = tarCompetenciaevaluarList;
+    }
+
+    public List<TarCompetenciaevaluarDto> getTarCompetenciaevaluarElimimados() {
+        return tarCompetenciaevaluarElimimados;
+    }
+
+    public void setTarCompetenciaevaluarElimimados(List<TarCompetenciaevaluarDto> tarCompetenciaevaluarElimimados) {
+        this.tarCompetenciaevaluarElimimados = tarCompetenciaevaluarElimimados;
+    }
+
+    
 }

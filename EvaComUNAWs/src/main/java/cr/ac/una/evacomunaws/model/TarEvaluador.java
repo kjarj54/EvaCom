@@ -72,6 +72,8 @@ public class TarEvaluador implements Serializable {
     public void actualizar(TarEvaluadorDto tarEvaluadorDto){
         this.evaluRetroalimentacion = tarEvaluadorDto.getEvaluRetroalimentacion();
         this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
+        this.traId = new TarTrabajadorevaluar(tarEvaluadorDto.getEvaluId());
+        this.usuId = new TarUsuario(tarEvaluadorDto.getUsuId());
     }
 
     public Long getEvaluId() {

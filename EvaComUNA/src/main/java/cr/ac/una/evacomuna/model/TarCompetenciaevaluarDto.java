@@ -15,11 +15,15 @@ public class TarCompetenciaevaluarDto {
     public SimpleStringProperty coeCalificacion;
     private Long coeVersion;
     private Boolean modficado;
+    public TarCompetenciaDto comId;
+    public TarEvaluadorDto evaluId;
     
     public TarCompetenciaevaluarDto() {
         this.coeId = new SimpleStringProperty();
         this.coeCalificacion = new SimpleStringProperty();
         this.modficado = false;
+        this.comId = new TarCompetenciaDto();
+        this.evaluId = new TarEvaluadorDto();
     }
 
     public Long getCoeId() {
@@ -56,6 +60,22 @@ public class TarCompetenciaevaluarDto {
 
     public void setModficado(Boolean modficado) {
         this.modficado = modficado;
+    }
+
+    public TarCompetenciaDto getComId() {
+        return comId;
+    }
+
+    public void setComId(TarCompetenciaDto comId) {
+        this.comId = comId;
+    }
+
+    public TarEvaluadorDto getEvaluId() {
+        return evaluId;
+    }
+
+    public void setEvaluId(TarEvaluadorDto evaluId) {
+        this.evaluId = evaluId;
     }
     
     

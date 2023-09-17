@@ -5,9 +5,12 @@
 package cr.ac.una.evacomuna.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 
 /**
  *
@@ -22,6 +25,8 @@ public class TarProcesoevaluacionDto {
     public ObjectProperty<String> proEstado;
     public Long proVersion;
     public Boolean modificado;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
 
     public TarProcesoevaluacionDto() {
         this.proId = new SimpleStringProperty();
@@ -29,6 +34,8 @@ public class TarProcesoevaluacionDto {
         this.proFfin = new SimpleObjectProperty();
         this.proTitulo = new SimpleStringProperty();
         this.proEstado = new SimpleObjectProperty("a");//definir no recuerdo que tenia de default
+        tarTrabajadorevaluarList = FXCollections.observableArrayList();
+        tarTrabajadorevaluarListEliminados = new ArrayList<>();
     }
 
     public Long getProId() {
@@ -91,4 +98,20 @@ public class TarProcesoevaluacionDto {
         this.modificado = modificado;
     }
 
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarList() {
+        return tarTrabajadorevaluarList;
+    }
+
+    public void setTarTrabajadorevaluarList(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList) {
+        this.tarTrabajadorevaluarList = tarTrabajadorevaluarList;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarListEliminados() {
+        return tarTrabajadorevaluarListEliminados;
+    }
+
+    public void setTarTrabajadorevaluarListEliminados(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados) {
+        this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
+    }
+    
 }

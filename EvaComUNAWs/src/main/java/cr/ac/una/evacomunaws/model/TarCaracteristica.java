@@ -56,6 +56,14 @@ public class TarCaracteristica implements Serializable {
     public TarCaracteristica() {
     }
 
+    public TarCaracteristica(Long carId, String carDescripcion, TarCompetenciaDto competenciaDto) {
+        this.carId = carId;
+        this.carDescripcion = carDescripcion;
+        this.comId = new TarCompetencia();
+    }
+    
+    
+
     public TarCaracteristica(TarCaracteristicaDto tarCaracteristicaDto) {
         this.carId = tarCaracteristicaDto.getCarId();
         actualizar(tarCaracteristicaDto);
@@ -66,6 +74,7 @@ public class TarCaracteristica implements Serializable {
     public void actualizar(TarCaracteristicaDto tarCaracteristicaDto) {
         this.carDescripcion = tarCaracteristicaDto.getCarDescripcion();
         this.carVersion = tarCaracteristicaDto.getCarVersion();
+        this.comId = new TarCompetencia(tarCaracteristicaDto.getComId());
     }
 
     public Long getCarId() {

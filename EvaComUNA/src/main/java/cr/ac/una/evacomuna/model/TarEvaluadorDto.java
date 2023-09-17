@@ -4,7 +4,10 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 
 /**
  *
@@ -16,12 +19,19 @@ public class TarEvaluadorDto {
     public SimpleStringProperty evaluRetroalimentacion;
     private Long evaluVersion;
     private Boolean modificado;
+    public TarTrabajadorevaluarDto traId;
+    public TarUsuarioDto usuId;
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados;
 
     public TarEvaluadorDto() {
         this.evaluId = new SimpleStringProperty();
         this.evaluRetroalimentacion = new SimpleStringProperty();
         this.modificado = false;
-
+        this.traId = new TarTrabajadorevaluarDto();
+        this.usuId = new TarUsuarioDto();
+        tarCompetenciaevaluarList = FXCollections.observableArrayList();
+        tarCompetenciaevaluarListEliminados = new ArrayList<>();
     }
 
     public Long getEvaluId() {
@@ -60,4 +70,36 @@ public class TarEvaluadorDto {
         this.modificado = modificado;
     }
 
+    public TarTrabajadorevaluarDto getTraId() {
+        return traId;
+    }
+
+    public void setTraId(TarTrabajadorevaluarDto traId) {
+        this.traId = traId;
+    }
+
+    public TarUsuarioDto getUsuId() {
+        return usuId;
+    }
+
+    public void setUsuId(TarUsuarioDto usuId) {
+        this.usuId = usuId;
+    }
+
+    public List<TarCompetenciaevaluarDto> getTarCompetenciaevaluarList() {
+        return tarCompetenciaevaluarList;
+    }
+
+    public void setTarCompetenciaevaluarList(List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList) {
+        this.tarCompetenciaevaluarList = tarCompetenciaevaluarList;
+    }
+
+    public List<TarCompetenciaevaluarDto> getTarCompetenciaevaluarListEliminados() {
+        return tarCompetenciaevaluarListEliminados;
+    }
+
+    public void setTarCompetenciaevaluarListEliminados(List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados) {
+        this.tarCompetenciaevaluarListEliminados = tarCompetenciaevaluarListEliminados;
+    }
+    
 }

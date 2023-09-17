@@ -4,6 +4,8 @@
  */
 package cr.ac.una.evacomunaws.model;
 
+import java.util.List;
+
 /**
  *
  * @author kevin
@@ -13,6 +15,10 @@ public class TarTrabajadorevaluarDto {
     private String traResultado;
     private Long traVersion;
     private Boolean modificado;
+    List<TarEvaluadorDto> tarEvaluadorList;
+    List<TarEvaluadorDto> tarEvaluadorListEliminados;
+    private TarProcesoevaluacionDto proId;
+    private TarUsuarioDto usuId;
     
     
     public TarTrabajadorevaluarDto() {
@@ -22,6 +28,8 @@ public class TarTrabajadorevaluarDto {
         this.traId = tarTrabajadorevaluar.getTraId();
         this.traResultado = tarTrabajadorevaluar.getTraResultado();
         this.traVersion = tarTrabajadorevaluar.getTraVersion();
+        this.usuId = new TarUsuarioDto(tarTrabajadorevaluar.getUsuId());
+        this.proId = new TarProcesoevaluacionDto(tarTrabajadorevaluar.getProId());
     }
 
     public Long getTraId() {
@@ -54,6 +62,38 @@ public class TarTrabajadorevaluarDto {
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
+    }
+
+    public List<TarEvaluadorDto> getTarEvaluadorList() {
+        return tarEvaluadorList;
+    }
+
+    public void setTarEvaluadorList(List<TarEvaluadorDto> tarEvaluadorList) {
+        this.tarEvaluadorList = tarEvaluadorList;
+    }
+
+    public TarProcesoevaluacionDto getProId() {
+        return proId;
+    }
+
+    public void setProId(TarProcesoevaluacionDto proId) {
+        this.proId = proId;
+    }
+
+    public TarUsuarioDto getUsuId() {
+        return usuId;
+    }
+
+    public void setUsuId(TarUsuarioDto usuId) {
+        this.usuId = usuId;
+    }
+
+    public List<TarEvaluadorDto> getTarEvaluadorListEliminados() {
+        return tarEvaluadorListEliminados;
+    }
+
+    public void setTarEvaluadorListEliminados(List<TarEvaluadorDto> tarEvaluadorListEliminados) {
+        this.tarEvaluadorListEliminados = tarEvaluadorListEliminados;
     }
     
     

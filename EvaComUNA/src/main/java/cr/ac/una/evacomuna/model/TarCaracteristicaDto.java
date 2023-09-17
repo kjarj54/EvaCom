@@ -15,12 +15,14 @@ public class TarCaracteristicaDto {
     public SimpleStringProperty carDescripcion;
     private Long carVersion;
     private Boolean modificado;
+    public TarCompetenciaDto comId;
     
 
     public TarCaracteristicaDto() {
         this.carId = new SimpleStringProperty();
         this.carDescripcion = new SimpleStringProperty();
         this.modificado = false;
+        this.comId = new TarCompetenciaDto();
     }
 
     
@@ -59,6 +61,14 @@ public class TarCaracteristicaDto {
 
     public void setCarVersion(Long carVersion) {
         this.carVersion = carVersion;
+    }
+
+    public TarCompetenciaDto getComId() {
+        return comId;
+    }
+
+    public void setComId(TarCompetenciaDto comId) {
+        this.comId = comId;
     }
     
     

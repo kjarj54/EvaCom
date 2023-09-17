@@ -5,10 +5,13 @@
 package cr.ac.una.evacomuna.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 
 /**
  *
@@ -31,6 +34,11 @@ public class TarUsuarioDto {
     public SimpleBooleanProperty usuAdmin;
     private Long usuVersion;
     private Boolean modificado;
+    List<TarEvaluadorDto> tarEvaluadorList;
+    List<TarEvaluadorDto> tarEvaluadorListEliminados;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
+    public TarPuestoDto pueId;
 
     public TarUsuarioDto() {
         this.usuId = new SimpleStringProperty();
@@ -47,6 +55,11 @@ public class TarUsuarioDto {
         this.usuActivo = new SimpleBooleanProperty(false);
         this.usuAdmin = new SimpleBooleanProperty(false);
         this.modificado = false;
+        this.pueId = new TarPuestoDto();
+        tarEvaluadorList = FXCollections.observableArrayList();
+        tarEvaluadorListEliminados = new ArrayList<>();
+        tarTrabajadorevaluarList = FXCollections.observableArrayList();
+        tarTrabajadorevaluarListEliminados = new ArrayList<>();
     }
 
     public Long getUsuId() {
@@ -103,7 +116,7 @@ public class TarUsuarioDto {
 
     public void setUsuTelefono(Long usuTelefono) {
         this.usuTelefono.set(usuTelefono.toString());
-        
+
     }
 
     public Long getUsuCelular() {
@@ -135,7 +148,7 @@ public class TarUsuarioDto {
     }
 
     public String getUsuActivo() {
-        return usuActivo.get()?"A":"I";
+        return usuActivo.get() ? "A" : "I";
     }
 
     public void setUsuActivo(String usuActivo) {
@@ -143,7 +156,7 @@ public class TarUsuarioDto {
     }
 
     public String getUsuAdmin() {
-        return usuAdmin.get()?"S":"N";
+        return usuAdmin.get() ? "S" : "N";
     }
 
     public void setUsuAdmin(String usuAdmin) {
@@ -166,4 +179,46 @@ public class TarUsuarioDto {
         this.modificado = modificado;
     }
 
+    public List<TarEvaluadorDto> getTarEvaluadorList() {
+        return tarEvaluadorList;
+    }
+
+    public void setTarEvaluadorList(List<TarEvaluadorDto> tarEvaluadorList) {
+        this.tarEvaluadorList = tarEvaluadorList;
+    }
+
+    public List<TarEvaluadorDto> getTarEvaluadorListEliminados() {
+        return tarEvaluadorListEliminados;
+    }
+
+    public void setTarEvaluadorListEliminados(List<TarEvaluadorDto> tarEvaluadorListEliminados) {
+        this.tarEvaluadorListEliminados = tarEvaluadorListEliminados;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarList() {
+        return tarTrabajadorevaluarList;
+    }
+
+    public void setTarTrabajadorevaluarList(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList) {
+        this.tarTrabajadorevaluarList = tarTrabajadorevaluarList;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarListEliminados() {
+        return tarTrabajadorevaluarListEliminados;
+    }
+
+    public void setTarTrabajadorevaluarListEliminados(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados) {
+        this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
+    }
+
+    public TarPuestoDto getPueId() {
+        return pueId;
+    }
+
+    public void setPueId(TarPuestoDto pueId) {
+        this.pueId = pueId;
+    }
+    
+    
+    
 }

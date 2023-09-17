@@ -4,25 +4,36 @@
  */
 package cr.ac.una.evacomuna.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 
 /**
  *
  * @author kevin
  */
 public class TarPuestoDto {
+
     public SimpleStringProperty pueId;
     public SimpleStringProperty pueNombre;
     public SimpleStringProperty pueEstado;
     private Long pueVersion;
     private Boolean modificado;
-    
-       
+    List<TarCompetenciaDto> tarCompetenciaList;
+    List<TarCompetenciaDto> tarCompetenciaListEliminados;
+    List<TarUsuarioDto> tarUsuarioList;
+    List<TarUsuarioDto> tarUsuarioListEliminados;
+
     public TarPuestoDto() {
         this.pueId = new SimpleStringProperty();
         this.pueNombre = new SimpleStringProperty();
         this.pueEstado = new SimpleStringProperty();
         this.modificado = false;
+        tarCompetenciaList = FXCollections.observableArrayList();
+        tarCompetenciaListEliminados = new ArrayList<>();
+        tarUsuarioList = FXCollections.observableArrayList();
+        tarUsuarioListEliminados = new ArrayList<>();
     }
 
     public Long getPueId() {
@@ -68,6 +79,38 @@ public class TarPuestoDto {
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
-     
+
+    public List<TarCompetenciaDto> getTarCompetenciaList() {
+        return tarCompetenciaList;
+    }
+
+    public void setTarCompetenciaList(List<TarCompetenciaDto> tarCompetenciaList) {
+        this.tarCompetenciaList = tarCompetenciaList;
+    }
+
+    public List<TarCompetenciaDto> getTarCompetenciaListEliminados() {
+        return tarCompetenciaListEliminados;
+    }
+
+    public void setTarCompetenciaListEliminados(List<TarCompetenciaDto> tarCompetenciaListEliminados) {
+        this.tarCompetenciaListEliminados = tarCompetenciaListEliminados;
+    }
+
+    public List<TarUsuarioDto> getTarUsuarioList() {
+        return tarUsuarioList;
+    }
+
+    public void setTarUsuarioList(List<TarUsuarioDto> tarUsuarioList) {
+        this.tarUsuarioList = tarUsuarioList;
+    }
+
+    public List<TarUsuarioDto> getTarUsuarioListEliminados() {
+        return tarUsuarioListEliminados;
+    }
+
+    public void setTarUsuarioListEliminados(List<TarUsuarioDto> tarUsuarioListEliminados) {
+        this.tarUsuarioListEliminados = tarUsuarioListEliminados;
+    }
+    
     
 }

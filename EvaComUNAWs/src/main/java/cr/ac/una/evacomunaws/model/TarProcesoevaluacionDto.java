@@ -5,6 +5,8 @@
 package cr.ac.una.evacomunaws.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,9 +20,14 @@ public class TarProcesoevaluacionDto {
     private String proEstado;
     private Long proVersion;
     private Boolean modificado;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
 
     public TarProcesoevaluacionDto() {
         this.modificado = false;
+        tarTrabajadorevaluarList = new ArrayList<>();
+        tarTrabajadorevaluarListEliminados = new ArrayList<>();
+        
     }
     
     public TarProcesoevaluacionDto(TarProcesoevaluacion tarProcesoevaluacion) {
@@ -86,6 +93,22 @@ public class TarProcesoevaluacionDto {
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarList() {
+        return tarTrabajadorevaluarList;
+    }
+
+    public void setTarTrabajadorevaluarList(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList) {
+        this.tarTrabajadorevaluarList = tarTrabajadorevaluarList;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarListEliminados() {
+        return tarTrabajadorevaluarListEliminados;
+    }
+
+    public void setTarTrabajadorevaluarListEliminados(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados) {
+        this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
     }
     
     

@@ -4,6 +4,9 @@
  */
 package cr.ac.una.evacomunaws.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -26,10 +29,19 @@ public class TarUsuarioDto {
     private String usuAdmin;
     private Long usuVersion;
     private Boolean modificado;
+    List<TarEvaluadorDto> tarEvaluadorList;
+    List<TarEvaluadorDto> tarEvaluadorListEliminados;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
+    private TarPuestoDto pueId;
 
     public TarUsuarioDto() {
         this.modificado = false;
-
+        tarEvaluadorList = new ArrayList<>();
+        tarEvaluadorListEliminados = new ArrayList<>();
+        tarTrabajadorevaluarList = new ArrayList<>();
+        tarTrabajadorevaluarListEliminados = new ArrayList<>();
+        this.pueId = new TarPuestoDto();
     }
 
     public TarUsuarioDto(TarUsuario tarUsuario) {
@@ -47,6 +59,7 @@ public class TarUsuarioDto {
         this.usuVersion = tarUsuario.getUsuVersion();
         this.usuUsu = tarUsuario.getUsuUsu();
         this.usuTempclave = tarUsuario.getUsuTempclave();
+        this.pueId = new TarPuestoDto(tarUsuario.getPueId());
     }
 
     public Long getUsuId() {
@@ -169,4 +182,46 @@ public class TarUsuarioDto {
         this.usuTempclave = usuTempclave;
     }
 
+    public List<TarEvaluadorDto> getTarEvaluadorList() {
+        return tarEvaluadorList;
+    }
+
+    public void setTarEvaluadorList(List<TarEvaluadorDto> tarEvaluadorList) {
+        this.tarEvaluadorList = tarEvaluadorList;
+    }
+
+    public List<TarEvaluadorDto> getTarEvaluadorListEliminados() {
+        return tarEvaluadorListEliminados;
+    }
+
+    public void setTarEvaluadorListEliminados(List<TarEvaluadorDto> tarEvaluadorListEliminados) {
+        this.tarEvaluadorListEliminados = tarEvaluadorListEliminados;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarList() {
+        return tarTrabajadorevaluarList;
+    }
+
+    public void setTarTrabajadorevaluarList(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList) {
+        this.tarTrabajadorevaluarList = tarTrabajadorevaluarList;
+    }
+
+    public List<TarTrabajadorevaluarDto> getTarTrabajadorevaluarListEliminados() {
+        return tarTrabajadorevaluarListEliminados;
+    }
+
+    public void setTarTrabajadorevaluarListEliminados(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados) {
+        this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
+    }
+
+    public TarPuestoDto getPueId() {
+        return pueId;
+    }
+
+    public void setPueId(TarPuestoDto pueId) {
+        this.pueId = pueId;
+    }
+
+    
+    
 }
