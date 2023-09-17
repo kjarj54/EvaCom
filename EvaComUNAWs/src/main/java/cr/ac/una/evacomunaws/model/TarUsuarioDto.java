@@ -7,7 +7,6 @@ package cr.ac.una.evacomunaws.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author kevin
@@ -33,7 +32,7 @@ public class TarUsuarioDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
-    private TarPuestoDto pueId;
+    private TarPuestoDto pueId = null;
 
     public TarUsuarioDto() {
         this.modificado = false;
@@ -59,7 +58,9 @@ public class TarUsuarioDto {
         this.usuVersion = tarUsuario.getUsuVersion();
         this.usuUsu = tarUsuario.getUsuUsu();
         this.usuTempclave = tarUsuario.getUsuTempclave();
-        this.pueId = new TarPuestoDto(tarUsuario.getPueId());
+        if (tarUsuario.getPueId() != null) {
+            this.pueId = new TarPuestoDto(tarUsuario.getPueId());
+        }
     }
 
     public Long getUsuId() {
@@ -222,6 +223,4 @@ public class TarUsuarioDto {
         this.pueId = pueId;
     }
 
-    
-    
 }

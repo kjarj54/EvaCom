@@ -129,7 +129,9 @@ public class TarUsuario implements Serializable {
         this.usuFoto = tarUsuarioDto.getUsuFoto();
         this.usuTempclave = tarUsuarioDto.getUsuTempclave();
         this.usuUsu = tarUsuarioDto.getUsuUsu();
-        this.pueId = new TarPuesto(tarUsuarioDto.getPueId());
+        if(tarUsuarioDto.getPueId() != null){
+            this.pueId = new TarPuesto(tarUsuarioDto.getPueId());
+        }
     }
 
     public Long getUsuId() {
