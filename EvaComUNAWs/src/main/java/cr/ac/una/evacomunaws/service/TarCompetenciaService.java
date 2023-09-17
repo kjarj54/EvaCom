@@ -33,7 +33,7 @@ public class TarCompetenciaService {
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
     
-    public Respuesta guardarCompetencia(TarCompetenciaDto tarCompetenciaDto) {
+    public Respuesta guardarCompetencia(TarCompetenciaDto tarCompetenciaDto) {//TODO el for each que setia las listas
         try {
             TarCompetencia competencia;
             if (tarCompetenciaDto.getComId() != null && tarCompetenciaDto.getComId() > 0) {

@@ -14,6 +14,7 @@ import cr.ac.una.evacomunaws.service.TarProcesoevaluacionService;
 import cr.ac.una.evacomunaws.service.TarPuestoService;
 import cr.ac.una.evacomunaws.service.TarTrabajadorevaluarService;
 import cr.ac.una.evacomunaws.service.TarUsuarioService;
+import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import cr.ac.una.evacomunaws.util.Respuesta;
 import jakarta.ejb.EJB;
 import jakarta.jws.WebMethod;
@@ -91,7 +92,7 @@ public class EvaComUNAWs {
             return false;
         }
     }
-     @WebMethod(operationName = "getUsuarioClass")
+    @WebMethod(operationName = "getUsuarioClass")
     public TarUsuarioDto getUsuarioClass(@WebParam(name = "id") Long id) {
         try {
             Respuesta res = tarUsuarioService.getUsuario(id);
@@ -106,6 +107,34 @@ public class EvaComUNAWs {
         }
     }
     
+    @WebMethod(operationName = "getUsuarioId")
+    public Long getUsuarioId(@WebParam(name = "usuario") String usuario, @WebParam(name = "clave") String clave) {
+        try {
+            Respuesta res = tarUsuarioService.validarUsuario(usuario, clave);
+            if (!res.getEstado()) {
+                return res.getCodigoRespuesta().getValue().longValue();//TODO
+            }
+            TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("Usuario");
+            return tarUsuarioDto.getUsuId();//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return CodigoRespuesta.ERROR_INTERNO.getValue().longValue();//TODO
+        }
+    }
+    
+    @WebMethod(operationName = "guardarUsuario")
+    public TarUsuarioDto guardarUsuario(@WebParam(name = "usuarioDto") TarUsuarioDto usuarioDto) {
+        try {
+            Respuesta res = tarUsuarioService.guardarUsuario(usuarioDto);
+            if (!res.getEstado()) {
+                return TarUsuarioDto.class.cast(res);//TODO
+            }
+            return usuarioDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarUsuarioDto.class.cast(ex);//TODO
+        }
+    }
     
     
     /*******************************************************************************************
