@@ -32,7 +32,7 @@ public class TarUsuarioDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
-    private TarPuestoDto pueId = null;
+    private TarPuestoDto pueId;
 
     public TarUsuarioDto() {
         this.modificado = false;
@@ -58,7 +58,7 @@ public class TarUsuarioDto {
         this.usuVersion = tarUsuario.getUsuVersion();
         this.usuUsu = tarUsuario.getUsuUsu();
         this.usuTempclave = tarUsuario.getUsuTempclave();
-        if (tarUsuario.getPueId() != null) {
+        if (tarUsuario.getPueId() != null) {//No se porque sin esta comprobacion no funciona 
             this.pueId = new TarPuestoDto(tarUsuario.getPueId());
         }
     }
