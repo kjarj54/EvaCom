@@ -37,6 +37,15 @@ public class TarProcesoevaluacionDto {
         tarTrabajadorevaluarList = FXCollections.observableArrayList();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
     }
+    
+    public TarProcesoevaluacionDto(cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto tarProcesoevaluacionDto) {
+        this();
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto tarProcesoevaluacionDtoSoap = new cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto();
+        return tarProcesoevaluacionDtoSoap;
+    }
 
     public Long getProId() {
         if (this.proId.get() != null && !this.proId.get().isEmpty()) {

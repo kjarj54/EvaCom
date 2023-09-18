@@ -40,6 +40,20 @@ public class TarCompetenciaDto {
         tarCompetenciaevaluarList=FXCollections.observableArrayList();
         tarCompetenciaevaluarElimimados= new ArrayList<>();
     }
+    
+    public TarCompetenciaDto(cr.ac.una.evacomunaws.controller.TarCompetenciaDto tarCaracteristicaDto) {
+        this();
+        this.comEstado.set(tarCaracteristicaDto.getComEstado().equals("A"));
+        this.comNombre.set(tarCaracteristicaDto.getComNombre());
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarCompetenciaDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarCompetenciaDto tarCompetenciaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCompetenciaDto();
+        tarCompetenciaDtoSoap.setComId(this.getComId());
+        tarCompetenciaDtoSoap.setComEstado(getComEstado());
+        tarCompetenciaDtoSoap.setComNombre(getComNombre());
+        return tarCompetenciaDtoSoap;
+    }
 
     public Long getComId() {
         if (this.comId.get() != null && !this.comId.get().isEmpty()) {

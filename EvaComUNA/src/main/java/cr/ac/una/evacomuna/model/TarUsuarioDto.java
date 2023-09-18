@@ -61,6 +61,15 @@ public class TarUsuarioDto {
         tarTrabajadorevaluarList = FXCollections.observableArrayList();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
     }
+    
+    public TarUsuarioDto(cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDto) {
+        this();
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarUsuarioDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDtoSoap = new cr.ac.una.evacomunaws.controller.TarUsuarioDto();
+        return tarUsuarioDtoSoap;
+    }
 
     public Long getUsuId() {
         if (this.usuId.get() != null && !this.usuId.get().isEmpty()) {

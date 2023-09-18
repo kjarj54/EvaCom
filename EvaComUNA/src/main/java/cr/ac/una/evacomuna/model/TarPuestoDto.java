@@ -35,6 +35,15 @@ public class TarPuestoDto {
         tarUsuarioList = FXCollections.observableArrayList();
         tarUsuarioListEliminados = new ArrayList<>();
     }
+    
+    public TarPuestoDto(cr.ac.una.evacomunaws.controller.TarPuestoDto tarPuestoDto) {
+        this();
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarPuestoDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarPuestoDto tarPuestoDtoSoap = new cr.ac.una.evacomunaws.controller.TarPuestoDto();
+        return tarPuestoDtoSoap;
+    }
 
     public Long getPueId() {
         if (this.pueId.get() != null && !this.pueId.get().isEmpty()) {

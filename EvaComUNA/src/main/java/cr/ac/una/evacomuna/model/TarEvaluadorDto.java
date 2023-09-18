@@ -33,6 +33,15 @@ public class TarEvaluadorDto {
         tarCompetenciaevaluarList = FXCollections.observableArrayList();
         tarCompetenciaevaluarListEliminados = new ArrayList<>();
     }
+    
+    public TarEvaluadorDto(cr.ac.una.evacomunaws.controller.TarEvaluadorDto tarEvaluadorDto) {
+        this();
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarEvaluadorDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarEvaluadorDto tarEvaluadorDtoSoap = new cr.ac.una.evacomunaws.controller.TarEvaluadorDto();
+        return tarEvaluadorDtoSoap;
+    }
 
     public Long getEvaluId() {
         if (this.evaluId.get() != null && !this.evaluId.get().isEmpty()) {

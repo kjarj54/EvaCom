@@ -36,6 +36,15 @@ public class TarParametrosDto {
         this.parDescripcion = new SimpleStringProperty();
         this.modificado = false;
     }
+    
+    public TarParametrosDto(cr.ac.una.evacomunaws.controller.TarParametrosDto tarParametrosDto) {
+        this();
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarParametrosDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarParametrosDto tarParametrosDtoSoap = new cr.ac.una.evacomunaws.controller.TarParametrosDto();
+        return tarParametrosDtoSoap;
+    }
 
     public Long getParId() {
         if (this.parId.get() != null && !this.parId.get().isEmpty()) {

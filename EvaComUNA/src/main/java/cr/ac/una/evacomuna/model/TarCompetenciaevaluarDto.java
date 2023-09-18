@@ -25,6 +25,18 @@ public class TarCompetenciaevaluarDto {
         this.comId = new TarCompetenciaDto();
         this.evaluId = new TarEvaluadorDto();
     }
+    
+    public TarCompetenciaevaluarDto(cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCaracteristicaDto) {
+        this();
+        this.coeCalificacion.set(tarCaracteristicaDto.getCoeCalificacion());
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCompetenciaevaluarDtoSoap = new cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto();
+        tarCompetenciaevaluarDtoSoap.setCoeId(this.getCoeId());
+        tarCompetenciaevaluarDtoSoap.setCoeCalificacion(this.getCoeCalificacion());
+        return tarCompetenciaevaluarDtoSoap;
+    }
 
     public Long getCoeId() {
         if (this.coeId.get()!= null && !this.coeId.get().isEmpty()) {

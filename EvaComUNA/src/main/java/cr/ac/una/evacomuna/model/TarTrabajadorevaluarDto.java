@@ -34,6 +34,15 @@ public class TarTrabajadorevaluarDto {
         tarEvaluadorListEliminados = new ArrayList<>();
         
     }
+    
+    public TarTrabajadorevaluarDto(cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto tarTrabajadorevaluarDto) {
+        this();
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto tarTrabajadorevaluarDtoSoap = new cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto();
+        return tarTrabajadorevaluarDtoSoap;
+    }
 
     public Long getTraId() {
         if (this.traId.get() != null && !this.traId.get().isEmpty()) {

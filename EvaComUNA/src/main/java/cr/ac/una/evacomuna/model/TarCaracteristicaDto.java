@@ -24,7 +24,18 @@ public class TarCaracteristicaDto {
         this.modificado = false;
         this.comId = new TarCompetenciaDto();
     }
-
+    
+    public TarCaracteristicaDto(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDto) {
+        this();
+        this.carDescripcion.set(tarCaracteristicaDto.getCarDescripcion());
+    }
+    
+    public cr.ac.una.evacomunaws.controller.TarCaracteristicaDto consultas(){
+        cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCaracteristicaDto();
+        tarCaracteristicaDtoSoap.setCarId(this.getCarId());
+        tarCaracteristicaDtoSoap.setCarDescripcion(this.getCarDescripcion());
+        return tarCaracteristicaDtoSoap;
+    }
     
     
     public Boolean getModificado() {
