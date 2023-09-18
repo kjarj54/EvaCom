@@ -4,6 +4,8 @@
  */
 package cr.ac.una.evacomunaws.service;
 
+import cr.ac.una.evacomunaws.model.TarCompetencia;
+import cr.ac.una.evacomunaws.model.TarCompetenciaDto;
 import cr.ac.una.evacomunaws.model.TarPuesto;
 import cr.ac.una.evacomunaws.model.TarPuestoDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
@@ -41,6 +43,18 @@ public class TarPuestoService {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el puesto a modificar.", "guardarPuesto NoResultException");
                 }
                 puesto.actualizar(tarPuestoDto);
+                for(TarCompetenciaDto com : tarPuestoDto.getTarCompetenciaListEliminados()){
+                    puesto.getTarCompetenciaList().remove(new TarCompetencia(com.getComId()));
+                }
+                if(!tarPuestoDto.getTarCompetenciaList().isEmpty()){
+                    for(TarCompetenciaDto com : tarPuestoDto.getTarCompetenciaList()){
+                        if(com.getModificado()){
+                            TarCompetencia competencia = em.find(TarCompetencia.class, com.getComId());
+                            competencia.getTarPuestoList().add(puesto);
+                            puesto.getTarCompetenciaList().add(competencia);
+                        }
+                    }
+                }
                 puesto = em.merge(puesto);
             } else {
                 puesto = new TarPuesto(tarPuestoDto);

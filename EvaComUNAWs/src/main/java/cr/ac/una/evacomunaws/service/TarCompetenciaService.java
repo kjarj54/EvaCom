@@ -7,6 +7,8 @@ package cr.ac.una.evacomunaws.service;
 import cr.ac.una.evacomunaws.model.TarCaracteristicaDto;
 import cr.ac.una.evacomunaws.model.TarCompetencia;
 import cr.ac.una.evacomunaws.model.TarCompetenciaDto;
+import cr.ac.una.evacomunaws.model.TarPuesto;
+import cr.ac.una.evacomunaws.model.TarPuestoDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import cr.ac.una.evacomunaws.util.Respuesta;
 import jakarta.ejb.LocalBean;
@@ -42,6 +44,18 @@ public class TarCompetenciaService {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competencia a modificar.", "guardarCompetencia NoResultException");
                 }
                 competencia.actualizar(tarCompetenciaDto);
+                for(TarPuestoDto pue : tarCompetenciaDto.getTarPuestoList()){
+                    competencia.getTarPuestoList().remove(new TarPuesto(pue.getPueId()));
+                }
+                if(!tarCompetenciaDto.getTarPuestoList().isEmpty()){
+                    for(TarPuestoDto pue : tarCompetenciaDto.getTarPuestoList()){
+                        if(pue.getModificado()){
+                            TarPuesto puesto = em.find(TarPuesto.class, pue.getPueId());
+                            competencia.getTarPuestoList().add(puesto);
+                            puesto.getTarCompetenciaList().add(competencia);
+                        }
+                    }
+                }
                 competencia = em.merge(competencia);
             } else {
                 competencia = new TarCompetencia(tarCompetenciaDto);
