@@ -36,10 +36,13 @@ public class TarEvaluadorDto {
     
     public TarEvaluadorDto(cr.ac.una.evacomunaws.controller.TarEvaluadorDto tarEvaluadorDto) {
         this();
+        this.evaluRetroalimentacion.set(tarEvaluadorDto.getEvaluRetroalimentacion());
     }
     
     public cr.ac.una.evacomunaws.controller.TarEvaluadorDto consultas(){
         cr.ac.una.evacomunaws.controller.TarEvaluadorDto tarEvaluadorDtoSoap = new cr.ac.una.evacomunaws.controller.TarEvaluadorDto();
+        tarEvaluadorDtoSoap.setEvaluId(this.getEvaluId());
+        tarEvaluadorDtoSoap.setEvaluRetroalimentacion(this.getEvaluRetroalimentacion());
         return tarEvaluadorDtoSoap;
     }
 

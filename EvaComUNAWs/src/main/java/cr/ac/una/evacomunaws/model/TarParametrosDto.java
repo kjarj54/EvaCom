@@ -68,7 +68,7 @@ public class TarParametrosDto {
         this.parClave = parClave;
     }
 
-    public Serializable getParHtml() {
+    public Byte[] getParHtml() {
         return parHtml;
     }
 
@@ -76,7 +76,7 @@ public class TarParametrosDto {
         this.parHtml = parHtml;
     }
 
-    public Serializable getParLogo() {
+    public Byte[] getParLogo() {
         return parLogo;
     }
 

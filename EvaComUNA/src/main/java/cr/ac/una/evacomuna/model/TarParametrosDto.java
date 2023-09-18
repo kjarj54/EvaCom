@@ -5,6 +5,9 @@
 package cr.ac.una.evacomuna.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,18 +17,17 @@ import javafx.beans.property.SimpleStringProperty;
  * @author kevin
  */
 public class TarParametrosDto {
-    public SimpleStringProperty  parId;
-    public SimpleStringProperty  parNombre;
-    public SimpleStringProperty  parEmail;
-    public SimpleStringProperty  parClave;
-    public ObjectProperty<byte[]> parHtml;
-    public ObjectProperty<byte[]> parLogo;
-    public SimpleStringProperty  parDescripcion;
+
+    public SimpleStringProperty parId;
+    public SimpleStringProperty parNombre;
+    public SimpleStringProperty parEmail;
+    public SimpleStringProperty parClave;
+    public ObjectProperty<Byte[]> parHtml;
+    public ObjectProperty<Byte[]> parLogo;
+    public SimpleStringProperty parDescripcion;
     private Long parVersion;
     private Boolean modificado;
-    
-    
-    
+
     public TarParametrosDto() {
         this.parId = new SimpleStringProperty();
         this.parNombre = new SimpleStringProperty();
@@ -36,13 +38,34 @@ public class TarParametrosDto {
         this.parDescripcion = new SimpleStringProperty();
         this.modificado = false;
     }
-    
+
     public TarParametrosDto(cr.ac.una.evacomunaws.controller.TarParametrosDto tarParametrosDto) {
         this();
+        this.parClave.set(tarParametrosDto.getParClave());
+        this.parDescripcion.set(tarParametrosDto.getParDescripcion());
+        this.parEmail.set(tarParametrosDto.getParEmail());
+        List<Byte> parHtmlList = tarParametrosDto.getParHtml();
+        Byte[] parHtmlArray = parHtmlList.toArray(new Byte[parHtmlList.size()]);
+        this.parHtml.set(parHtmlArray);
+        this.parId.set(tarParametrosDto.getParId().toString());
+        List<Byte> parLogoList = tarParametrosDto.getParLogo();
+        Byte[] parLogoArray = parLogoList.toArray(new Byte[parLogoList.size()]);
+        this.parLogo.set(parLogoArray);
+        this.parNombre.set(tarParametrosDto.getParNombre());
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarParametrosDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarParametrosDto consultas() {
         cr.ac.una.evacomunaws.controller.TarParametrosDto tarParametrosDtoSoap = new cr.ac.una.evacomunaws.controller.TarParametrosDto();
+        tarParametrosDtoSoap.setParClave(this.getParClave());
+        tarParametrosDtoSoap.setParDescripcion(this.getParDescripcion());
+        tarParametrosDtoSoap.setParEmail(this.getParEmail());
+        tarParametrosDtoSoap.setParNombre(this.getParNombre());
+        Byte[] parHtmlArray = this.getParHtml();
+        List<Byte> parHtmlList = new ArrayList<>(Arrays.asList(parHtmlArray));
+        tarParametrosDtoSoap.getParHtml().addAll(parHtmlList);
+        Byte[] parLogoArray = this.getParLogo();
+        List<Byte> parLogoList = new ArrayList<>(Arrays.asList(parLogoArray));
+        tarParametrosDtoSoap.getParLogo().addAll(parLogoList);
         return tarParametrosDtoSoap;
     }
 
@@ -82,19 +105,19 @@ public class TarParametrosDto {
         this.parClave.set(parClave);
     }
 
-    public byte[] getParHtml() {
+    public Byte[] getParHtml() {
         return parHtml.get();
     }
 
-    public void setParHtml(byte[] parHtml) {
+    public void setParHtml(Byte[] parHtml) {
         this.parHtml.set(parHtml);
     }
 
-    public byte[] getParLogo() {
+    public Byte[] getParLogo() {
         return parLogo.get();
     }
 
-    public void setParLogo(byte[] parLogo) {
+    public void setParLogo(Byte[] parLogo) {
         this.parLogo.set(parLogo);
     }
 
@@ -121,8 +144,5 @@ public class TarParametrosDto {
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
-    
-    
-    
-    
+
 }
