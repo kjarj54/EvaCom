@@ -4,6 +4,7 @@
  */
 package cr.ac.una.evacomunaws.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class TarUsuarioDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
-    private TarPuestoDto pueId = null;
+    private TarPuestoDto puestoDto = null;
+    private LocalDateTime fecha;
 
     public TarUsuarioDto() {
         this.modificado = false;
@@ -40,7 +42,7 @@ public class TarUsuarioDto {
         tarEvaluadorListEliminados = new ArrayList<>();
         tarTrabajadorevaluarList = new ArrayList<>();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
-        this.pueId = new TarPuestoDto();
+        this.fecha = LocalDateTime.now();   
     }
 
     public TarUsuarioDto(TarUsuario tarUsuario) {
@@ -212,12 +214,22 @@ public class TarUsuarioDto {
         this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
     }
 
-    public TarPuestoDto getPueId() {
-        return pueId;
+    public TarPuestoDto getPuestoDto() {
+        return puestoDto;
     }
 
-    public void setPueId(TarPuestoDto pueId) {
-        this.pueId = pueId;
+    public void setPuestoDto(TarPuestoDto puestoDto) {
+        this.puestoDto = puestoDto;
     }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    
 
 }

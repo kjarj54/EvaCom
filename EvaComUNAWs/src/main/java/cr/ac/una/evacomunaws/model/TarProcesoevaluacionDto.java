@@ -5,6 +5,7 @@
 package cr.ac.una.evacomunaws.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,21 +23,27 @@ public class TarProcesoevaluacionDto {
     private Boolean modificado;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
+    private LocalDateTime fecha;
 
     public TarProcesoevaluacionDto() {
         this.modificado = false;
         tarTrabajadorevaluarList = new ArrayList<>();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
-        
+        this.fecha = LocalDateTime.now();    
     }
     
     public TarProcesoevaluacionDto(TarProcesoevaluacion tarProcesoevaluacion) {
         this.proId = tarProcesoevaluacion.getProId();
         this.proFini = tarProcesoevaluacion.getProFini();
-        this.proFfin = tarProcesoevaluacion.getProFfin();
+        if (tarProcesoevaluacion.getProFfin()!= null) {
+            this.proFfin = tarProcesoevaluacion.getProFfin();
+        } else {
+            this.proFfin = null;
+        }
         this.proTitulo = tarProcesoevaluacion.getProTitulo();
         this.proEstado = tarProcesoevaluacion.getProEstado();
         this.proVersion = tarProcesoevaluacion.getProVersion();
+        this.fecha = LocalDateTime.now();
     }
 
     public Long getProId() {
@@ -109,6 +116,14 @@ public class TarProcesoevaluacionDto {
 
     public void setTarTrabajadorevaluarListEliminados(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados) {
         this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
     
     

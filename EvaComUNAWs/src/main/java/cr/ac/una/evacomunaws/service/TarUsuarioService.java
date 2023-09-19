@@ -34,7 +34,7 @@ public class TarUsuarioService {
     private static final Logger LOG = Logger.getLogger(TarUsuarioService.class.getName());
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
-    
+
     public Respuesta validarUsuario(String usuUsu, String usuClave) {
         try {
             Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuClaveUsuario", TarUsuario.class);
@@ -53,20 +53,20 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el usuario.", "validarUsuario " + ex.getMessage());
         }
     }
-    
-    
-    
+
     public Respuesta guardarUsuario(TarUsuarioDto tarUsuarioDto) {
         try {
             TarUsuario usuario;
-            if (tarUsuarioDto.getUsuId()!= null && tarUsuarioDto.getUsuId() > 0) {
+            if (tarUsuarioDto.getUsuId() != null && tarUsuarioDto.getUsuId() > 0) {
                 usuario = em.find(TarUsuario.class, tarUsuarioDto.getUsuId());
                 if (usuario == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "guardarCaracteristica NoResultException");
                 }
                 usuario.actualizar(tarUsuarioDto);
-                usuario.setPueId(em.find(TarUsuario.class, tarUsuarioDto.getPueId().getPueId()));
-                
+                if (tarUsuarioDto.getPuestoDto() != null) {
+                    TarPuesto puesto = em.find(TarPuesto.class, tarUsuarioDto.getPuestoDto().getPueId());
+                    usuario.setPueId(puesto);
+                }
                 usuario = em.merge(usuario);
             } else {
                 usuario = new TarUsuario(tarUsuarioDto);
@@ -79,7 +79,7 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el usuario.", "guardarUsuario " + ex.getMessage());
         }
     }
-    
+
     public Respuesta eliminarUsuario(Long id) {
         try {
             TarUsuario caracteristica;
@@ -102,7 +102,7 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar el usuario.", "eliminarUsuario " + ex.getMessage());
         }
     }
-    
+
     public Respuesta getUsuarios() {
         try {
             Query qryUsuario = em.createNamedQuery("TarUsuario.findAll", TarUsuario.class);
@@ -121,18 +121,18 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar usuarios.", "getUsuarios " + ex.getMessage());
         }
     }
-    
+
     public Respuesta getUsuario(Long usuId) {
         try {
             Query qryCaracteristica = em.createNamedQuery("TarUsuario.findByUsuId", TarUsuario.class);
             qryCaracteristica.setParameter("usuId", usuId);
-            
-            TarUsuario tarUsuario = (TarUsuario) qryCaracteristica.getSingleResult();
-            
-            TarUsuarioDto dto = new TarUsuarioDto(tarUsuario);
-            
-            dto.setPueId(new TarPuestoDto(tarUsuario.getPueId()));
 
+            TarUsuario tarUsuario = (TarUsuario) qryCaracteristica.getSingleResult();
+
+            TarUsuarioDto dto = new TarUsuarioDto(tarUsuario);
+            if (tarUsuario.getPueId() != null) {
+                dto.setPuestoDto(new TarPuestoDto(tarUsuario.getPueId()));
+            }
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", dto);
 
         } catch (NoResultException ex) {
@@ -145,6 +145,5 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el usuario.", "getUsuario " + ex.getMessage());
         }
     }
-    
-    
+
 }

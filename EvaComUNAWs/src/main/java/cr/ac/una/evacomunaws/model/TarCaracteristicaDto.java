@@ -14,11 +14,11 @@ public class TarCaracteristicaDto {
     private String carDescripcion;
     private Long carVersion;
     private Boolean modificado;
-    private TarCompetenciaDto comId = null;
+    private TarCompetenciaDto competenciaDto;
 
     public TarCaracteristicaDto() {
         this.modificado = false;
-        this.comId = new TarCompetenciaDto();
+        this.competenciaDto = new TarCompetenciaDto();
     }
 
     public TarCaracteristicaDto(TarCaracteristica tarCaracteristica) {
@@ -26,9 +26,6 @@ public class TarCaracteristicaDto {
         this.carId = tarCaracteristica.getCarId();
         this.carDescripcion = tarCaracteristica.getCarDescripcion();
         this.carVersion = tarCaracteristica.getCarVersion();
-        if (tarCaracteristica.getComId() != null) {
-            this.comId = new TarCompetenciaDto(tarCaracteristica.getComId());
-        }
     }
 
     public Boolean getModificado() {
@@ -63,12 +60,14 @@ public class TarCaracteristicaDto {
         this.carVersion = carVersion;
     }
 
-    public TarCompetenciaDto getComId() {
-        return comId;
+    public TarCompetenciaDto getCompetenciaDto() {
+        return competenciaDto;
     }
 
-    public void setComId(TarCompetenciaDto comId) {
-        this.comId = comId;
+    public void setCompetenciaDto(TarCompetenciaDto competenciaDto) {
+        this.competenciaDto = competenciaDto;
     }
+
+   
 
 }

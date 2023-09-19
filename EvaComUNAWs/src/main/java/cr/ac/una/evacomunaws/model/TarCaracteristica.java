@@ -74,7 +74,6 @@ public class TarCaracteristica implements Serializable {
     public void actualizar(TarCaracteristicaDto tarCaracteristicaDto) {
         this.carDescripcion = tarCaracteristicaDto.getCarDescripcion();
         this.carVersion = tarCaracteristicaDto.getCarVersion();
-        this.comId = new TarCompetencia(tarCaracteristicaDto.getComId());
     }
 
     public Long getCarId() {

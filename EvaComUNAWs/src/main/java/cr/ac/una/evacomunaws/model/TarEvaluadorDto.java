@@ -17,15 +17,15 @@ public class TarEvaluadorDto {
     private String evaluRetroalimentacion;
     private Long evaluVersion;
     private Boolean modificado;
-    private TarTrabajadorevaluarDto traId = null;
-    private TarUsuarioDto usuId = null;
+    private TarTrabajadorevaluarDto trabajadorevaluarDto;
+    private TarUsuarioDto usuarioDto;
     List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
     List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados;
 
     public TarEvaluadorDto() {
         this.modificado = false;
-        this.traId = new TarTrabajadorevaluarDto();
-        this.usuId = new TarUsuarioDto();
+        this.trabajadorevaluarDto = new TarTrabajadorevaluarDto();
+        this.usuarioDto = new TarUsuarioDto();
         tarCompetenciaevaluarList = new ArrayList<>();
         tarCompetenciaevaluarListEliminados = new ArrayList<>();
     }
@@ -34,12 +34,6 @@ public class TarEvaluadorDto {
         this.evaluId = tarEvaluador.getEvaluId();
         this.evaluRetroalimentacion = tarEvaluador.getEvaluRetroalimentacion();
         this.evaluVersion = tarEvaluador.getEvaluVersion();
-        if (tarEvaluador.getTraId() != null) {
-            this.traId = new TarTrabajadorevaluarDto(tarEvaluador.getTraId());
-        }
-        if (tarEvaluador.getUsuId() != null) {
-            this.usuId = new TarUsuarioDto(tarEvaluador.getUsuId());
-        }
     }
 
     public Long getEvaluId() {
@@ -74,20 +68,20 @@ public class TarEvaluadorDto {
         this.modificado = modificado;
     }
 
-    public TarTrabajadorevaluarDto getTraId() {
-        return traId;
+    public TarTrabajadorevaluarDto getTrabajadorevaluarDto() {
+        return trabajadorevaluarDto;
     }
 
-    public void setTraId(TarTrabajadorevaluarDto traId) {
-        this.traId = traId;
+    public void setTrabajadorevaluarDto(TarTrabajadorevaluarDto trabajadorevaluarDto) {
+        this.trabajadorevaluarDto = trabajadorevaluarDto;
     }
 
-    public TarUsuarioDto getUsuId() {
-        return usuId;
+    public TarUsuarioDto getUsuarioDto() {
+        return usuarioDto;
     }
 
-    public void setUsuId(TarUsuarioDto usuId) {
-        this.usuId = usuId;
+    public void setUsuarioDto(TarUsuarioDto usuarioDto) {
+        this.usuarioDto = usuarioDto;
     }
 
     public List<TarCompetenciaevaluarDto> getTarCompetenciaevaluarList() {

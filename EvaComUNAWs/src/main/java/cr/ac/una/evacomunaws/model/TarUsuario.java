@@ -31,7 +31,7 @@ import jakarta.persistence.Version;
  * @author kevin
  */
 @Entity
-@Table(name = "TAR_USUARIO",schema="EvaComUNA")
+@Table(name = "TAR_USUARIO", schema = "EvaComUNA")
 @NamedQueries({
     @NamedQuery(name = "TarUsuario.findAll", query = "SELECT t FROM TarUsuario t"),
     @NamedQuery(name = "TarUsuario.findByUsuId", query = "SELECT t FROM TarUsuario t WHERE t.usuId = :usuId"),
@@ -114,8 +114,8 @@ public class TarUsuario implements Serializable {
         this.usuId = tarUsuarioDto.getUsuId();
         actualizar(tarUsuarioDto);
     }
-    
-    public void actualizar(TarUsuarioDto tarUsuarioDto){
+
+    public void actualizar(TarUsuarioDto tarUsuarioDto) {
         this.usuNombre = tarUsuarioDto.getUsuNombre();
         this.usuApellido = tarUsuarioDto.getUsuApellido();
         this.usuCedula = tarUsuarioDto.getUsuCedula();
@@ -129,9 +129,7 @@ public class TarUsuario implements Serializable {
         this.usuFoto = tarUsuarioDto.getUsuFoto();
         this.usuTempclave = tarUsuarioDto.getUsuTempclave();
         this.usuUsu = tarUsuarioDto.getUsuUsu();
-        if(tarUsuarioDto.getPueId() != null){
-            this.pueId = new TarPuesto(tarUsuarioDto.getPueId());
-        }
+
     }
 
     public Long getUsuId() {
@@ -221,7 +219,6 @@ public class TarUsuario implements Serializable {
     public void setUsuTempclave(String usuTempclave) {
         this.usuTempclave = usuTempclave;
     }
-    
 
     public String getUsuActivo() {
         return usuActivo;
@@ -295,5 +292,5 @@ public class TarUsuario implements Serializable {
     public String toString() {
         return "cr.ac.una.evacomunaws.model.TarUsuario[ usuId=" + usuId + " ]";
     }
-    
+
 }

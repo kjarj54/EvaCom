@@ -69,8 +69,6 @@ public class TarCompetenciaevaluar implements Serializable {
     public void actualizar(TarCompetenciaevaluarDto tarCompetenciaevaluarDto){
         this.coeCalificacion = tarCompetenciaevaluarDto.getCoeCalificacion();
         this.coeVersion = tarCompetenciaevaluarDto.getCoeVersion();
-        this.comId = new TarCompetencia(tarCompetenciaevaluarDto.getComId());
-        this.evaluId = new TarEvaluador(tarCompetenciaevaluarDto.getEvaluId());
     }
 
     public Long getCoeId() {

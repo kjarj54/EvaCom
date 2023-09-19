@@ -18,23 +18,18 @@ public class TarTrabajadorevaluarDto {
     private Boolean modificado;
     List<TarEvaluadorDto> tarEvaluadorList;
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
-    private TarProcesoevaluacionDto proId = null;
-    private TarUsuarioDto usuId = null;
+    private TarProcesoevaluacionDto procesoDto;
+    private TarUsuarioDto usuarioDto;
 
     public TarTrabajadorevaluarDto() {
         this.modificado = false;
+        
     }
 
     public TarTrabajadorevaluarDto(TarTrabajadorevaluar tarTrabajadorevaluar) {
         this.traId = tarTrabajadorevaluar.getTraId();
         this.traResultado = tarTrabajadorevaluar.getTraResultado();
         this.traVersion = tarTrabajadorevaluar.getTraVersion();
-        if (tarTrabajadorevaluar.getUsuId() != null) {
-            this.usuId = new TarUsuarioDto(tarTrabajadorevaluar.getUsuId());
-        }
-        if (tarTrabajadorevaluar.getProId() != null) {
-            this.proId = new TarProcesoevaluacionDto(tarTrabajadorevaluar.getProId());
-        }
     }
 
     public Long getTraId() {
@@ -77,20 +72,20 @@ public class TarTrabajadorevaluarDto {
         this.tarEvaluadorList = tarEvaluadorList;
     }
 
-    public TarProcesoevaluacionDto getProId() {
-        return proId;
+    public TarProcesoevaluacionDto getProcesoDto() {
+        return procesoDto;
     }
 
-    public void setProId(TarProcesoevaluacionDto proId) {
-        this.proId = proId;
+    public void setProcesoDto(TarProcesoevaluacionDto procesoDto) {
+        this.procesoDto = procesoDto;
     }
 
-    public TarUsuarioDto getUsuId() {
-        return usuId;
+    public TarUsuarioDto getUsuarioDto() {
+        return usuarioDto;
     }
 
-    public void setUsuId(TarUsuarioDto usuId) {
-        this.usuId = usuId;
+    public void setUsuarioDto(TarUsuarioDto usuarioDto) {
+        this.usuarioDto = usuarioDto;
     }
 
     public List<TarEvaluadorDto> getTarEvaluadorListEliminados() {
