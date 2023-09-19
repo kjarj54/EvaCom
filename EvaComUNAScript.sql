@@ -411,7 +411,7 @@ COMMENT ON COLUMN TAR_COMPETENCIAEVALUAR.coe_version IS 'Version del registro de
 CREATE OR REPLACE TRIGGER TAR_PARAMETROS_TGR01 BEFORE INSERT
 ON TAR_PARAMETROS FOR EACH ROW
 BEGIN
-    if:new.par_id is null or :new.val_id <=0 then
+    if:new.par_id is null or :new.par_id <=0 then
         :new.par_id := TAR_PARAMETROS_SEQ01.nextval;
     end if;
 END;
@@ -491,7 +491,7 @@ END;
 CREATE OR REPLACE TRIGGER TAR_PROCESOEVALUACION_TGR01 BEFORE INSERT
 ON TAR_PROCESOEVALUACION FOR EACH ROW
 BEGIN
-    if:new.car_id is null or :new.car_id <=0 then
+    if:new.pro_id is null or :new.pro_id <=0 then
         :new.pro_id := TAR_PROCESOEVALUACION_SEQ01.nextval;
     end if;
 END;
