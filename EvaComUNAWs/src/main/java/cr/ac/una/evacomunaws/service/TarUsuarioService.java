@@ -4,6 +4,8 @@
  */
 package cr.ac.una.evacomunaws.service;
 
+import cr.ac.una.evacomunaws.model.TarPuesto;
+import cr.ac.una.evacomunaws.model.TarPuestoDto;
 import cr.ac.una.evacomunaws.model.TarUsuario;
 import cr.ac.una.evacomunaws.model.TarUsuarioDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
@@ -63,6 +65,8 @@ public class TarUsuarioService {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "guardarCaracteristica NoResultException");
                 }
                 usuario.actualizar(tarUsuarioDto);
+                usuario.setPueId(em.find(TarUsuario.class, tarUsuarioDto.getPueId().getPueId()));
+                
                 usuario = em.merge(usuario);
             } else {
                 usuario = new TarUsuario(tarUsuarioDto);
@@ -122,8 +126,14 @@ public class TarUsuarioService {
         try {
             Query qryCaracteristica = em.createNamedQuery("TarUsuario.findByUsuId", TarUsuario.class);
             qryCaracteristica.setParameter("usuId", usuId);
+            
+            TarUsuario tarUsuario = (TarUsuario) qryCaracteristica.getSingleResult();
+            
+            TarUsuarioDto dto = new TarUsuarioDto(tarUsuario);
+            
+            dto.setPueId(new TarPuestoDto(tarUsuario.getPueId()));
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", new TarUsuarioDto((TarUsuario) qryCaracteristica.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", dto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un usuario con el código ingresado.", "getUsuario NoResultException");

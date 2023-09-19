@@ -57,10 +57,7 @@ public class TarUsuarioDto {
         this.usuAdmin = tarUsuario.getUsuAdmin();
         this.usuVersion = tarUsuario.getUsuVersion();
         this.usuUsu = tarUsuario.getUsuUsu();
-        this.usuTempclave = tarUsuario.getUsuTempclave();
-        if (tarUsuario.getPueId() != null) {//No se porque sin esta comprobacion no funciona 
-            this.pueId = new TarPuestoDto(tarUsuario.getPueId());
-        }
+        this.usuTempclave = tarUsuario.getUsuTempclave();        
     }
 
     public Long getUsuId() {
