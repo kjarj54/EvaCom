@@ -59,7 +59,8 @@ public class TarUsuarioDto {
         this.usuAdmin = tarUsuario.getUsuAdmin();
         this.usuVersion = tarUsuario.getUsuVersion();
         this.usuUsu = tarUsuario.getUsuUsu();
-        this.usuTempclave = tarUsuario.getUsuTempclave();        
+        this.usuTempclave = tarUsuario.getUsuTempclave();
+        this.fecha = LocalDateTime.now(); 
     }
 
     public Long getUsuId() {

@@ -142,17 +142,16 @@ public class EvaComUNAWs {
             return TarUsuarioDto.class.cast(ex);//TODO
         }
     }
-    
-    
-     @WebMethod(operationName = "EliminarUsuario")
-    public TarUsuarioDto EliminarUsuario(@WebParam(name = "id") Long id) {
+
+    @WebMethod(operationName = "EliminarUsuario")
+    public TarUsuarioDto eliminarUsuario(@WebParam(name = "id") Long id) {
         try {
             Respuesta res = tarUsuarioService.eliminarUsuario(id);
             if (!res.getEstado()) {
                 return TarUsuarioDto.class.cast(res);//TODO
             }
-            TarUsuarioDto tarAgendasDto = (TarUsuarioDto) res.getResultado("Agenda");
-            return tarAgendasDto;//TODO
+            TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("");
+            return tarUsuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarUsuarioDto.class.cast(ex);//TODO
@@ -182,11 +181,26 @@ public class EvaComUNAWs {
             return TarParametrosDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getParametrosClass")
     public TarParametrosDto getParametrosClass(@WebParam(name = "id") Long id) {
         try {
             Respuesta res = tarParametrosService.getParametro(id);
+            if (!res.getEstado()) {
+                return TarParametrosDto.class.cast(res);//TODO
+            }
+            TarParametrosDto tarParametrosDto = (TarParametrosDto) res.getResultado("TarParametros");
+            return tarParametrosDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarParametrosDto.class.cast(ex);//TODO
+        }
+    }
+    
+    @WebMethod(operationName = "eliminarParametros")
+    public TarParametrosDto eliminarParametros(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarParametrosService.eliminarParametros(id);
             if (!res.getEstado()) {
                 return TarParametrosDto.class.cast(res);//TODO
             }
@@ -222,6 +236,37 @@ public class EvaComUNAWs {
         }
     }
 
+    @WebMethod(operationName = "getCaracteristicaClass")
+    public TarCaracteristicaDto getCaracteristicaClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarCaracteristicaService.getCaracteristica(id);
+            if (!res.getEstado()) {
+                return TarCaracteristicaDto.class.cast(res);//TODO
+            }
+            TarCaracteristicaDto tarCaracteristicaDto = (TarCaracteristicaDto) res.getResultado("Caracteristica");
+            return tarCaracteristicaDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarCaracteristicaDto.class.cast(ex);//TODO
+        }
+    }
+    
+    
+    @WebMethod(operationName = "eliminarCaracteristica")
+    public TarCaracteristicaDto eliminarCaracteristica(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarCaracteristicaService.eliminarCaracteristica(id);
+            if (!res.getEstado()) {
+                return TarCaracteristicaDto.class.cast(res);//TODO
+            }
+            TarCaracteristicaDto tarCaracteristicaDto = (TarCaracteristicaDto) res.getResultado("");
+            return tarCaracteristicaDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarCaracteristicaDto.class.cast(ex);//TODO
+        }
+    }
+
     /**
      * *****************************************************************************************
      *
@@ -231,9 +276,8 @@ public class EvaComUNAWs {
      *
      *
      ******************************************************************************************
-     * 
+     *
      */
-    
     @WebMethod(operationName = "guardarCompetencia")
     public TarCompetenciaDto guardarCompetencia(@WebParam(name = "tarCompetenciaDto") TarCompetenciaDto tarCompetenciaDto) {
         try {
@@ -247,10 +291,37 @@ public class EvaComUNAWs {
             return TarCompetenciaDto.class.cast(ex);//TODO
         }
     }
+
+    @WebMethod(operationName = "getCompetenciaClass")
+    public TarCompetenciaDto getCompetenciaClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarCompetenciaService.getCompetencia(id);
+            if (!res.getEstado()) {
+                return TarCompetenciaDto.class.cast(res);//TODO
+            }
+            TarCompetenciaDto tarCompetenciaDto = (TarCompetenciaDto) res.getResultado("Competencia");
+            return tarCompetenciaDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarCompetenciaDto.class.cast(ex);//TODO
+        }
+    }
     
-    
-    
-    
+    @WebMethod(operationName = "eliminarCompetencia")
+    public TarCompetenciaDto eliminarCompetencia(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarCompetenciaService.eliminarCompetencia(id);
+            if (!res.getEstado()) {
+                return TarCompetenciaDto.class.cast(res);//TODO
+            }
+            TarCompetenciaDto tarCompetenciaDto = (TarCompetenciaDto) res.getResultado("");
+            return tarCompetenciaDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarCompetenciaDto.class.cast(ex);//TODO
+        }
+    }
+
     /**
      * *****************************************************************************************
      *
@@ -261,7 +332,6 @@ public class EvaComUNAWs {
      *
      ******************************************************************************************
      */
-    
     @WebMethod(operationName = "guardarCompetenciaevaluar")
     public TarCompetenciaevaluarDto guardarCompetenciaevaluar(@WebParam(name = "tarCompetenciaevaluarDto") TarCompetenciaevaluarDto tarCompetenciaevaluarDto) {
         try {
@@ -275,7 +345,37 @@ public class EvaComUNAWs {
             return TarCompetenciaevaluarDto.class.cast(ex);//TODO
         }
     }
+
+    @WebMethod(operationName = "getCompetenciaevaluarClass")
+    public TarCompetenciaevaluarDto getCompetenciaevaluarClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarCompetenciaevaluarService.getCompetenciaEvaluar(id);
+            if (!res.getEstado()) {
+                return TarCompetenciaevaluarDto.class.cast(res);//TODO
+            }
+            TarCompetenciaevaluarDto tarCompetenciaevaluarDto = (TarCompetenciaevaluarDto) res.getResultado("CompetenciaEvaluar");
+            return tarCompetenciaevaluarDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarCompetenciaevaluarDto.class.cast(ex);//TODO
+        }
+    }
     
+    @WebMethod(operationName = "eliminarCompetenciaevaluar")
+    public TarCompetenciaevaluarDto eliminarCompetenciaevaluar(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarCompetenciaevaluarService.eliminarCompetenciaEvaluar(id);
+            if (!res.getEstado()) {
+                return TarCompetenciaevaluarDto.class.cast(res);//TODO
+            }
+            TarCompetenciaevaluarDto tarCompetenciaevaluarDto = (TarCompetenciaevaluarDto) res.getResultado("");
+            return tarCompetenciaevaluarDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarCompetenciaevaluarDto.class.cast(ex);//TODO
+        }
+    }
+
     /**
      * *****************************************************************************************
      *
@@ -286,8 +386,6 @@ public class EvaComUNAWs {
      *
      ******************************************************************************************
      */
-    
-    
     @WebMethod(operationName = "guardarEvaluador")
     public TarEvaluadorDto guardarEvaluador(@WebParam(name = "tarEvaluadorDto") TarEvaluadorDto tarEvaluadorDto) {
         try {
@@ -301,7 +399,37 @@ public class EvaComUNAWs {
             return TarEvaluadorDto.class.cast(ex);//TODO
         }
     }
+
+    @WebMethod(operationName = "getEvaluadorClass")
+    public TarEvaluadorDto getEvaluadorClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarEvaluadorService.getEvaluador(id);
+            if (!res.getEstado()) {
+                return TarEvaluadorDto.class.cast(res);//TODO
+            }
+            TarEvaluadorDto tarEvaluadorDto = (TarEvaluadorDto) res.getResultado("Evaluador");
+            return tarEvaluadorDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarEvaluadorDto.class.cast(ex);//TODO
+        }
+    }
     
+    @WebMethod(operationName = "eliminarEvaluador")
+    public TarEvaluadorDto eliminarEvaluador(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarEvaluadorService.eliminarEvaluador(id);
+            if (!res.getEstado()) {
+                return TarEvaluadorDto.class.cast(res);//TODO
+            }
+            TarEvaluadorDto tarEvaluadorDto = (TarEvaluadorDto) res.getResultado("");
+            return tarEvaluadorDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarEvaluadorDto.class.cast(ex);//TODO
+        }
+    }
+
     /**
      * *****************************************************************************************
      *
@@ -312,7 +440,6 @@ public class EvaComUNAWs {
      *
      ******************************************************************************************
      */
-    
     @WebMethod(operationName = "guardarProcesoevaluacion")
     public TarProcesoevaluacionDto guardarProcesoevaluacion(@WebParam(name = "tarProcesoevaluacionDto") TarProcesoevaluacionDto tarProcesoevaluacionDto) {
         try {
@@ -326,8 +453,37 @@ public class EvaComUNAWs {
             return TarProcesoevaluacionDto.class.cast(ex);//TODO
         }
     }
+
+    @WebMethod(operationName = "getProcesoevaluacionClass")
+    public TarProcesoevaluacionDto getProcesoevaluacionClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarProcesoevaluacionService.getProcesoEvaluacion(id);
+            if (!res.getEstado()) {
+                return TarProcesoevaluacionDto.class.cast(res);//TODO
+            }
+            TarProcesoevaluacionDto tarProcesoevaluacionDto = (TarProcesoevaluacionDto) res.getResultado("TarProcesoevaluacion");
+            return tarProcesoevaluacionDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarProcesoevaluacionDto.class.cast(ex);//TODO
+        }
+    }
     
-    
+    @WebMethod(operationName = "eliminarProcesoevaluacion")
+    public TarProcesoevaluacionDto eliminarProcesoevaluacion(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarProcesoevaluacionService.eliminarProcesoEvaluacion(id);
+            if (!res.getEstado()) {
+                return TarProcesoevaluacionDto.class.cast(res);//TODO
+            }
+            TarProcesoevaluacionDto tarProcesoevaluacionDto = (TarProcesoevaluacionDto) res.getResultado("");
+            return tarProcesoevaluacionDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarProcesoevaluacionDto.class.cast(ex);//TODO
+        }
+    }
+
     /**
      * *****************************************************************************************
      *
@@ -338,7 +494,6 @@ public class EvaComUNAWs {
      *
      ******************************************************************************************
      */
-    
     @WebMethod(operationName = "guardarPuesto")
     public TarPuestoDto guardarPuesto(@WebParam(name = "tarPuestoDto") TarPuestoDto tarPuestoDto) {
         try {
@@ -352,7 +507,38 @@ public class EvaComUNAWs {
             return TarPuestoDto.class.cast(ex);//TODO
         }
     }
+
+    @WebMethod(operationName = "getPuestoClass")
+    public TarPuestoDto getPuestoClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarPuestoService.getPuesto(id);
+            if (!res.getEstado()) {
+                return TarPuestoDto.class.cast(res);//TODO
+            }
+            TarPuestoDto tarCaracteristicaDto = (TarPuestoDto) res.getResultado("Puesto");
+            return tarCaracteristicaDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarPuestoDto.class.cast(ex);//TODO
+        }
+    }
     
+    
+    @WebMethod(operationName = "eliminarPuesto")
+    public TarPuestoDto eliminarPuesto(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarPuestoService.eliminarPuesto(id);
+            if (!res.getEstado()) {
+                return TarPuestoDto.class.cast(res);//TODO
+            }
+            TarPuestoDto tarPuestoDto = (TarPuestoDto) res.getResultado("");
+            return tarPuestoDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarPuestoDto.class.cast(ex);//TODO
+        }
+    }
+
     /**
      * *****************************************************************************************
      *
@@ -363,8 +549,6 @@ public class EvaComUNAWs {
      *
      ******************************************************************************************
      */
-    
-    
     @WebMethod(operationName = "guardarTrabajadorevaluar")
     public TarTrabajadorevaluarDto guardarTrabajadorevaluar(@WebParam(name = "tarTrabajadorevaluarDto") TarTrabajadorevaluarDto tarTrabajadorevaluarDto) {
         try {
@@ -378,6 +562,36 @@ public class EvaComUNAWs {
             return TarTrabajadorevaluarDto.class.cast(ex);//TODO
         }
     }
+
+    @WebMethod(operationName = "getTrabajadorevaluarClass")
+    public TarTrabajadorevaluarDto getTrabajadorevaluarClass(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarTrabajadorevaluarService.getTrabajadorEvaluar(id);
+            if (!res.getEstado()) {
+                return TarTrabajadorevaluarDto.class.cast(res);//TODO
+            }
+            TarTrabajadorevaluarDto tarCaracteristicaDto = (TarTrabajadorevaluarDto) res.getResultado("");
+            return tarCaracteristicaDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarTrabajadorevaluarDto.class.cast(ex);//TODO
+        }
+    }
     
     
+    @WebMethod(operationName = "eliminarTrabajadorevaluar")
+    public TarTrabajadorevaluarDto eliminarTrabajadorevaluar(@WebParam(name = "id") Long id) {
+        try {
+            Respuesta res = tarTrabajadorevaluarService.eliminarTrabajadorEvaluar(id);
+            if (!res.getEstado()) {
+                return TarTrabajadorevaluarDto.class.cast(res);//TODO
+            }
+            TarTrabajadorevaluarDto tarTrabajadorevaluarDto = (TarTrabajadorevaluarDto) res.getResultado("TrabajadorEvaluar");
+            return tarTrabajadorevaluarDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarTrabajadorevaluarDto.class.cast(ex);//TODO
+        }
+    }
+
 }
