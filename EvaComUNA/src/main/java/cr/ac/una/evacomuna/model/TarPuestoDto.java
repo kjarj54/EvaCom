@@ -41,6 +41,18 @@ public class TarPuestoDto {
         this.pueEstado.set(tarPuestoDto.getPueEstado());
         this.pueId.set(tarPuestoDto.getPueId().toString());
         this.pueNombre.set(tarPuestoDto.getPueNombre());
+        
+        List<cr.ac.una.evacomunaws.controller.TarUsuarioDto> usuarioDtos = tarPuestoDto.getTarUsuarioList();
+        for (cr.ac.una.evacomunaws.controller.TarUsuarioDto item : usuarioDtos) {
+            TarUsuarioDto convertedItem = new TarUsuarioDto(item);
+            this.tarUsuarioList.add(convertedItem);
+        }
+        
+        List<cr.ac.una.evacomunaws.controller.TarCompetenciaDto> competenciaDtos = tarPuestoDto.getTarCompetenciaList();
+        for (cr.ac.una.evacomunaws.controller.TarCompetenciaDto item : competenciaDtos) {
+            TarCompetenciaDto convertedItem = new TarCompetenciaDto(item);
+            this.tarCompetenciaList.add(convertedItem);
+        }
     }
     
     public cr.ac.una.evacomunaws.controller.TarPuestoDto consultas(){
@@ -48,6 +60,16 @@ public class TarPuestoDto {
         tarPuestoDtoSoap.setPueEstado(this.getPueEstado());
         tarPuestoDtoSoap.setPueId(this.getPueId());
         tarPuestoDtoSoap.setPueNombre(this.getPueNombre());
+        
+        List<TarCompetenciaDto> tarCompetenciaevaluarElimimados = this.tarCompetenciaListEliminados;
+        for (TarCompetenciaDto item : tarCompetenciaevaluarElimimados) {         
+            tarPuestoDtoSoap.getTarCompetenciaListEliminados().add(item.consultas());
+        }
+        
+        List<TarUsuarioDto> tarUsuarioDtos = this.tarUsuarioListEliminados;
+        for (TarUsuarioDto item : tarUsuarioDtos) {         
+            tarPuestoDtoSoap.getTarUsuarioList().add(item.consultas());
+        }
         return tarPuestoDtoSoap;
     }
 

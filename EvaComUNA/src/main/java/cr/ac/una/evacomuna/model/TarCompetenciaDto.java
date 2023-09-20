@@ -66,6 +66,27 @@ public class TarCompetenciaDto {
         tarCompetenciaDtoSoap.setComId(this.getComId());
         tarCompetenciaDtoSoap.setComEstado(getComEstado());
         tarCompetenciaDtoSoap.setComNombre(getComNombre());
+        
+        List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList = this.tarCompetenciaevaluarList;
+        for (TarCompetenciaevaluarDto item : tarCompetenciaevaluarList) {         
+            tarCompetenciaDtoSoap.getTarCompetenciaevaluarList().add(item.consultas());
+        }
+        
+        List<TarCompetenciaevaluarDto> tarCompetenciaevaluarElimimados = this.tarCompetenciaevaluarElimimados;
+        for (TarCompetenciaevaluarDto item : tarCompetenciaevaluarElimimados) {         
+            tarCompetenciaDtoSoap.getTarCompetenciaevaluarElimimados().add(item.consultas());
+        }
+        
+        List<TarCaracteristicaDto> tarCaracteristicaList = this.tarCaracteristicaList;
+        for (TarCaracteristicaDto item : tarCaracteristicaList) {         
+            tarCompetenciaDtoSoap.getTarCaracteristicaList().add(item.consultas());
+        }
+        
+        List<TarCaracteristicaDto> tarCaracteristicaEliminados = this.tarCaracteristicaEliminados;
+        for (TarCaracteristicaDto item : tarCaracteristicaEliminados) {         
+            tarCompetenciaDtoSoap.getTarCaracteristicaEliminados().add(item.consultas());
+        }
+        
         return tarCompetenciaDtoSoap;
     }
 

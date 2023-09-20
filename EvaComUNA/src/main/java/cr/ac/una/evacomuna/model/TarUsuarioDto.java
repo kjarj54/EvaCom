@@ -80,6 +80,19 @@ public class TarUsuarioDto {
         this.usuUsu.set(tarUsuarioDto.getUsuUsu());
         this.usuActivo.set(tarUsuarioDto.getUsuActivo().equals("A"));
         this.usuAdmin.set(tarUsuarioDto.getUsuAdmin().equals("S"));
+        this.puestoDto = new TarPuestoDto(tarUsuarioDto.getPuestoDto());
+        
+        List<cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto> tarCompetenciaevaluarList = tarUsuarioDto.getTarTrabajadorevaluarList();
+        for (cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {
+            TarTrabajadorevaluarDto convertedItem = new TarTrabajadorevaluarDto(item);
+            this.tarTrabajadorevaluarList.add(convertedItem);
+        }
+        
+        List<cr.ac.una.evacomunaws.controller.TarEvaluadorDto> evaluadorDtos = tarUsuarioDto.getTarEvaluadorList();
+        for (cr.ac.una.evacomunaws.controller.TarEvaluadorDto item : evaluadorDtos) {
+            TarEvaluadorDto convertedItem = new TarEvaluadorDto(item);
+            this.tarEvaluadorList.add(convertedItem);
+        }
     }
     
     public cr.ac.una.evacomunaws.controller.TarUsuarioDto consultas(){
@@ -98,6 +111,23 @@ public class TarUsuarioDto {
         Byte[] usuFotoArray = this.getUsuFoto();
         List<Byte> usuFotoList = new ArrayList<>(Arrays.asList(usuFotoArray));
         tarUsuarioDtoSoap.getUsuFoto().addAll(usuFotoList);
+        tarUsuarioDtoSoap.setPuestoDto(this.puestoDto.consultas());
+        
+        List<TarTrabajadorevaluarDto> tarCompetenciaevaluarList = this.tarTrabajadorevaluarList;
+        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {         
+            tarUsuarioDtoSoap.getTarTrabajadorevaluarList().add(item.consultas());
+        }
+        
+        List<TarTrabajadorevaluarDto> tarCompetenciaevaluarElimimados = this.tarTrabajadorevaluarListEliminados;
+        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarElimimados) {         
+            tarUsuarioDtoSoap.getTarTrabajadorevaluarListEliminados().add(item.consultas());
+        }
+        
+        List<TarEvaluadorDto> tarUsuarioDtos = this.tarEvaluadorListEliminados;
+        for (TarEvaluadorDto item : tarUsuarioDtos) {         
+            tarUsuarioDtoSoap.getTarEvaluadorListEliminados().add(item.consultas());
+        }
+        
         return tarUsuarioDtoSoap;
     }
 

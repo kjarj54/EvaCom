@@ -28,13 +28,18 @@ public class TarCompetenciaevaluarDto {
     
     public TarCompetenciaevaluarDto(cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCaracteristicaDto) {
         this();
+        this.coeId.set(tarCaracteristicaDto.getCoeId().toString());
         this.coeCalificacion.set(tarCaracteristicaDto.getCoeCalificacion());
+        this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
+        this.evaluadorDto = new TarEvaluadorDto(tarCaracteristicaDto.getEvaluadorDto());
     }
     
     public cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto consultas(){
         cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCompetenciaevaluarDtoSoap = new cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto();
         tarCompetenciaevaluarDtoSoap.setCoeId(this.getCoeId());
         tarCompetenciaevaluarDtoSoap.setCoeCalificacion(this.getCoeCalificacion());
+        tarCompetenciaevaluarDtoSoap.setCompetenciaDto(this.competenciaDto.consultas());
+        tarCompetenciaevaluarDtoSoap.setEvaluadorDto(this.evaluadorDto.consultas());
         return tarCompetenciaevaluarDtoSoap;
     }
 

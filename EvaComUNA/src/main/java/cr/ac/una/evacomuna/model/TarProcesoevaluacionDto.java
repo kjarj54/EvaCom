@@ -45,6 +45,11 @@ public class TarProcesoevaluacionDto {
         this.proFini.set(java.time.LocalDate.parse(tarProcesoevaluacionDto.getProFini().toString()));
         this.proId.set(tarProcesoevaluacionDto.getProId().toString());
         this.proTitulo.set(tarProcesoevaluacionDto.getProTitulo());
+        List<cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto> tarCompetenciaevaluarList = tarProcesoevaluacionDto.getTarTrabajadorevaluarList();
+        for (cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {
+            TarTrabajadorevaluarDto convertedItem = new TarTrabajadorevaluarDto(item);
+            this.tarTrabajadorevaluarList.add(convertedItem);
+        }
     }
 
     public cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto consultas() {
@@ -54,6 +59,16 @@ public class TarProcesoevaluacionDto {
         tarProcesoevaluacionDtoSoap.setProFini(cr.ac.una.evacomunaws.controller.LocalDate.class.cast(this.getProFini()));
         tarProcesoevaluacionDtoSoap.setProId(this.getProId());
         tarProcesoevaluacionDtoSoap.setProTitulo(this.getProTitulo());
+        
+        List<TarTrabajadorevaluarDto> tarCompetenciaevaluarList = this.tarTrabajadorevaluarList;
+        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {         
+            tarProcesoevaluacionDtoSoap.getTarTrabajadorevaluarList().add(item.consultas());
+        }
+        
+        List<TarTrabajadorevaluarDto> tarCompetenciaevaluarElimimados = this.tarTrabajadorevaluarListEliminados;
+        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarElimimados) {         
+            tarProcesoevaluacionDtoSoap.getTarTrabajadorevaluarListEliminados().add(item.consultas());
+        }
         return tarProcesoevaluacionDtoSoap;
     }
 
