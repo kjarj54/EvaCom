@@ -5,6 +5,7 @@
 package cr.ac.una.evacomuna.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -36,18 +37,31 @@ public class TarCompetenciaDto {
         tarPuestoList = FXCollections.observableArrayList();
         tarPuestoEliminados = new ArrayList<>();
         tarCaracteristicaList = FXCollections.observableArrayList();
-        tarCaracteristicaEliminados= new ArrayList<>();
-        tarCompetenciaevaluarList=FXCollections.observableArrayList();
-        tarCompetenciaevaluarElimimados= new ArrayList<>();
+        tarCaracteristicaEliminados = new ArrayList<>();
+        tarCompetenciaevaluarList = FXCollections.observableArrayList();
+        tarCompetenciaevaluarElimimados = new ArrayList<>();
     }
-    
+
     public TarCompetenciaDto(cr.ac.una.evacomunaws.controller.TarCompetenciaDto tarCaracteristicaDto) {
         this();
+        this.comId.set(tarCaracteristicaDto.getComId().toString());
         this.comEstado.set(tarCaracteristicaDto.getComEstado().equals("A"));
         this.comNombre.set(tarCaracteristicaDto.getComNombre());
+        
+        List<cr.ac.una.evacomunaws.controller.TarCaracteristicaDto> tarCaracteristicaDtosList = tarCaracteristicaDto.getTarCaracteristicaList();
+        for (cr.ac.una.evacomunaws.controller.TarCaracteristicaDto item : tarCaracteristicaDtosList) {
+            TarCaracteristicaDto convertedItem = new TarCaracteristicaDto(item);
+            this.tarCaracteristicaList.add(convertedItem);
+        }
+        
+        List<cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto> tarCompetenciaevaluarList = tarCaracteristicaDto.getTarCompetenciaevaluarList();
+        for (cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto item : tarCompetenciaevaluarList) {
+            TarCompetenciaevaluarDto convertedItem = new TarCompetenciaevaluarDto(item);
+            this.tarCompetenciaevaluarList.add(convertedItem);
+        }
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarCompetenciaDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarCompetenciaDto consultas() {
         cr.ac.una.evacomunaws.controller.TarCompetenciaDto tarCompetenciaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCompetenciaDto();
         tarCompetenciaDtoSoap.setComId(this.getComId());
         tarCompetenciaDtoSoap.setComEstado(getComEstado());
@@ -146,7 +160,5 @@ public class TarCompetenciaDto {
     public void setTarCompetenciaevaluarElimimados(List<TarCompetenciaevaluarDto> tarCompetenciaevaluarElimimados) {
         this.tarCompetenciaevaluarElimimados = tarCompetenciaevaluarElimimados;
     }
-    
-    
-    
+
 }

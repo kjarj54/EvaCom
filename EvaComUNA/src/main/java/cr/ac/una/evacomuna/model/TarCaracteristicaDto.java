@@ -27,13 +27,16 @@ public class TarCaracteristicaDto {
     
     public TarCaracteristicaDto(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDto) {
         this();
+        this.carId.set(tarCaracteristicaDto.getCarId().toString());
         this.carDescripcion.set(tarCaracteristicaDto.getCarDescripcion());
+        this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
     }
     
     public cr.ac.una.evacomunaws.controller.TarCaracteristicaDto consultas(){
         cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCaracteristicaDto();
         tarCaracteristicaDtoSoap.setCarId(this.getCarId());
         tarCaracteristicaDtoSoap.setCarDescripcion(this.getCarDescripcion());
+        tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
         return tarCaracteristicaDtoSoap;
     }
     
