@@ -19,8 +19,8 @@ public class TarEvaluadorDto {
     public SimpleStringProperty evaluRetroalimentacion;
     private Long evaluVersion;
     private Boolean modificado;
-    public TarTrabajadorevaluarDto traId;
-    public TarUsuarioDto usuId;
+    public TarTrabajadorevaluarDto trabajadorevaluarDto;
+    public TarUsuarioDto usuarioDto;
     List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
     List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados;
 
@@ -28,8 +28,8 @@ public class TarEvaluadorDto {
         this.evaluId = new SimpleStringProperty();
         this.evaluRetroalimentacion = new SimpleStringProperty();
         this.modificado = false;
-        this.traId = new TarTrabajadorevaluarDto();
-        this.usuId = new TarUsuarioDto();
+        this.trabajadorevaluarDto = new TarTrabajadorevaluarDto();
+        this.usuarioDto = new TarUsuarioDto();
         tarCompetenciaevaluarList = FXCollections.observableArrayList();
         tarCompetenciaevaluarListEliminados = new ArrayList<>();
     }
@@ -82,20 +82,20 @@ public class TarEvaluadorDto {
         this.modificado = modificado;
     }
 
-    public TarTrabajadorevaluarDto getTraId() {
-        return traId;
+    public TarTrabajadorevaluarDto getTrabajadorevaluarDto() {
+        return trabajadorevaluarDto;
     }
 
-    public void setTraId(TarTrabajadorevaluarDto traId) {
-        this.traId = traId;
+    public void setTrabajadorevaluarDto(TarTrabajadorevaluarDto trabajadorevaluarDto) {
+        this.trabajadorevaluarDto = trabajadorevaluarDto;
     }
 
-    public TarUsuarioDto getUsuId() {
-        return usuId;
+    public TarUsuarioDto getUsuarioDto() {
+        return usuarioDto;
     }
 
-    public void setUsuId(TarUsuarioDto usuId) {
-        this.usuId = usuId;
+    public void setUsuarioDto(TarUsuarioDto usuarioDto) {
+        this.usuarioDto = usuarioDto;
     }
 
     public List<TarCompetenciaevaluarDto> getTarCompetenciaevaluarList() {

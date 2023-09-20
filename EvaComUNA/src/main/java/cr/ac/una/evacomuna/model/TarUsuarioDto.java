@@ -39,7 +39,7 @@ public class TarUsuarioDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
-    public TarPuestoDto pueId;
+    public TarPuestoDto puestoDto;
 
     public TarUsuarioDto() {
         this.usuId = new SimpleStringProperty();
@@ -56,7 +56,7 @@ public class TarUsuarioDto {
         this.usuActivo = new SimpleBooleanProperty(false);
         this.usuAdmin = new SimpleBooleanProperty(false);
         this.modificado = false;
-        this.pueId = new TarPuestoDto();
+        this.puestoDto = new TarPuestoDto();
         tarEvaluadorList = FXCollections.observableArrayList();
         tarEvaluadorListEliminados = new ArrayList<>();
         tarTrabajadorevaluarList = FXCollections.observableArrayList();
@@ -250,12 +250,12 @@ public class TarUsuarioDto {
         this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
     }
 
-    public TarPuestoDto getPueId() {
-        return pueId;
+    public TarPuestoDto getPuestoDto() {
+        return puestoDto;
     }
 
-    public void setPueId(TarPuestoDto pueId) {
-        this.pueId = pueId;
+    public void setPuestoDto(TarPuestoDto puestoDto) {
+        this.puestoDto = puestoDto;
     }
     
     public String getUsuUsu() {

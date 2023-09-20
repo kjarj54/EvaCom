@@ -15,15 +15,15 @@ public class TarCompetenciaevaluarDto {
     public SimpleStringProperty coeCalificacion;
     private Long coeVersion;
     private Boolean modficado;
-    public TarCompetenciaDto comId;
-    public TarEvaluadorDto evaluId;
+    public TarCompetenciaDto competenciaDto;
+    public TarEvaluadorDto evaluadorDto;
     
     public TarCompetenciaevaluarDto() {
         this.coeId = new SimpleStringProperty();
         this.coeCalificacion = new SimpleStringProperty();
         this.modficado = false;
-        this.comId = new TarCompetenciaDto();
-        this.evaluId = new TarEvaluadorDto();
+        this.competenciaDto = new TarCompetenciaDto();
+        this.evaluadorDto = new TarEvaluadorDto();
     }
     
     public TarCompetenciaevaluarDto(cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCaracteristicaDto) {
@@ -74,20 +74,20 @@ public class TarCompetenciaevaluarDto {
         this.modficado = modficado;
     }
 
-    public TarCompetenciaDto getComId() {
-        return comId;
+    public TarCompetenciaDto getCompetenciaDto() {
+        return competenciaDto;
     }
 
-    public void setComId(TarCompetenciaDto comId) {
-        this.comId = comId;
+    public void setCompetenciaDto(TarCompetenciaDto competenciaDto) {
+        this.competenciaDto = competenciaDto;
     }
 
-    public TarEvaluadorDto getEvaluId() {
-        return evaluId;
+    public TarEvaluadorDto getEvaluadorDto() {
+        return evaluadorDto;
     }
 
-    public void setEvaluId(TarEvaluadorDto evaluId) {
-        this.evaluId = evaluId;
+    public void setEvaluadorDto(TarEvaluadorDto evaluadorDto) {
+        this.evaluadorDto = evaluadorDto;
     }
     
     

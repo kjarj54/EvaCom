@@ -15,14 +15,14 @@ public class TarCaracteristicaDto {
     public SimpleStringProperty carDescripcion;
     private Long carVersion;
     private Boolean modificado;
-    public TarCompetenciaDto comId;
+    public TarCompetenciaDto competenciaDto;
     
 
     public TarCaracteristicaDto() {
         this.carId = new SimpleStringProperty();
         this.carDescripcion = new SimpleStringProperty();
         this.modificado = false;
-        this.comId = new TarCompetenciaDto();
+        this.competenciaDto = new TarCompetenciaDto();
     }
     
     public TarCaracteristicaDto(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDto) {
@@ -74,12 +74,12 @@ public class TarCaracteristicaDto {
         this.carVersion = carVersion;
     }
 
-    public TarCompetenciaDto getComId() {
-        return comId;
+    public TarCompetenciaDto getCompetenciaDto() {
+        return competenciaDto;
     }
 
-    public void setComId(TarCompetenciaDto comId) {
-        this.comId = comId;
+    public void setCompetenciaDto(TarCompetenciaDto competenciaDto) {
+        this.competenciaDto = competenciaDto;
     }
     
     

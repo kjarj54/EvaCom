@@ -20,16 +20,16 @@ public class TarTrabajadorevaluarDto {
     private Boolean modificado;
     List<TarEvaluadorDto> tarEvaluadorList;
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
-    public TarProcesoevaluacionDto proId;
-    public TarUsuarioDto usuId;
+    public TarProcesoevaluacionDto procesoDto;
+    public TarUsuarioDto usuarioDto;
     
     
     public TarTrabajadorevaluarDto() {
         this.traId = new SimpleStringProperty();
         this.traResultado = new SimpleStringProperty();
         this.modificado = false;
-        this.proId = new TarProcesoevaluacionDto();
-        this.usuId = new TarUsuarioDto();
+        this.procesoDto = new TarProcesoevaluacionDto();
+        this.usuarioDto = new TarUsuarioDto();
         tarEvaluadorList = FXCollections.observableArrayList();
         tarEvaluadorListEliminados = new ArrayList<>();
         
@@ -100,20 +100,20 @@ public class TarTrabajadorevaluarDto {
         this.tarEvaluadorListEliminados = tarEvaluadorListEliminados;
     }
 
-    public TarProcesoevaluacionDto getProId() {
-        return proId;
+    public TarProcesoevaluacionDto getProcesoDto() {
+        return procesoDto;
     }
 
-    public void setProId(TarProcesoevaluacionDto proId) {
-        this.proId = proId;
+    public void setProcesoDto(TarProcesoevaluacionDto procesoDto) {
+        this.procesoDto = procesoDto;
     }
 
-    public TarUsuarioDto getUsuId() {
-        return usuId;
+    public TarUsuarioDto getUsuarioDto() {
+        return usuarioDto;
     }
 
-    public void setUsuId(TarUsuarioDto usuId) {
-        this.usuId = usuId;
+    public void setUsuarioDto(TarUsuarioDto usuarioDto) {
+        this.usuarioDto = usuarioDto;
     }
     
     
