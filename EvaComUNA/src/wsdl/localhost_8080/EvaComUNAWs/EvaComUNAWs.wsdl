@@ -10,23 +10,29 @@
 <message name="helloResponse">
 <part name="parameters" element="tns:helloResponse"/>
 </message>
-<message name="guardarCaracteristica">
-<part name="parameters" element="tns:guardarCaracteristica"/>
+<message name="guardarCompetencia">
+<part name="parameters" element="tns:guardarCompetencia"/>
 </message>
-<message name="guardarCaracteristicaResponse">
-<part name="parameters" element="tns:guardarCaracteristicaResponse"/>
+<message name="guardarCompetenciaResponse">
+<part name="parameters" element="tns:guardarCompetenciaResponse"/>
 </message>
-<message name="guardarCompetenciaevaluar">
-<part name="parameters" element="tns:guardarCompetenciaevaluar"/>
+<message name="guardarUsuario">
+<part name="parameters" element="tns:guardarUsuario"/>
 </message>
-<message name="guardarCompetenciaevaluarResponse">
-<part name="parameters" element="tns:guardarCompetenciaevaluarResponse"/>
+<message name="guardarUsuarioResponse">
+<part name="parameters" element="tns:guardarUsuarioResponse"/>
 </message>
-<message name="guardarPuesto">
-<part name="parameters" element="tns:guardarPuesto"/>
+<message name="EliminarUsuario">
+<part name="parameters" element="tns:EliminarUsuario"/>
 </message>
-<message name="guardarPuestoResponse">
-<part name="parameters" element="tns:guardarPuestoResponse"/>
+<message name="EliminarUsuarioResponse">
+<part name="parameters" element="tns:EliminarUsuarioResponse"/>
+</message>
+<message name="guardarParametros">
+<part name="parameters" element="tns:guardarParametros"/>
+</message>
+<message name="guardarParametrosResponse">
+<part name="parameters" element="tns:guardarParametrosResponse"/>
 </message>
 <message name="guardarEvaluador">
 <part name="parameters" element="tns:guardarEvaluador"/>
@@ -40,29 +46,11 @@
 <message name="getUsuarioResponse">
 <part name="parameters" element="tns:getUsuarioResponse"/>
 </message>
-<message name="guardarUsuario">
-<part name="parameters" element="tns:guardarUsuario"/>
+<message name="guardarPuesto">
+<part name="parameters" element="tns:guardarPuesto"/>
 </message>
-<message name="guardarUsuarioResponse">
-<part name="parameters" element="tns:guardarUsuarioResponse"/>
-</message>
-<message name="guardarParametros">
-<part name="parameters" element="tns:guardarParametros"/>
-</message>
-<message name="guardarParametrosResponse">
-<part name="parameters" element="tns:guardarParametrosResponse"/>
-</message>
-<message name="guardarCompetencia">
-<part name="parameters" element="tns:guardarCompetencia"/>
-</message>
-<message name="guardarCompetenciaResponse">
-<part name="parameters" element="tns:guardarCompetenciaResponse"/>
-</message>
-<message name="getUsuarioId">
-<part name="parameters" element="tns:getUsuarioId"/>
-</message>
-<message name="getUsuarioIdResponse">
-<part name="parameters" element="tns:getUsuarioIdResponse"/>
+<message name="guardarPuestoResponse">
+<part name="parameters" element="tns:guardarPuestoResponse"/>
 </message>
 <message name="getUsuarioClass">
 <part name="parameters" element="tns:getUsuarioClass"/>
@@ -70,11 +58,35 @@
 <message name="getUsuarioClassResponse">
 <part name="parameters" element="tns:getUsuarioClassResponse"/>
 </message>
-<message name="guardarProcesoevaluacion">
-<part name="parameters" element="tns:guardarProcesoevaluacion"/>
+<message name="getParametrosClass">
+<part name="parameters" element="tns:getParametrosClass"/>
 </message>
-<message name="guardarProcesoevaluacionResponse">
-<part name="parameters" element="tns:guardarProcesoevaluacionResponse"/>
+<message name="getParametrosClassResponse">
+<part name="parameters" element="tns:getParametrosClassResponse"/>
+</message>
+<message name="getUsuarioId">
+<part name="parameters" element="tns:getUsuarioId"/>
+</message>
+<message name="getUsuarioIdResponse">
+<part name="parameters" element="tns:getUsuarioIdResponse"/>
+</message>
+<message name="eliminarEvaluador">
+<part name="parameters" element="tns:eliminarEvaluador"/>
+</message>
+<message name="eliminarEvaluadorResponse">
+<part name="parameters" element="tns:eliminarEvaluadorResponse"/>
+</message>
+<message name="eliminarPuesto">
+<part name="parameters" element="tns:eliminarPuesto"/>
+</message>
+<message name="eliminarPuestoResponse">
+<part name="parameters" element="tns:eliminarPuestoResponse"/>
+</message>
+<message name="eliminarParametros">
+<part name="parameters" element="tns:eliminarParametros"/>
+</message>
+<message name="eliminarParametrosResponse">
+<part name="parameters" element="tns:eliminarParametrosResponse"/>
 </message>
 <message name="guardarTrabajadorevaluar">
 <part name="parameters" element="tns:guardarTrabajadorevaluar"/>
@@ -82,34 +94,116 @@
 <message name="guardarTrabajadorevaluarResponse">
 <part name="parameters" element="tns:guardarTrabajadorevaluarResponse"/>
 </message>
-<message name="getParametrosClass">
-<part name="parameters" element="tns:getParametrosClass"/>
+<message name="eliminarCompetencia">
+<part name="parameters" element="tns:eliminarCompetencia"/>
 </message>
-<message name="getParametrosClassResponse">
-<part name="parameters" element="tns:getParametrosClassResponse"/>
+<message name="eliminarCompetenciaResponse">
+<part name="parameters" element="tns:eliminarCompetenciaResponse"/>
 </message>
-<message name="EliminarUsuario">
-<part name="parameters" element="tns:EliminarUsuario"/>
+<message name="guardarProcesoevaluacion">
+<part name="parameters" element="tns:guardarProcesoevaluacion"/>
 </message>
-<message name="EliminarUsuarioResponse">
-<part name="parameters" element="tns:EliminarUsuarioResponse"/>
+<message name="guardarProcesoevaluacionResponse">
+<part name="parameters" element="tns:guardarProcesoevaluacionResponse"/>
+</message>
+<message name="guardarCaracteristica">
+<part name="parameters" element="tns:guardarCaracteristica"/>
+</message>
+<message name="guardarCaracteristicaResponse">
+<part name="parameters" element="tns:guardarCaracteristicaResponse"/>
+</message>
+<message name="guardarCompetenciaevaluar">
+<part name="parameters" element="tns:guardarCompetenciaevaluar"/>
+</message>
+<message name="guardarCompetenciaevaluarResponse">
+<part name="parameters" element="tns:guardarCompetenciaevaluarResponse"/>
+</message>
+<message name="eliminarCaracteristica">
+<part name="parameters" element="tns:eliminarCaracteristica"/>
+</message>
+<message name="eliminarCaracteristicaResponse">
+<part name="parameters" element="tns:eliminarCaracteristicaResponse"/>
+</message>
+<message name="getCaracteristicaClass">
+<part name="parameters" element="tns:getCaracteristicaClass"/>
+</message>
+<message name="getCaracteristicaClassResponse">
+<part name="parameters" element="tns:getCaracteristicaClassResponse"/>
+</message>
+<message name="getProcesoevaluacionClass">
+<part name="parameters" element="tns:getProcesoevaluacionClass"/>
+</message>
+<message name="getProcesoevaluacionClassResponse">
+<part name="parameters" element="tns:getProcesoevaluacionClassResponse"/>
+</message>
+<message name="getTrabajadorevaluarClass">
+<part name="parameters" element="tns:getTrabajadorevaluarClass"/>
+</message>
+<message name="getTrabajadorevaluarClassResponse">
+<part name="parameters" element="tns:getTrabajadorevaluarClassResponse"/>
+</message>
+<message name="getCompetenciaClass">
+<part name="parameters" element="tns:getCompetenciaClass"/>
+</message>
+<message name="getCompetenciaClassResponse">
+<part name="parameters" element="tns:getCompetenciaClassResponse"/>
+</message>
+<message name="eliminarCompetenciaevaluar">
+<part name="parameters" element="tns:eliminarCompetenciaevaluar"/>
+</message>
+<message name="eliminarCompetenciaevaluarResponse">
+<part name="parameters" element="tns:eliminarCompetenciaevaluarResponse"/>
+</message>
+<message name="eliminarTrabajadorevaluar">
+<part name="parameters" element="tns:eliminarTrabajadorevaluar"/>
+</message>
+<message name="eliminarTrabajadorevaluarResponse">
+<part name="parameters" element="tns:eliminarTrabajadorevaluarResponse"/>
+</message>
+<message name="getCompetenciaevaluarClass">
+<part name="parameters" element="tns:getCompetenciaevaluarClass"/>
+</message>
+<message name="getCompetenciaevaluarClassResponse">
+<part name="parameters" element="tns:getCompetenciaevaluarClassResponse"/>
+</message>
+<message name="eliminarProcesoevaluacion">
+<part name="parameters" element="tns:eliminarProcesoevaluacion"/>
+</message>
+<message name="eliminarProcesoevaluacionResponse">
+<part name="parameters" element="tns:eliminarProcesoevaluacionResponse"/>
+</message>
+<message name="getPuestoClass">
+<part name="parameters" element="tns:getPuestoClass"/>
+</message>
+<message name="getPuestoClassResponse">
+<part name="parameters" element="tns:getPuestoClassResponse"/>
+</message>
+<message name="getEvaluadorClass">
+<part name="parameters" element="tns:getEvaluadorClass"/>
+</message>
+<message name="getEvaluadorClassResponse">
+<part name="parameters" element="tns:getEvaluadorClassResponse"/>
 </message>
 <portType name="EvaComUNAWs">
 <operation name="hello">
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/helloRequest" message="tns:hello"/>
 <output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/helloResponse" message="tns:helloResponse"/>
 </operation>
-<operation name="guardarCaracteristica">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCaracteristicaRequest" message="tns:guardarCaracteristica"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCaracteristicaResponse" message="tns:guardarCaracteristicaResponse"/>
+<operation name="guardarCompetencia">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaRequest" message="tns:guardarCompetencia"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaResponse" message="tns:guardarCompetenciaResponse"/>
 </operation>
-<operation name="guardarCompetenciaevaluar">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaevaluarRequest" message="tns:guardarCompetenciaevaluar"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaevaluarResponse" message="tns:guardarCompetenciaevaluarResponse"/>
+<operation name="guardarUsuario">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarUsuarioRequest" message="tns:guardarUsuario"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarUsuarioResponse" message="tns:guardarUsuarioResponse"/>
 </operation>
-<operation name="guardarPuesto">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarPuestoRequest" message="tns:guardarPuesto"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarPuestoResponse" message="tns:guardarPuestoResponse"/>
+<operation name="EliminarUsuario">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/EliminarUsuarioRequest" message="tns:EliminarUsuario"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/EliminarUsuarioResponse" message="tns:EliminarUsuarioResponse"/>
+</operation>
+<operation name="guardarParametros">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarParametrosRequest" message="tns:guardarParametros"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarParametrosResponse" message="tns:guardarParametrosResponse"/>
 </operation>
 <operation name="guardarEvaluador">
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarEvaluadorRequest" message="tns:guardarEvaluador"/>
@@ -119,41 +213,97 @@
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioRequest" message="tns:getUsuario"/>
 <output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioResponse" message="tns:getUsuarioResponse"/>
 </operation>
-<operation name="guardarUsuario">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarUsuarioRequest" message="tns:guardarUsuario"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarUsuarioResponse" message="tns:guardarUsuarioResponse"/>
-</operation>
-<operation name="guardarParametros">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarParametrosRequest" message="tns:guardarParametros"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarParametrosResponse" message="tns:guardarParametrosResponse"/>
-</operation>
-<operation name="guardarCompetencia">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaRequest" message="tns:guardarCompetencia"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaResponse" message="tns:guardarCompetenciaResponse"/>
-</operation>
-<operation name="getUsuarioId">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioIdRequest" message="tns:getUsuarioId"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioIdResponse" message="tns:getUsuarioIdResponse"/>
+<operation name="guardarPuesto">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarPuestoRequest" message="tns:guardarPuesto"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarPuestoResponse" message="tns:guardarPuestoResponse"/>
 </operation>
 <operation name="getUsuarioClass">
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioClassRequest" message="tns:getUsuarioClass"/>
 <output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioClassResponse" message="tns:getUsuarioClassResponse"/>
 </operation>
-<operation name="guardarProcesoevaluacion">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarProcesoevaluacionRequest" message="tns:guardarProcesoevaluacion"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarProcesoevaluacionResponse" message="tns:guardarProcesoevaluacionResponse"/>
+<operation name="getParametrosClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getParametrosClassRequest" message="tns:getParametrosClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getParametrosClassResponse" message="tns:getParametrosClassResponse"/>
+</operation>
+<operation name="getUsuarioId">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioIdRequest" message="tns:getUsuarioId"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getUsuarioIdResponse" message="tns:getUsuarioIdResponse"/>
+</operation>
+<operation name="eliminarEvaluador">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarEvaluadorRequest" message="tns:eliminarEvaluador"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarEvaluadorResponse" message="tns:eliminarEvaluadorResponse"/>
+</operation>
+<operation name="eliminarPuesto">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarPuestoRequest" message="tns:eliminarPuesto"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarPuestoResponse" message="tns:eliminarPuestoResponse"/>
+</operation>
+<operation name="eliminarParametros">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarParametrosRequest" message="tns:eliminarParametros"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarParametrosResponse" message="tns:eliminarParametrosResponse"/>
 </operation>
 <operation name="guardarTrabajadorevaluar">
 <input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarTrabajadorevaluarRequest" message="tns:guardarTrabajadorevaluar"/>
 <output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarTrabajadorevaluarResponse" message="tns:guardarTrabajadorevaluarResponse"/>
 </operation>
-<operation name="getParametrosClass">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getParametrosClassRequest" message="tns:getParametrosClass"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getParametrosClassResponse" message="tns:getParametrosClassResponse"/>
+<operation name="eliminarCompetencia">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarCompetenciaRequest" message="tns:eliminarCompetencia"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarCompetenciaResponse" message="tns:eliminarCompetenciaResponse"/>
 </operation>
-<operation name="EliminarUsuario">
-<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/EliminarUsuarioRequest" message="tns:EliminarUsuario"/>
-<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/EliminarUsuarioResponse" message="tns:EliminarUsuarioResponse"/>
+<operation name="guardarProcesoevaluacion">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarProcesoevaluacionRequest" message="tns:guardarProcesoevaluacion"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarProcesoevaluacionResponse" message="tns:guardarProcesoevaluacionResponse"/>
+</operation>
+<operation name="guardarCaracteristica">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCaracteristicaRequest" message="tns:guardarCaracteristica"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCaracteristicaResponse" message="tns:guardarCaracteristicaResponse"/>
+</operation>
+<operation name="guardarCompetenciaevaluar">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaevaluarRequest" message="tns:guardarCompetenciaevaluar"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/guardarCompetenciaevaluarResponse" message="tns:guardarCompetenciaevaluarResponse"/>
+</operation>
+<operation name="eliminarCaracteristica">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarCaracteristicaRequest" message="tns:eliminarCaracteristica"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarCaracteristicaResponse" message="tns:eliminarCaracteristicaResponse"/>
+</operation>
+<operation name="getCaracteristicaClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getCaracteristicaClassRequest" message="tns:getCaracteristicaClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getCaracteristicaClassResponse" message="tns:getCaracteristicaClassResponse"/>
+</operation>
+<operation name="getProcesoevaluacionClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getProcesoevaluacionClassRequest" message="tns:getProcesoevaluacionClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getProcesoevaluacionClassResponse" message="tns:getProcesoevaluacionClassResponse"/>
+</operation>
+<operation name="getTrabajadorevaluarClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getTrabajadorevaluarClassRequest" message="tns:getTrabajadorevaluarClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getTrabajadorevaluarClassResponse" message="tns:getTrabajadorevaluarClassResponse"/>
+</operation>
+<operation name="getCompetenciaClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getCompetenciaClassRequest" message="tns:getCompetenciaClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getCompetenciaClassResponse" message="tns:getCompetenciaClassResponse"/>
+</operation>
+<operation name="eliminarCompetenciaevaluar">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarCompetenciaevaluarRequest" message="tns:eliminarCompetenciaevaluar"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarCompetenciaevaluarResponse" message="tns:eliminarCompetenciaevaluarResponse"/>
+</operation>
+<operation name="eliminarTrabajadorevaluar">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarTrabajadorevaluarRequest" message="tns:eliminarTrabajadorevaluar"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarTrabajadorevaluarResponse" message="tns:eliminarTrabajadorevaluarResponse"/>
+</operation>
+<operation name="getCompetenciaevaluarClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getCompetenciaevaluarClassRequest" message="tns:getCompetenciaevaluarClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getCompetenciaevaluarClassResponse" message="tns:getCompetenciaevaluarClassResponse"/>
+</operation>
+<operation name="eliminarProcesoevaluacion">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarProcesoevaluacionRequest" message="tns:eliminarProcesoevaluacion"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/eliminarProcesoevaluacionResponse" message="tns:eliminarProcesoevaluacionResponse"/>
+</operation>
+<operation name="getPuestoClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getPuestoClassRequest" message="tns:getPuestoClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getPuestoClassResponse" message="tns:getPuestoClassResponse"/>
+</operation>
+<operation name="getEvaluadorClass">
+<input wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getEvaluadorClassRequest" message="tns:getEvaluadorClass"/>
+<output wsam:Action="http://controller.evacomunaws.una.ac.cr/EvaComUNAWs/getEvaluadorClassResponse" message="tns:getEvaluadorClassResponse"/>
 </operation>
 </portType>
 <binding name="EvaComUNAWsPortBinding" type="tns:EvaComUNAWs">
@@ -167,7 +317,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="guardarCaracteristica">
+<operation name="guardarCompetencia">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -176,7 +326,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="guardarCompetenciaevaluar">
+<operation name="guardarUsuario">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -185,7 +335,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="guardarPuesto">
+<operation name="EliminarUsuario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="guardarParametros">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -212,34 +371,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="guardarUsuario">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="guardarParametros">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="guardarCompetencia">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getUsuarioId">
+<operation name="guardarPuesto">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -257,7 +389,43 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="guardarProcesoevaluacion">
+<operation name="getParametrosClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getUsuarioId">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarEvaluador">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarPuesto">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarParametros">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -275,7 +443,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getParametrosClass">
+<operation name="eliminarCompetencia">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -284,7 +452,124 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="EliminarUsuario">
+<operation name="guardarProcesoevaluacion">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="guardarCaracteristica">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="guardarCompetenciaevaluar">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarCaracteristica">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCaracteristicaClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getProcesoevaluacionClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getTrabajadorevaluarClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCompetenciaClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarCompetenciaevaluar">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarTrabajadorevaluar">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCompetenciaevaluarClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarProcesoevaluacion">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getPuestoClass">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getEvaluadorClass">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

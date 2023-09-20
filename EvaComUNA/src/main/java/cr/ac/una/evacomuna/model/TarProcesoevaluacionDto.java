@@ -33,17 +33,27 @@ public class TarProcesoevaluacionDto {
         this.proFini = new SimpleObjectProperty();
         this.proFfin = new SimpleObjectProperty();
         this.proTitulo = new SimpleStringProperty();
-        this.proEstado = new SimpleObjectProperty("a");//definir no recuerdo que tenia de default
+        this.proEstado = new SimpleObjectProperty("A");//definir no recuerdo que tenia de default
         tarTrabajadorevaluarList = FXCollections.observableArrayList();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
     }
-    
+
     public TarProcesoevaluacionDto(cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto tarProcesoevaluacionDto) {
         this();
+        this.proEstado.set(tarProcesoevaluacionDto.getProEstado());
+        this.proFfin.set(java.time.LocalDate.parse(tarProcesoevaluacionDto.getProFfin().toString()));
+        this.proFini.set(java.time.LocalDate.parse(tarProcesoevaluacionDto.getProFini().toString()));
+        this.proId.set(tarProcesoevaluacionDto.getProId().toString());
+        this.proTitulo.set(tarProcesoevaluacionDto.getProTitulo());
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto consultas() {
         cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto tarProcesoevaluacionDtoSoap = new cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto();
+        tarProcesoevaluacionDtoSoap.setProEstado(this.getProEstado());
+        tarProcesoevaluacionDtoSoap.setProFfin(cr.ac.una.evacomunaws.controller.LocalDate.class.cast(this.getProFfin()));
+        tarProcesoevaluacionDtoSoap.setProFini(cr.ac.una.evacomunaws.controller.LocalDate.class.cast(this.getProFini()));
+        tarProcesoevaluacionDtoSoap.setProId(this.getProId());
+        tarProcesoevaluacionDtoSoap.setProTitulo(this.getProTitulo());
         return tarProcesoevaluacionDtoSoap;
     }
 
@@ -122,5 +132,5 @@ public class TarProcesoevaluacionDto {
     public void setTarTrabajadorevaluarListEliminados(List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados) {
         this.tarTrabajadorevaluarListEliminados = tarTrabajadorevaluarListEliminados;
     }
-    
+
 }

@@ -37,10 +37,14 @@ public class TarTrabajadorevaluarDto {
     
     public TarTrabajadorevaluarDto(cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto tarTrabajadorevaluarDto) {
         this();
+        this.traId.set(tarTrabajadorevaluarDto.getTraId().toString());
+        this.traResultado.set(tarTrabajadorevaluarDto.getTraResultado());
     }
     
     public cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto consultas(){
         cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto tarTrabajadorevaluarDtoSoap = new cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto();
+        tarTrabajadorevaluarDtoSoap.setTraId(this.getTraId());
+        tarTrabajadorevaluarDtoSoap.setTraResultado(this.getTraResultado());
         return tarTrabajadorevaluarDtoSoap;
     }
 

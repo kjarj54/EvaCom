@@ -6,6 +6,7 @@ package cr.ac.una.evacomuna.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -26,7 +27,7 @@ public class TarUsuarioDto {
     public SimpleStringProperty usuCorreo;
     public SimpleStringProperty usuTelefono;
     public SimpleStringProperty usuCelular;
-    public ObjectProperty<byte[]> usuFoto;
+    public ObjectProperty<Byte[]> usuFoto;
     public SimpleStringProperty usuUsu;
     public SimpleStringProperty usuClave;
     public SimpleStringProperty usuTempclave;
@@ -64,10 +65,39 @@ public class TarUsuarioDto {
     
     public TarUsuarioDto(cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDto) {
         this();
+        this.usuId.set(tarUsuarioDto.getUsuId().toString());
+        this.usuNombre.set(tarUsuarioDto.getUsuNombre());
+        this.usuApellido.set(tarUsuarioDto.getUsuApellido());
+        this.usuCedula.set(tarUsuarioDto.getUsuCedula());
+        this.usuCorreo.set(tarUsuarioDto.getUsuCorreo());
+        this.usuTelefono.set(tarUsuarioDto.getUsuTelefono().toString());
+        this.usuCelular.set(tarUsuarioDto.getUsuCelular().toString());
+        List<Byte> usuFotoList = tarUsuarioDto.getUsuFoto();
+        Byte[] usuFotoArray = usuFotoList.toArray(new Byte[usuFotoList.size()]);
+        this.usuFoto.set(usuFotoArray);
+        this.usuClave.set(tarUsuarioDto.getUsuClave());
+        this.usuTempclave.set(tarUsuarioDto.getUsuTempclave());
+        this.usuUsu.set(tarUsuarioDto.getUsuUsu());
+        this.usuActivo.set(tarUsuarioDto.getUsuActivo().equals("A"));
+        this.usuAdmin.set(tarUsuarioDto.getUsuAdmin().equals("S"));
     }
     
     public cr.ac.una.evacomunaws.controller.TarUsuarioDto consultas(){
         cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDtoSoap = new cr.ac.una.evacomunaws.controller.TarUsuarioDto();
+        tarUsuarioDtoSoap.setUsuActivo(this.getUsuActivo());
+        tarUsuarioDtoSoap.setUsuAdmin(this.getUsuAdmin());
+        tarUsuarioDtoSoap.setUsuApellido(this.getUsuApellido());
+        tarUsuarioDtoSoap.setUsuCedula(this.getUsuCedula());
+        tarUsuarioDtoSoap.setUsuCelular(this.getUsuCelular());
+        tarUsuarioDtoSoap.setUsuClave(this.getUsuClave());
+        tarUsuarioDtoSoap.setUsuCorreo(this.getUsuCorreo());
+        tarUsuarioDtoSoap.setUsuId(this.getUsuId());
+        tarUsuarioDtoSoap.setUsuNombre(this.getUsuNombre());
+        tarUsuarioDtoSoap.setUsuTelefono(this.getUsuTelefono());
+        tarUsuarioDtoSoap.setUsuUsu(this.getUsuUsu());
+        Byte[] usuFotoArray = this.getUsuFoto();
+        List<Byte> usuFotoList = new ArrayList<>(Arrays.asList(usuFotoArray));
+        tarUsuarioDtoSoap.getUsuFoto().addAll(usuFotoList);
         return tarUsuarioDtoSoap;
     }
 
@@ -140,11 +170,11 @@ public class TarUsuarioDto {
         this.usuCelular.set(usuCelular.toString());
     }
 
-    public byte[] getUsuFoto() {
+    public Byte[] getUsuFoto() {
         return usuFoto.get();
     }
 
-    public void setUsuFoto(byte[] usuFoto) {
+    public void setUsuFoto(Byte[] usuFoto) {
         this.usuFoto.set(usuFoto);
     }
 
@@ -228,6 +258,12 @@ public class TarUsuarioDto {
         this.pueId = pueId;
     }
     
-    
+    public String getUsuUsu() {
+        return usuUsu.get();
+    }
+
+    public void setUsuUsu(String usuUsu) {
+        this.usuUsu.set(usuUsu);
+    }
     
 }

@@ -38,10 +38,16 @@ public class TarPuestoDto {
     
     public TarPuestoDto(cr.ac.una.evacomunaws.controller.TarPuestoDto tarPuestoDto) {
         this();
+        this.pueEstado.set(tarPuestoDto.getPueEstado());
+        this.pueId.set(tarPuestoDto.getPueId().toString());
+        this.pueNombre.set(tarPuestoDto.getPueNombre());
     }
     
     public cr.ac.una.evacomunaws.controller.TarPuestoDto consultas(){
         cr.ac.una.evacomunaws.controller.TarPuestoDto tarPuestoDtoSoap = new cr.ac.una.evacomunaws.controller.TarPuestoDto();
+        tarPuestoDtoSoap.setPueEstado(this.getPueEstado());
+        tarPuestoDtoSoap.setPueId(this.getPueId());
+        tarPuestoDtoSoap.setPueNombre(this.getPueNombre());
         return tarPuestoDtoSoap;
     }
 

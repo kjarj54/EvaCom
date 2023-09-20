@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bienvenido a mi página</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #222;
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                text-align: center;
+            }
+
+            .logo {
+                max-width: 300px;
+                animation: fireAnimation 1s infinite alternate-reverse;
+            }
+
+            @keyframes fireAnimation {
+                0% {
+                    transform: scale(1);
+                }
+                100% {
+                    transform: scale(1.1);
+                }
+            }
+
+            h1 {
+                font-size: 3em;
+                color: #FFF;
+                margin-top: 20px;
+            }
+
+            .WSDL {
+                color: #FFF;
+                text-decoration: none;
+                font-size: 1.5em;
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="container">
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/LogoUNA.svg/1200px-LogoUNA.svg.png" alt="Logo UNA">
+            <h1>Bienvenido al Web service EvaComUNA</h1>
+            <ul>
+                <li>
+                    <a class="WSDL" href="http://localhost:8080/EvaComUNAWs/EvaComUNAWs?wsdl">http://localhost:8080/EvaComUNAWs/EvaComUNAWs?wsdl</a>
+                </li>
+            </ul>
+        </div>
     </body>
 </html>

@@ -4,9 +4,69 @@
 
 <xs:element name="EliminarUsuarioResponse" type="tns:EliminarUsuarioResponse"/>
 
+<xs:element name="eliminarCaracteristica" type="tns:eliminarCaracteristica"/>
+
+<xs:element name="eliminarCaracteristicaResponse" type="tns:eliminarCaracteristicaResponse"/>
+
+<xs:element name="eliminarCompetencia" type="tns:eliminarCompetencia"/>
+
+<xs:element name="eliminarCompetenciaResponse" type="tns:eliminarCompetenciaResponse"/>
+
+<xs:element name="eliminarCompetenciaevaluar" type="tns:eliminarCompetenciaevaluar"/>
+
+<xs:element name="eliminarCompetenciaevaluarResponse" type="tns:eliminarCompetenciaevaluarResponse"/>
+
+<xs:element name="eliminarEvaluador" type="tns:eliminarEvaluador"/>
+
+<xs:element name="eliminarEvaluadorResponse" type="tns:eliminarEvaluadorResponse"/>
+
+<xs:element name="eliminarParametros" type="tns:eliminarParametros"/>
+
+<xs:element name="eliminarParametrosResponse" type="tns:eliminarParametrosResponse"/>
+
+<xs:element name="eliminarProcesoevaluacion" type="tns:eliminarProcesoevaluacion"/>
+
+<xs:element name="eliminarProcesoevaluacionResponse" type="tns:eliminarProcesoevaluacionResponse"/>
+
+<xs:element name="eliminarPuesto" type="tns:eliminarPuesto"/>
+
+<xs:element name="eliminarPuestoResponse" type="tns:eliminarPuestoResponse"/>
+
+<xs:element name="eliminarTrabajadorevaluar" type="tns:eliminarTrabajadorevaluar"/>
+
+<xs:element name="eliminarTrabajadorevaluarResponse" type="tns:eliminarTrabajadorevaluarResponse"/>
+
+<xs:element name="getCaracteristicaClass" type="tns:getCaracteristicaClass"/>
+
+<xs:element name="getCaracteristicaClassResponse" type="tns:getCaracteristicaClassResponse"/>
+
+<xs:element name="getCompetenciaClass" type="tns:getCompetenciaClass"/>
+
+<xs:element name="getCompetenciaClassResponse" type="tns:getCompetenciaClassResponse"/>
+
+<xs:element name="getCompetenciaevaluarClass" type="tns:getCompetenciaevaluarClass"/>
+
+<xs:element name="getCompetenciaevaluarClassResponse" type="tns:getCompetenciaevaluarClassResponse"/>
+
+<xs:element name="getEvaluadorClass" type="tns:getEvaluadorClass"/>
+
+<xs:element name="getEvaluadorClassResponse" type="tns:getEvaluadorClassResponse"/>
+
 <xs:element name="getParametrosClass" type="tns:getParametrosClass"/>
 
 <xs:element name="getParametrosClassResponse" type="tns:getParametrosClassResponse"/>
+
+<xs:element name="getProcesoevaluacionClass" type="tns:getProcesoevaluacionClass"/>
+
+<xs:element name="getProcesoevaluacionClassResponse" type="tns:getProcesoevaluacionClassResponse"/>
+
+<xs:element name="getPuestoClass" type="tns:getPuestoClass"/>
+
+<xs:element name="getPuestoClassResponse" type="tns:getPuestoClassResponse"/>
+
+<xs:element name="getTrabajadorevaluarClass" type="tns:getTrabajadorevaluarClass"/>
+
+<xs:element name="getTrabajadorevaluarClassResponse" type="tns:getTrabajadorevaluarClassResponse"/>
 
 <xs:element name="getUsuario" type="tns:getUsuario"/>
 
@@ -73,138 +133,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarTrabajadorevaluar">
-<xs:sequence>
-<xs:element name="tarTrabajadorevaluarDto" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarTrabajadorevaluarDto">
-<xs:sequence>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-<xs:element name="proId" type="tns:tarProcesoevaluacionDto" minOccurs="0"/>
-<xs:element name="tarEvaluadorList" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarEvaluadorListEliminados" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="traId" type="xs:long" minOccurs="0"/>
-<xs:element name="traResultado" type="xs:string" minOccurs="0"/>
-<xs:element name="traVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="usuId" type="tns:tarUsuarioDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarProcesoevaluacionDto">
-<xs:sequence>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-<xs:element name="proEstado" type="xs:string" minOccurs="0"/>
-<xs:element name="proFfin" type="tns:localDate" minOccurs="0"/>
-<xs:element name="proFini" type="tns:localDate" minOccurs="0"/>
-<xs:element name="proId" type="xs:long" minOccurs="0"/>
-<xs:element name="proTitulo" type="xs:string" minOccurs="0"/>
-<xs:element name="proVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="tarTrabajadorevaluarList" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarTrabajadorevaluarListEliminados" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="localDate" final="extension restriction">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="tarEvaluadorDto">
-<xs:sequence>
-<xs:element name="evaluId" type="xs:long" minOccurs="0"/>
-<xs:element name="evaluRetroalimentacion" type="xs:string" minOccurs="0"/>
-<xs:element name="evaluVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-<xs:element name="tarCompetenciaevaluarList" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarCompetenciaevaluarListEliminados" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="traId" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
-<xs:element name="usuId" type="tns:tarUsuarioDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarCompetenciaevaluarDto">
-<xs:sequence>
-<xs:element name="coeCalificacion" type="xs:string" minOccurs="0"/>
-<xs:element name="coeId" type="xs:long" minOccurs="0"/>
-<xs:element name="coeVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="comId" type="tns:tarCompetenciaDto" minOccurs="0"/>
-<xs:element name="evaluId" type="tns:tarEvaluadorDto" minOccurs="0"/>
-<xs:element name="modficado" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarCompetenciaDto">
-<xs:sequence>
-<xs:element name="comEstado" type="xs:string" minOccurs="0"/>
-<xs:element name="comId" type="xs:long" minOccurs="0"/>
-<xs:element name="comNombre" type="xs:string" minOccurs="0"/>
-<xs:element name="comVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-<xs:element name="tarCaracteristicaEliminados" type="tns:tarCaracteristicaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarCaracteristicaList" type="tns:tarCaracteristicaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarCompetenciaevaluarElimimados" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarCompetenciaevaluarList" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarPuestoEliminados" type="tns:tarPuestoDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarPuestoList" type="tns:tarPuestoDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarCaracteristicaDto">
-<xs:sequence>
-<xs:element name="carDescripcion" type="xs:string" minOccurs="0"/>
-<xs:element name="carId" type="xs:long" minOccurs="0"/>
-<xs:element name="carVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="comId" type="tns:tarCompetenciaDto" minOccurs="0"/>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarPuestoDto">
-<xs:sequence>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-<xs:element name="pueEstado" type="xs:string" minOccurs="0"/>
-<xs:element name="pueId" type="xs:long" minOccurs="0"/>
-<xs:element name="pueNombre" type="xs:string" minOccurs="0"/>
-<xs:element name="pueVersion" type="xs:long" minOccurs="0"/>
-<xs:element name="tarCompetenciaList" type="tns:tarCompetenciaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarCompetenciaListEliminados" type="tns:tarCompetenciaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarUsuarioList" type="tns:tarUsuarioDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarUsuarioListEliminados" type="tns:tarUsuarioDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="tarUsuarioDto">
-<xs:sequence>
-<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
-<xs:element name="pueId" type="tns:tarPuestoDto" minOccurs="0"/>
-<xs:element name="tarEvaluadorList" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarEvaluadorListEliminados" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarTrabajadorevaluarList" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="tarTrabajadorevaluarListEliminados" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="usuActivo" type="xs:string" minOccurs="0"/>
-<xs:element name="usuAdmin" type="xs:string" minOccurs="0"/>
-<xs:element name="usuApellido" type="xs:string" minOccurs="0"/>
-<xs:element name="usuCedula" type="xs:string" minOccurs="0"/>
-<xs:element name="usuCelular" type="xs:long" minOccurs="0"/>
-<xs:element name="usuClave" type="xs:string" minOccurs="0"/>
-<xs:element name="usuCorreo" type="xs:string" minOccurs="0"/>
-<xs:element name="usuFoto" type="xs:byte" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="usuId" type="xs:long" minOccurs="0"/>
-<xs:element name="usuNombre" type="xs:string" minOccurs="0"/>
-<xs:element name="usuTelefono" type="xs:long" minOccurs="0"/>
-<xs:element name="usuTempclave" type="xs:string" minOccurs="0"/>
-<xs:element name="usuUsu" type="xs:string" minOccurs="0"/>
-<xs:element name="usuVersion" type="xs:long" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="guardarTrabajadorevaluarResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getParametrosClass">
 <xs:sequence>
 <xs:element name="id" type="xs:long" minOccurs="0"/>
@@ -231,6 +159,144 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getProcesoevaluacionClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProcesoevaluacionClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarProcesoevaluacionDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarProcesoevaluacionDto">
+<xs:sequence>
+<xs:element name="fecha" type="tns:localDateTime" minOccurs="0"/>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="proEstado" type="xs:string" minOccurs="0"/>
+<xs:element name="proFfin" type="tns:localDate" minOccurs="0"/>
+<xs:element name="proFini" type="tns:localDate" minOccurs="0"/>
+<xs:element name="proId" type="xs:long" minOccurs="0"/>
+<xs:element name="proTitulo" type="xs:string" minOccurs="0"/>
+<xs:element name="proVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="tarTrabajadorevaluarList" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarTrabajadorevaluarListEliminados" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="localDateTime" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="localDate" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="tarTrabajadorevaluarDto">
+<xs:sequence>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="procesoDto" type="tns:tarProcesoevaluacionDto" minOccurs="0"/>
+<xs:element name="tarEvaluadorList" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarEvaluadorListEliminados" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="traId" type="xs:long" minOccurs="0"/>
+<xs:element name="traResultado" type="xs:string" minOccurs="0"/>
+<xs:element name="traVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="usuarioDto" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarEvaluadorDto">
+<xs:sequence>
+<xs:element name="evaluId" type="xs:long" minOccurs="0"/>
+<xs:element name="evaluRetroalimentacion" type="xs:string" minOccurs="0"/>
+<xs:element name="evaluVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="tarCompetenciaevaluarList" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarCompetenciaevaluarListEliminados" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="trabajadorevaluarDto" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
+<xs:element name="usuarioDto" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarCompetenciaevaluarDto">
+<xs:sequence>
+<xs:element name="coeCalificacion" type="xs:string" minOccurs="0"/>
+<xs:element name="coeId" type="xs:long" minOccurs="0"/>
+<xs:element name="coeVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="competenciaDto" type="tns:tarCompetenciaDto" minOccurs="0"/>
+<xs:element name="evaluadorDto" type="tns:tarEvaluadorDto" minOccurs="0"/>
+<xs:element name="modficado" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarCompetenciaDto">
+<xs:sequence>
+<xs:element name="comEstado" type="xs:string" minOccurs="0"/>
+<xs:element name="comId" type="xs:long" minOccurs="0"/>
+<xs:element name="comNombre" type="xs:string" minOccurs="0"/>
+<xs:element name="comVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="tarCaracteristicaEliminados" type="tns:tarCaracteristicaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarCaracteristicaList" type="tns:tarCaracteristicaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarCompetenciaevaluarElimimados" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarCompetenciaevaluarList" type="tns:tarCompetenciaevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarPuestoEliminados" type="tns:tarPuestoDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarPuestoList" type="tns:tarPuestoDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarCaracteristicaDto">
+<xs:sequence>
+<xs:element name="carDescripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="carId" type="xs:long" minOccurs="0"/>
+<xs:element name="carVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="competenciaDto" type="tns:tarCompetenciaDto" minOccurs="0"/>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarPuestoDto">
+<xs:sequence>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="pueEstado" type="xs:string" minOccurs="0"/>
+<xs:element name="pueId" type="xs:long" minOccurs="0"/>
+<xs:element name="pueNombre" type="xs:string" minOccurs="0"/>
+<xs:element name="pueVersion" type="xs:long" minOccurs="0"/>
+<xs:element name="tarCompetenciaList" type="tns:tarCompetenciaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarCompetenciaListEliminados" type="tns:tarCompetenciaDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarUsuarioList" type="tns:tarUsuarioDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarUsuarioListEliminados" type="tns:tarUsuarioDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarUsuarioDto">
+<xs:sequence>
+<xs:element name="fecha" type="tns:localDateTime" minOccurs="0"/>
+<xs:element name="modificado" type="xs:boolean" minOccurs="0"/>
+<xs:element name="puestoDto" type="tns:tarPuestoDto" minOccurs="0"/>
+<xs:element name="tarEvaluadorList" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarEvaluadorListEliminados" type="tns:tarEvaluadorDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarTrabajadorevaluarList" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="tarTrabajadorevaluarListEliminados" type="tns:tarTrabajadorevaluarDto" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="usuActivo" type="xs:string" minOccurs="0"/>
+<xs:element name="usuAdmin" type="xs:string" minOccurs="0"/>
+<xs:element name="usuApellido" type="xs:string" minOccurs="0"/>
+<xs:element name="usuCedula" type="xs:string" minOccurs="0"/>
+<xs:element name="usuCelular" type="xs:long" minOccurs="0"/>
+<xs:element name="usuClave" type="xs:string" minOccurs="0"/>
+<xs:element name="usuCorreo" type="xs:string" minOccurs="0"/>
+<xs:element name="usuFoto" type="xs:byte" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="usuId" type="xs:long" minOccurs="0"/>
+<xs:element name="usuNombre" type="xs:string" minOccurs="0"/>
+<xs:element name="usuTelefono" type="xs:long" minOccurs="0"/>
+<xs:element name="usuTempclave" type="xs:string" minOccurs="0"/>
+<xs:element name="usuUsu" type="xs:string" minOccurs="0"/>
+<xs:element name="usuVersion" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="guardarCompetencia">
 <xs:sequence>
 <xs:element name="tarCompetenciaDto" type="tns:tarCompetenciaDto" minOccurs="0"/>
@@ -243,27 +309,63 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarUsuario">
+<xs:complexType name="eliminarPuesto">
 <xs:sequence>
-<xs:element name="usuarioDto" type="tns:tarUsuarioDto" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarUsuarioResponse">
+<xs:complexType name="eliminarPuestoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCompetencia">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCompetenciaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="EliminarUsuario">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="EliminarUsuarioResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarCompetenciaevaluar">
+<xs:complexType name="eliminarEvaluador">
 <xs:sequence>
-<xs:element name="tarCompetenciaevaluarDto" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarCompetenciaevaluarResponse">
+<xs:complexType name="eliminarEvaluadorResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+<xs:element name="return" type="tns:tarEvaluadorDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompetenciaClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompetenciaClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -279,25 +381,13 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarCaracteristica">
+<xs:complexType name="getEvaluadorClass">
 <xs:sequence>
-<xs:element name="tarCaracteristicaDto" type="tns:tarCaracteristicaDto" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarCaracteristicaResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarCaracteristicaDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="guardarEvaluador">
-<xs:sequence>
-<xs:element name="tarEvaluadorDto" type="tns:tarEvaluadorDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="guardarEvaluadorResponse">
+<xs:complexType name="getEvaluadorClassResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarEvaluadorDto" minOccurs="0"/>
 </xs:sequence>
@@ -315,19 +405,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getUsuario">
-<xs:sequence>
-<xs:element name="usuario" type="xs:string" minOccurs="0"/>
-<xs:element name="clave" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getUsuarioResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="guardarParametros">
 <xs:sequence>
 <xs:element name="tarParametrosDto" type="tns:tarParametrosDto" minOccurs="0"/>
@@ -337,18 +414,6 @@
 <xs:complexType name="guardarParametrosResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarParametrosDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="guardarPuesto">
-<xs:sequence>
-<xs:element name="tarPuestoDto" type="tns:tarPuestoDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="guardarPuestoResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -364,15 +429,196 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="EliminarUsuario">
+<xs:complexType name="getCaracteristicaClass">
 <xs:sequence>
 <xs:element name="id" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="EliminarUsuarioResponse">
+<xs:complexType name="getCaracteristicaClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCaracteristicaDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarProcesoevaluacion">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarProcesoevaluacionResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarProcesoevaluacionDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTrabajadorevaluarClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTrabajadorevaluarClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCompetenciaevaluar">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCompetenciaevaluarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarTrabajadorevaluar">
+<xs:sequence>
+<xs:element name="tarTrabajadorevaluarDto" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarTrabajadorevaluarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarUsuario">
+<xs:sequence>
+<xs:element name="usuarioDto" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarUsuarioResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPuestoClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPuestoClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarCompetenciaevaluar">
+<xs:sequence>
+<xs:element name="tarCompetenciaevaluarDto" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarCompetenciaevaluarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarCaracteristica">
+<xs:sequence>
+<xs:element name="tarCaracteristicaDto" type="tns:tarCaracteristicaDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarCaracteristicaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCaracteristicaDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarParametros">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarParametrosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarParametrosDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompetenciaevaluarClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompetenciaevaluarClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarEvaluador">
+<xs:sequence>
+<xs:element name="tarEvaluadorDto" type="tns:tarEvaluadorDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarEvaluadorResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarEvaluadorDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarTrabajadorevaluar">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarTrabajadorevaluarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarTrabajadorevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUsuario">
+<xs:sequence>
+<xs:element name="usuario" type="xs:string" minOccurs="0"/>
+<xs:element name="clave" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarPuesto">
+<xs:sequence>
+<xs:element name="tarPuestoDto" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarPuestoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCaracteristica">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCaracteristicaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCaracteristicaDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
