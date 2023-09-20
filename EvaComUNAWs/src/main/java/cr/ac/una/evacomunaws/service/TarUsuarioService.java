@@ -155,7 +155,7 @@ public class TarUsuarioService {
     
     public Respuesta activacionCuenta(Long usuId) {
         try {
-            Query qryActividad = em.createNamedQuery("ProClientes.findByUsuId", TarUsuario.class);
+            Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuId", TarUsuario.class);
             qryActividad.setParameter("usuId", usuId);
             TarUsuarioDto tarUsuariosDto = new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult());
             tarUsuariosDto.setUsuActivo("A");
@@ -179,7 +179,7 @@ public class TarUsuarioService {
     
     public Respuesta getUsuariosSinParametros() {
         try {
-            Query qryUsuarios = em.createNamedQuery("ProClientes.findAll", TarUsuario.class);
+            Query qryUsuarios = em.createNamedQuery("TarUsuario.findAll", TarUsuario.class);
             List<TarUsuario> usuarios = qryUsuarios.getResultList();
 
             List<TarUsuarioDto> clientesDto = new ArrayList<>();
@@ -199,7 +199,7 @@ public class TarUsuarioService {
     
     public Respuesta recuperarClave(String usuCorreo) {
         try {
-            Query qryActividad = em.createNamedQuery("ProClientes.findByUsuCorreo", TarUsuario.class);
+            Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuCorreo", TarUsuario.class);
             qryActividad.setParameter("usuCorreo", usuCorreo);
             TarUsuarioDto tarUsuarioDto = new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult());
             recuClave(tarUsuarioDto);
@@ -320,7 +320,7 @@ public class TarUsuarioService {
                     + "							data-ogsb=\"rgb(229, 229, 229)\">\n"
                     + "							<div style=\"color:#FFFFFF;margin:30px\">Hola por parte de EvaComUNA se generar una nueva clave!<br aria-hidden=\"true\"><br aria-hidden=\"true\">Su\n"
                     + "								clave nueva es: " + claveRestaurada + "<br aria-hidden=\\\"true\\\"><br\n"
-                    + "									aria-hidden=\\\"true\\\">Atte: EvaComUNA:\n"
+                    + "									aria-hidden=\\\"true\\\">Atte: EvaComUNA\n"
                     + "							</div>\n"
                     + "						</div>\n"
                     + "					</div>\n"

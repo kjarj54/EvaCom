@@ -143,7 +143,7 @@ public class EvaComUNAWs {
         }
     }
 
-    @WebMethod(operationName = "EliminarUsuario")
+    @WebMethod(operationName = "eliminarUsuario")
     public TarUsuarioDto eliminarUsuario(@WebParam(name = "id") Long id) {
         try {
             Respuesta res = tarUsuarioService.eliminarUsuario(id);
@@ -155,6 +155,20 @@ public class EvaComUNAWs {
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarUsuarioDto.class.cast(ex);//TODO
+        }
+    }
+
+    @WebMethod(operationName = "recuperarClave")
+    public Boolean recuperarClave(@WebParam(name = "correo") String correo) {
+        try {
+            Respuesta res = tarUsuarioService.recuperarClave(correo);
+            if (!res.getEstado()) {
+                return TarUsuarioDto.class.cast(res).getModificado();//TODO
+            }
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarUsuarioDto.class.cast(ex).getModificado();//TODO
         }
     }
 
@@ -196,7 +210,7 @@ public class EvaComUNAWs {
             return TarParametrosDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "eliminarParametros")
     public TarParametrosDto eliminarParametros(@WebParam(name = "id") Long id) {
         try {
@@ -250,8 +264,7 @@ public class EvaComUNAWs {
             return TarCaracteristicaDto.class.cast(ex);//TODO
         }
     }
-    
-    
+
     @WebMethod(operationName = "eliminarCaracteristica")
     public TarCaracteristicaDto eliminarCaracteristica(@WebParam(name = "id") Long id) {
         try {
@@ -306,7 +319,7 @@ public class EvaComUNAWs {
             return TarCompetenciaDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "eliminarCompetencia")
     public TarCompetenciaDto eliminarCompetencia(@WebParam(name = "id") Long id) {
         try {
@@ -360,7 +373,7 @@ public class EvaComUNAWs {
             return TarCompetenciaevaluarDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "eliminarCompetenciaevaluar")
     public TarCompetenciaevaluarDto eliminarCompetenciaevaluar(@WebParam(name = "id") Long id) {
         try {
@@ -414,7 +427,7 @@ public class EvaComUNAWs {
             return TarEvaluadorDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "eliminarEvaluador")
     public TarEvaluadorDto eliminarEvaluador(@WebParam(name = "id") Long id) {
         try {
@@ -468,7 +481,7 @@ public class EvaComUNAWs {
             return TarProcesoevaluacionDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "eliminarProcesoevaluacion")
     public TarProcesoevaluacionDto eliminarProcesoevaluacion(@WebParam(name = "id") Long id) {
         try {
@@ -522,8 +535,7 @@ public class EvaComUNAWs {
             return TarPuestoDto.class.cast(ex);//TODO
         }
     }
-    
-    
+
     @WebMethod(operationName = "eliminarPuesto")
     public TarPuestoDto eliminarPuesto(@WebParam(name = "id") Long id) {
         try {
@@ -577,8 +589,7 @@ public class EvaComUNAWs {
             return TarTrabajadorevaluarDto.class.cast(ex);//TODO
         }
     }
-    
-    
+
     @WebMethod(operationName = "eliminarTrabajadorevaluar")
     public TarTrabajadorevaluarDto eliminarTrabajadorevaluar(@WebParam(name = "id") Long id) {
         try {
