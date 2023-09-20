@@ -38,6 +38,8 @@ public class LoginViewController extends Controller implements Initializable {
     private JFXButton btnLogin;
     @FXML
     private JFXButton btnCancelar;
+    @FXML
+    private JFXButton btnOlvidarClave;
 
     /**
      * Initializes the controller class.
@@ -67,10 +69,21 @@ public class LoginViewController extends Controller implements Initializable {
                     AppContext.getInstance().set("UsuarioId", tarUsuarioDto.getUsuId());
                     if (tarUsuarioDto.getUsuClave().equals(tarUsuarioDto.getUsuTempclave())) {
                         new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de usuario", (Stage) btnLogin.getScene().getWindow(), "Es necesario cambiar la clave para ingresar al sistema.");
-                        FlowController.getInstance().goViewInWindowModal("CambioClaveView", getStage(), true);
+                        FlowController.getInstance().goViewInWindowModal("P02_CambioClaveView", getStage(), true);
 
+                    } else {
+                        if ("S".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
+                            //FlowController.getInstance()//TODO
+                            getStage().close();
+                        } else if ("N".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
+                            //FlowController.getInstance() TODO
+                            getStage().close();
+
+                        } else {
+                            new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", (Stage) btnLogin.getScene().getWindow(), "Es necesario que su cuenta este activada.");
+                        }
                     }
-                    
+
                 }
             }
 
@@ -82,6 +95,11 @@ public class LoginViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnCancelar(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnOlvidarClave(ActionEvent event) {
+        FlowController.getInstance().goViewInWindow("P01_RecuClaveView");
     }
 
 }
