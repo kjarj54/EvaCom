@@ -33,7 +33,7 @@ public class TarUsuarioDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
     List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
-    private TarPuestoDto puestoDto = null;
+    private TarPuestoDto puestoDto;
     private LocalDateTime fecha;
 
     public TarUsuarioDto() {
