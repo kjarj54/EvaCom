@@ -4,6 +4,7 @@
  */
 package cr.ac.una.evacomuna.service;
 
+import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs_Service;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
  * @author kevin
  */
 public class TarUsuarioService {
+
     EvaComUNAWs evaComUNAWs;
 
     public Respuesta guardarUsuario(cr.ac.una.evacomunaws.controller.TarUsuarioDto usuario) {
@@ -22,7 +24,7 @@ public class TarUsuarioService {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
             evaComUNAWs.guardarUsuario(usuario);
-           if (false) {
+            if (false) {
                 return new Respuesta(false, "", "");
             }
             cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDto = (cr.ac.una.evacomunaws.controller.TarUsuarioDto) evaComUNAWs.guardarUsuario(usuario);
@@ -32,8 +34,27 @@ public class TarUsuarioService {
             return new Respuesta(false, "Error guardando el usuario.", "guardarUsuario " + ex.getMessage());
         }
     }
-    
-     public Respuesta getUsuario(Long id) {
+
+    public Respuesta getUsuario(String usuario, String clave) {
+
+        try { // Call Web Service Operation
+            EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
+            evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
+            evaComUNAWs.logIn(usuario, clave);
+            if (evaComUNAWs.logIn(usuario, clave).equals(false)) {
+                return new Respuesta(false, "", "");
+            }
+            TarUsuarioDto tarUsuarioDto = new TarUsuarioDto((cr.ac.una.evacomunaws.controller.TarUsuarioDto)evaComUNAWs.logIn(usuario, clave));
+            
+            return new Respuesta(true, "", "", "TarUsuario", tarUsuarioDto);
+        } catch (Exception ex) {
+            Logger.getLogger(TarUsuarioService.class.getName()).log(Level.SEVERE, "Error obteniendo el usuario [" + usuario + "]", ex);
+            return new Respuesta(false, "Error obteniendo el usuario.", "getUsuario" + ex.getMessage());
+        }
+
+    }
+
+    public Respuesta getUsuario(Long id) {
         try {
             //TODO
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();

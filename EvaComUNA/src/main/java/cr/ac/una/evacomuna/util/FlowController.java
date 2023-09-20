@@ -21,13 +21,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class FlowController {
 
-    private static FlowController INSTANCE = null;
+     private static FlowController INSTANCE = null;
     private static Stage mainStage;
     private static ResourceBundle idioma;
     private static HashMap<String, FXMLLoader> loaders = new HashMap<>();
+    private static Controller controller;
 
     private FlowController() {
     }
@@ -76,13 +78,25 @@ public class FlowController {
                 }
             }
         }
+        if (!name.equals("LoginView")) {
+            this.controller = loader.getController();
+        }
         return loader;
     }
 
     public void goMain() {
         try {
-            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/A01_PruebasView.fxml"), this.idioma)));
-            FlowController.mainStage.show();
+            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/evaconuna/view/.fxml"), this.idioma)));
+            this.mainStage.show();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
+        }
+    }
+    
+    public void goMainCliente() {
+        try {
+            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/evaconuna/view/.fxml"), this.idioma)));
+            this.mainStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }
@@ -103,14 +117,13 @@ public class FlowController {
         controller.initialize();
         Stage stage = controller.getStage();
         if (stage == null) {
-            stage = FlowController.mainStage;
+            stage = this.mainStage;
             controller.setStage(stage);
         }
         switch (location) {
             case "Center":
-                AnchorPane anchorP = ((AnchorPane) ((BorderPane) stage.getScene().getRoot()).getCenter());
-                anchorP.getChildren().clear();
-                anchorP.getChildren().add(loader.getRoot());
+                ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).getChildren().clear();
+                ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter()).getChildren().add(loader.getRoot());
                 break;
             case "Top":
                 break;
@@ -124,7 +137,7 @@ public class FlowController {
                 break;
         }
     }
-
+    
     public void goViewInStage(String viewName, Stage stage) {
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
@@ -137,8 +150,8 @@ public class FlowController {
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image("cr/ac/una/unaplanilla/resources/media/UNA_Logo.png"));
-        stage.setTitle(controller.getNombreVista());
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/evacomuna/resources/LogoUNArojo.png")));
+        stage.setTitle("EvaComUNA");
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
@@ -149,7 +162,10 @@ public class FlowController {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
-
+    }
+    
+    public void goLogInWindowModal(Boolean resizable) {
+        goViewInWindowModal("LoginView", this.controller.getStage(), resizable);
     }
 
     public void goViewInWindowModal(String viewName, Stage parentStage, Boolean resizable) {
@@ -157,8 +173,8 @@ public class FlowController {
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        //stage.getIcons().add(new Image(""));
-        stage.setTitle(controller.getNombreVista());
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/evacomuna/resources/LogoUNArojo.png")));
+        stage.setTitle("EvaComUNA");
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());
@@ -179,10 +195,20 @@ public class FlowController {
         return getLoader(viewName).getController();
     }
 
+    
+    
+    public void limpiarLoader(String view) {
+        this.loaders.remove(view);
+    }
+    
+    public ResourceBundle getIdioma(){
+        return idioma;
+    }
+    
     public static void setIdioma(ResourceBundle idioma) {
         FlowController.idioma = idioma;
     }
-
+    
     public void initialize() {
         this.loaders.clear();
     }
@@ -191,15 +217,4 @@ public class FlowController {
         this.mainStage.close();
     }
 
-    public void delete(String parameter) {
-        loaders.remove(parameter);
-    }
-
-    public Stage getMainStage() {
-        return mainStage;
-    }
-
-    public Scene getMainScene() {
-        return mainStage.getScene();
-    }
 }

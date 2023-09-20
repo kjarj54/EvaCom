@@ -95,7 +95,23 @@ public class EvaComUNAWs {
             return res.getEstado();
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return TarUsuarioDto.class.cast(ex).getModificado();
+        }
+    }
+    
+    
+    @WebMethod(operationName = "logIn")
+    public TarUsuarioDto logIn(@WebParam(name = "usuario") String usuario, @WebParam(name = "clave") String clave) {
+        try {
+            Respuesta res = tarUsuarioService.validarUsuario(usuario, clave);
+            if (!res.getEstado()) {
+                return TarUsuarioDto.class.cast(res);
+            }
+            TarUsuarioDto pruebaDto = (TarUsuarioDto) res.getResultado("Usuario");
+            return pruebaDto;
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarUsuarioDto.class.cast(ex);
         }
     }
 

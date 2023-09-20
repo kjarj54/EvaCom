@@ -265,5 +265,11 @@ public class TarUsuarioDto {
     public void setUsuUsu(String usuUsu) {
         this.usuUsu.set(usuUsu);
     }
-    
+    public String getUsuTempclave() {
+        return usuTempclave.get();
+    }
+
+    public void setUsuTempclave(String usuTempclave) {
+        this.usuTempclave.set(usuTempclave);
+    }
 }

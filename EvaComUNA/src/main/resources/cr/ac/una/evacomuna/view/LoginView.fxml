@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.LoginViewController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
+    <!-- Add your login components here -->
+    <JFXTextField fx:id="txtUsuario" layoutX="50" layoutY="50" promptText="Username" />
+    <JFXPasswordField fx:id="txtClave" layoutX="50" layoutY="100" promptText="Password" />
+    <JFXButton fx:id="btnLogin" layoutX="50" layoutY="150" onAction="#onActionBtnLogin" text="Login" />
+    <JFXButton fx:id="btnCancelar" layoutX="150" layoutY="150" onAction="#onActionBtnCancelar" text="Cancel" />
+
+</AnchorPane>

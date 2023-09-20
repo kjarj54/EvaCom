@@ -1,9 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by XML-WS Runtime (https://github.com/eclipse-ee4j/metro-jax-ws). Runtime's version is Eclipse Metro/4.0.1 (RELEASE-4.0.1-18da659; 2022-07-02T08:47:18+0000) XMLWS-Impl/4.0.0 XMLWS-API/${jaxws-api.version} XMLB-Impl/4.0.0 XMLB-API/4.0.0 git-revision#18da659. --><xs:schema xmlns:tns="http://controller.evacomunaws.una.ac.cr/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://controller.evacomunaws.una.ac.cr/">
 
-<xs:element name="EliminarUsuario" type="tns:EliminarUsuario"/>
-
-<xs:element name="EliminarUsuarioResponse" type="tns:EliminarUsuarioResponse"/>
-
 <xs:element name="eliminarCaracteristica" type="tns:eliminarCaracteristica"/>
 
 <xs:element name="eliminarCaracteristicaResponse" type="tns:eliminarCaracteristicaResponse"/>
@@ -35,6 +31,10 @@
 <xs:element name="eliminarTrabajadorevaluar" type="tns:eliminarTrabajadorevaluar"/>
 
 <xs:element name="eliminarTrabajadorevaluarResponse" type="tns:eliminarTrabajadorevaluarResponse"/>
+
+<xs:element name="eliminarUsuario" type="tns:eliminarUsuario"/>
+
+<xs:element name="eliminarUsuarioResponse" type="tns:eliminarUsuarioResponse"/>
 
 <xs:element name="getCaracteristicaClass" type="tns:getCaracteristicaClass"/>
 
@@ -119,6 +119,14 @@
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="logIn" type="tns:logIn"/>
+
+<xs:element name="logInResponse" type="tns:logInResponse"/>
+
+<xs:element name="recuperarClave" type="tns:recuperarClave"/>
+
+<xs:element name="recuperarClaveResponse" type="tns:recuperarClaveResponse"/>
 
 <xs:complexType name="getUsuarioId">
 <xs:sequence>
@@ -333,13 +341,26 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="EliminarUsuario">
+<xs:complexType name="eliminarUsuario">
 <xs:sequence>
 <xs:element name="id" type="xs:long" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="EliminarUsuarioResponse">
+<xs:complexType name="eliminarUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logIn">
+<xs:sequence>
+<xs:element name="usuario" type="xs:string" minOccurs="0"/>
+<xs:element name="clave" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logInResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
 </xs:sequence>
@@ -474,6 +495,18 @@
 <xs:complexType name="eliminarCompetenciaevaluarResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarCompetenciaevaluarDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recuperarClave">
+<xs:sequence>
+<xs:element name="correo" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recuperarClaveResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
