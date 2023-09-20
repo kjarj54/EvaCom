@@ -66,10 +66,11 @@ public class LoginViewController extends Controller implements Initializable {
                     TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) respuesta.getResultado("TarUsuario");
                     AppContext.getInstance().set("UsuarioId", tarUsuarioDto.getUsuId());
                     if (tarUsuarioDto.getUsuClave().equals(tarUsuarioDto.getUsuTempclave())) {
-                            new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de usuario", (Stage) btnLogin.getScene().getWindow(), "Es necesario cambiar la clave para ingresar al sistema.");
-                            FlowController.getInstance().goViewInWindowModal("CambioClaveView", getStage(), true);
-                            
-                        }
+                        new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de usuario", (Stage) btnLogin.getScene().getWindow(), "Es necesario cambiar la clave para ingresar al sistema.");
+                        FlowController.getInstance().goViewInWindowModal("CambioClaveView", getStage(), true);
+
+                    }
+                    
                 }
             }
 
