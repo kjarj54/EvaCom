@@ -62,7 +62,7 @@ public class TarUsuarioDto {
         tarTrabajadorevaluarList = FXCollections.observableArrayList();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
     }
-    
+
     public TarUsuarioDto(cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDto) {
         this();
         this.usuId.set(tarUsuarioDto.getUsuId().toString());
@@ -80,22 +80,26 @@ public class TarUsuarioDto {
         this.usuUsu.set(tarUsuarioDto.getUsuUsu());
         this.usuActivo.set(tarUsuarioDto.getUsuActivo().equals("A"));
         this.usuAdmin.set(tarUsuarioDto.getUsuAdmin().equals("S"));
-        this.puestoDto = new TarPuestoDto(tarUsuarioDto.getPuestoDto());
-        
-        List<cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto> tarCompetenciaevaluarList = tarUsuarioDto.getTarTrabajadorevaluarList();
-        for (cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {
-            TarTrabajadorevaluarDto convertedItem = new TarTrabajadorevaluarDto(item);
-            this.tarTrabajadorevaluarList.add(convertedItem);
+        if (tarUsuarioDto.getPuestoDto() != null) {
+            this.puestoDto = new TarPuestoDto(tarUsuarioDto.getPuestoDto());
         }
-        
-        List<cr.ac.una.evacomunaws.controller.TarEvaluadorDto> evaluadorDtos = tarUsuarioDto.getTarEvaluadorList();
-        for (cr.ac.una.evacomunaws.controller.TarEvaluadorDto item : evaluadorDtos) {
-            TarEvaluadorDto convertedItem = new TarEvaluadorDto(item);
-            this.tarEvaluadorList.add(convertedItem);
+        if (!tarUsuarioDto.getTarTrabajadorevaluarList().isEmpty()) {
+            List<cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto> tarCompetenciaevaluarList = tarUsuarioDto.getTarTrabajadorevaluarList();
+            for (cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {
+                TarTrabajadorevaluarDto convertedItem = new TarTrabajadorevaluarDto(item);
+                this.tarTrabajadorevaluarList.add(convertedItem);
+            }
+        }
+        if (!tarUsuarioDto.getTarEvaluadorList().isEmpty()) {
+            List<cr.ac.una.evacomunaws.controller.TarEvaluadorDto> evaluadorDtos = tarUsuarioDto.getTarEvaluadorList();
+            for (cr.ac.una.evacomunaws.controller.TarEvaluadorDto item : evaluadorDtos) {
+                TarEvaluadorDto convertedItem = new TarEvaluadorDto(item);
+                this.tarEvaluadorList.add(convertedItem);
+            }
         }
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarUsuarioDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarUsuarioDto consultas() {
         cr.ac.una.evacomunaws.controller.TarUsuarioDto tarUsuarioDtoSoap = new cr.ac.una.evacomunaws.controller.TarUsuarioDto();
         tarUsuarioDtoSoap.setUsuActivo(this.getUsuActivo());
         tarUsuarioDtoSoap.setUsuAdmin(this.getUsuAdmin());
@@ -112,22 +116,22 @@ public class TarUsuarioDto {
         List<Byte> usuFotoList = new ArrayList<>(Arrays.asList(usuFotoArray));
         tarUsuarioDtoSoap.getUsuFoto().addAll(usuFotoList);
         tarUsuarioDtoSoap.setPuestoDto(this.puestoDto.consultas());
-        
+
         List<TarTrabajadorevaluarDto> tarCompetenciaevaluarList = this.tarTrabajadorevaluarList;
-        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {         
+        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarList) {
             tarUsuarioDtoSoap.getTarTrabajadorevaluarList().add(item.consultas());
         }
-        
+
         List<TarTrabajadorevaluarDto> tarCompetenciaevaluarElimimados = this.tarTrabajadorevaluarListEliminados;
-        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarElimimados) {         
+        for (TarTrabajadorevaluarDto item : tarCompetenciaevaluarElimimados) {
             tarUsuarioDtoSoap.getTarTrabajadorevaluarListEliminados().add(item.consultas());
         }
-        
+
         List<TarEvaluadorDto> tarUsuarioDtos = this.tarEvaluadorListEliminados;
-        for (TarEvaluadorDto item : tarUsuarioDtos) {         
+        for (TarEvaluadorDto item : tarUsuarioDtos) {
             tarUsuarioDtoSoap.getTarEvaluadorListEliminados().add(item.consultas());
         }
-        
+
         return tarUsuarioDtoSoap;
     }
 
@@ -287,7 +291,7 @@ public class TarUsuarioDto {
     public void setPuestoDto(TarPuestoDto puestoDto) {
         this.puestoDto = puestoDto;
     }
-    
+
     public String getUsuUsu() {
         return usuUsu.get();
     }
@@ -295,6 +299,7 @@ public class TarUsuarioDto {
     public void setUsuUsu(String usuUsu) {
         this.usuUsu.set(usuUsu);
     }
+
     public String getUsuTempclave() {
         return usuTempclave.get();
     }

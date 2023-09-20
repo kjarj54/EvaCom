@@ -47,8 +47,13 @@ public class TarUsuarioService {
             Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuClaveUsuario", TarUsuario.class);
             qryActividad.setParameter("usuUsu", usuUsu);
             qryActividad.setParameter("usuClave", usuClave);
+            TarUsuario tarUsuario = (TarUsuario) qryActividad.getSingleResult();
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult()));
+            TarUsuarioDto dto = new TarUsuarioDto(tarUsuario);
+            if (tarUsuario.getPueId() != null) {
+                dto.setPuestoDto(new TarPuestoDto(tarUsuario.getPueId()));
+            }
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", dto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe un usuario con las credenciales ingresadas.", "validarUsuario NoResultException");
@@ -152,7 +157,7 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el usuario.", "getUsuario " + ex.getMessage());
         }
     }
-    
+
     public Respuesta activacionCuenta(Long usuId) {
         try {
             Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuId", TarUsuario.class);
@@ -160,7 +165,7 @@ public class TarUsuarioService {
             TarUsuarioDto tarUsuariosDto = new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult());
             tarUsuariosDto.setUsuActivo("A");
             TarUsuario tarUsuario;
-            if (tarUsuariosDto.getUsuId()!= null && tarUsuariosDto.getUsuId() > 0) {
+            if (tarUsuariosDto.getUsuId() != null && tarUsuariosDto.getUsuId() > 0) {
                 tarUsuario = em.find(TarUsuario.class, tarUsuariosDto.getUsuId());
                 if (tarUsuario == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "activacionCuenta NoResultException");
@@ -175,8 +180,7 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el usuario.", "activacionCuenta " + ex.getMessage());
         }
     }
-    
-    
+
     public Respuesta getUsuariosSinParametros() {
         try {
             Query qryUsuarios = em.createNamedQuery("TarUsuario.findAll", TarUsuario.class);
@@ -196,7 +200,7 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el usuario.", "getUsuariosSinParametros " + ex.getMessage());
         }
     }
-    
+
     public Respuesta recuperarClave(String usuCorreo) {
         try {
             Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuCorreo", TarUsuario.class);
@@ -204,7 +208,7 @@ public class TarUsuarioService {
             TarUsuarioDto tarUsuarioDto = new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult());
             recuClave(tarUsuarioDto);
             TarUsuario tarUsuario;
-            if (tarUsuarioDto.getUsuId()!= null && tarUsuarioDto.getUsuId() > 0) {
+            if (tarUsuarioDto.getUsuId() != null && tarUsuarioDto.getUsuId() > 0) {
                 tarUsuario = em.find(TarUsuario.class, tarUsuarioDto.getUsuId());
                 if (tarUsuario == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "recuperarClave NoResultException");
@@ -219,8 +223,7 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el usuario.", "recuperarClave " + ex.getMessage());
         }
     }
-    
-    
+
     public static String generateRandomPassword(int len) {
         // Rango ASCII – alfanumérico (0-9, a-z, A-Z)
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -237,10 +240,9 @@ public class TarUsuarioService {
 
         return sb.toString();
     }
-    
-    
-    public Respuesta recuClave(TarUsuarioDto tarUsuarioDto){
-       int len = 8;
+
+    public Respuesta recuClave(TarUsuarioDto tarUsuarioDto) {
+        int len = 8;
         //System.out.println(generateRandomPassword(len));
 
         try {
@@ -259,11 +261,10 @@ public class TarUsuarioService {
             //Optine el correo al cual va a ser enviado el mensaje
             String correoReceptor = tarUsuarioDto.getUsuCorreo();
             String asunto = "EvaComUNA";
-            
-            
+
             //Llama al metodo de creacion de contrasena y se la manda a la persona y luego se la setea para que la cambie
             String claveRestaurada = generateRandomPassword(len);
-            
+
             String mensaje = "<div role=\"region\" tabindex=\"-1\" aria-label=\"Cuerpo del mensaje\" class=\"ulb23 UxthP GNqVo yxtKT allowTextSelection\">\n"
                     + "	<div>\n"
                     + "		<style type=\"text/css\">\n"
@@ -341,15 +342,15 @@ public class TarUsuarioService {
             t.connect(correoRemitente, passwordRemitente);
             t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
             t.close();
-            
+
             tarUsuarioDto.setUsuClave(claveRestaurada);
             tarUsuarioDto.setUsuTempclave(claveRestaurada);
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "","");
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "");
 
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "Ocurrio un error al guardar el cliente.", ex);
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el cliente.", "recuClave " + ex.getMessage());
-        } 
+        }
     }
-    
+
 }
