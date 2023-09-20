@@ -40,9 +40,9 @@ public class TarTrabajadorevaluarService {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
             // TODO process result here
-            TarTrabajadorevaluarDto procesoevaluacionDto = new TarTrabajadorevaluarDto((cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto)evaComUNAWs.getTrabajadorevaluarClass(id));
+            TarTrabajadorevaluarDto tarTrabajadorevaluarDto = new TarTrabajadorevaluarDto((cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto)evaComUNAWs.getTrabajadorevaluarClass(id));
             
-            return new Respuesta(true, "", "", "Trabajadorevaluar", procesoevaluacionDto);
+            return new Respuesta(true, "", "", "Trabajadorevaluar", tarTrabajadorevaluarDto);
         } catch (Exception ex) {
             Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Trabajadorevaluar [" + id + "]", ex);
             return new Respuesta(false, "Error obteniendo el Trabajadorevaluar.", "getTarTrabajadorevaluar" + ex.getMessage());
@@ -57,7 +57,7 @@ public class TarTrabajadorevaluarService {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
 
-            TarTrabajadorevaluarDto procesoevaluacionDto  = new TarTrabajadorevaluarDto((cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto)evaComUNAWs.eliminarTrabajadorevaluar(id));
+            TarTrabajadorevaluarDto tarTrabajadorevaluarDto  = new TarTrabajadorevaluarDto((cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto)evaComUNAWs.eliminarTrabajadorevaluar(id));
             return new Respuesta(true, "", "", "Trabajadorevaluar", "");
         } catch (Exception ex) {
             Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Trabajadorevaluar [" + id + "]", ex);
