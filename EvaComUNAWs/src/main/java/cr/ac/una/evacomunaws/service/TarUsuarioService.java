@@ -4,6 +4,8 @@
  */
 package cr.ac.una.evacomunaws.service;
 
+import cr.ac.una.evacomunaws.model.TarEvaluador;
+import cr.ac.una.evacomunaws.model.TarEvaluadorDto;
 import cr.ac.una.evacomunaws.model.TarPuesto;
 import cr.ac.una.evacomunaws.model.TarPuestoDto;
 import cr.ac.una.evacomunaws.model.TarUsuario;
@@ -53,6 +55,19 @@ public class TarUsuarioService {
             if (tarUsuario.getPueId() != null) {
                 dto.setPuestoDto(new TarPuestoDto(tarUsuario.getPueId()));
             }
+            if (!tarUsuario.getTarEvaluadorList().isEmpty()) {
+                List<TarEvaluadorDto> evaluadorDtoList = new ArrayList<>();
+
+                for (TarEvaluador tarEvaluador : tarUsuario.getTarEvaluadorList()) {
+                    // Convert TarEvaluador to TarEvaluadorDto
+                    TarEvaluadorDto tarEvaluadorDto = new TarEvaluadorDto(tarEvaluador);
+
+                    // Add tarEvaluadorDto to the list
+                    evaluadorDtoList.add(tarEvaluadorDto);
+                }
+
+                dto.getTarEvaluadorList().addAll(evaluadorDtoList);
+            }
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", dto);
 
         } catch (NoResultException ex) {
@@ -74,11 +89,23 @@ public class TarUsuarioService {
                 if (usuario == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "guardarCaracteristica NoResultException");
                 }
-                usuario.actualizar(tarUsuarioDto);
+
                 if (tarUsuarioDto.getPuestoDto() != null) {
                     TarPuesto puesto = em.find(TarPuesto.class, tarUsuarioDto.getPuestoDto().getPueId());
                     usuario.setPueId(puesto);
                 }
+                if (!tarUsuarioDto.getTarEvaluadorList().isEmpty()) {
+                    List<TarEvaluador> evaluadorList = new ArrayList<>();
+
+                    for (TarEvaluadorDto tarEvaluadorDto : tarUsuarioDto.getTarEvaluadorList()) {
+                        TarEvaluador tarEvaluador = new TarEvaluador(tarEvaluadorDto);
+                        evaluadorList.add(tarEvaluador);
+                    }
+
+                    // Add the new evaluators to the user entity's list
+                    usuario.getTarEvaluadorList().addAll(evaluadorList);
+                }
+                usuario.actualizar(tarUsuarioDto);
                 usuario = em.merge(usuario);
             } else {
                 usuario = new TarUsuario(tarUsuarioDto);
@@ -94,13 +121,13 @@ public class TarUsuarioService {
 
     public Respuesta eliminarUsuario(Long id) {
         try {
-            TarUsuario caracteristica;
+            TarUsuario usuario;
             if (id != null && id > 0) {
-                caracteristica = em.find(TarUsuario.class, id);
-                if (caracteristica == null) {
+                usuario = em.find(TarUsuario.class, id);
+                if (usuario == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a eliminar.", "eliminarUsuario NoResultException");
                 }
-                em.remove(caracteristica);
+                em.remove(usuario);
             } else {
                 return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "Debe cargar el usuario a eliminar.", "eliminarUsuario NoResultException");
             }
@@ -144,6 +171,19 @@ public class TarUsuarioService {
             TarUsuarioDto dto = new TarUsuarioDto(tarUsuario);
             if (tarUsuario.getPueId() != null) {
                 dto.setPuestoDto(new TarPuestoDto(tarUsuario.getPueId()));
+            }
+            if (!tarUsuario.getTarEvaluadorList().isEmpty()) {
+                List<TarEvaluadorDto> evaluadorDtoList = new ArrayList<>();
+
+                for (TarEvaluador tarEvaluador : tarUsuario.getTarEvaluadorList()) {
+                    // Convert TarEvaluador to TarEvaluadorDto
+                    TarEvaluadorDto tarEvaluadorDto = new TarEvaluadorDto(tarEvaluador);
+
+                    // Add tarEvaluadorDto to the list
+                    evaluadorDtoList.add(tarEvaluadorDto);
+                }
+
+                dto.getTarEvaluadorList().addAll(evaluadorDtoList);
             }
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", dto);
 
