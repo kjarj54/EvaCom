@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
  * @author kevin
  */
 public class TarTrabajadorevaluarDto {
+
     public SimpleStringProperty traId;
     public SimpleStringProperty traResultado;
     private Long traVersion;
@@ -22,8 +23,7 @@ public class TarTrabajadorevaluarDto {
     List<TarEvaluadorDto> tarEvaluadorListEliminados;
     public TarProcesoevaluacionDto procesoDto;
     public TarUsuarioDto usuarioDto;
-    
-    
+
     public TarTrabajadorevaluarDto() {
         this.traId = new SimpleStringProperty();
         this.traResultado = new SimpleStringProperty();
@@ -32,36 +32,48 @@ public class TarTrabajadorevaluarDto {
         this.usuarioDto = new TarUsuarioDto();
         tarEvaluadorList = FXCollections.observableArrayList();
         tarEvaluadorListEliminados = new ArrayList<>();
-        
+
     }
-    
+
     public TarTrabajadorevaluarDto(cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto tarTrabajadorevaluarDto) {
         this();
         this.traId.set(tarTrabajadorevaluarDto.getTraId().toString());
         this.traResultado.set(tarTrabajadorevaluarDto.getTraResultado());
-        this.usuarioDto = new TarUsuarioDto(tarTrabajadorevaluarDto.getUsuarioDto());
-        this.procesoDto = new TarProcesoevaluacionDto(tarTrabajadorevaluarDto.getProcesoDto());
-        
-        List<cr.ac.una.evacomunaws.controller.TarEvaluadorDto> evaluadorDtos = tarTrabajadorevaluarDto.getTarEvaluadorList();
-        for (cr.ac.una.evacomunaws.controller.TarEvaluadorDto item : evaluadorDtos) {
-            TarEvaluadorDto convertedItem = new TarEvaluadorDto(item);
-            this.tarEvaluadorList.add(convertedItem);
+        if (tarTrabajadorevaluarDto.getUsuarioDto() != null) {
+            this.usuarioDto = new TarUsuarioDto(tarTrabajadorevaluarDto.getUsuarioDto());
         }
-        
+        if (tarTrabajadorevaluarDto.getProcesoDto() != null) {
+            this.procesoDto = new TarProcesoevaluacionDto(tarTrabajadorevaluarDto.getProcesoDto());
+        }
+        if (!tarTrabajadorevaluarDto.getTarEvaluadorList().isEmpty()) {
+            List<cr.ac.una.evacomunaws.controller.TarEvaluadorDto> evaluadorDtos = tarTrabajadorevaluarDto.getTarEvaluadorList();
+            for (cr.ac.una.evacomunaws.controller.TarEvaluadorDto item : evaluadorDtos) {
+                TarEvaluadorDto convertedItem = new TarEvaluadorDto(item);
+                this.tarEvaluadorList.add(convertedItem);
+            }
+        }
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto consultas() {
         cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto tarTrabajadorevaluarDtoSoap = new cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto();
         tarTrabajadorevaluarDtoSoap.setTraId(this.getTraId());
         tarTrabajadorevaluarDtoSoap.setTraResultado(this.getTraResultado());
         tarTrabajadorevaluarDtoSoap.setProcesoDto(this.procesoDto.consultas());
         tarTrabajadorevaluarDtoSoap.setUsuarioDto(this.usuarioDto.consultas());
-        
-        List<TarEvaluadorDto> tarUsuarioDtos = this.tarEvaluadorListEliminados;
-        for (TarEvaluadorDto item : tarUsuarioDtos) {         
-            tarTrabajadorevaluarDtoSoap.getTarEvaluadorListEliminados().add(item.consultas());
+        if (!this.tarEvaluadorList.isEmpty()) {
+            List<TarEvaluadorDto> tarUsuarioDtos = this.tarEvaluadorList;
+            for (TarEvaluadorDto item : tarUsuarioDtos) {
+                tarTrabajadorevaluarDtoSoap.getTarEvaluadorList().add(item.consultas());
+            }
         }
-        
+
+        if (!this.tarEvaluadorListEliminados.isEmpty()) {
+            List<TarEvaluadorDto> tarUsuarioDtos = this.tarEvaluadorListEliminados;
+            for (TarEvaluadorDto item : tarUsuarioDtos) {
+                tarTrabajadorevaluarDtoSoap.getTarEvaluadorListEliminados().add(item.consultas());
+            }
+        }
+
         return tarTrabajadorevaluarDtoSoap;
     }
 
@@ -132,6 +144,5 @@ public class TarTrabajadorevaluarDto {
     public void setUsuarioDto(TarUsuarioDto usuarioDto) {
         this.usuarioDto = usuarioDto;
     }
-    
-    
+
 }

@@ -11,12 +11,12 @@ import javafx.beans.property.SimpleStringProperty;
  * @author kevin
  */
 public class TarCaracteristicaDto {
+
     public SimpleStringProperty carId;
     public SimpleStringProperty carDescripcion;
     private Long carVersion;
     private Boolean modificado;
     public TarCompetenciaDto competenciaDto;
-    
 
     public TarCaracteristicaDto() {
         this.carId = new SimpleStringProperty();
@@ -24,31 +24,35 @@ public class TarCaracteristicaDto {
         this.modificado = false;
         this.competenciaDto = new TarCompetenciaDto();
     }
-    
+
     public TarCaracteristicaDto(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDto) {
         this();
         this.carId.set(tarCaracteristicaDto.getCarId().toString());
         this.carDescripcion.set(tarCaracteristicaDto.getCarDescripcion());
-        this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
+        if (tarCaracteristicaDto.getCompetenciaDto() != null) {
+            this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
+        }
+
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarCaracteristicaDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarCaracteristicaDto consultas() {
         cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCaracteristicaDto();
         tarCaracteristicaDtoSoap.setCarId(this.getCarId());
         tarCaracteristicaDtoSoap.setCarDescripcion(this.getCarDescripcion());
-        tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
+        if (this.getCompetenciaDto() != null) {
+            tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
+        }
         return tarCaracteristicaDtoSoap;
     }
-    
-    
+
     public Boolean getModificado() {
         return modificado;
     }
 
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
-    }  
-    
+    }
+
     public Long getCarId() {
         if (this.carId.get() != null && !this.carId.get().isEmpty()) {
             return Long.valueOf(this.carId.get());
@@ -84,7 +88,5 @@ public class TarCaracteristicaDto {
     public void setCompetenciaDto(TarCompetenciaDto competenciaDto) {
         this.competenciaDto = competenciaDto;
     }
-    
-    
-    
+
 }

@@ -11,13 +11,14 @@ import javafx.beans.property.SimpleStringProperty;
  * @author kevin
  */
 public class TarCompetenciaevaluarDto {
+
     public SimpleStringProperty coeId;
     public SimpleStringProperty coeCalificacion;
     private Long coeVersion;
     private Boolean modficado;
     public TarCompetenciaDto competenciaDto;
     public TarEvaluadorDto evaluadorDto;
-    
+
     public TarCompetenciaevaluarDto() {
         this.coeId = new SimpleStringProperty();
         this.coeCalificacion = new SimpleStringProperty();
@@ -25,26 +26,34 @@ public class TarCompetenciaevaluarDto {
         this.competenciaDto = new TarCompetenciaDto();
         this.evaluadorDto = new TarEvaluadorDto();
     }
-    
+
     public TarCompetenciaevaluarDto(cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCaracteristicaDto) {
         this();
         this.coeId.set(tarCaracteristicaDto.getCoeId().toString());
         this.coeCalificacion.set(tarCaracteristicaDto.getCoeCalificacion());
-        this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
-        this.evaluadorDto = new TarEvaluadorDto(tarCaracteristicaDto.getEvaluadorDto());
+        if (tarCaracteristicaDto.getCompetenciaDto() != null) {
+            this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
+        }
+        if (tarCaracteristicaDto.getEvaluadorDto() != null) {
+            this.evaluadorDto = new TarEvaluadorDto(tarCaracteristicaDto.getEvaluadorDto());
+        }
     }
-    
-    public cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto consultas(){
+
+    public cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto consultas() {
         cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto tarCompetenciaevaluarDtoSoap = new cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto();
         tarCompetenciaevaluarDtoSoap.setCoeId(this.getCoeId());
         tarCompetenciaevaluarDtoSoap.setCoeCalificacion(this.getCoeCalificacion());
-        tarCompetenciaevaluarDtoSoap.setCompetenciaDto(this.competenciaDto.consultas());
-        tarCompetenciaevaluarDtoSoap.setEvaluadorDto(this.evaluadorDto.consultas());
+        if (this.competenciaDto != null) {
+            tarCompetenciaevaluarDtoSoap.setCompetenciaDto(this.competenciaDto.consultas());
+        }
+        if (this.evaluadorDto != null) {
+            tarCompetenciaevaluarDtoSoap.setEvaluadorDto(this.evaluadorDto.consultas());
+        }
         return tarCompetenciaevaluarDtoSoap;
     }
 
     public Long getCoeId() {
-        if (this.coeId.get()!= null && !this.coeId.get().isEmpty()) {
+        if (this.coeId.get() != null && !this.coeId.get().isEmpty()) {
             return Long.valueOf(this.coeId.get());
         } else {
             return null;
@@ -94,7 +103,5 @@ public class TarCompetenciaevaluarDto {
     public void setEvaluadorDto(TarEvaluadorDto evaluadorDto) {
         this.evaluadorDto = evaluadorDto;
     }
-    
-    
-    
+
 }
