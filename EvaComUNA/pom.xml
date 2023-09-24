@@ -34,6 +34,14 @@
             <artifactId>jfoenix</artifactId>
             <version>9.0.10</version>
         </dependency>
+        <!-- dependencia del MaterialFx para parte grafica-->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.14.0-EA3</version>
+            <type>jar</type>
+        </dependency>
+        
         <dependency>
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-rt</artifactId>
@@ -74,7 +82,12 @@
             <artifactId>jakarta.xml.ws-api</artifactId>
             <version>4.0.0</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>19.0.2.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <resources>

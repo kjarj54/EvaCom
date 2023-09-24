@@ -2,90 +2,158 @@
  * Empty Stylesheet file.
  */
 
-/* styles.css */
-/* styles.css */
-
-/* Set default font and font size for the entire application */
-* {
-    -fx-font-family: "Arial", sans-serif;
-    -fx-font-size: 14px;
-}
-
-.root {
-    -fx-background-color: #f0f0f0;
-}
-
 .mainFxmlClass {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-padding: 20;
-    -fx-spacing: 10; /* Add some spacing between components */
+
 }
 
-/* Apply common styles to buttons */
-#btnLogin, #btnCancelar {
-    -fx-pref-width: 100px;
-    -fx-pref-height: 40px;
-    -fx-font-weight: bold;
+.mfx-ripple-generator{
+    -mfx-animation-speed: 0;
+    -mfx-background-opacity: 0;
+    -mfx-ripple-radius: 0;
+    -mfx-paused: true;
 }
 
-#btnLogin {
-    -fx-background-color: #007bff;
-    -fx-text-fill: #ffffff;
+/*-----------------------------------------------------------------------------------------------------------------*/
+.mfx-button-menuPrincipal, .mfx-button-menuSalir{
+    -fx-cursor: hand;
+    -fx-background-color: #333333; /* Establece el fondo del botón como transparente */
+    -fx-font: 20px "Arial Rounded MT Bold"; /* Establece la fuente y el tamano */
+    -fx-text-fill: #FFFFFF; /* Color del texto */
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+    -fx-padding: 0;  /*Elimina el relleno del botón */
+}
+.mfx-button-menuPrincipal:hover{
+    -fx-background-color: #FFFFFF; /* Establece el fondo del botón como transparente */
+    -fx-text-fill: #000000;
+    /*-fx-scale-x: 1.2; /* Escala horizontalmente el botón a 120% en hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+}
+.mfx-button-menuPrincipal:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
 }
 
-#btnCancelar {
-    -fx-background-color: #dc3545;
-    -fx-text-fill: #ffffff;
+.mfx-button-menuSalir:hover{
+    -fx-background-color: #cc0000; /* Establece el fondo del botón como transparente */
+    -fx-text-fill: #000000;
+    /*-fx-scale-x: 1.2; /* Escala horizontalmente el botón a 120% en hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+}
+.mfx-button-menuSalir:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
 }
 
-/* Style text input fields */
-.JFXTextField, .JFXPasswordField {
-    -jfx-unfocus-color: #007bff;
-    -fx-pref-width: 200px;
+/*-----------------------------------------------------------------------------------------------------------------*/
+.mfx-button-Image, .mfx-button-Image-salir{
+    -fx-cursor: hand;
+    -fx-background-color: transparent; /* Establece el fondo del botón como transparente */
+    -fx-content-display: graphic-only;
+    -fx-background-repeat: no-repeat; /* Evita que la imagen se repita */
+    -fx-background-size: contain; /* Ajusta el tamaño de la imagen al botón */
+    -fx-background-position: center; /* Centra la imagen en el botón */
+    -fx-padding: 0;  /*Elimina el relleno del botón */
 }
 
-/* Style prompt text */
-.prompt-text {
-    -fx-fill: #aaa; /* Adjust the color of the prompt text */
+.mfx-button-Image:hover{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
 }
-/* Apply common styles to buttons */
-.JFXButton {
-    -fx-pref-width: 100px;
-    -fx-pref-height: 40px;
-    -fx-font-weight: bold;
+.mfx-button-Image:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(0, 51, 255, 1), 10, 0.5, 0.0, 0.0);
 }
 
-#btnEnviar {
-    -fx-background-color: #28a745; /* Green color for the button */
-    -fx-text-fill: #ffffff;
+.mfx-button-Image-salir:hover{
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+}
+.mfx-button-Image-salir:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
 }
 
-/* Style text input fields */
-.JFXTextField {
-    -jfx-unfocus-color: #007bff;
-    -fx-pref-width: 200px;
-    -fx-background-radius: 5px; /* Add rounded corners to the input fields */
+/*-----------------------------------------------------------------------------------------------------------------*/
+.mfx-button-link{
+    -fx-cursor: hand;
+    -fx-background-color: transparent; /* Establece el fondo del botón como transparente */
+    -fx-font: 17px "Arial Rounded MT Bold"; /* Establece la fuente y el tamano */
+    -fx-text-fill: #ffffff; /* Color del texto */
+    -fx-underline: true;
+    -fx-content-display: text-only;
+    -fx-background-repeat: no-repeat; /* Evita que la imagen se repita */
+    -fx-background-size: contain; /* Ajusta el tamaño de la imagen al botón */
+    -fx-background-position: center; /* Centra la imagen en el botón */
+    -fx-padding: 0;  /*Elimina el relleno del botón */
+}
+.mfx-button-link:hover{
+    /*-fx-scale-x: 1.2; /* Escala horizontalmente el botón a 120% en hover */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+    -fx-text-fill: #0000ff; /* Color del texto */
+}
+.mfx-button-link:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(0, 102, 204, 1), 10, 0.5, 0.0, 0.0);
 }
 
-/* Style label */
-.label {
-    -fx-font-size: 16px; /* Increase font size for the label */
-    -fx-font-weight: bold; /* Make the label text bold */
+/*-----------------------------------------------------------------------------------------------------------------*/
+.mfx-text-field-edit {
+    -mfx-main: #000000;
+    -fx-background-color: rgba(153, 153, 153, 0.49);
+    -fx-background-radius: 5px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 5px;
+    -fx-padding: 5;
+    -fx-font: 17px "Arial Rounded MT Bold";
+    -fx-text-fill: #000000; /* Color del texto */
 }
 
-/* Set background color for AnchorPane */
-#AnchorPane {
-    -fx-background-color: #f0f0f0; /* Light gray background color */
+.mfx-text-field-edit .floating-text {
+    -fx-font: 15px "Arial Rounded MT Bold";
+    -fx-text-fill: -mfx-text-he;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+    -fx-text-fill: #ffffff; /* Color del texto */
 }
 
-/* Set border color and width for AnchorPane */
-.mainFxmlClass {
-    -fx-background-color: #ffffff; /* White background color */
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10px; /* Add rounded corners to the pane */
-    -fx-padding: 20;
-    -fx-spacing: 10; /* Add some spacing between components */
+.mfx-text-field-edit:floating .floating-text {
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+    -fx-text-fill: #ffffff; /* Color del texto */
+}
+
+.mfx-text-field:focus-within {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
+
+.eye-icon{
+    -mfx-color: #000000;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+.images-effect {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
+/*-----------------------------------------------------------------------------------------------------------------*/
+.fondo-registro{
+    -fx-background-image: url("../resources/media/images/registroFondo.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+.fondo-recuperar{
+    -fx-background-image: url("../resources/media/images/recuperarFondo.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+/*-----------------------------------------------------------------------------------------------------------------*/
+.images-effect-button {
+
+}
+.images-effect-button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
+.images-effect-button:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 255, 1), 10, 0.5, 0.0, 0.0);
+}
+/*-----------------------------------------------------------------------------------------------------------------*/
+.txt-effect{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 15, 0.7, 0.0, 0.0);
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+<AnchorPane id="AnchorPane" fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P02_LogInViewController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <children>
+      <MediaView fx:id="mdvFondoLogIn" fitHeight="720.0" fitWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox alignment="CENTER" layoutX="220.0" layoutY="70.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="390.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" styleClass="mfx-button-Image-salir">
+                     <graphic>
+                        <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" styleClass="mfx-button-Image">
+                           <image>
+                              <Image url="@../resources/media/icons/Icono_Salir.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="imvLogo" fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/media/images/logoEva.png" />
+                     </image>
+                  </ImageView>
+                  <MFXTextField fx:id="txfCorreo" floatingText="Correo o usuario" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
+                  <MFXPasswordField fx:id="txfContrasena" floatingText="Contraseña" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
+                  <MFXButton fx:id="btnIngresar" onAction="#onActionBtnIngresar" prefHeight="50.0" prefWidth="350.0" styleClass="mfx-button-menuPrincipal" text="Ingresar" />
+                  <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <MFXButton fx:id="btnNuevaCuenta" onAction="#onActionBtnNuevaCuenta" styleClass="mfx-button-link" text="¿No tiene una cuenta?" />
+                        <MFXButton fx:id="btnRecuperarContra" onAction="#onActionBtnRecuperarContra" styleClass="mfx-button-link" text="¿Olvidó la contraseña?" />
+                     </children>
+                  </HBox>
+                  <MFXButton fx:id="btnAcercaDe" onAction="#onActionBtnAcercaDe" styleClass="mfx-button-link" text="Acerca de..." />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="390.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

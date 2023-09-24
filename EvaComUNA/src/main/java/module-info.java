@@ -2,12 +2,14 @@ module cr.ac.una.evacomuna {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;
+    requires javafx.media;
     requires java.logging;
     requires com.jfoenix;
     requires jakarta.xml.bind;
     requires jakarta.xml.soap;
     requires jakarta.xml.ws;
     requires java.xml.ws;
+    requires MaterialFX;
    
     
     opens cr.ac.una.evacomuna to javafx.fxml,java.base,com.jfoenix;

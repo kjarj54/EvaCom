@@ -1,0 +1,91 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+/* styles.css */
+/* styles.css */
+
+/* Set default font and font size for the entire application */
+* {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 14px;
+}
+
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+.mainFxmlClass {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 20;
+    -fx-spacing: 10; /* Add some spacing between components */
+}
+
+/* Apply common styles to buttons */
+#btnLogin, #btnCancelar {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-weight: bold;
+}
+
+#btnLogin {
+    -fx-background-color: #007bff;
+    -fx-text-fill: #ffffff;
+}
+
+#btnCancelar {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: #ffffff;
+}
+
+/* Style text input fields */
+.JFXTextField, .JFXPasswordField {
+    -jfx-unfocus-color: #007bff;
+    -fx-pref-width: 200px;
+}
+
+/* Style prompt text */
+.prompt-text {
+    -fx-fill: #aaa; /* Adjust the color of the prompt text */
+}
+/* Apply common styles to buttons */
+.JFXButton {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-weight: bold;
+}
+
+#btnEnviar {
+    -fx-background-color: #28a745; /* Green color for the button */
+    -fx-text-fill: #ffffff;
+}
+
+/* Style text input fields */
+.JFXTextField {
+    -jfx-unfocus-color: #007bff;
+    -fx-pref-width: 200px;
+    -fx-background-radius: 5px; /* Add rounded corners to the input fields */
+}
+
+/* Style label */
+.label {
+    -fx-font-size: 16px; /* Increase font size for the label */
+    -fx-font-weight: bold; /* Make the label text bold */
+}
+
+/* Set background color for AnchorPane */
+#AnchorPane {
+    -fx-background-color: #f0f0f0; /* Light gray background color */
+}
+
+/* Set border color and width for AnchorPane */
+.mainFxmlClass {
+    -fx-background-color: #ffffff; /* White background color */
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px; /* Add rounded corners to the pane */
+    -fx-padding: 20;
+    -fx-spacing: 10; /* Add some spacing between components */
+}
