@@ -98,8 +98,7 @@ public class EvaComUNAWs {
             return TarUsuarioDto.class.cast(ex).getModificado();
         }
     }
-    
-    
+
     @WebMethod(operationName = "logIn")
     public TarUsuarioDto logIn(@WebParam(name = "usuario") String usuario, @WebParam(name = "clave") String clave) {
         try {
@@ -152,6 +151,7 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return TarUsuarioDto.class.cast(res);//TODO
             }
+            tarUsuarioService.correoActivacion(usuarioDto);
             return usuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
@@ -185,6 +185,20 @@ public class EvaComUNAWs {
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarUsuarioDto.class.cast(ex).getModificado();//TODO
+        }
+    }
+
+    @WebMethod(operationName = "activacionUsu")
+    public String activacionUsu(@WebParam(name = "usuId") Long usuId) {
+        try {
+            Respuesta res = tarUsuarioService.activacionCuenta(usuId);
+            if (!res.getEstado()) {
+                return TarUsuarioDto.class.cast(res).toString();//TODO
+            }
+            return "<script>window.location.href = 'activacionExitosa.html';</script>";
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return TarUsuarioDto.class.cast(ex).toString();//TODO
         }
     }
 
