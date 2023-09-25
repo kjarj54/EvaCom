@@ -195,7 +195,7 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return TarUsuarioDto.class.cast(res).toString();//TODO
             }
-            return "<script>window.location.href = 'activacionExitosa.html';</script>";
+            return "<html><body><h1>Activation Successful</h1></body></html>";
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarUsuarioDto.class.cast(ex).toString();//TODO
