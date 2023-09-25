@@ -42,7 +42,7 @@
                         <Image url="@../resources/media/images/logoEva.png" />
                      </image>
                   </ImageView>
-                  <MFXTextField fx:id="txfCorreo" floatingText="Correo o usuario" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
+                  <MFXTextField fx:id="txfCorreo" floatingText="Correo" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
                   <MFXPasswordField fx:id="txfContrasena" floatingText="Contraseña" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
                   <MFXButton fx:id="btnIngresar" onAction="#onActionBtnIngresar" prefHeight="50.0" prefWidth="350.0" styleClass="mfx-button-menuPrincipal" text="Ingresar" />
                   <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="20.0">

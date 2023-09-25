@@ -94,7 +94,7 @@ public class P02_LogInViewController extends Controller implements Initializable
                     AppContext.getInstance().set("UsuarioId", tarUsuarioDto.getUsuId());
                     if (tarUsuarioDto.getUsuClave().equals(tarUsuarioDto.getUsuTempclave())) {
                         new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de usuario", getStage(), "Es necesario cambiar la clave para ingresar al sistema.");
-                        //FlowController.getInstance().goViewInWindowModal("P02_CambioClaveView", getStage(), true);
+                        FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
                     } else {
                         if ("S".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
                             //FlowController.getInstance()//TODO
@@ -122,13 +122,14 @@ public class P02_LogInViewController extends Controller implements Initializable
 
     @FXML
     private void onActionBtnRecuperarContra(ActionEvent event) {
-        FlowController.getInstance().goViewInWindowModal("P04_RecuperarClaveView", stage, false);
         SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goViewInWindowModal("P04_RecuperarClaveView", stage, false);
     }
 
     @FXML
     private void onActionBtnAcercaDe(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
     }
 
     @FXML

@@ -57,7 +57,7 @@ public class P04_RecuperarClaveViewController extends Controller implements Init
                 TarUsuarioService tarUsuarioService = new TarUsuarioService();
                 Respuesta respuesta = tarUsuarioService.recuperarClave(txfCorreo.getText());
                 if (respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.CONFIRMATION, "Recuperación de clave", getStage(), "El correo fue enviado correctamente.");
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Recuperación de clave", getStage(), "El correo fue enviado correctamente.");
                 } else {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Recuperación de clave", getStage(), "Ocurrio un error enviando el correo de recuperacion.");
                 }
@@ -71,11 +71,6 @@ public class P04_RecuperarClaveViewController extends Controller implements Init
         // Botones
         btnAceptar.setOnMouseEntered(event -> {
             SoundUtil.mouseHoverSound();
-        });
-        Stage stage1 = FlowController.getInstance().getMainStage();
-        stage1.setOnShown(event -> {
-            // Luego de que la escena se muestre, solicitar el enfoque a otro nodo
-            btnAceptar.requestFocus();
         });
     }
 }
