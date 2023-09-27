@@ -3,20 +3,20 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
-<html>
-    <head>
-        <title>Activation</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <h1>Activation Page</h1>
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            const usuId = urlParams.get('usuId');
-            fetch('http://localhost:8080/EvaComUNAWs/activacionUsu?usuId=' + usuId)
-                .then(response => response.text())
-                .then(html => document.body.innerHTML = html);
-        </script>
-    </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activación de Cuenta</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Activación de Cuenta</h1>
+        <button id="activarBtn">Activar Cuenta</button>
+    </div>
+
+    <script src="activacionscript.js"></script>
+</body>
 </html>

@@ -755,7 +755,7 @@ public class TarUsuarioService {
                 + "                                <p style=\"font-size: 14px; line-height: 180%;\"> </p>\n"
                 + "                                <p style=\"font-size: 14px; line-height: 180%;\"><span\n"
                 + "                                    style=\"font-size: 18px; line-height: 32.4px; color: #000000;\"><span\n"
-                + "                                      style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">Presione el link para activar su cuenta: http://" +/*TODO Cambiar lo del link cuando se averigue*/ obtenerIp() + ":8080/EvaComUNAWs/EvaComUNAWs/activarCuenta?id=" + tarUsuarioDto.getUsuId()+ "</span></span>\n"
+                + "                                      style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">Presione el link para activar su cuenta: http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId()+ "</span></span>\n"
                 + "                                </p>\n"
                 + "                                <p style=\"font-size: 14px; line-height: 180%;\"> </p>\n"
                 + "                              </div>\n"
