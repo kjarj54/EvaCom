@@ -151,7 +151,10 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return TarUsuarioDto.class.cast(res);//TODO
             }
-            tarUsuarioService.correoActivacion(usuarioDto);
+            TarParametrosDto parametrosDto;
+            parametrosDto = getParametrosClass(Long.parseLong("1"));
+            usuarioDto = (TarUsuarioDto) res.getResultado("TarUsuario");
+            tarUsuarioService.correoActivacion(usuarioDto,parametrosDto);
             return usuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,7 +180,10 @@ public class EvaComUNAWs {
     @WebMethod(operationName = "recuperarClave")
     public Boolean recuperarClave(@WebParam(name = "correo") String correo) {
         try {
-            Respuesta res = tarUsuarioService.recuperarClave(correo);
+            TarParametrosDto parametrosDto;
+            parametrosDto = getParametrosClass(Long.parseLong("1"));
+            Respuesta res = tarUsuarioService.recuperarClave(correo,parametrosDto);
+            
             if (!res.getEstado()) {
                 return TarUsuarioDto.class.cast(res).getModificado();//TODO
             }

@@ -6,6 +6,7 @@ package cr.ac.una.evacomunaws.service;
 
 import cr.ac.una.evacomunaws.model.TarEvaluador;
 import cr.ac.una.evacomunaws.model.TarEvaluadorDto;
+import cr.ac.una.evacomunaws.model.TarParametrosDto;
 import cr.ac.una.evacomunaws.model.TarPuesto;
 import cr.ac.una.evacomunaws.model.TarPuestoDto;
 import cr.ac.una.evacomunaws.model.TarUsuario;
@@ -24,8 +25,12 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
@@ -33,6 +38,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -243,12 +249,12 @@ public class TarUsuarioService {
         }
     }
 
-    public Respuesta recuperarClave(String usuCorreo) {
+    public Respuesta recuperarClave(String usuCorreo,TarParametrosDto parametrosDto) {
         try {
             Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuCorreo", TarUsuario.class);
             qryActividad.setParameter("usuCorreo", usuCorreo);
             TarUsuarioDto tarUsuarioDto = new TarUsuarioDto((TarUsuario) qryActividad.getSingleResult());
-            recuClave(tarUsuarioDto);
+            recuClave(tarUsuarioDto, parametrosDto);
             TarUsuario tarUsuario;
             if (tarUsuarioDto.getUsuId() != null && tarUsuarioDto.getUsuId() > 0) {
                 tarUsuario = em.find(TarUsuario.class, tarUsuarioDto.getUsuId());
@@ -265,8 +271,8 @@ public class TarUsuarioService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el usuario.", "recuperarClave " + ex.getMessage());
         }
     }
-    
-    public Respuesta correoActivacion(TarUsuarioDto tarUsuarioDto) {
+
+    public Respuesta correoActivacion(TarUsuarioDto tarUsuarioDto,TarParametrosDto parametrosDto) {
         try {
             //setea las propiedades del smtp para poder enviar los emails
             Properties props = new Properties();
@@ -275,15 +281,17 @@ public class TarUsuarioService {
             props.setProperty("mail.smtp.port", "587");
             props.setProperty("mail.smtp.auth", "true");
 
+
             Session session = Session.getDefaultInstance(props);
 
             //proporciona el correo y contrasena del correo con el que va a ser enviado
-            String correoRemitente = "CineUna123@outlook.com";
-            String passwordRemitente = "cine1234";
+            String correoRemitente = parametrosDto.getParEmail();//"CineUna123@outlook.com";
+            String passwordRemitente = parametrosDto.getParClave();//"cine1234";
             String correoReceptor = tarUsuarioDto.getUsuCorreo();
             String asunto = "EvaComUNA";
+
             //Mensaje que va a ser enviado
-            String mensaje = mensajeEmail(tarUsuarioDto);
+            String mensaje = mensajeEmail(tarUsuarioDto, parametrosDto.getParHtml(), parametrosDto.getParLogo(), parametrosDto.getParNombre());
 
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(correoRemitente));
@@ -296,7 +304,7 @@ public class TarUsuarioService {
             t.connect(correoRemitente, passwordRemitente);
             t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
             t.close();
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "","");
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "");
         } catch (Exception ex) {
             LOG.log(Level.SEVERE, "Ocurrio un error al guardar el cliente.", ex);
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar el cliente.", "guardarCliente " + ex.getMessage());
@@ -320,7 +328,7 @@ public class TarUsuarioService {
         return sb.toString();
     }
 
-    public Respuesta recuClave(TarUsuarioDto tarUsuarioDto) {
+    public Respuesta recuClave(TarUsuarioDto tarUsuarioDto,TarParametrosDto parametrosDto) {
         int len = 8;
         //System.out.println(generateRandomPassword(len));
 
@@ -334,9 +342,11 @@ public class TarUsuarioService {
 
             Session session = Session.getDefaultInstance(props);
 
+            //Llamada a los parametros
+  
             //proporciona el correo y contrasena del correo con el que va a ser enviado
-            String correoRemitente = "CineUna123@outlook.com";
-            String passwordRemitente = "cine1234";
+            String correoRemitente = parametrosDto.getParEmail();//"CineUna123@outlook.com";
+            String passwordRemitente = parametrosDto.getParClave();//"cine1234";
             //Optine el correo al cual va a ser enviado el mensaje
             String correoReceptor = tarUsuarioDto.getUsuCorreo();
             String asunto = "EvaComUNA";
@@ -344,72 +354,9 @@ public class TarUsuarioService {
             //Llama al metodo de creacion de contrasena y se la manda a la persona y luego se la setea para que la cambie
             String claveRestaurada = generateRandomPassword(len);
 
-            String mensaje = "<div role=\"region\" tabindex=\"-1\" aria-label=\"Cuerpo del mensaje\" class=\"ulb23 UxthP GNqVo yxtKT allowTextSelection\">\n"
-                    + "	<div>\n"
-                    + "		<style type=\"text/css\">\n"
-                    + "			<!--\n"
-                    + "			.rps_ddee h1 {\n"
-                    + "				color: #262626;\n"
-                    + "				font-family: \"Enriqueta\", serif;\n"
-                    + "				font-size: 30px;\n"
-                    + "				line-height: 30px;\n"
-                    + "				margin: 0 0 30px\n"
-                    + "			}\n"
-                    + "\n"
-                    + "			.rps_ddee h2 {\n"
-                    + "				color: #262626;\n"
-                    + "				font-family: \"Enriqueta\", serif;\n"
-                    + "				font-size: 18px;\n"
-                    + "				font-weight: normal;\n"
-                    + "				line-height: 18px;\n"
-                    + "				margin: 5px;\n"
-                    + "				padding: 5px 0 0\n"
-                    + "			}\n"
-                    + "\n"
-                    + "			.rps_ddee p {\n"
-                    + "				color: #333333;\n"
-                    + "				font-family: Georgia, serif;\n"
-                    + "				font-size: 16px;\n"
-                    + "				line-height: 26px;\n"
-                    + "				margin: 0 0 26px\n"
-                    + "			}\n"
-                    + "\n"
-                    + "			.rps_ddee table {\n"
-                    + "				border-collapse: collapse\n"
-                    + "			}\n"
-                    + "\n"
-                    + "			.rps_ddee th,\n"
-                    + "			.rps_ddee td {\n"
-                    + "				text-align: left;\n"
-                    + "				padding: 8px\n"
-                    + "			}\n"
-                    + "			-->\n"
-                    + "		</style>\n"
-                    + "		<div class=\"rps_ddee\">\n"
-                    + "			<div>\n"
-                    + "				<div style=\"width:600px; height:auto; margin:0px auto; border-radius:4px; border:1px lightgray solid\">\n"
-                    + "					<div style=\"height:110px; background-color:#1A1A1A\">\n"
-                    + "						<div style=\"top:35%; margin-left:40px\"><span\n"
-                    + "								style=\"color:#FFFFFF; font-family:Enriqueta,serif; font-size:30px; font-weight:600\">Solicitud\n"
-                    + "								de contraseña</span>\n"
-                    + "						</div>\n"
-                    + "					</div>\n"
-                    + "					<div style=\"height: 200px; background-color: rgb(51, 51, 51) !important; padding: 40px;\"\n"
-                    + "						data-ogsb=\"rgb(255, 255, 255)\">\n"
-                    + "						<div style=\"height: 100%; border-radius: 10px; border: 1px solid transparent; background-color: rgb(63, 63, 63) !important;\"\n"
-                    + "							data-ogsb=\"rgb(229, 229, 229)\">\n"
-                    + "							<div style=\"color:#FFFFFF;margin:30px\">Hola por parte de EvaComUNA se generar una nueva clave!<br aria-hidden=\"true\"><br aria-hidden=\"true\">Su\n"
-                    + "								clave nueva es: " + claveRestaurada + "<br aria-hidden=\\\"true\\\"><br\n"
-                    + "									aria-hidden=\\\"true\\\">Atte: EvaComUNA\n"
-                    + "							</div>\n"
-                    + "						</div>\n"
-                    + "					</div>\n"
-                    + "				</div>\n"
-                    + "			</div>\n"
-                    + "		</div>\n"
-                    + "	</div>\n"
-                    + "</div>";
+            String mensaje = mensajeClave(parametrosDto.getParHtml(), parametrosDto.getParLogo(), parametrosDto.getParNombre(), claveRestaurada);
 
+            //Envio del mensaje
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(correoRemitente));
 
@@ -437,8 +384,42 @@ public class TarUsuarioService {
         return ip.getHostAddress();
     }
 
-    public String mensajeEmail(TarUsuarioDto tarUsuarioDto) throws UnknownHostException {
-        return "<head>\n"
+    public String mensajeClave(byte[] html, byte[] logo, String nombre, String claveRestaurada) throws IOException {
+
+        String mensaje = convertirBytesAHTML(html);
+        String recuperacionMensaje = "Hola por parte de "+nombre+" se generar una nueva clave! La clave nueva es: " + claveRestaurada + "  Atte: " + nombre;
+
+        mensaje = mensaje.replace("{Insertar nombre de la empresa}", nombre);
+
+        mensaje = mensaje.replace("{Contenido que se le vaya a enviar}", recuperacionMensaje);
+
+        return mensaje;
+    }
+
+    public static String convertirBytesAHTML(byte[] bytes) throws IOException {
+        InputStream inputStream = new ByteArrayInputStream(bytes);
+        String html = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        return html;
+    }
+
+    public String mensajeEmail(TarUsuarioDto tarUsuarioDto, byte[] html, byte[] logo, String nombre) throws UnknownHostException, IOException {
+        String mensaje = convertirBytesAHTML(html);
+        String activacionMensaje = "<p style=\"font-size: 14px; line-height: 180%;\"><span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
+        + "<span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
+        + "<span style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">"
+        + "Presione el link para activar su cuenta: "
+        + "<a href=\"http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId() + "\">"
+        + "http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId()
+        + "</a>"
+        + "</span>"
+        + "</span>"
+        + "</span>"
+        + "</p>";
+        mensaje = mensaje.replace("{Insertar nombre de la empresa}", nombre);
+        mensaje = mensaje.replace("{Contenido que se le vaya a enviar}", activacionMensaje);
+        
+        return mensaje;
+                /*"<head>\n"
                 + "  <!--[if gte mso 9]>\n"
                 + "<xml>\n"
                 + "  <o:OfficeDocumentSettings>\n"
@@ -755,7 +736,7 @@ public class TarUsuarioService {
                 + "                                <p style=\"font-size: 14px; line-height: 180%;\"> </p>\n"
                 + "                                <p style=\"font-size: 14px; line-height: 180%;\"><span\n"
                 + "                                    style=\"font-size: 18px; line-height: 32.4px; color: #000000;\"><span\n"
-                + "                                      style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">Presione el link para activar su cuenta: http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId()+ "</span></span>\n"
+                + "                                      style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">Presione el link para activar su cuenta: http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId() + "</span></span>\n"
                 + "                                </p>\n"
                 + "                                <p style=\"font-size: 14px; line-height: 180%;\"> </p>\n"
                 + "                              </div>\n"
@@ -894,6 +875,6 @@ public class TarUsuarioService {
                 + "  <!--[if IE]></div><![endif]-->\n"
                 + "</body>\n"
                 + "\n"
-                + "</html>";
+                + "</html>";*/
     }
 }
