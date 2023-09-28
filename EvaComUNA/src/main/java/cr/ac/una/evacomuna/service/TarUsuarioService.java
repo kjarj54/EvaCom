@@ -23,7 +23,7 @@ public class TarUsuarioService {
         try {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
-            evaComUNAWs.guardarUsuario(usuario);
+            //evaComUNAWs.guardarUsuario(usuario);
             if (false) {
                 return new Respuesta(false, "", "");
             }
