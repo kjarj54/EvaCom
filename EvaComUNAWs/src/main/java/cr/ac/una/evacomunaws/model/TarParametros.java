@@ -74,7 +74,7 @@ public class TarParametros implements Serializable {
     }
 
     public TarParametros(TarParametrosDto tarParametrosDto) {
-        this.parId = parId;
+        this.parId = tarParametrosDto.getParId();
         actualizar(tarParametrosDto);
     }
     public void actualizar(TarParametrosDto tarParametrosDto ){
