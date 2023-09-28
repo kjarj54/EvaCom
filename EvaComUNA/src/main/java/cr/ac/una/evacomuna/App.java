@@ -3,12 +3,14 @@ package cr.ac.una.evacomuna;
 import cr.ac.una.evacomuna.util.FlowController;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.scene.image.Image;
+import org.apache.commons.compress.utils.IOUtils;
 
 /**
  * JavaFX App
@@ -45,6 +47,12 @@ public class App extends Application {
 //
 //            byte[] bytes = bos.toByteArray();
 //            tarParametrosDto.setParHtml(bytes);
+//            
+//            File file = new File("D:\\carpetaU\\Segundo Semestre 2023\\Progra3\\Tarea1\\EvaCom\\imagen.jpg");
+//            
+//            byte[] imageBytes = SaveImage(file);
+//            tarParametrosDto.setParLogo(imageBytes);
+//            
 //            cr.ac.una.evacomunaws.controller.TarParametrosDto result = port.guardarParametros(tarParametrosDto);
 //            System.out.println("Result = " + result);
 //        } catch (Exception ex) {
@@ -57,4 +65,10 @@ public class App extends Application {
         launch();
     }
 
+    private static byte[] SaveImage(File file) throws IOException {
+        FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
+        byte[] imageInBytes = IOUtils.toByteArray(fiStream);
+        return imageInBytes;
+    }
+    
 }

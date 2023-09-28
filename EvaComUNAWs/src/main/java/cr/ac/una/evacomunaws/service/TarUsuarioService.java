@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -385,13 +386,16 @@ public class TarUsuarioService {
     }
 
     public String mensajeClave(byte[] html, byte[] logo, String nombre, String claveRestaurada) throws IOException {
-
+        
+        String base64Image = convertirABase64(logo);
         String mensaje = convertirBytesAHTML(html);
         String recuperacionMensaje = "Hola por parte de "+nombre+" se generar una nueva clave! La clave nueva es: " + claveRestaurada + "  Atte: " + nombre;
 
         mensaje = mensaje.replace("{Insertar nombre de la empresa}", nombre);
 
         mensaje = mensaje.replace("{Contenido que se le vaya a enviar}", recuperacionMensaje);
+        
+        mensaje = mensaje.replace("{imagen}", "data:image/png;base64,"+base64Image);
 
         return mensaje;
     }
@@ -401,8 +405,14 @@ public class TarUsuarioService {
         String html = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         return html;
     }
+    
+    public static String convertirABase64(byte[] bytes) {
+        return Base64.getEncoder().encodeToString(bytes);
+    }
 
     public String mensajeEmail(TarUsuarioDto tarUsuarioDto, byte[] html, byte[] logo, String nombre) throws UnknownHostException, IOException {
+        
+        String base64Image = convertirABase64(logo);
         String mensaje = convertirBytesAHTML(html);
         String activacionMensaje = "<p style=\"font-size: 14px; line-height: 180%;\"><span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
         + "<span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
@@ -417,6 +427,7 @@ public class TarUsuarioService {
         + "</p>";
         mensaje = mensaje.replace("{Insertar nombre de la empresa}", nombre);
         mensaje = mensaje.replace("{Contenido que se le vaya a enviar}", activacionMensaje);
+        mensaje = mensaje.replace("{imagen}", "data:image/png;base64,"+base64Image);
         
         return mensaje;
     }
