@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="600.0" styleClass="fondo-registro" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P03_RegistroViewController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="600.0" styleClass="fondo-registro" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P03_RegistroViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="imvFotoPerfil" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="images-effect-button">
+            <ImageView fx:id="imvFotoPerfil" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="images-effect-button">
                <image>
                   <Image url="@../resources/media/icons/userIcon.png" />
                </image>
@@ -32,6 +32,7 @@
             <MFXTextField fx:id="txfNombre" floatingText="Nombre" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
             <MFXTextField fx:id="txfApellidos" floatingText="Apellidos" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
             <MFXTextField fx:id="txfCedula" floatingText="Cédula" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
+            <MFXTextField fx:id="txfUsuario" floatingText="Usuario" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
             <MFXTextField fx:id="txfCorreo" floatingText="Correo" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
             <MFXTextField fx:id="txfContrasena" floatingText="Contraseña" maxWidth="1.7976931348623157E308" styleClass="mfx-text-field-edit" />
             <HBox prefWidth="200.0" spacing="10.0">
