@@ -97,7 +97,7 @@ public class P02_LogInViewController extends Controller implements Initializable
                         FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
                     } else {
                         if ("S".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
-                            //FlowController.getInstance()//TODO
+                            FlowController.getInstance().goViewInWindow("P01_PrincipalView");
                             getStage().close();
                         } else if ("N".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
                             //FlowController.getInstance() TODO
