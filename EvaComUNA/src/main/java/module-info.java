@@ -10,6 +10,7 @@ module cr.ac.una.evacomuna {
     requires jakarta.xml.ws;
     requires java.xml.ws;
     requires MaterialFX;
+    requires org.apache.commons.compress;
    
     
     opens cr.ac.una.evacomuna to javafx.fxml,java.base,com.jfoenix;

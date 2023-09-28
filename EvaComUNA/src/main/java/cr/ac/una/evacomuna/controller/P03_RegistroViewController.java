@@ -16,6 +16,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import org.apache.commons.compress.utils.IOUtils;
 
 /**
  * FXML Controller class
@@ -215,8 +217,13 @@ public class P03_RegistroViewController extends Controller implements Initializa
                     new FileChooser.ExtensionFilter("JPG", "*.jpg", "PNG", "*.png", "GIF", "*.gif"),
                     new FileChooser.ExtensionFilter("All Images", "*.*")
             );
-
+            
             file = fileChooser.showOpenDialog(null);
+            try {
+                tarUsuarioDto.setUsuFoto(SaveImage(file));
+            } catch (IOException ex) {
+                Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             loadImages(imvFotoPerfil, file);
         });
     }
@@ -227,11 +234,18 @@ public class P03_RegistroViewController extends Controller implements Initializa
             try {
                 BufferedImage bufferedImage = ImageIO.read(file_);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                
                 imgview.setImage(image);
                 System.out.println(file_.toString());
             } catch (IOException ex) {
                 new Mensaje().show(Alert.AlertType.ERROR, "Imagen", "Error cargando imagen");
             }
         }
+    }
+    
+    private byte[] SaveImage(File file) throws IOException {
+        FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
+        byte[] imageInBytes = IOUtils.toByteArray(fiStream);
+        return imageInBytes;
     }
 }

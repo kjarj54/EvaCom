@@ -21,7 +21,7 @@ public class TarUsuarioDto {
     private String usuCorreo;
     private Long usuTelefono;
     private Long usuCelular;
-    private Byte[] usuFoto;
+    private byte[] usuFoto;
     private String usuUsu;
     private String usuClave;
     private String usuTempclave;
@@ -53,7 +53,7 @@ public class TarUsuarioDto {
         this.usuCorreo = tarUsuario.getUsuCorreo();
         this.usuTelefono = tarUsuario.getUsuTelefono();
         this.usuCelular = tarUsuario.getUsuCelular();
-        this.usuFoto = (Byte[]) tarUsuario.getUsuFoto();
+        this.usuFoto = (byte[]) tarUsuario.getUsuFoto();
         this.usuClave = tarUsuario.getUsuClave();
         this.usuActivo = tarUsuario.getUsuActivo();
         this.usuAdmin = tarUsuario.getUsuAdmin();
@@ -119,11 +119,11 @@ public class TarUsuarioDto {
         this.usuCelular = usuCelular;
     }
 
-    public Byte[] getUsuFoto() {
+    public byte[] getUsuFoto() {
         return usuFoto;
     }
 
-    public void setUsuFoto(Byte[] usuFoto) {
+    public void setUsuFoto(byte[] usuFoto) {
         this.usuFoto = usuFoto;
     }
 

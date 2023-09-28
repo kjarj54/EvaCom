@@ -46,6 +46,12 @@
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-rt</artifactId>
             <version>4.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.xml.bind</groupId>
+                    <artifactId>jakarta.xml.bind-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--Extra-->
         <dependency>
@@ -68,7 +74,7 @@
             <version>2.3.1</version>
         </dependency>
         
-         <!--Extra-->
+        <!--Extra-->
         <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
@@ -76,7 +82,7 @@
             <version>4.0.0</version>
         </dependency>
 
-         <!--Extra-->
+        <!--Extra-->
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
@@ -87,6 +93,19 @@
             <artifactId>javafx-media</artifactId>
             <version>19.0.2.1</version>
             <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.22</version>
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.xml.bind</groupId>
+                    <artifactId>jakarta.xml.bind-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>

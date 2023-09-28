@@ -27,7 +27,7 @@ public class TarUsuarioDto {
     public SimpleStringProperty usuCorreo;
     public SimpleStringProperty usuTelefono;
     public SimpleStringProperty usuCelular;
-    public ObjectProperty<Byte[]> usuFoto;
+    public ObjectProperty<byte[]> usuFoto;
     public SimpleStringProperty usuUsu;
     public SimpleStringProperty usuClave;
     public SimpleStringProperty usuTempclave;
@@ -72,9 +72,7 @@ public class TarUsuarioDto {
         this.usuCorreo.set(tarUsuarioDto.getUsuCorreo());
         this.usuTelefono.set(tarUsuarioDto.getUsuTelefono().toString());
         this.usuCelular.set(tarUsuarioDto.getUsuCelular().toString());
-        List<Byte> usuFotoList = tarUsuarioDto.getUsuFoto();
-        Byte[] usuFotoArray = usuFotoList.toArray(new Byte[usuFotoList.size()]);
-        this.usuFoto.set(usuFotoArray);
+        this.usuFoto.set(tarUsuarioDto.getUsuFoto());
         this.usuClave.set(tarUsuarioDto.getUsuClave());
         this.usuTempclave.set(tarUsuarioDto.getUsuTempclave());
         this.usuUsu.set(tarUsuarioDto.getUsuUsu());
@@ -112,9 +110,7 @@ public class TarUsuarioDto {
         tarUsuarioDtoSoap.setUsuNombre(this.getUsuNombre());
         tarUsuarioDtoSoap.setUsuTelefono(this.getUsuTelefono());
         tarUsuarioDtoSoap.setUsuUsu(this.getUsuUsu());
-        Byte[] usuFotoArray = this.getUsuFoto();
-        List<Byte> usuFotoList = new ArrayList<>(Arrays.asList(usuFotoArray));
-        tarUsuarioDtoSoap.getUsuFoto().addAll(usuFotoList);
+        tarUsuarioDtoSoap.setUsuFoto(this.getUsuFoto());
         if (this.puestoDto != null) {
             tarUsuarioDtoSoap.setPuestoDto(this.puestoDto.consultas());
         }
@@ -212,11 +208,11 @@ public class TarUsuarioDto {
         this.usuCelular.set(usuCelular.toString());
     }
 
-    public Byte[] getUsuFoto() {
+    public byte[] getUsuFoto() {
         return usuFoto.get();
     }
 
-    public void setUsuFoto(Byte[] usuFoto) {
+    public void setUsuFoto(byte[] usuFoto) {
         this.usuFoto.set(usuFoto);
     }
 

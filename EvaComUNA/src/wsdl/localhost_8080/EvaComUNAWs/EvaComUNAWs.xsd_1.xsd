@@ -299,7 +299,7 @@
 <xs:element name="usuCelular" type="xs:long" minOccurs="0"/>
 <xs:element name="usuClave" type="xs:string" minOccurs="0"/>
 <xs:element name="usuCorreo" type="xs:string" minOccurs="0"/>
-<xs:element name="usuFoto" type="xs:byte" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="usuFoto" type="xs:base64Binary" minOccurs="0"/>
 <xs:element name="usuId" type="xs:long" minOccurs="0"/>
 <xs:element name="usuNombre" type="xs:string" minOccurs="0"/>
 <xs:element name="usuTelefono" type="xs:long" minOccurs="0"/>
