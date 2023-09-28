@@ -66,7 +66,12 @@ public class P02_LogInViewController extends Controller implements Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Para el responsive
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        
         loadVideo();
         loadSounds();
         efectoLogo();
@@ -118,6 +123,7 @@ public class P02_LogInViewController extends Controller implements Initializable
     private void onActionBtnNuevaCuenta(ActionEvent event
     ) {
         SoundUtil.mouseEnterSound();
+        AppContext.getInstance().set("Padre", "LogInView");
         FlowController.getInstance().goViewInWindowModal("P03_RegistroView", stage, false);
     }
 
@@ -132,7 +138,8 @@ public class P02_LogInViewController extends Controller implements Initializable
     private void onActionBtnAcercaDe(ActionEvent event
     ) {
         SoundUtil.mouseEnterSound();
-        FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
+        AppContext.getInstance().set("Padre", "Other");
+        FlowController.getInstance().goView("P03_RegistroView");
     }
 
     @FXML

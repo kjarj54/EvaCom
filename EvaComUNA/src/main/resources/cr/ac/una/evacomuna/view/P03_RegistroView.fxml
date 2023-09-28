@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import java.net.URL?>
@@ -9,51 +10,77 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="600.0" styleClass="fondo-registro" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P03_RegistroViewController">
+<AnchorPane id="AnchorPane" fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="600.0" styleClass="fondo-registro" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P03_RegistroViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox prefWidth="75.0" HBox.hgrow="ALWAYS">
                <children>
-                  <ImageView fx:id="imvFotoPerfil" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="images-effect-button">
-                     <image>
-                        <Image url="@../resources/media/icons/userIcon.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Agregar Imagen" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="20.0" />
-                     </font>
-                  </Label>
+                  <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" styleClass="mfx-button-Image-salir">
+                     <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/media/icons/Back_Icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MFXButton>
                </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </VBox>
-            <JFXTextField fx:id="txfNombre" focusColor="BLACK" labelFloat="true" promptText="Nombre" styleClass="jfx-text-field-edit" unFocusColor="WHITE">
-               <opaqueInsets>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </opaqueInsets>
-            </JFXTextField>
-            <JFXTextField fx:id="txfApellidos" labelFloat="true" promptText="Apellidos" styleClass="jfx-text-field-edit" />
-            <JFXTextField fx:id="txfCedula" promptText="Cédula" styleClass="jfx-text-field-edit" />
-            <JFXTextField fx:id="txfUsuario" promptText="Usuario" styleClass="jfx-text-field-edit" />
-            <JFXTextField fx:id="txfCorreo" promptText="Correo" styleClass="jfx-text-field-edit" />
-            <JFXTextField fx:id="txfContrasena" promptText="Contraseña" styleClass="jfx-text-field-edit" />
-            <HBox prefWidth="200.0" spacing="10.0">
+            <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefWidth="450.0" spacing="20.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXTextField fx:id="txfTelefono" promptText="Teléfono" styleClass="jfx-text-field-edit" />
-                  <JFXTextField fx:id="txfCelular" promptText="Celular" styleClass="jfx-text-field-edit" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <ImageView fx:id="imvFotoPerfil" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="images-effect-button">
+                           <image>
+                              <Image url="@../resources/media/icons/userIcon.png" />
+                           </image>
+                        </ImageView>
+                        <Label styleClass="labels-text" text="Agregar Imagen" />
+                     </children>
+                  </VBox>
+                  <JFXTextField fx:id="txfNombre" focusColor="BLACK" labelFloat="true" promptText="Nombre" styleClass="jfx-text-field-edit" unFocusColor="WHITE">
+                     <opaqueInsets>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txfApellidos" labelFloat="true" promptText="Apellidos" styleClass="jfx-text-field-edit" />
+                  <JFXTextField fx:id="txfCedula" promptText="Cédula" styleClass="jfx-text-field-edit" />
+                  <JFXTextField fx:id="txfCorreo" promptText="Correo" styleClass="jfx-text-field-edit" />
+                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <JFXTextField fx:id="txfUsuario" promptText="Usuario" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                        <JFXCheckBox fx:id="chkAdministrador" checkedColor="#10229c" text="Administrador" unCheckedColor="BLACK" />
+                     </children>
+                  </HBox>
+                  <JFXTextField fx:id="txfContrasena" promptText="Contraseña" styleClass="jfx-text-field-edit" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <JFXTextField fx:id="txfTelefono" promptText="Teléfono" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="txfCelular" promptText="Celular" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <JFXTextField fx:id="txfPuesto" layoutX="22.0" layoutY="540.0" promptText="Puesto del trabajador" styleClass="jfx-text-field-edit" />
+                  <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrar" prefHeight="50.0" prefWidth="200.0" styleClass="mfx-button-menuPrincipal" text="Registrar" />
                </children>
-            </HBox>
-            <MFXButton fx:id="btnRegistrar" onAction="#onActionBtnRegistrar" prefHeight="50.0" prefWidth="200.0" styleClass="mfx-button-menuPrincipal" text="Registrar" />
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <Pane layoutX="214.0" layoutY="10.0" prefWidth="75.0" HBox.hgrow="ALWAYS" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package cr.ac.una.evacomuna.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
@@ -10,6 +11,7 @@ import cr.ac.una.evacomuna.util.Mensaje;
 import cr.ac.una.evacomuna.util.SoundUtil;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarUsuarioService;
+import cr.ac.una.evacomuna.util.AppContext;
 import cr.ac.una.evacomuna.util.Respuesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
@@ -31,6 +33,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -60,9 +63,17 @@ public class P03_RegistroViewController extends Controller implements Initializa
     @FXML
     private JFXTextField txfCelular;
     @FXML
+    private JFXTextField txfPuesto;
+    @FXML
     private MFXButton btnRegistrar;
     @FXML
     private ImageView imvFotoPerfil;
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private JFXCheckBox chkAdministrador;
+    @FXML
+    private MFXButton btnSalir;
 
     // Para cargar la imagen
     File file;
@@ -74,6 +85,12 @@ public class P03_RegistroViewController extends Controller implements Initializa
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Para el responsive
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+
         txfNombre.setTextFormatter(Formato.getInstance().letrasFormat(25));
         txfApellidos.setTextFormatter(Formato.getInstance().letrasFormat(25));
         txfCedula.setTextFormatter(Formato.getInstance().cedulaFormat(9));
@@ -85,18 +102,15 @@ public class P03_RegistroViewController extends Controller implements Initializa
         this.tarUsuarioDto = new TarUsuarioDto();
         nuevoUsuario();
 //        indicarRequeridos();
+        cargarInterfaz();
         loadSounds();
-        Stage stage1 = FlowController.getInstance().getMainStage();
-        stage1.setOnShown(event -> {
-            // Luego de que la escena se muestre, solicitar el enfoque a otro nodo
-            btnRegistrar.requestFocus();
-        });
     }
 
     @Override
     public void initialize() {
+        cargarInterfaz();
     }
-
+    
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
@@ -122,9 +136,14 @@ public class P03_RegistroViewController extends Controller implements Initializa
         }
     }
     
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+    }
+
     private void indicarRequeridos() {
         requeridos.clear();
-//        requeridos.addAll(Arrays.asList(txfNombre, txfApellidos, txfCedula, txfCorreo, txfUsuario, txfContrasena, txfCelular));
+        requeridos.addAll(Arrays.asList(txfNombre, txfApellidos, txfCedula, txfCorreo, txfUsuario, txfContrasena, txfCelular));
     }
 
     private void nuevoUsuario() {
@@ -195,17 +214,35 @@ public class P03_RegistroViewController extends Controller implements Initializa
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
         }
     }
+    
+    public void cargarInterfaz() {
+        String padre = (String) AppContext.getInstance().get("Padre");
+        if (padre == "LogInView") {
+            chkAdministrador.setVisible(false);
+            txfPuesto.setVisible(false);
+            btnSalir.setVisible(false);
+        } else {
+            root.setPrefWidth(1280);
+            root.getStyleClass().add("fondo-registro-completa");
+            chkAdministrador.setVisible(true);
+            txfPuesto.setVisible(true);
+            btnSalir.setVisible(true);
+        }
+    }
 
     private void loadSounds() {
         // Botones
         btnRegistrar.setOnMouseEntered(event -> {
             SoundUtil.mouseHoverSound();
         });
+        btnSalir.setOnMouseEntered(event -> {
+            SoundUtil.mouseHoverSound();
+        });
         imvFotoPerfil.setOnMouseEntered(event -> {
             SoundUtil.mouseHoverSound();
         });
         imvFotoPerfil.setOnMouseClicked(event -> {
-            SoundUtil.pressButtonSound();
+            SoundUtil.mouseEnterSound();
 
             //Inicializa el FileChooser y le da un titulo a la nueva ventana
             FileChooser fileChooser = new FileChooser();
@@ -216,13 +253,16 @@ public class P03_RegistroViewController extends Controller implements Initializa
                     new FileChooser.ExtensionFilter("JPG", "*.jpg", "PNG", "*.png", "GIF", "*.gif"),
                     new FileChooser.ExtensionFilter("All Images", "*.*")
             );
-            
+
             file = fileChooser.showOpenDialog(null);
             try {
-                tarUsuarioDto.setUsuFoto(SaveImage(file));
+                if (file != null) {
+                    tarUsuarioDto.setUsuFoto(SaveImage(file));
+                }
             } catch (IOException ex) {
                 Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             loadImages(imvFotoPerfil, file);
         });
     }
@@ -233,18 +273,20 @@ public class P03_RegistroViewController extends Controller implements Initializa
             try {
                 BufferedImage bufferedImage = ImageIO.read(file_);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                
+
                 imgview.setImage(image);
-                System.out.println(file_.toString());
+//                System.out.println(file_.toString());
             } catch (IOException ex) {
                 new Mensaje().show(Alert.AlertType.ERROR, "Imagen", "Error cargando imagen");
             }
         }
     }
-    
+
     private byte[] SaveImage(File file) throws IOException {
         FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
         byte[] imageInBytes = IOUtils.toByteArray(fiStream);
         return imageInBytes;
     }
+
+    
 }
