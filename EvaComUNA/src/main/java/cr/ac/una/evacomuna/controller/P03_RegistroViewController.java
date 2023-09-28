@@ -12,7 +12,6 @@ import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarUsuarioService;
 import cr.ac.una.evacomuna.util.Respuesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,21 +44,21 @@ import org.apache.commons.compress.utils.IOUtils;
 public class P03_RegistroViewController extends Controller implements Initializable {
 
     @FXML
-    private MFXTextField txfNombre;
+    private JFXTextField txfNombre;
     @FXML
-    private MFXTextField txfApellidos;
+    private JFXTextField txfApellidos;
     @FXML
-    private MFXTextField txfCedula;
+    private JFXTextField txfCedula;
     @FXML
-    private MFXTextField txfCorreo;
+    private JFXTextField txfCorreo;
     @FXML
-    private MFXTextField txfUsuario;
+    private JFXTextField txfUsuario;
     @FXML
-    private MFXTextField txfContrasena;
+    private JFXTextField txfContrasena;
     @FXML
-    private MFXTextField txfTelefono;
+    private JFXTextField txfTelefono;
     @FXML
-    private MFXTextField txfCelular;
+    private JFXTextField txfCelular;
     @FXML
     private MFXButton btnRegistrar;
     @FXML
@@ -125,7 +124,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
     
     private void indicarRequeridos() {
         requeridos.clear();
-//        requeridos.addAll(Arrays.asList(txtNombre, txtCedula, txtPApellido, dtpFIngreso));
+//        requeridos.addAll(Arrays.asList(txfNombre, txfApellidos, txfCedula, txfCorreo, txfUsuario, txfContrasena, txfCelular));
     }
 
     private void nuevoUsuario() {
