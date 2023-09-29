@@ -14,6 +14,7 @@ import cr.ac.una.evacomuna.service.TarUsuarioService;
 import cr.ac.una.evacomuna.util.AppContext;
 import cr.ac.una.evacomuna.util.Respuesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,8 +66,6 @@ public class P03_RegistroViewController extends Controller implements Initializa
     @FXML
     private JFXTextField txfCelular;
     @FXML
-    private JFXTextField txfPuesto;
-    @FXML
     private MFXButton btnRegistrar;
     @FXML
     private ImageView imvFotoPerfil;
@@ -74,11 +75,19 @@ public class P03_RegistroViewController extends Controller implements Initializa
     private JFXCheckBox chkAdministrador;
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private MFXButton btnBuscar;
+    @FXML
+    private MFXButton btnBorrar;
+    @FXML
+    private JFXComboBox<String> cboxPuesto;
 
     // Para cargar la imagen
     File file;
     TarUsuarioDto tarUsuarioDto;
     List<Node> requeridos = new ArrayList<>();
+    
+    
 
     /**
      * Initializes the controller class.
@@ -90,15 +99,25 @@ public class P03_RegistroViewController extends Controller implements Initializa
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
+        
+        // Crear una lista de elementos
+        ObservableList<String> elementos = FXCollections.observableArrayList(
+                "Opción 1",
+                "Opción 2",
+                "Opción 3"
+        );
+
+        // Agregar la lista de elementos al ComboBox
+        cboxPuesto.setItems(elementos);
 
         txfNombre.setTextFormatter(Formato.getInstance().letrasFormat(25));
-        txfApellidos.setTextFormatter(Formato.getInstance().letrasFormat(25));
-        txfCedula.setTextFormatter(Formato.getInstance().cedulaFormat(9));
+        txfApellidos.setTextFormatter(Formato.getInstance().letrasFormat(35));
+        txfCedula.setTextFormatter(Formato.getInstance().cedulaFormat(30));
         txfCorreo.setTextFormatter(Formato.getInstance().maxLengthFormat(80));
         txfUsuario.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
         txfContrasena.setTextFormatter(Formato.getInstance().letrasFormat(15));
-        txfTelefono.setTextFormatter(Formato.getInstance().maxLengthFormat(8));
-        txfCelular.setTextFormatter(Formato.getInstance().maxLengthFormat(8));
+        txfTelefono.setTextFormatter(Formato.getInstance().integerFormat());
+        txfCelular.setTextFormatter(Formato.getInstance().integerFormat());
         this.tarUsuarioDto = new TarUsuarioDto();
         nuevoUsuario();
 //        indicarRequeridos();
@@ -137,8 +156,14 @@ public class P03_RegistroViewController extends Controller implements Initializa
     }
     
     @FXML
+    private void onActionBtnBuscar(ActionEvent event) {
+        FlowController.getInstance().goViewInWindowModal("P03_1_BuscadorRegistroView", stage, false);
+    }
+    
+    @FXML
     private void onActionBtnSalir(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
     }
 
     private void indicarRequeridos() {
@@ -217,16 +242,21 @@ public class P03_RegistroViewController extends Controller implements Initializa
     
     public void cargarInterfaz() {
         String padre = (String) AppContext.getInstance().get("Padre");
-        if (padre == "LogInView") {
+        if ("LogInView".equals(padre)) {
             chkAdministrador.setVisible(false);
-            txfPuesto.setVisible(false);
+            btnBorrar.setVisible(false);
+            cboxPuesto.setVisible(false);
             btnSalir.setVisible(false);
+            btnBuscar.setVisible(false);
         } else {
             root.setPrefWidth(1280);
             root.getStyleClass().add("fondo-registro-completa");
+            btnRegistrar.setText("Registrar/Actualizar");
             chkAdministrador.setVisible(true);
-            txfPuesto.setVisible(true);
+            btnBorrar.setVisible(true);
+            cboxPuesto.setVisible(true);
             btnSalir.setVisible(true);
+            btnBuscar.setVisible(true);
         }
     }
 
@@ -287,6 +317,12 @@ public class P03_RegistroViewController extends Controller implements Initializa
         byte[] imageInBytes = IOUtils.toByteArray(fiStream);
         return imageInBytes;
     }
+
+    @FXML
+    private void onActionBtnBorrar(ActionEvent event) {
+    }
+
+    
 
     
 }

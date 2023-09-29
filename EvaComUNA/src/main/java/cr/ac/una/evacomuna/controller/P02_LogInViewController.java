@@ -71,7 +71,7 @@ public class P02_LogInViewController extends Controller implements Initializable
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
-        
+
         loadVideo();
         loadSounds();
         efectoLogo();
@@ -102,11 +102,11 @@ public class P02_LogInViewController extends Controller implements Initializable
                         FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
                     } else {
                         if ("S".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
-                            FlowController.getInstance().goViewInWindowModal("P01_PrincipalView", getStage(), true);
-                            getStage().close();
+                            FlowController.getInstance().goViewInWindowModal("P06_MenuPrincipalView", getStage(), true);
+                            //getStage().close();
                         } else if ("N".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
                             //FlowController.getInstance() TODO
-                            getStage().close();
+                            //getStage().close();
 
                         } else {
                             new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario que su cuenta este activada.");
@@ -120,31 +120,27 @@ public class P02_LogInViewController extends Controller implements Initializable
     }
 
     @FXML
-    private void onActionBtnNuevaCuenta(ActionEvent event
-    ) {
+    private void onActionBtnNuevaCuenta(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         AppContext.getInstance().set("Padre", "LogInView");
         FlowController.getInstance().goViewInWindowModal("P03_RegistroView", stage, false);
     }
 
     @FXML
-    private void onActionBtnRecuperarContra(ActionEvent event
-    ) {
+    private void onActionBtnRecuperarContra(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         FlowController.getInstance().goViewInWindowModal("P04_RecuperarClaveView", stage, false);
     }
 
     @FXML
-    private void onActionBtnAcercaDe(ActionEvent event
-    ) {
+    private void onActionBtnAcercaDe(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         AppContext.getInstance().set("Padre", "Other");
-        FlowController.getInstance().goView("P03_RegistroView");
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
     }
 
     @FXML
-    private void onActionBtnSalir(ActionEvent event
-    ) {
+    private void onActionBtnSalir(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         FlowController.getInstance().salir();
     }

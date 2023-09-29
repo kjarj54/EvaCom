@@ -106,7 +106,6 @@
 
 .mfx-text-field-edit .floating-text {
     -fx-font: 15px "Arial Rounded MT Bold";
-    -fx-text-fill: -mfx-text-he;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
     -fx-text-fill: #ffffff; /* Color del texto */
 }
@@ -172,7 +171,7 @@
     -fx-border-color: #000000;
     -fx-border-radius: 5px;
     -fx-padding: 5;
-    -fx-font: 17px "Arial Rounded MT Bold";
+    -fx-font: 15px "Arial Rounded MT Bold";
     -fx-text-fill: #000000; /* Color del texto */
     -fx-prompt-text-fill: #000000;
     -jfx-focus-color: #000000;
@@ -219,7 +218,45 @@
     -fx-text-fill: #000000; /* Color del texto */
 }
 /*-----------------------------------------------------------------------------------------------------------------*/
+.mfx-button-menu, .mfx-button-salir{
+    -fx-cursor: hand;
+    -fx-pref-width: 300px;   /* Ancho mínimo */
+    -fx-pref-height: 50px;   /* Alto mínimo */
+    -fx-background-color: #333333; /* Establece el fondo del botón como transparente */
+    -fx-font: 20px "Arial Rounded MT Bold"; /* Establece la fuente y el tamano */
+    -fx-text-fill: #FFFFFF; /* Color del texto */
+    -fx-background-radius: 0px;
+}
+.mfx-button-menu:hover{
+    -fx-background-color: #FFFFFF; /* Establece el fondo del botón como transparente */
+    -fx-text-fill: #000000;
+    /*-fx-scale-x: 1.2; /* Escala horizontalmente el botón a 120% en hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+}
+.mfx-button-menu:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
+
+.mfx-button-salir:hover{
+    -fx-background-color: #cc0000; /* Establece el fondo del botón como transparente */
+    -fx-text-fill: #000000;
+    /*-fx-scale-x: 1.2; /* Escala horizontalmente el botón a 120% en hover */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 10, 0.5, 0.0, 0.0);
+}
+.mfx-button-salir:pressed{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
 /*-----------------------------------------------------------------------------------------------------------------*/
+.tooltip {
+    -fx-font: 15px "Arial Rounded MT Bold"; /* Establece la fuente y el tamano */
+    -fx-text-fill: #000000; /* Color del texto */
+    -fx-background-color: rgba(204, 204, 204, 0.49); /* Cambia el color de fondo */
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000; /* Cambia el color del borde */
+    -fx-border-width: 2px; /* Cambia el ancho del borde */
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------*/
