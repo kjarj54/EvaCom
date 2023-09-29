@@ -8,6 +8,8 @@ import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs_Service;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -83,6 +85,29 @@ public class TarUsuarioService {
             return new Respuesta(false, "Error obteniendo el usuario.", "getUsuario" + ex.getMessage());
         }
 
+    }
+
+    public Respuesta getUsuarios(String cedula, String nombre, String usuario, String puesto) {
+        try {
+            EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
+            evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
+            
+            List<cr.ac.una.evacomunaws.controller.TarUsuarioDto> tarUsuarioDtosSoap = evaComUNAWs.getUsuarios();
+            
+            List<TarUsuarioDto> tarUsuarioDtosList = new ArrayList<>();
+            
+            for(cr.ac.una.evacomunaws.controller.TarUsuarioDto item : tarUsuarioDtosSoap){
+                TarUsuarioDto tarUsuarioDto = new TarUsuarioDto(item);
+                tarUsuarioDtosList.add(tarUsuarioDto);
+            }
+            
+            
+            return new Respuesta(true, "", "", "TarUsuario",tarUsuarioDtosList);
+
+        } catch (Exception ex) {
+            Logger.getLogger(TarUsuarioService.class.getName()).log(Level.SEVERE, "Error obteniendo los usuarios", ex);
+            return new Respuesta(false, "Error obteniendo los usuarios.", "getUsuarios" + ex.getMessage());
+        }
     }
 
     public Respuesta recuperarClave(String correo) {//Devuelve un boolean
