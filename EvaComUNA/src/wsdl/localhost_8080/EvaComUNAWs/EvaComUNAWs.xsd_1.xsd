@@ -321,18 +321,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="eliminarCompetencia">
-<xs:sequence>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="eliminarCompetenciaResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="guardarCompetencia">
 <xs:sequence>
 <xs:element name="tarCompetenciaDto" type="tns:tarCompetenciaDto" minOccurs="0"/>
@@ -354,6 +342,18 @@
 <xs:complexType name="eliminarPuestoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCompetencia">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarCompetenciaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -382,18 +382,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCompetenciaClass">
-<xs:sequence>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCompetenciaClassResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="eliminarEvaluador">
 <xs:sequence>
 <xs:element name="id" type="xs:long" minOccurs="0"/>
@@ -403,6 +391,18 @@
 <xs:complexType name="eliminarEvaluadorResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarEvaluadorDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompetenciaClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompetenciaClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -454,18 +454,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCaracteristicaClass">
-<xs:sequence>
-<xs:element name="id" type="xs:long" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCaracteristicaClassResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarCaracteristicaDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getUsuarioClass">
 <xs:sequence>
 <xs:element name="id" type="xs:long" minOccurs="0"/>
@@ -475,6 +463,18 @@
 <xs:complexType name="getUsuarioClassResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCaracteristicaClass">
+<xs:sequence>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCaracteristicaClassResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCaracteristicaDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

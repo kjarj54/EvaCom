@@ -5,14 +5,13 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="cr.ac.una.evacomuna.controller.P03_1_BuscadorRegistroViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P03_1_BuscadorRegistroViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -42,12 +41,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="labels-text" text="Búsqueda de trabajadores" />
-                  <TableView prefWidth="520.0" VBox.vgrow="ALWAYS">
-                    <columns>
-                      <TableColumn prefWidth="133.0" text="C1" />
-                      <TableColumn prefWidth="125.0" text="C2" />
-                    </columns>
-                  </TableView>
+                  <TableView fx:id="tbvResultados" onMousePressed="#onMousePressenTbvResultados" prefWidth="520.0" VBox.vgrow="ALWAYS" />
                   <HBox>
                      <children>
                         <Pane maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
