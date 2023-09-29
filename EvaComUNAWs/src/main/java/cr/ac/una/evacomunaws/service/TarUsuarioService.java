@@ -157,7 +157,24 @@ public class TarUsuarioService {
             List<TarUsuario> usuarios = qryUsuario.getResultList();
             List<TarUsuarioDto> usuarioDto = new ArrayList<>();
             for (TarUsuario usuario : usuarios) {
-                usuarioDto.add(new TarUsuarioDto(usuario));
+                TarUsuarioDto dto = new TarUsuarioDto(usuario);
+                if (usuario.getPueId() != null) {
+                    dto.setPuestoDto(new TarPuestoDto(usuario.getPueId()));
+                }
+                if (!usuario.getTarEvaluadorList().isEmpty()) {
+                    List<TarEvaluadorDto> evaluadorDtoList = new ArrayList<>();
+
+                    for (TarEvaluador tarEvaluador : usuario.getTarEvaluadorList()) {
+                        // Convert TarEvaluador to TarEvaluadorDto
+                        TarEvaluadorDto tarEvaluadorDto = new TarEvaluadorDto(tarEvaluador);
+
+                        // Add tarEvaluadorDto to the list
+                        evaluadorDtoList.add(tarEvaluadorDto);
+                    }
+
+                    dto.getTarEvaluadorList().addAll(evaluadorDtoList);
+                }
+                usuarioDto.add(dto);
             }
 
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Usuario", usuarioDto);
@@ -250,7 +267,7 @@ public class TarUsuarioService {
         }
     }
 
-    public Respuesta recuperarClave(String usuCorreo,TarParametrosDto parametrosDto) {
+    public Respuesta recuperarClave(String usuCorreo, TarParametrosDto parametrosDto) {
         try {
             Query qryActividad = em.createNamedQuery("TarUsuario.findByUsuCorreo", TarUsuario.class);
             qryActividad.setParameter("usuCorreo", usuCorreo);
@@ -273,7 +290,7 @@ public class TarUsuarioService {
         }
     }
 
-    public Respuesta correoActivacion(TarUsuarioDto tarUsuarioDto,TarParametrosDto parametrosDto) {
+    public Respuesta correoActivacion(TarUsuarioDto tarUsuarioDto, TarParametrosDto parametrosDto) {
         try {
             //setea las propiedades del smtp para poder enviar los emails
             Properties props = new Properties();
@@ -281,7 +298,6 @@ public class TarUsuarioService {
             props.setProperty("mail.smtp.starttls.enable", "true");
             props.setProperty("mail.smtp.port", "587");
             props.setProperty("mail.smtp.auth", "true");
-
 
             Session session = Session.getDefaultInstance(props);
 
@@ -329,7 +345,7 @@ public class TarUsuarioService {
         return sb.toString();
     }
 
-    public Respuesta recuClave(TarUsuarioDto tarUsuarioDto,TarParametrosDto parametrosDto) {
+    public Respuesta recuClave(TarUsuarioDto tarUsuarioDto, TarParametrosDto parametrosDto) {
         int len = 8;
         //System.out.println(generateRandomPassword(len));
 
@@ -344,7 +360,6 @@ public class TarUsuarioService {
             Session session = Session.getDefaultInstance(props);
 
             //Llamada a los parametros
-  
             //proporciona el correo y contrasena del correo con el que va a ser enviado
             String correoRemitente = parametrosDto.getParEmail();//"CineUna123@outlook.com";
             String passwordRemitente = parametrosDto.getParClave();//"cine1234";
@@ -386,16 +401,16 @@ public class TarUsuarioService {
     }
 
     public String mensajeClave(byte[] html, byte[] logo, String nombre, String claveRestaurada) throws IOException {
-        
+
         String base64Image = convertirABase64(logo);
         String mensaje = convertirBytesAHTML(html);
-        String recuperacionMensaje = "Hola por parte de "+nombre+" se generar una nueva clave! La clave nueva es: " + claveRestaurada + "  Atte: " + nombre;
+        String recuperacionMensaje = "Hola por parte de " + nombre + " se generar una nueva clave! La clave nueva es: " + claveRestaurada + "  Atte: " + nombre;
 
         mensaje = mensaje.replace("{Insertar nombre de la empresa}", nombre);
 
         mensaje = mensaje.replace("{Contenido que se le vaya a enviar}", recuperacionMensaje);
-        
-        mensaje = mensaje.replace("{imagen}", "data:image/png;base64,"+base64Image);
+
+        mensaje = mensaje.replace("{imagen}", "data:image/png;base64," + base64Image);
 
         return mensaje;
     }
@@ -405,30 +420,30 @@ public class TarUsuarioService {
         String html = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         return html;
     }
-    
+
     public static String convertirABase64(byte[] bytes) {
         return Base64.getEncoder().encodeToString(bytes);
     }
 
     public String mensajeEmail(TarUsuarioDto tarUsuarioDto, byte[] html, byte[] logo, String nombre) throws UnknownHostException, IOException {
-        
+
         String base64Image = convertirABase64(logo);
         String mensaje = convertirBytesAHTML(html);
         String activacionMensaje = "<p style=\"font-size: 14px; line-height: 180%;\"><span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
-        + "<span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
-        + "<span style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">"
-        + "Presione el link para activar su cuenta: "
-        + "<a href=\"http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId() + "\">"
-        + "http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId()
-        + "</a>"
-        + "</span>"
-        + "</span>"
-        + "</span>"
-        + "</p>";
+                + "<span style=\"font-size: 18px; line-height: 32.4px; color: #000000;\">"
+                + "<span style=\"line-height: 32.4px; font-family: Montserrat, sans-serif; font-size: 18px;\">"
+                + "Presione el link para activar su cuenta: "
+                + "<a href=\"http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId() + "\">"
+                + "http://" + obtenerIp() + ":8080/EvaComUNAWs/activacion.html?id=" + tarUsuarioDto.getUsuId()
+                + "</a>"
+                + "</span>"
+                + "</span>"
+                + "</span>"
+                + "</p>";
         mensaje = mensaje.replace("{Insertar nombre de la empresa}", nombre);
         mensaje = mensaje.replace("{Contenido que se le vaya a enviar}", activacionMensaje);
-        mensaje = mensaje.replace("{imagen}", "data:image/png;base64,"+base64Image);
-        
+        mensaje = mensaje.replace("{imagen}", "data:image/png;base64," + base64Image);
+
         return mensaje;
     }
 }

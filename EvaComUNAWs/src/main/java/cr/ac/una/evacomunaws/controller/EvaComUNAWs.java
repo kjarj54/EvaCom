@@ -28,6 +28,8 @@ import jakarta.ejb.EJB;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -207,6 +209,22 @@ public class EvaComUNAWs {
             return TarUsuarioDto.class.cast(ex).toString();//TODO
         }
     }
+    
+    @WebMethod(operationName = "getUsuarios")
+    public List<TarUsuarioDto> getUsuarios() {
+        try {
+            Respuesta res = tarUsuarioService.getUsuarios();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarUsuarioDto> tarUsuarioDto = (List<TarUsuarioDto>) res.getResultado("Usuario");
+            return tarUsuarioDto;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
+        }
+    }
+    
 
     /**
      * *****************************************************************************************
