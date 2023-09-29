@@ -103,16 +103,18 @@ public class TarUsuarioService {
                     TarPuesto puesto = em.find(TarPuesto.class, tarUsuarioDto.getPuestoDto().getPueId());
                     usuario.setPueId(puesto);
                 }
+                if (!tarUsuarioDto.getTarEvaluadorListEliminados().isEmpty()) {
+                    for (TarEvaluadorDto tarEvaluadorDto : tarUsuarioDto.getTarEvaluadorListEliminados()) {
+                        usuario.getTarEvaluadorList().remove(new TarEvaluador(tarEvaluadorDto.getEvaluId()));
+                    }
+                }
                 if (!tarUsuarioDto.getTarEvaluadorList().isEmpty()) {
-                    List<TarEvaluador> evaluadorList = new ArrayList<>();
 
                     for (TarEvaluadorDto tarEvaluadorDto : tarUsuarioDto.getTarEvaluadorList()) {
-                        TarEvaluador tarEvaluador = new TarEvaluador(tarEvaluadorDto);
-                        evaluadorList.add(tarEvaluador);
+                        TarEvaluador tarEvaluador = em.find(TarEvaluador.class, tarEvaluadorDto.getEvaluId());//new TarEvaluador(tarEvaluadorDto);
+                        usuario.getTarEvaluadorList().add(tarEvaluador);
                     }
 
-                    // Add the new evaluators to the user entity's list
-                    usuario.getTarEvaluadorList().addAll(evaluadorList);
                 }
                 usuario.actualizar(tarUsuarioDto);
                 usuario = em.merge(usuario);

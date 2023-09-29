@@ -4,9 +4,13 @@
  */
 package cr.ac.una.evacomunaws.service;
 
+import cr.ac.una.evacomunaws.model.TarCompetencia;
+import cr.ac.una.evacomunaws.model.TarCompetenciaDto;
 import cr.ac.una.evacomunaws.util.Respuesta;
 import cr.ac.una.evacomunaws.model.TarCompetenciaevaluar;
 import cr.ac.una.evacomunaws.model.TarCompetenciaevaluarDto;
+import cr.ac.una.evacomunaws.model.TarEvaluador;
+import cr.ac.una.evacomunaws.model.TarEvaluadorDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
@@ -32,14 +36,22 @@ public class TarCompetenciaevaluarService {
     private static final Logger LOG = Logger.getLogger(TarCompetenciaevaluarService.class.getName());
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
-    
+
     public Respuesta guardarCompetenciaEvaluar(TarCompetenciaevaluarDto tarCompetenicaevaluarDto) {
         try {
             TarCompetenciaevaluar competenciaEvaluar;
-            if (tarCompetenicaevaluarDto.getCoeId()!= null && tarCompetenicaevaluarDto.getCoeId()> 0) {
+            if (tarCompetenicaevaluarDto.getCoeId() != null && tarCompetenicaevaluarDto.getCoeId() > 0) {
                 competenciaEvaluar = em.find(TarCompetenciaevaluar.class, tarCompetenicaevaluarDto.getCoeId());
                 if (competenciaEvaluar == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la competenciaevaluar a modificar.", "guardarCompetenciaEvaluar NoResultException");
+                }
+                if (tarCompetenicaevaluarDto.getCompetenciaDto() != null) {
+                    TarCompetencia tarCompetencia = em.find(TarCompetencia.class, tarCompetenicaevaluarDto.getCompetenciaDto().getComId());
+                    competenciaEvaluar.setComId(tarCompetencia);
+                }
+                if (tarCompetenicaevaluarDto.getEvaluadorDto() != null) {
+                    TarEvaluador tarEvaluador = em.find(TarEvaluador.class, tarCompetenicaevaluarDto.getEvaluadorDto().getEvaluId());
+                    competenciaEvaluar.setEvaluId(tarEvaluador);
                 }
                 competenciaEvaluar.actualizar(tarCompetenicaevaluarDto);
                 competenciaEvaluar = em.merge(competenciaEvaluar);
@@ -54,7 +66,7 @@ public class TarCompetenciaevaluarService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la competenciaevaluar.", "guardarCompetenciaEvaluar " + ex.getMessage());
         }
     }
-    
+
     public Respuesta eliminarCompetenciaEvaluar(Long id) {
         try {
             TarCompetenciaevaluar competenciaEvaluar;
@@ -77,14 +89,22 @@ public class TarCompetenciaevaluarService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar la competenciaevaluar.", "eliminarCompetenciaEvaluar " + ex.getMessage());
         }
     }
-    
+
     public Respuesta getCompetenciasEvaluar() {
         try {
             Query qryCompetencia = em.createNamedQuery("TarCompetenciaevaluar.findAll", TarCompetenciaevaluar.class);
             List<TarCompetenciaevaluar> competenciasEvaluar = qryCompetencia.getResultList();
             List<TarCompetenciaevaluarDto> competenciaEvaluarDto = new ArrayList<>();
-            for (TarCompetenciaevaluar competenciaEvaluar : competenciasEvaluar) {
-                competenciaEvaluarDto.add(new TarCompetenciaevaluarDto(competenciaEvaluar));
+            for (TarCompetenciaevaluar tarCompetenciaevaluar : competenciasEvaluar) {
+                TarCompetenciaevaluarDto competenciaevaluarDto = new TarCompetenciaevaluarDto(tarCompetenciaevaluar);
+                if (tarCompetenciaevaluar.getComId() != null) {
+                    competenciaevaluarDto.setCompetenciaDto(new TarCompetenciaDto(tarCompetenciaevaluar.getComId()));
+                }
+                if (tarCompetenciaevaluar.getEvaluId() != null) {
+                    competenciaevaluarDto.setEvaluadorDto(new TarEvaluadorDto(tarCompetenciaevaluar.getEvaluId()));
+                }
+                competenciaEvaluarDto.add(competenciaevaluarDto);
+
             }
 
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "CompetenciaEvaluar", competenciaEvaluarDto);
@@ -96,13 +116,22 @@ public class TarCompetenciaevaluarService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la competenciasevaluar.", "getCompetenciasEvaluar " + ex.getMessage());
         }
     }
-    
+
     public Respuesta getCompetenciaEvaluar(Long coeId) {
         try {
             Query qryCompetencia = em.createNamedQuery("TarCompetencia.findByCoeId", TarCompetenciaevaluar.class);
             qryCompetencia.setParameter("coeId", coeId);
+            TarCompetenciaevaluar tarCompetenciaevaluar = (TarCompetenciaevaluar) qryCompetencia.getSingleResult();
+            TarCompetenciaevaluarDto competenciaevaluarDto = new TarCompetenciaevaluarDto();
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "CompetenciaEvaluar", new TarCompetenciaevaluarDto((TarCompetenciaevaluar) qryCompetencia.getSingleResult()));
+            if (tarCompetenciaevaluar.getComId() != null) {
+                competenciaevaluarDto.setCompetenciaDto(new TarCompetenciaDto(tarCompetenciaevaluar.getComId()));
+            }
+            if (tarCompetenciaevaluar.getEvaluId() != null) {
+                competenciaevaluarDto.setEvaluadorDto(new TarEvaluadorDto(tarCompetenciaevaluar.getEvaluId()));
+            }
+
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "CompetenciaEvaluar", competenciaevaluarDto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe una competenciaevaluar con el código ingresado.", "getCompetenciaEvaluar NoResultException");

@@ -6,6 +6,8 @@ package cr.ac.una.evacomunaws.service;
 
 import cr.ac.una.evacomunaws.model.TarCaracteristica;
 import cr.ac.una.evacomunaws.model.TarCaracteristicaDto;
+import cr.ac.una.evacomunaws.model.TarCompetencia;
+import cr.ac.una.evacomunaws.model.TarCompetenciaDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import cr.ac.una.evacomunaws.util.Respuesta;
 import jakarta.ejb.LocalBean;
@@ -32,8 +34,7 @@ public class TarCaracteristicaService {
     private static final Logger LOG = Logger.getLogger(TarCaracteristicaService.class.getName());
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
-    
-    
+
     public Respuesta guardarCaracteristica(TarCaracteristicaDto tarCaracteristicaDto) {
         try {
             TarCaracteristica caracteristica;
@@ -41,6 +42,10 @@ public class TarCaracteristicaService {
                 caracteristica = em.find(TarCaracteristica.class, tarCaracteristicaDto.getCarId());
                 if (caracteristica == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró la caracteristica a modificar.", "guardarCaracteristica NoResultException");
+                }
+                if (tarCaracteristicaDto.getCompetenciaDto() != null) {
+                    TarCompetencia competencia = em.find(TarCompetencia.class, tarCaracteristicaDto.getCompetenciaDto().getComId());
+                    caracteristica.setComId(competencia);
                 }
                 caracteristica.actualizar(tarCaracteristicaDto);
                 caracteristica = em.merge(caracteristica);
@@ -55,7 +60,7 @@ public class TarCaracteristicaService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al guardar la caracteristica.", "guardarCaracteristica " + ex.getMessage());
         }
     }
-    
+
     public Respuesta eliminarCaracteristica(Long id) {
         try {
             TarCaracteristica caracteristica;
@@ -78,6 +83,7 @@ public class TarCaracteristicaService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al eliminar la caracteristica.", "eliminarCaracteristica " + ex.getMessage());
         }
     }
+
     //TODO
     public Respuesta getCaracteristicas() {
         try {
@@ -85,7 +91,11 @@ public class TarCaracteristicaService {
             List<TarCaracteristica> caracteristicas = qryCaracteristica.getResultList();
             List<TarCaracteristicaDto> caracteristicaDto = new ArrayList<>();
             for (TarCaracteristica caracteristica : caracteristicas) {
-                caracteristicaDto.add(new TarCaracteristicaDto(caracteristica));
+                TarCaracteristicaDto tarCaracteristicaDto = new TarCaracteristicaDto(caracteristica);
+                if (caracteristica.getComId() != null) {
+                    tarCaracteristicaDto.setCompetenciaDto(new TarCompetenciaDto(caracteristica.getComId()));
+                }
+                caracteristicaDto.add(tarCaracteristicaDto);
             }
 
             return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Caracteristica", caracteristicaDto);
@@ -97,13 +107,18 @@ public class TarCaracteristicaService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la caracteristica.", "getCaracteristicas " + ex.getMessage());
         }
     }
-    
+
     public Respuesta getCaracteristica(Long carId) {
         try {
             Query qryCaracteristica = em.createNamedQuery("TarCaracteristica.findByCarId", TarCaracteristica.class);
             qryCaracteristica.setParameter("carId", carId);
+            TarCaracteristica tarCaracteristica = (TarCaracteristica) qryCaracteristica.getSingleResult();
+            TarCaracteristicaDto tarCaracteristicaDto = new TarCaracteristicaDto(tarCaracteristica);
+            if (tarCaracteristica.getComId() != null) {
+                tarCaracteristicaDto.setCompetenciaDto(new TarCompetenciaDto(tarCaracteristica.getComId()));
+            }
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Caracteristica", new TarCaracteristicaDto((TarCaracteristica) qryCaracteristica.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Caracteristica", tarCaracteristicaDto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe una caracteristica con el código ingresado.", "getCaracteristica NoResultException");
@@ -115,5 +130,5 @@ public class TarCaracteristicaService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar la caracteristica.", "getCaracteristica " + ex.getMessage());
         }
     }
-    
+
 }
