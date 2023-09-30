@@ -14,7 +14,6 @@ import cr.ac.una.evacomuna.service.TarUsuarioService;
 import cr.ac.una.evacomuna.util.AppContext;
 import cr.ac.una.evacomuna.util.Respuesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,7 +37,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import org.apache.commons.compress.utils.IOUtils;
 
@@ -78,9 +76,12 @@ public class P03_RegistroViewController extends Controller implements Initializa
     @FXML
     private MFXButton btnBuscar;
     @FXML
-    private MFXButton btnBorrar;
+    private MFXButton btnEliminar;
+    @FXML
+    private MFXButton btnLimpiarCampos;
     @FXML
     private JFXComboBox<String> cboxPuesto;
+    
 
     // Para cargar la imagen
     File file;
@@ -157,7 +158,18 @@ public class P03_RegistroViewController extends Controller implements Initializa
     
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
         FlowController.getInstance().goViewInWindowModal("P03_1_BuscadorRegistroView", stage, false);
+    }
+    
+    @FXML
+    private void onActionBtnLimpiarCampos(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+    }
+    
+     @FXML
+    private void onActionBtnEliminarUsuario(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
     }
     
     @FXML
@@ -244,24 +256,35 @@ public class P03_RegistroViewController extends Controller implements Initializa
         String padre = (String) AppContext.getInstance().get("Padre");
         if ("LogInView".equals(padre)) {
             chkAdministrador.setVisible(false);
-            btnBorrar.setVisible(false);
-            cboxPuesto.setVisible(false);
-            btnSalir.setVisible(false);
             btnBuscar.setVisible(false);
+            btnEliminar.setVisible(false);
+            btnLimpiarCampos.setVisible(false);
+            btnSalir.setVisible(false);
+            cboxPuesto.setVisible(false);
         } else {
             root.setPrefWidth(1280);
             root.getStyleClass().add("fondo-registro-completa");
             btnRegistrar.setText("Registrar/Actualizar");
             chkAdministrador.setVisible(true);
-            btnBorrar.setVisible(true);
-            cboxPuesto.setVisible(true);
-            btnSalir.setVisible(true);
             btnBuscar.setVisible(true);
+            btnEliminar.setVisible(true);
+            btnLimpiarCampos.setVisible(true);
+            btnSalir.setVisible(true);
+            cboxPuesto.setVisible(true);
         }
     }
 
     private void loadSounds() {
         // Botones
+        btnBuscar.setOnMouseEntered(event -> {
+            SoundUtil.mouseHoverSound();
+        });
+        btnEliminar.setOnMouseEntered(event -> {
+            SoundUtil.mouseHoverSound();
+        });
+        btnLimpiarCampos.setOnMouseEntered(event -> {
+            SoundUtil.mouseHoverSound();
+        });
         btnRegistrar.setOnMouseEntered(event -> {
             SoundUtil.mouseHoverSound();
         });
@@ -316,13 +339,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
         byte[] imageInBytes = IOUtils.toByteArray(fiStream);
         return imageInBytes;
-    }
+    }    
 
-    @FXML
-    private void onActionBtnBorrar(ActionEvent event) {
-    }
-
-    
-
-    
+   
 }

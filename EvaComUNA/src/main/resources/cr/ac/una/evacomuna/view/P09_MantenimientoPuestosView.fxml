@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <children>
+        <HBox layoutX="463.0" layoutY="239.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="630.0" spacing="25.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER" spacing="10.0">
+                            <children>
+                                <JFXTextField fx:id="txfPuesto" promptText="Nombre del puesto" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                <JFXCheckBox fx:id="chkActiva" styleClass="jfx-check-box" text="Activo" />
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <MFXButton fx:id="btnEliminarPuesto" onAction="#onActionBtnEliminarPuesto" styleClass="mfx-button-Image">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../resources/media/icons/Delete1.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Eliminar competencia" />
+                                    </tooltip>
+                                </MFXButton>
+                                <MFXButton fx:id="btnLimpiarPuesto" layoutX="290.0" layoutY="10.0" onAction="#onActionBtnLimpiarPuesto" styleClass="mfx-button-Image">
+                                    <graphic>
+                                        <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../resources/media/icons/clearIcon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip text="Limpiar campos" />
+                                    </tooltip>
+                                </MFXButton>
+                                <MFXButton fx:id="btnAgregarPuesto" onAction="#onActionBtnAgregarPuesto" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
+                            </children>
+                        </HBox>
+                        <TableView fx:id="tbvPuestos" prefHeight="416.0" prefWidth="620.0" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn prefWidth="302.0" text="C1" />
+                                <TableColumn prefWidth="311.0" text="C2" />
+                            </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefWidth="200.0" spacing="15.0">
+                            <children>
+                                <JFXTextField fx:id="txfBuscarNombre" promptText="Buscar por nombre de puesto" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                <JFXCheckBox fx:id="chkBuscarActivas" styleClass="jfx-check-box" text="Seleccionar activas" />
+                                <MFXButton fx:id="btnFiltrar" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </VBox>
+                <Separator orientation="VERTICAL" prefHeight="700.0" prefWidth="17.0" />
+                <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="630.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <JFXTextField fx:id="txfBuscarCompetencia" promptText="Buscar competencia" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                <MFXButton fx:id="btnAgregarCompetencia" maxHeight="1.7976931348623157E308" onAction="#onActionBtnAgregarCompetencia" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
+                            </children>
+                            <padding>
+                                <Insets left="10.0" />
+                            </padding>
+                        </HBox>
+                        <TableView fx:id="tbvCompetencias" prefHeight="522.0" prefWidth="630.0" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn prefWidth="302.0" text="C1" />
+                                <TableColumn prefWidth="311.0" text="C2" />
+                            </columns>
+                        </TableView>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package cr.ac.una.evacomuna.controller;
 
 import cr.ac.una.evacomuna.util.FlowController;
@@ -51,6 +47,8 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
 
     @FXML
     private void onActionBtnGenerales(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P07_MantenimientoGeneralesView");
     }
 
     @FXML
