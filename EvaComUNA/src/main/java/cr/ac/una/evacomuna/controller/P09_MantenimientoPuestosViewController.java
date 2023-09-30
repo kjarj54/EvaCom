@@ -41,6 +41,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private MFXButton btnAgregarCompetencia;
     @FXML
     private TableView<?> tbvPuestos;
+    @FXML
+    private MFXButton btnSalir;
 
     /**
      * Initializes the controller class.
@@ -68,6 +70,10 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     @FXML
     private void onActionBtnAgregarCompetencia(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
     }
     
 }
