@@ -54,6 +54,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private MFXButton btnAgregarCompetencia;
     @FXML
     private TableView<TarPuestoDto> tbvPuestos;
+    @FXML
+    private MFXButton btnSalir;
 
     private ObservableList<TarPuestoDto> puestos = FXCollections.observableArrayList();
     private ObservableList<TarCompetenciaDto> ceompetencias = FXCollections.observableArrayList();
@@ -209,4 +211,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private void unbindCompetencia() {
         txfBuscarNombre.textProperty().unbindBidirectional(this.tarCompetenciaDto.comNombre);
     }
+
+    private void onActionBtnSalir(ActionEvent event) {
+    }
+
 }

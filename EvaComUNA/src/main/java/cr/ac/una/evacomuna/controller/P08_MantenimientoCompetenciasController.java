@@ -44,6 +44,8 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
     private MFXButton btnAgregarCaracteristica;
     @FXML
     private TableView<?> tbvCaracteristicas;
+    @FXML
+    private MFXButton btnSalir;
 
     /**
      * Initializes the controller class.
@@ -71,6 +73,10 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
 
     @FXML
     private void onActionBtnAgregarCaracteristica(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
     }
     
 }
