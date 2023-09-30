@@ -337,18 +337,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="guardarCompetencia">
-<xs:sequence>
-<xs:element name="tarCompetenciaDto" type="tns:tarCompetenciaDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="guardarCompetenciaResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="eliminarPuesto">
 <xs:sequence>
 <xs:element name="id" type="xs:long" minOccurs="0"/>
@@ -358,6 +346,18 @@
 <xs:complexType name="eliminarPuestoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarCompetencia">
+<xs:sequence>
+<xs:element name="tarCompetenciaDto" type="tns:tarCompetenciaDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="guardarCompetenciaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarCompetenciaDto" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -651,16 +651,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getUsuarios">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getUsuariosResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="guardarPuesto">
 <xs:sequence>
 <xs:element name="tarPuestoDto" type="tns:tarPuestoDto" minOccurs="0"/>
@@ -670,6 +660,16 @@
 <xs:complexType name="guardarPuestoResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:tarPuestoDto" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUsuarios">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getUsuariosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

@@ -1,8 +1,17 @@
 package cr.ac.una.evacomuna.controller;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.evacomuna.model.TarParametrosDto;
+import cr.ac.una.evacomuna.model.TarUsuarioDto;
+import cr.ac.una.evacomuna.service.TarParametrosService;
+import cr.ac.una.evacomuna.service.TarUsuarioService;
+import cr.ac.una.evacomuna.util.Formato;
 import cr.ac.una.evacomuna.util.Mensaje;
+import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomuna.util.SoundUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
@@ -11,12 +20,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,6 +55,8 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
     @FXML
     private JFXTextField txfCorreo;
     @FXML
+    private JFXTextField txfClave;
+    @FXML
     private JFXTextField txfPlantilla;
     @FXML
     private MFXButton btnAgregarPlantilla;
@@ -51,12 +65,24 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
     @FXML
     private MFXButton btnSalir;
 
+    File file;
+    TarParametrosDto tarParametrosDto;
+    List<Node> requeridos = new ArrayList<>();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        txfNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
+        txaInformacion.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
+        txfCorreo.setTextFormatter(Formato.getInstance().maxLengthFormat(80));
+        txfClave.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
+
+        this.tarParametrosDto = new TarParametrosDto();
+        nuevoParametro();
+        cargarParametros();
+//        indicarRequeridos();
         onActionsBotones();
     }
 
@@ -93,11 +119,105 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        try {
+//            String invalidos = validarRequeridos();
+//            if (!invalidos.isEmpty()) {
+//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), invalidos);
+//            } else {
+            TarParametrosService parametrosService = new TarParametrosService();
+            Respuesta respuesta = parametrosService.guardarTarParametros(tarParametrosDto.consultas());
+            if (!respuesta.getEstado()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Parametros", getStage(), respuesta.getMensaje());
+            } else {
+                unbindParametro();
+                this.tarParametrosDto = (TarParametrosDto) respuesta.getResultado("Parametros");
+                bindParametro(false);
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Parametros", getStage(), "Parametros actualizados correctamente.");
+            }
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, "Error guardando los Parametros.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Parametros", getStage(), "Ocurrio un error guardando los Parametros.");
+        }
     }
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+    }
+
+    private void cargarParametros() {
+        TarParametrosService service = new TarParametrosService();
+        Respuesta respuesta = service.getParametros(1L);
+
+        if (respuesta.getEstado()) {
+            unbindParametro();
+            this.tarParametrosDto = (TarParametrosDto) respuesta.getResultado("Parametros");
+            bindParametro(false);
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Parametros", getStage(), respuesta.getMensaje());
+        }
+    }
+
+    private void nuevoParametro() {
+        unbindParametro();
+        this.tarParametrosDto = new TarParametrosDto();
+        bindParametro(true);
+    }
+
+    private void bindParametro(Boolean nuevo) {
+        txfNombre.textProperty().bindBidirectional(tarParametrosDto.parNombre);
+        txaInformacion.textProperty().bindBidirectional(tarParametrosDto.parDescripcion);
+        txfCorreo.textProperty().bindBidirectional(tarParametrosDto.parEmail);
+        txfClave.textProperty().bindBidirectional(tarParametrosDto.parClave);
+    }
+
+    private void unbindParametro() {
+        txfNombre.textProperty().unbindBidirectional(tarParametrosDto.parNombre);
+        txaInformacion.textProperty().unbindBidirectional(tarParametrosDto.parDescripcion);
+        txfCorreo.textProperty().unbindBidirectional(tarParametrosDto.parEmail);
+        txfClave.textProperty().unbindBidirectional(tarParametrosDto.parClave);
+    }
+
+    public String validarRequeridos() {
+        Boolean validos = true;
+        String invalidos = "";
+        for (Node node : requeridos) {
+            if (node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank())) {
+                if (validos) {
+                    invalidos += ((JFXTextField) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXTextField) node).getPromptText();
+                }
+                validos = false;
+            } else if (node instanceof JFXPasswordField && (((JFXPasswordField) node).getText() == null || ((JFXPasswordField) node).getText().isBlank())) {
+                if (validos) {
+                    invalidos += ((JFXPasswordField) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXPasswordField) node).getPromptText();
+                }
+                validos = false;
+            } else if (node instanceof JFXDatePicker && ((JFXDatePicker) node).getValue() == null) {
+                if (validos) {
+                    invalidos += ((JFXDatePicker) node).getAccessibleText();
+                } else {
+                    invalidos += "," + ((JFXDatePicker) node).getAccessibleText();
+                }
+                validos = false;
+            } else if (node instanceof JFXComboBox && ((JFXComboBox) node).getSelectionModel().getSelectedIndex() < 0) {
+                if (validos) {
+                    invalidos += ((JFXComboBox) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXComboBox) node).getPromptText();
+                }
+                validos = false;
+            }
+        }
+        if (validos) {
+            return "";
+        } else {
+            return "Campos requeridos o con problemas de formato [" + invalidos + "].";
+        }
     }
 
     private void onActionsBotones() {

@@ -6,7 +6,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -62,17 +61,12 @@
                                 <MFXButton fx:id="btnAgregarPuesto" onAction="#onActionBtnAgregarPuesto" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
                             </children>
                         </HBox>
-                        <TableView fx:id="tbvPuestos" prefHeight="416.0" prefWidth="620.0" VBox.vgrow="ALWAYS">
-                            <columns>
-                                <TableColumn prefWidth="302.0" text="C1" />
-                                <TableColumn prefWidth="311.0" text="C2" />
-                            </columns>
-                        </TableView>
+                        <TableView fx:id="tbvPuestos" prefHeight="416.0" prefWidth="620.0" VBox.vgrow="ALWAYS" />
                         <HBox alignment="CENTER" prefWidth="200.0" spacing="15.0">
                             <children>
                                 <JFXTextField fx:id="txfBuscarNombre" promptText="Buscar por nombre de puesto" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
                                 <JFXCheckBox fx:id="chkBuscarActivas" styleClass="jfx-check-box" text="Seleccionar activas" />
-                                <MFXButton fx:id="btnFiltrar" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                                <MFXButton fx:id="btnFiltrar" onAction="#onActionBtnFiltrar" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
                             </children>
                         </HBox>
                     </children>
@@ -92,12 +86,7 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
-                        <TableView fx:id="tbvCompetencias" prefHeight="522.0" prefWidth="630.0" VBox.vgrow="ALWAYS">
-                            <columns>
-                                <TableColumn prefWidth="302.0" text="C1" />
-                                <TableColumn prefWidth="311.0" text="C2" />
-                            </columns>
-                        </TableView>
+                        <TableView fx:id="tbvCompetencias" prefHeight="522.0" prefWidth="630.0" VBox.vgrow="ALWAYS" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="10.0" top="10.0" />

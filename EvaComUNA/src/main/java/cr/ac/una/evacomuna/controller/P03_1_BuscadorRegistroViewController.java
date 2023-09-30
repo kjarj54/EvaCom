@@ -84,13 +84,13 @@ public class P03_1_BuscadorRegistroViewController extends Controller implements 
 
     @FXML
     private void onActionBtnFiltrar(ActionEvent event) {
-        String cedula = "%" + txfCedula.getText() + "%";
+        String cedula = txfCedula.getText();
 
-        String nombre = "%" + txfNombre.getText() + "%";
+        String nombre = txfNombre.getText();
 
-        String pApellido = "%" + txfUsuario.getText() + "%";
+        String pApellido = txfUsuario.getText();
 
-        String sApellido = "%" + txfPuesto.getText() + "%";
+        String sApellido = txfPuesto.getText();
 
         cargarUsuarios(cedula, nombre, pApellido, sApellido);
     }
@@ -113,8 +113,9 @@ public class P03_1_BuscadorRegistroViewController extends Controller implements 
         Respuesta respuesta = service.getUsuarios(cedula.toUpperCase(), nombre.toUpperCase(), usuario.toUpperCase(), puesto.toUpperCase());
 
         if (respuesta.getEstado()) {
+            tbvResultados.getItems().clear();
             usuarios.clear();
-            usuarios.addAll((List<TarUsuarioDto>) respuesta.getResultado("Usuarios"));
+            usuarios.addAll((List<TarUsuarioDto>) respuesta.getResultado("TarUsuario"));
             tbvResultados.setItems(usuarios);
             tbvResultados.refresh();
         } else {

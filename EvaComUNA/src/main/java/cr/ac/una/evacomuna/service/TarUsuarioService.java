@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -101,6 +102,22 @@ public class TarUsuarioService {
                 tarUsuarioDtosList.add(tarUsuarioDto);
             }
             
+            if (!cedula.isEmpty()) {
+                System.out.println("-" + cedula + "-");
+                tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getUsuCedula().contains(cedula)).collect(Collectors.toList());
+            }
+            if (!nombre.isEmpty()) {
+                System.out.println("-" + nombre + "-");
+                tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getUsuNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
+            }
+            if (!usuario.isEmpty()) {
+                System.out.println("-" + usuario + "-");
+                tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getUsuUsu().toLowerCase().contains(usuario.toLowerCase())).collect(Collectors.toList());
+            }
+            if (!puesto.isEmpty()) {
+                System.out.println("-" + puesto + "-");
+                tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getPuestoDto()!= null && p.getPuestoDto().getPueNombre().toLowerCase().contains(puesto.toLowerCase())).collect(Collectors.toList());
+            }
             
             return new Respuesta(true, "", "", "TarUsuario",tarUsuarioDtosList);
 
