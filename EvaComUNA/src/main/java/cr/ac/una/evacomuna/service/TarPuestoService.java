@@ -94,4 +94,23 @@ public class TarPuestoService {
             return new Respuesta(false, "Error obteniendo los Puesto.", "getPuestos" + ex.getMessage());
         }
     }
+    
+    public Respuesta getListaPuestos() {
+        try {
+            EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
+            evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
+            List<cr.ac.una.evacomunaws.controller.TarPuestoDto> tarPuestoDtoList = evaComUNAWs.getPuestos();
+            List<TarPuestoDto> tarPuestoDtoClienteList = new ArrayList<>();
+            
+            for(cr.ac.una.evacomunaws.controller.TarPuestoDto item : tarPuestoDtoList){
+                TarPuestoDto tarPuestoDto = new TarPuestoDto(item);
+                tarPuestoDtoClienteList.add(tarPuestoDto);
+            }
+            
+            return new Respuesta(true, "", "", "TarPuestos",tarPuestoDtoClienteList);
+        } catch (Exception ex) {
+            Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo los Puesto", ex);
+            return new Respuesta(false, "Error obteniendo los Puesto.", "getPuestos" + ex.getMessage());
+        }
+    }
 }

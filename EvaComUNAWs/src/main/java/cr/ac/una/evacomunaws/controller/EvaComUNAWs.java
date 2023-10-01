@@ -168,17 +168,17 @@ public class EvaComUNAWs {
     }
 
     @WebMethod(operationName = "eliminarUsuario")
-    public TarUsuarioDto eliminarUsuario(@WebParam(name = "id") Long id) {
+    public String eliminarUsuario(@WebParam(name = "id") Long id) {
         try {
             Respuesta res = tarUsuarioService.eliminarUsuario(id);
             if (!res.getEstado()) {
-                return TarUsuarioDto.class.cast(res);//TODO
+                return res.toString();//TODO
             }
-            TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("");
-            return tarUsuarioDto;//TODO
+           //TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("");
+            return "Usuario eliminado correctamente";//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarUsuarioDto.class.cast(ex);//TODO
+            return ex.toString();//TODO
         }
     }
 

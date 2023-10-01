@@ -79,8 +79,7 @@ public class TarUsuarioService {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
             // TODO process result here
-            TarUsuarioDto tarUsuarioDto = new TarUsuarioDto((cr.ac.una.evacomunaws.controller.TarUsuarioDto) evaComUNAWs.eliminarUsuario(id));
-            return new Respuesta(true, "", "", "TarUsuario", tarUsuarioDto);
+            return new Respuesta(true, "", "", "TarUsuario",  evaComUNAWs.eliminarUsuario(id));
         } catch (Exception ex) {
             Logger.getLogger(TarUsuarioService.class.getName()).log(Level.SEVERE, "Error obteniendo el usuario [" + id + "]", ex);
             return new Respuesta(false, "Error obteniendo el usuario.", "getUsuario" + ex.getMessage());

@@ -5,17 +5,20 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.evacomuna.model.TarParametrosDto;
 import cr.ac.una.evacomuna.util.FlowController;
 import cr.ac.una.evacomuna.util.Formato;
 import cr.ac.una.evacomuna.util.Mensaje;
 import cr.ac.una.evacomuna.util.SoundUtil;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
+import cr.ac.una.evacomuna.service.TarParametrosService;
 import cr.ac.una.evacomuna.service.TarUsuarioService;
 import cr.ac.una.evacomuna.util.AppContext;
 import cr.ac.una.evacomuna.util.Respuesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -131,10 +134,18 @@ public class P03_RegistroViewController extends Controller implements Initializa
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        TarParametrosService tarParametrosService = new TarParametrosService();
+        Respuesta respuesta2 = tarParametrosService.getParametrosList();
+
+        List<TarParametrosDto> listPametrosDto = (List<TarParametrosDto>) respuesta2.getResultado("Parametros");
+
         try {
             String invalidos = validarRequeridos();
             if (!invalidos.isEmpty()) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), invalidos);
+            } else if (listPametrosDto.isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de parámetros", getStage(), "Es necesario crear parámetros.");
+                FlowController.getInstance().goViewInWindowModal("P07_MantenimientoGeneralesView", stage, false);
             } else {
                 TarUsuarioService empleadoService = new TarUsuarioService();
                 Respuesta respuesta = empleadoService.guardarUsuario(tarUsuarioDto.consultas());
@@ -157,6 +168,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
     private void onActionBtnBuscar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         FlowController.getInstance().goViewInWindowModal("P03_1_BuscadorRegistroView", stage, false);
+
     }
 
     @FXML
@@ -169,7 +181,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
     private void onActionBtnEliminarUsuario(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         try {
-            if (tarUsuarioDto.getUsuId()== null) {
+            if (tarUsuarioDto.getUsuId() == null) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar empleado", getStage(), "Debe cargar el empleado que desea eliminar.");
             } else {
                 TarUsuarioService service = new TarUsuarioService();
@@ -215,7 +227,9 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfCelular.textProperty().bindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().bindBidirectional(tarUsuarioDto.usuAdmin);
         cboxPuesto.valueProperty().bindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
-
+        if (this.tarUsuarioDto.getUsuFoto() != null) {
+            imvFotoPerfil.setImage(byteToImage(this.tarUsuarioDto.getUsuFoto()));
+        }
     }
 
     private void unbindEmpleado() {
@@ -229,6 +243,8 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfCelular.textProperty().unbindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().unbindBidirectional(tarUsuarioDto.usuAdmin);
         cboxPuesto.valueProperty().unbindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
+        file = new File("src/main/resources/cr/ac/una/evacomuna/resources/media/icons/userIcon.png");
+        loadImages(imvFotoPerfil, file);
     }
 
     public String validarRequeridos() {
@@ -277,7 +293,6 @@ public class P03_RegistroViewController extends Controller implements Initializa
         unbindEmpleado();
         tarUsuarioDto = (TarUsuarioDto) buscadorRegistroController.getSeleccionado();
         bindEmpleado();
-
     }
 
     public void cargarInterfaz() {
@@ -372,7 +387,6 @@ public class P03_RegistroViewController extends Controller implements Initializa
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 
                 imgview.setImage(image);
-//                System.out.println(file_.toString());
             } catch (IOException ex) {
                 new Mensaje().show(Alert.AlertType.ERROR, "Imagen", "Error cargando imagen");
             }
@@ -383,6 +397,11 @@ public class P03_RegistroViewController extends Controller implements Initializa
         FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
         byte[] imageInBytes = IOUtils.toByteArray(fiStream);
         return imageInBytes;
+    }
+
+    private Image byteToImage(byte[] bytes) {
+        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        return new Image(bis);
     }
 
 }

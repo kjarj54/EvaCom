@@ -97,19 +97,14 @@ public class P02_LogInViewController extends Controller implements Initializable
                 if (respuesta.getEstado()) {
                     TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) respuesta.getResultado("TarUsuario");
                     AppContext.getInstance().set("UsuarioId", tarUsuarioDto.getUsuId());
-                    AppContext.getInstance().set("UsuarioClass", tarUsuarioDto);                   
+                    AppContext.getInstance().set("UsuarioClass", tarUsuarioDto);
                     if (tarUsuarioDto.getUsuClave().equals(tarUsuarioDto.getUsuTempclave())) {
                         new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de usuario", getStage(), "Es necesario cambiar la clave para ingresar al sistema.");
                         FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
                         initialize(null, null);
                     } else {
-                        if (/*"S".equals(tarUsuarioDto.getUsuAdmin()) &&*/ "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
+                        if (/*"S".equals(tarUsuarioDto.getUsuAdmin()) &&*/"A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
                             FlowController.getInstance().goView("P06_MenuPrincipalView");
-                            //getStage().close();
-                        } else if ("N".equals(tarUsuarioDto.getUsuAdmin()) && "A".equals(tarUsuarioDto.getUsuActivo())) {//compruba que el usuario este activo
-                            //FlowController.getInstance() TODO
-                            //getStage().close();
-
                         } else {
                             new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario que su cuenta este activada.");
                         }

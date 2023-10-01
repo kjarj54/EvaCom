@@ -66,6 +66,8 @@ public class P11_RegistroEvaluacionesViewController extends Controller implement
 
     
     private ObservableList<TarUsuarioDto> usuarios = FXCollections.observableArrayList();
+    @FXML
+    private MFXButton btnSalir;
     /**
      * Initializes the controller class.
      */
@@ -186,6 +188,10 @@ public class P11_RegistroEvaluacionesViewController extends Controller implement
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Usuarios", getStage(), respuesta.getMensaje());
         }
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
     }
     
     private class ButtonCell extends TableCell<TarUsuarioDto, Boolean> {
