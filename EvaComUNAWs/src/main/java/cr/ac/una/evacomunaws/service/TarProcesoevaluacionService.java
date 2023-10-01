@@ -6,6 +6,8 @@ package cr.ac.una.evacomunaws.service;
 
 import cr.ac.una.evacomunaws.model.TarProcesoevaluacion;
 import cr.ac.una.evacomunaws.model.TarProcesoevaluacionDto;
+import cr.ac.una.evacomunaws.model.TarTrabajadorevaluar;
+import cr.ac.una.evacomunaws.model.TarTrabajadorevaluarDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import cr.ac.una.evacomunaws.util.Respuesta;
 import jakarta.ejb.LocalBean;
@@ -36,12 +38,21 @@ public class TarProcesoevaluacionService {
     public Respuesta guardarProcesoEvaluacion(TarProcesoevaluacionDto tarProcesoevaluacionDto) {
         try {
             TarProcesoevaluacion procesoevaluacion;
-            if (tarProcesoevaluacionDto.getProId()!= null && tarProcesoevaluacionDto.getProId()> 0) {
+            if (tarProcesoevaluacionDto.getProId() != null && tarProcesoevaluacionDto.getProId() > 0) {
                 procesoevaluacion = em.find(TarProcesoevaluacion.class, tarProcesoevaluacionDto.getProId());
                 if (procesoevaluacion == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el procesoevaluar a modificar.", "guardarProcesoEvaluacion NoResultException");
                 }
                 procesoevaluacion.actualizar(tarProcesoevaluacionDto);
+                for (TarTrabajadorevaluarDto tarTrabajadorevaluarDto : tarProcesoevaluacionDto.getTarTrabajadorevaluarListEliminados()) {
+                    procesoevaluacion.getTarTrabajadorevaluarList().remove(new TarTrabajadorevaluar(tarTrabajadorevaluarDto.getTraId()));
+                }
+                if (!tarProcesoevaluacionDto.getTarTrabajadorevaluarList().isEmpty()) {
+                    for (TarTrabajadorevaluarDto tarTrabajadorevaluarDto : tarProcesoevaluacionDto.getTarTrabajadorevaluarList()) {
+                        TarTrabajadorevaluar tarTrabajadorevaluar = em.find(TarTrabajadorevaluar.class, tarTrabajadorevaluarDto.getTraId());
+                        procesoevaluacion.getTarTrabajadorevaluarList().add(tarTrabajadorevaluar);
+                    }
+                }
                 procesoevaluacion = em.merge(procesoevaluacion);
             } else {
                 procesoevaluacion = new TarProcesoevaluacion(tarProcesoevaluacionDto);
@@ -81,14 +92,19 @@ public class TarProcesoevaluacionService {
     public Respuesta getProcesosEvaluacion() {
         try {
             Query qryProcesoEvaluacion = em.createNamedQuery("TarProcesoevaluacion.findAll", TarProcesoevaluacion.class);
-            List<TarProcesoevaluacion> procesoevaluacions = qryProcesoEvaluacion.getResultList();
-            List<TarProcesoevaluacionDto> procesoevaluacionDto = new ArrayList<>();
-            for (TarProcesoevaluacion procesoevaluacion : procesoevaluacions) {
-                procesoevaluacionDto.add(new TarProcesoevaluacionDto(procesoevaluacion));
+            List<TarProcesoevaluacion> tarProcesoevaluacionsList = qryProcesoEvaluacion.getResultList();
+            List<TarProcesoevaluacionDto> tarProcesoevaluacionDtosList = new ArrayList<>();
+            for (TarProcesoevaluacion tarProcesoevaluacion : tarProcesoevaluacionsList) {
+                TarProcesoevaluacionDto tarProcesoevaluacionDto = new TarProcesoevaluacionDto(tarProcesoevaluacion);
+                if (!tarProcesoevaluacion.getTarTrabajadorevaluarList().isEmpty()) {
+                    for (TarTrabajadorevaluar tarTrabajadorevaluar : tarProcesoevaluacion.getTarTrabajadorevaluarList()) {
+                        tarProcesoevaluacionDto.getTarTrabajadorevaluarList().add(new TarTrabajadorevaluarDto(tarTrabajadorevaluar));
+                    }
+                }
+                tarProcesoevaluacionDtosList.add(tarProcesoevaluacionDto);
             }
-            
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "TarProcesoevaluaciones", procesoevaluacionDto);
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "TarProcesoevaluaciones", tarProcesoevaluacionDtosList);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen el procesoevaluar con los criterios ingresados.", "getProcesosEvaluacion NoResultException");
@@ -102,8 +118,15 @@ public class TarProcesoevaluacionService {
         try {
             Query qryProcesoEvaluacion = em.createNamedQuery("TarProcesoevaluacion.findByProId", TarProcesoevaluacion.class);
             qryProcesoEvaluacion.setParameter("proId", proId);
+            TarProcesoevaluacion tarProcesoevaluacion = (TarProcesoevaluacion) qryProcesoEvaluacion.getSingleResult();
+            TarProcesoevaluacionDto tarProcesoevaluacionDto = new TarProcesoevaluacionDto(tarProcesoevaluacion);
+            if (!tarProcesoevaluacion.getTarTrabajadorevaluarList().isEmpty()) {
+                for (TarTrabajadorevaluar tarTrabajadorevaluar : tarProcesoevaluacion.getTarTrabajadorevaluarList()) {
+                    tarProcesoevaluacionDto.getTarTrabajadorevaluarList().add(new TarTrabajadorevaluarDto(tarTrabajadorevaluar));
+                }
+            }
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "TarProcesoevaluacion", new TarProcesoevaluacionDto((TarProcesoevaluacion) qryProcesoEvaluacion.getSingleResult()));
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "TarProcesoevaluacion", tarProcesoevaluacionDto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe el procesoevaluar con el código ingresado.", "getProcesoEvaluacion NoResultException");

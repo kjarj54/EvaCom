@@ -8,6 +8,8 @@ import cr.ac.una.evacomunaws.model.TarCompetencia;
 import cr.ac.una.evacomunaws.model.TarCompetenciaDto;
 import cr.ac.una.evacomunaws.model.TarPuesto;
 import cr.ac.una.evacomunaws.model.TarPuestoDto;
+import cr.ac.una.evacomunaws.model.TarUsuario;
+import cr.ac.una.evacomunaws.model.TarUsuarioDto;
 import cr.ac.una.evacomunaws.util.CodigoRespuesta;
 import cr.ac.una.evacomunaws.util.Respuesta;
 import jakarta.ejb.LocalBean;
@@ -30,25 +32,35 @@ import java.util.logging.Logger;
 @Stateless
 @LocalBean
 public class TarPuestoService {
+
     private static final Logger LOG = Logger.getLogger(TarPuestoService.class.getName());
     @PersistenceContext(unitName = "EvaComUNAPU")
     private EntityManager em;
-    
+
     public Respuesta guardarPuesto(TarPuestoDto tarPuestoDto) {
         try {
             TarPuesto puesto;
-            if (tarPuestoDto.getPueId()!= null && tarPuestoDto.getPueId()> 0) {
+            if (tarPuestoDto.getPueId() != null && tarPuestoDto.getPueId() > 0) {
                 puesto = em.find(TarPuesto.class, tarPuestoDto.getPueId());
                 if (puesto == null) {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el puesto a modificar.", "guardarPuesto NoResultException");
                 }
                 puesto.actualizar(tarPuestoDto);
-                for(TarCompetenciaDto com : tarPuestoDto.getTarCompetenciaListEliminados()){
+                for (TarUsuarioDto tarUsuarioDto : tarPuestoDto.getTarUsuarioListEliminados()) {
+                    puesto.getTarUsuarioList().remove(new TarUsuario(tarUsuarioDto.getUsuId()));
+                }
+                if (!tarPuestoDto.getTarUsuarioList().isEmpty()) {
+                    for (TarUsuarioDto tarUsuarioDto : tarPuestoDto.getTarUsuarioList()) {
+                        TarUsuario tarUsuario = em.find(TarUsuario.class, tarUsuarioDto.getUsuId());
+                        puesto.getTarUsuarioList().add(tarUsuario);
+                    }
+                }
+                for (TarCompetenciaDto com : tarPuestoDto.getTarCompetenciaListEliminados()) {
                     puesto.getTarCompetenciaList().remove(new TarCompetencia(com.getComId()));
                 }
-                if(!tarPuestoDto.getTarCompetenciaList().isEmpty()){
-                    for(TarCompetenciaDto com : tarPuestoDto.getTarCompetenciaList()){
-                        if(com.getModificado()){
+                if (!tarPuestoDto.getTarCompetenciaList().isEmpty()) {
+                    for (TarCompetenciaDto com : tarPuestoDto.getTarCompetenciaList()) {
+                        if (com.getModificado()) {
                             TarCompetencia competencia = em.find(TarCompetencia.class, com.getComId());
                             competencia.getTarPuestoList().add(puesto);
                             puesto.getTarCompetenciaList().add(competencia);
@@ -94,13 +106,24 @@ public class TarPuestoService {
     public Respuesta getPuestos() {
         try {
             Query qryPuesto = em.createNamedQuery("TarPuesto.findAll", TarPuesto.class);
-            List<TarPuesto> puestos = qryPuesto.getResultList();
-            List<TarPuestoDto> puestoDto = new ArrayList<>();
-            for (TarPuesto puesto : puestos) {
-                puestoDto.add(new TarPuestoDto(puesto));
+            List<TarPuesto> tarPuestosList = qryPuesto.getResultList();
+            List<TarPuestoDto> tarPuestoDtosList = new ArrayList<>();
+            for (TarPuesto tarPuesto : tarPuestosList) {
+                TarPuestoDto tarPuestoDto = new TarPuestoDto(tarPuesto);
+                if (!tarPuesto.getTarUsuarioList().isEmpty()) {
+                    for (TarUsuario tarUsuario : tarPuesto.getTarUsuarioList()) {
+                        tarPuestoDto.getTarUsuarioList().add(new TarUsuarioDto(tarUsuario));
+                    }
+                }
+                if (!tarPuesto.getTarCompetenciaList().isEmpty()) {
+                    for (TarCompetencia tarCompetencia : tarPuesto.getTarCompetenciaList()) {
+                        tarPuestoDto.getTarCompetenciaList().add(new TarCompetenciaDto(tarCompetencia));
+                    }
+                }
+                tarPuestoDtosList.add(tarPuestoDto);
             }
 
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Puesto", puestoDto);
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Puesto", tarPuestoDtosList);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existen el puestos con los criterios ingresados.", "getPuestos NoResultException");
@@ -114,8 +137,19 @@ public class TarPuestoService {
         try {
             Query qryProcesoEvaluacion = em.createNamedQuery("TarProcesoevaluacion.findByPueId", TarPuesto.class);
             qryProcesoEvaluacion.setParameter("pueId", pueId);
-
-            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Puesto", new TarPuestoDto((TarPuesto) qryProcesoEvaluacion.getSingleResult()));
+            TarPuesto tarPuesto = (TarPuesto) qryProcesoEvaluacion.getSingleResult();
+            TarPuestoDto tarPuestoDto = new TarPuestoDto(tarPuesto);
+            if (!tarPuesto.getTarUsuarioList().isEmpty()) {
+                for (TarUsuario tarUsuario : tarPuesto.getTarUsuarioList()) {
+                    tarPuestoDto.getTarUsuarioList().add(new TarUsuarioDto(tarUsuario));
+                }
+            }
+            if (!tarPuesto.getTarCompetenciaList().isEmpty()) {
+                for (TarCompetencia tarCompetencia : tarPuesto.getTarCompetenciaList()) {
+                    tarPuestoDto.getTarCompetenciaList().add(new TarCompetenciaDto(tarCompetencia));
+                }
+            }
+            return new Respuesta(true, CodigoRespuesta.CORRECTO, "", "", "Puesto", tarPuestoDto);
 
         } catch (NoResultException ex) {
             return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No existe el puesto con el código ingresado.", "getPuesto NoResultException");
@@ -127,5 +161,5 @@ public class TarPuestoService {
             return new Respuesta(false, CodigoRespuesta.ERROR_INTERNO, "Ocurrio un error al consultar el puesto.", "getPuesto " + ex.getMessage());
         }
     }
-    
+
 }
