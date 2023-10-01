@@ -147,6 +147,12 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
+.fondo-mantenimiento{
+    -fx-background-image: url("../resources/media/images/backgroundMantenimientos.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
 /*-----------------------------------------------------------------------------------------------------------------*/
 .images-effect-button {
 

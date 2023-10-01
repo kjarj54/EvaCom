@@ -5,7 +5,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
@@ -15,17 +14,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P08_MantenimientoCompetenciasController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="fondo-mantenimiento" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P08_MantenimientoCompetenciasController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
    <children>
-      <HBox layoutX="463.0" layoutY="239.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutX="463.0" layoutY="239.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="630.0" spacing="15.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="630.0" spacing="15.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
                <children>
                   <HBox prefWidth="200.0">
                      <children>
@@ -90,11 +89,10 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets bottom="10.0" right="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <Separator orientation="VERTICAL" prefHeight="700.0" prefWidth="17.0" />
-            <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="630.0" spacing="20.0" HBox.hgrow="ALWAYS">
+            <VBox layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="630.0" spacing="20.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
                      <children>
@@ -113,7 +111,7 @@
                   </TableView>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
          </children>
