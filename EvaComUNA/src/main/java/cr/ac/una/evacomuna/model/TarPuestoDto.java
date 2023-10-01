@@ -6,6 +6,7 @@ package cr.ac.una.evacomuna.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 
@@ -17,7 +18,7 @@ public class TarPuestoDto {
 
     public SimpleStringProperty pueId;
     public SimpleStringProperty pueNombre;
-    public SimpleStringProperty pueEstado;
+    public SimpleBooleanProperty pueEstado;
     private Long pueVersion;
     private Boolean modificado;
     List<TarCompetenciaDto> tarCompetenciaList;
@@ -28,7 +29,7 @@ public class TarPuestoDto {
     public TarPuestoDto() {
         this.pueId = new SimpleStringProperty();
         this.pueNombre = new SimpleStringProperty();
-        this.pueEstado = new SimpleStringProperty();
+        this.pueEstado = new SimpleBooleanProperty(false);
         this.modificado = false;
         tarCompetenciaList = FXCollections.observableArrayList();
         tarCompetenciaListEliminados = new ArrayList<>();
@@ -38,7 +39,7 @@ public class TarPuestoDto {
 
     public TarPuestoDto(cr.ac.una.evacomunaws.controller.TarPuestoDto tarPuestoDto) {
         this();
-        this.pueEstado.set(tarPuestoDto.getPueEstado());
+        this.pueEstado.set(tarPuestoDto.getPueEstado().equals("A"));
         this.pueId.set(tarPuestoDto.getPueId().toString());
         this.pueNombre.set(tarPuestoDto.getPueNombre());
         if (!tarPuestoDto.getTarUsuarioList().isEmpty()) {
@@ -111,11 +112,11 @@ public class TarPuestoDto {
     }
 
     public String getPueEstado() {
-        return pueEstado.get();
+        return pueEstado.get() ? "A" : "I";
     }
 
     public void setPueEstado(String pueEstado) {
-        this.pueEstado.set(pueEstado);
+        this.pueEstado.set(pueEstado.equals("A"));
     }
 
     public Long getPueVersion() {

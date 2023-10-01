@@ -71,7 +71,7 @@
                                         <Tooltip text="Limpiar campos" />
                                     </tooltip>
                                 </MFXButton>
-                                <MFXButton fx:id="btnAgregarPuesto" onAction="#onActionBtnAgregarPuesto" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
+                                <MFXButton fx:id="btnAgregarPuesto" onAction="#onActionBtnAgregarPuesto" prefHeight="45.0" prefWidth="208.0" styleClass="mfx-button-menuPrincipal" text="Agregar o Guardar" wrapText="true" />
                             </children>
                         </HBox>
                         <TableView fx:id="tbvPuestos" prefHeight="416.0" prefWidth="620.0" VBox.vgrow="ALWAYS" />
@@ -99,7 +99,8 @@
                                 <Insets left="10.0" />
                             </padding>
                         </HBox>
-                        <TableView fx:id="tbvCompetencias" prefHeight="522.0" prefWidth="630.0" VBox.vgrow="ALWAYS" />
+                  <TableView fx:id="tbvCompetenciasBusqueda" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="615.0" />
+                        <TableView fx:id="tbvCompetencias" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="378.0" prefWidth="615.0" VBox.vgrow="ALWAYS" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="10.0" top="10.0" />

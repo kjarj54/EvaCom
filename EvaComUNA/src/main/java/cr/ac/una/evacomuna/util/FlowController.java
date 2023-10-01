@@ -85,7 +85,8 @@ public class FlowController {
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P02_LogInView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P03_1_BuscadorRegistroView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P01_PrincipalView.fxml"), FlowController.idioma)));
-            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P07_MantenimientoGeneralesView.fxml"), FlowController.idioma)));
+//            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P07_MantenimientoGeneralesView.fxml"), FlowController.idioma)));
+            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P09_MantenimientoPuestosView.fxml"), FlowController.idioma)));
             //FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P02_LogInView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P01_PrincipalView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P07_MantenimientoGeneralesView.fxml"), FlowController.idioma)));

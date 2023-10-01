@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -67,9 +68,8 @@ public class TarPuestoService {
 
     }
 
-    public Respuesta getPuestos(String nombre) {
+    public Respuesta getPuestos(String nombre, String activas) {
         try {
-
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
             List<cr.ac.una.evacomunaws.controller.TarPuestoDto> tarPuestoDtoList = evaComUNAWs.getPuestos();
@@ -78,6 +78,14 @@ public class TarPuestoService {
             for(cr.ac.una.evacomunaws.controller.TarPuestoDto item : tarPuestoDtoList){
                 TarPuestoDto tarPuestoDto = new TarPuestoDto(item);
                 tarPuestoDtoClienteList.add(tarPuestoDto);
+            }
+
+            if (!nombre.isEmpty()) {
+                tarPuestoDtoClienteList = tarPuestoDtoClienteList.stream().filter((p) -> p.getPueNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
+            }
+            
+            if ("S".equals(activas)) {
+                tarPuestoDtoClienteList = tarPuestoDtoClienteList.stream().filter((p) -> "A".equals(p.getPueEstado())).collect(Collectors.toList());
             }
             
             return new Respuesta(true, "", "", "TarPuestos",tarPuestoDtoClienteList);

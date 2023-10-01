@@ -14,6 +14,9 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +46,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     @FXML
     private TableView<TarCompetenciaDto> tbvCompetencias;
     @FXML
+    private TableView<TarCompetenciaDto> tbvCompetenciasBusqueda;
+    @FXML
     private JFXTextField txfBuscarNombre;
     @FXML
     private JFXCheckBox chkBuscarActivas;
@@ -58,7 +63,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private MFXButton btnSalir;
 
     private ObservableList<TarPuestoDto> puestos = FXCollections.observableArrayList();
-    private ObservableList<TarCompetenciaDto> ceompetencias = FXCollections.observableArrayList();
+    private ObservableList<TarCompetenciaDto> competencias = FXCollections.observableArrayList();
     TarPuestoDto tarPuestoDto;
     TarCompetenciaDto tarCompetenciaDto;
 
@@ -83,12 +88,70 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
         TableColumn<TarPuestoDto, String> tbcEstado = new TableColumn<>("Estado");
         tbcEstado.setPrefWidth(50);
-        tbcEstado.setCellValueFactory(cd -> cd.getValue().pueEstado);
+        tbcEstado.setCellValueFactory(cd -> {
+            if ("A".equals(cd.getValue().getPueEstado())) {
+                return new SimpleStringProperty("Activo");
+            } else {
+                return new SimpleStringProperty("Inactivo");
+            }
+        });
 
         tbvPuestos.getColumns().add(tbcId);
         tbvPuestos.getColumns().add(tbcNombre);
         tbvPuestos.getColumns().add(tbcEstado);
         tbvPuestos.refresh();
+        
+        tbvCompetenciasBusqueda.getColumns().clear();
+        tbvCompetenciasBusqueda.getItems().clear();
+
+        TableColumn<TarCompetenciaDto, String> tbcComIdBus = new TableColumn<>("Id");
+        tbcComIdBus.setPrefWidth(30);
+        tbcComIdBus.setCellValueFactory(cd -> cd.getValue().comId);
+
+        TableColumn<TarCompetenciaDto, String> tbcComNombreBus = new TableColumn<>("Nombre");
+        tbcComNombreBus.setPrefWidth(100);
+        tbcComNombreBus.setCellValueFactory(cd -> cd.getValue().comNombre);
+
+        TableColumn<TarCompetenciaDto, String> tbcComEstadoBus = new TableColumn<>("Estado");
+        tbcComEstadoBus.setPrefWidth(50);
+        tbcComEstadoBus.setCellValueFactory(cd -> {
+            if ("A".equals(cd.getValue().getComEstado())) {
+                return new SimpleStringProperty("Activo");
+            } else {
+                return new SimpleStringProperty("Inactivo");
+            }
+        });
+        
+        tbvCompetenciasBusqueda.getColumns().add(tbcComIdBus);
+        tbvCompetenciasBusqueda.getColumns().add(tbcComNombreBus);
+        tbvCompetenciasBusqueda.getColumns().add(tbcComEstadoBus);
+        tbvCompetenciasBusqueda.refresh();
+
+        tbvCompetenciasBusqueda.getColumns().clear();
+        tbvCompetenciasBusqueda.getItems().clear();
+
+        TableColumn<TarCompetenciaDto, String> tbcComId = new TableColumn<>("Id");
+        tbcComId.setPrefWidth(30);
+        tbcComId.setCellValueFactory(cd -> cd.getValue().comId);
+
+        TableColumn<TarCompetenciaDto, String> tbcComNombre = new TableColumn<>("Nombre");
+        tbcComNombre.setPrefWidth(100);
+        tbcComNombre.setCellValueFactory(cd -> cd.getValue().comNombre);
+
+        TableColumn<TarCompetenciaDto, String> tbcComEstado = new TableColumn<>("Estado");
+        tbcComEstado.setPrefWidth(50);
+        tbcComEstado.setCellValueFactory(cd -> {
+            if ("A".equals(cd.getValue().getComEstado())) {
+                return new SimpleStringProperty("Activo");
+            } else {
+                return new SimpleStringProperty("Inactivo");
+            }
+        });
+        
+        tbvCompetencias.getColumns().add(tbcComId);
+        tbvCompetencias.getColumns().add(tbcComNombre);
+        tbvCompetencias.getColumns().add(tbcComEstado);
+        tbvCompetencias.refresh();
 
         this.tarPuestoDto = new TarPuestoDto();
         this.tarCompetenciaDto = new TarCompetenciaDto();
@@ -104,7 +167,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 nuevoPuesto();
             }
         });
-        tbvCompetencias.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        
+        tbvCompetenciasBusqueda.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 unbindCompetencia();
                 tarCompetenciaDto = newValue;
@@ -121,28 +185,75 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     @FXML
     private void onActionBtnEliminarPuesto(ActionEvent event) {
+        try {
+            if (tarPuestoDto.getPueId() == null) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar Puesto", getStage(), "Debe cargar el Puesto que desea eliminar.");
+            } else {
+                TarPuestoService service = new TarPuestoService();
+                Respuesta respuesta = service.eliminarPuesto(tarPuestoDto.getPueId());
+                if (!respuesta.getEstado()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar Puesto", getStage(), respuesta.getMensaje());
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar Puesto", getStage(), "Puesto eliminado correctamente.");
+                    nuevoPuesto();
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(P09_MantenimientoPuestosViewController.class.getName()).log(Level.SEVERE, "Error eliminando el Puesto.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar Puesto", getStage(), "Ocurrio un error eliminando el Puesto.");
+        }
     }
 
     @FXML
     private void onActionBtnLimpiarPuesto(ActionEvent event) {
+        if (new Mensaje().showConfirmation("Limpiar Puesto", getStage(), "¿Esta seguro que desea limpiar el registro?")) {
+            nuevoPuesto();
+        }
     }
 
     @FXML
     private void onActionBtnAgregarPuesto(ActionEvent event) {
+        try {
+//            String invalidos = validarRequeridos();
+//            if (!invalidos.isEmpty()) {
+//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar tipo planilla", getStage(), invalidos);
+//            } else {
+            TarPuestoService service = new TarPuestoService();
+            Respuesta respuesta = service.guardarTarPuesto(tarPuestoDto.consultas());
+            if (!respuesta.getEstado()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), respuesta.getMensaje());
+            } else {
+                unbindPuesto();
+                tarPuestoDto = (TarPuestoDto) respuesta.getResultado("Puesto");
+                bindPuesto(false);
+                nuevoCompetencia();
+                onActionBtnFiltrar(event);
+                cargarCompetencias();
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Puesto", getStage(), "Puesto actualizado correctamente.");
+            }
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(P09_MantenimientoPuestosViewController.class.getName()).log(Level.SEVERE, "Error guardando el Puesto.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), "Ocurrio un error guardando el Puesto.");
+        }
     }
 
     @FXML
     private void onActionBtnAgregarCompetencia(ActionEvent event) {
+        if (tarCompetenciaDto.getComId() == null || tarCompetenciaDto.getComNombre().isEmpty()) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Competencia para agregarla a la lista.");
+        } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.equals(tarCompetenciaDto))) {
+            tarCompetenciaDto.setModificado(true);
+            tbvCompetencias.getItems().add(tarCompetenciaDto);
+            tbvCompetencias.refresh();
+        }
+        nuevoCompetencia();
     }
 
     @FXML
     private void onActionBtnFiltrar(ActionEvent event) {
-        cargarPuestos(txfBuscarNombre.getText());
-    }
-
-    private void cargarPuestos(String nombre) {
         TarPuestoService service = new TarPuestoService();
-        Respuesta respuesta = service.getPuestos(nombre);
+        Respuesta respuesta = service.getPuestos(txfBuscarNombre.getText(), chkBuscarActivas.isSelected() ? "S" : "N");
 
         if (respuesta.getEstado()) {
             tbvPuestos.getItems().clear();
@@ -160,19 +271,18 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         tarPuestoDto = new TarPuestoDto();
         bindPuesto(true);
         nuevoCompetencia();
-        cargarCompetencias();
         txfPuesto.clear();
         txfPuesto.requestFocus();
     }
 
     private void bindPuesto(Boolean nuevo) {
         txfPuesto.textProperty().bindBidirectional(tarPuestoDto.pueNombre);
-//        chkActiva.selectedProperty().bindBidirectional(tarPuestoDto.pueEstado);
+        chkActiva.selectedProperty().bindBidirectional(tarPuestoDto.pueEstado);
     }
 
     private void unbindPuesto() {
         txfPuesto.textProperty().unbindBidirectional(tarPuestoDto.pueNombre);
-//        chkActiva.selectedProperty().unbindBidirectional(tarPuestoDto.estado);
+        chkActiva.selectedProperty().unbindBidirectional(tarPuestoDto.pueEstado);
     }
 
     private void cargarCompetencias(String nombre) {
@@ -200,8 +310,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         unbindCompetencia();
         tarCompetenciaDto = new TarCompetenciaDto();
         bindCompetencia(true);
-        txfBuscarNombre.clear();
-        txfBuscarNombre.requestFocus();
+        txfBuscarCompetencia.clear();
     }
 
     private void bindCompetencia(Boolean nuevo) {
@@ -212,6 +321,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         txfBuscarNombre.textProperty().unbindBidirectional(this.tarCompetenciaDto.comNombre);
     }
 
+    @FXML
     private void onActionBtnSalir(ActionEvent event) {
     }
 
