@@ -61,6 +61,7 @@ public class TarCompetenciaDto {
                 this.tarCompetenciaevaluarList.add(convertedItem);
             }
         }
+        this.modificado = tarCaracteristicaDto.isModificado();
         this.comVersion = tarCaracteristicaDto.getComVersion();
     }
 
@@ -94,7 +95,7 @@ public class TarCompetenciaDto {
                 tarCompetenciaDtoSoap.getTarCaracteristicaEliminados().add(item.consultas());
             }
         }
-        
+        tarCompetenciaDtoSoap.setModificado(this.getModificado());
         tarCompetenciaDtoSoap.setComVersion(this.getComVersion());
 
         return tarCompetenciaDtoSoap;

@@ -74,9 +74,11 @@ public class TarPuestoDto {
         if (!this.tarCompetenciaList.isEmpty()) {
             List<TarCompetenciaDto> tarCompetenciaevaluar = this.tarCompetenciaList;
             for (TarCompetenciaDto item : tarCompetenciaevaluar) {
+                System.out.println(item.comNombre + " : " + item.getModificado());
                 tarPuestoDtoSoap.getTarCompetenciaList().add(item.consultas());
             }
         }
+
         if (!this.tarUsuarioList.isEmpty()) {
             List<TarUsuarioDto> tarUsuarioDtos = this.tarUsuarioList;
             for (TarUsuarioDto item : tarUsuarioDtos) {
