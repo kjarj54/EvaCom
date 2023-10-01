@@ -428,7 +428,7 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return new ArrayList<>().getClass().cast(res);//TODO
             }
-            List<TarCompetenciaDto> tarPuestoDtos = (List<TarCompetenciaDto>) res.getResultado("getCompetencias");
+            List<TarCompetenciaDto> tarPuestoDtos = (List<TarCompetenciaDto>) res.getResultado("Competencia");
             return tarPuestoDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
