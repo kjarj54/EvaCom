@@ -49,6 +49,7 @@ public class TarParametrosDto {
 
     public cr.ac.una.evacomunaws.controller.TarParametrosDto consultas() {
         cr.ac.una.evacomunaws.controller.TarParametrosDto tarParametrosDtoSoap = new cr.ac.una.evacomunaws.controller.TarParametrosDto();
+        tarParametrosDtoSoap.setParId(this.getParId());
         tarParametrosDtoSoap.setParClave(this.getParClave());
         tarParametrosDtoSoap.setParDescripcion(this.getParDescripcion());
         tarParametrosDtoSoap.setParEmail(this.getParEmail());

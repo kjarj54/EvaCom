@@ -17,6 +17,7 @@ import cr.ac.una.evacomuna.util.SoundUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -75,13 +76,12 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         txfNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
         txaInformacion.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfCorreo.setTextFormatter(Formato.getInstance().maxLengthFormat(80));
         txfClave.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
-
         this.tarParametrosDto = new TarParametrosDto();
-        nuevoParametro();
         cargarParametros();
 //        indicarRequeridos();
         onActionsBotones();
@@ -108,13 +108,13 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
         if (file != null) {
             txfPlantilla.setText(file.getAbsolutePath());
         }
-//            try {
-//                if (file != null) {
-//                   tarUsuarioDto.setUsuFoto(SaveImage(file));
-//                }
-//            } catch (IOException ex) {
-//                Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+        try {
+            if (file != null) {
+                tarParametrosDto.setParHtml(fileToByte(file));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -134,6 +134,7 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
                 this.tarParametrosDto = (TarParametrosDto) respuesta.getResultado("Parametros");
                 bindParametro(false);
                 new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Parametros", getStage(), "Parametros actualizados correctamente.");
+                initialize(null, null);
             }
 //            }
         } catch (Exception ex) {
@@ -150,14 +151,21 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
 
     private void cargarParametros() {
         TarParametrosService service = new TarParametrosService();
-        Respuesta respuesta = service.getParametros(1L);
+        Respuesta respuesta = service.getParametrosList();
 
-        if (respuesta.getEstado()) {
-            unbindParametro();
-            this.tarParametrosDto = (TarParametrosDto) respuesta.getResultado("Parametros");
-            bindParametro(false);
+        List<TarParametrosDto> tarParametrosDtosList = new ArrayList<>();
+        tarParametrosDtosList = (List<TarParametrosDto>) respuesta.getResultado("Parametros");
+        if (!tarParametrosDtosList.isEmpty()) {
+            if (respuesta.getEstado()) {
+                unbindParametro();
+                this.tarParametrosDto = tarParametrosDtosList.get(0);
+                imvFotoEmpresa.setImage(byteToImage(this.tarParametrosDto.getParLogo()));
+                bindParametro(false);
+            } else {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Parametros", getStage(), respuesta.getMensaje());
+            }
         } else {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Parametros", getStage(), respuesta.getMensaje());
+            nuevoParametro();
         }
     }
 
@@ -250,13 +258,13 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
             );
 
             File file = fileChooser.showOpenDialog(null);
-//            try {
-//                if (file != null) {
-//                   tarUsuarioDto.setUsuFoto(SaveImage(file));
-//                }
-//            } catch (IOException ex) {
-//                Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            try {
+                if (file != null) {
+                    this.tarParametrosDto.setParLogo(fileToByte(file));
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             loadImages(imvFotoEmpresa, file);
         });
@@ -268,7 +276,7 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
             try {
                 BufferedImage bufferedImage = ImageIO.read(file_);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-
+                
                 imgview.setImage(image);
 //                System.out.println(file_.toString());
             } catch (IOException ex) {
@@ -277,10 +285,14 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
         }
     }
 
-    private byte[] SaveImage(File file) throws IOException {
+    private byte[] fileToByte(File file) throws IOException {
         FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
         byte[] imageInBytes = IOUtils.toByteArray(fiStream);
         return imageInBytes;
     }
 
+    private Image byteToImage(byte[] bytes) {
+        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        return new Image(bis);
+    }
 }

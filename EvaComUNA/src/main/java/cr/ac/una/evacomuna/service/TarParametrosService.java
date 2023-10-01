@@ -8,6 +8,8 @@ import cr.ac.una.evacomuna.model.TarParametrosDto;
 import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs_Service;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,4 +66,26 @@ public class TarParametrosService {
         }
 
     }
+    
+    public Respuesta getParametrosList() {
+        try {
+            EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
+            
+            evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
+            
+            List<cr.ac.una.evacomunaws.controller.TarParametrosDto> tarParametrosDtosListSoap = evaComUNAWs.getParametros();
+            
+            List<TarParametrosDto> tarParametrosDtosList = new ArrayList<>();
+            
+            for (cr.ac.una.evacomunaws.controller.TarParametrosDto item : tarParametrosDtosListSoap) {
+                TarParametrosDto tarParametrosDto = new TarParametrosDto(item);
+                tarParametrosDtosList.add(tarParametrosDto);
+            }
+            return new Respuesta(true, "", "", "Parametros", tarParametrosDtosList);
+        } catch (Exception ex) {
+            Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Evaluador ", ex);
+            return new Respuesta(false, "Error obteniendo el Evaluador.", "getEvaluadores" + ex.getMessage());
+        }
+    }
+    
 }
