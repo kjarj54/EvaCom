@@ -79,13 +79,13 @@ public class TarCompetenciaService {
                 tarCompetenciaDtoClienteList.add(tarCompetenciaDto);
             }
 
-            if (nombre != null && !nombre.isBlank()) {
-                tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> p.getComNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
-            }
-
-            if (activas != null && "S".equals(activas)) {
-                tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> "A".equals(p.getComEstado())).collect(Collectors.toList());
-            }
+//            if (nombre != null && !nombre.isBlank()) {
+//                tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> p.getComNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
+//            }
+//
+//            if (activas != null && "S".equals(activas)) {
+//                tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> "A".equals(p.getComEstado())).collect(Collectors.toList());
+//            }
 
             return new Respuesta(true, "", "", "TarCompetencia", tarCompetenciaDtoClienteList);
         } catch (Exception ex) {

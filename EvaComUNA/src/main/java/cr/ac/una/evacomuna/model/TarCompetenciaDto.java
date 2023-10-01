@@ -51,6 +51,7 @@ public class TarCompetenciaDto {
             List<cr.ac.una.evacomunaws.controller.TarCaracteristicaDto> tarCaracteristicaDtosList = tarCaracteristicaDto.getTarCaracteristicaList();
             for (cr.ac.una.evacomunaws.controller.TarCaracteristicaDto item : tarCaracteristicaDtosList) {
                 TarCaracteristicaDto convertedItem = new TarCaracteristicaDto(item);
+                convertedItem.setCompetenciaDto(this);
                 this.tarCaracteristicaList.add(convertedItem);
             }
         }
