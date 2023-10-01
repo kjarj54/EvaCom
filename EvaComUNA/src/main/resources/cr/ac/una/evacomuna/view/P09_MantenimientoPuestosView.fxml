@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -106,7 +106,6 @@
                            <children>
                               <Label styleClass="labels-text" text="Competencias asignadas al puesto" />
                               <Pane HBox.hgrow="ALWAYS" />
-                              <MFXButton maxHeight="1.7976931348623157E308" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
                            </children>
                            <padding>
                               <Insets left="10.0" />

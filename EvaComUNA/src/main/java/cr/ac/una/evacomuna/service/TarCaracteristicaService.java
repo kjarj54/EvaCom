@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -67,7 +68,7 @@ public class TarCaracteristicaService {
 
     }
 
-    public Respuesta getCaracteristicas() {
+    public Respuesta getCaracteristicas(String descripcion) {
 
         try { // Call Web Service Operation
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
@@ -79,6 +80,10 @@ public class TarCaracteristicaService {
             for(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto item : tarCaracteristicaDtosSoap){
                 TarCaracteristicaDto tarCaracteristicaDto = new TarCaracteristicaDto(item);
                 tarCaracteristicaDtosList.add(tarCaracteristicaDto);
+            }
+            
+            if (descripcion != null && !descripcion.isBlank()) {
+                tarCaracteristicaDtosList = tarCaracteristicaDtosList.stream().filter((p) -> p.getCarDescripcion().toLowerCase().contains(descripcion.toLowerCase())).collect(Collectors.toList());
             }
 
             return new Respuesta(true, "", "", "Caracteristica", tarCaracteristicaDtosList);

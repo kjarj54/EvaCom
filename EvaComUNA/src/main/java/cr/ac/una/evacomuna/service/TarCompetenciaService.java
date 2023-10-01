@@ -68,22 +68,26 @@ public class TarCompetenciaService {
 
     }
 
-    public Respuesta getCompetencias(String nombre) {
+    public Respuesta getCompetencias(String nombre, String activas) {
         try {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
             List<cr.ac.una.evacomunaws.controller.TarCompetenciaDto> tarPuestoDtoList = evaComUNAWs.getCompetenciaS();
             List<TarCompetenciaDto> tarCompetenciaDtoClienteList = new ArrayList<>();
-            for(cr.ac.una.evacomunaws.controller.TarCompetenciaDto item : tarPuestoDtoList){
-                TarCompetenciaDto tarCompetenciaDto= new TarCompetenciaDto(item);
+            for (cr.ac.una.evacomunaws.controller.TarCompetenciaDto item : tarPuestoDtoList) {
+                TarCompetenciaDto tarCompetenciaDto = new TarCompetenciaDto(item);
                 tarCompetenciaDtoClienteList.add(tarCompetenciaDto);
             }
-            
+
             if (nombre != null && !nombre.isBlank()) {
                 tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> p.getComNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
             }
-            
-            return new Respuesta(true, "", "", "TarCompetencia",tarCompetenciaDtoClienteList);
+
+            if (activas != null && "S".equals(activas)) {
+                tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> "A".equals(p.getComEstado())).collect(Collectors.toList());
+            }
+
+            return new Respuesta(true, "", "", "TarCompetencia", tarCompetenciaDtoClienteList);
         } catch (Exception ex) {
             Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Competencia ", ex);
             return new Respuesta(false, "Error obteniendo el Competencia.", "getCompetencia" + ex.getMessage());

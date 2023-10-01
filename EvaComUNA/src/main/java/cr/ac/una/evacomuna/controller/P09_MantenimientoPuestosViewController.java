@@ -30,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -38,6 +39,8 @@ import javafx.scene.input.KeyEvent;
  */
 public class P09_MantenimientoPuestosViewController extends Controller implements Initializable {
 
+    @FXML
+    private AnchorPane root;
     @FXML
     private JFXTextField txfPuesto;
     @FXML
@@ -152,10 +155,10 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 return new SimpleStringProperty("Inactivo");
             }
         });
-        
+
         TableColumn<TarCompetenciaDto, Boolean> tbcEliminar = new TableColumn<>("Eliminar");
         tbcEliminar.setPrefWidth(150);
-        tbcEliminar.setCellValueFactory(cd->new SimpleObjectProperty(cd.getValue() !=null));
+        tbcEliminar.setCellValueFactory(cd -> new SimpleObjectProperty(cd.getValue() != null));
         tbcEliminar.setCellFactory(cd -> new ButtonCell());
 
         tbvCompetencias.getColumns().add(tbcComId);
@@ -278,7 +281,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             tbvPuestos.refresh();
             tbvCompetencias.refresh();
         } else {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Usuarios", getStage(), respuesta.getMensaje());
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Puestos", getStage(), respuesta.getMensaje());
         }
     }
 
@@ -315,7 +318,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     private void cargarCompetencias(String nombre) {
         TarCompetenciaService service = new TarCompetenciaService();
-        Respuesta respuesta = service.getCompetencias(nombre);
+        Respuesta respuesta = service.getCompetencias(nombre, "");
 
         if (respuesta.getEstado()) {
             tbvCompetenciasBusqueda.getItems().clear();
@@ -343,7 +346,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         tbvCompetenciasBusqueda.getItems().clear();
         tbvCompetenciasBusqueda.refresh();
     }
-    
+
     private class ButtonCell extends TableCell<TarCompetenciaDto, Boolean> {
 
         final Button cellButton = new Button();
@@ -355,7 +358,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
             cellButton.setOnAction((ActionEvent t) -> {
                 TarCompetenciaDto com = (TarCompetenciaDto) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
-                if(!com.getModificado()){
+                if (!com.getModificado()) {
                     tarPuestoDto.getTarCompetenciaListEliminados().add(com);
                 }
                 tbvCompetencias.getItems().remove(com);
