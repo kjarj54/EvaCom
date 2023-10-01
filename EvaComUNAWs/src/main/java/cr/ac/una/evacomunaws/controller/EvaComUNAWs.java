@@ -154,9 +154,12 @@ public class EvaComUNAWs {
                 return TarUsuarioDto.class.cast(res);//TODO
             }
             TarParametrosDto parametrosDto;
-            parametrosDto = getParametrosClass(Long.parseLong("1"));
+            parametrosDto = getParametros().get(0);
             usuarioDto = (TarUsuarioDto) res.getResultado("TarUsuario");
-            tarUsuarioService.correoActivacion(usuarioDto, parametrosDto);
+            if (usuarioDto.getUsuId() == null) {
+                tarUsuarioService.correoActivacion(usuarioDto, parametrosDto);
+            }
+
             return usuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,7 +281,7 @@ public class EvaComUNAWs {
             return TarParametrosDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getParametros")
     public List<TarParametrosDto> getParametros() {
         try {
@@ -347,7 +350,7 @@ public class EvaComUNAWs {
             return TarCaracteristicaDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getCaracteristicas")
     public List<TarCaracteristicaDto> getCaracteristicas() {
         try {
@@ -417,7 +420,7 @@ public class EvaComUNAWs {
             return TarCompetenciaDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getCompetenciaS")
     public List<TarCompetenciaDto> getCompetenciaS() {
         try {
@@ -486,7 +489,7 @@ public class EvaComUNAWs {
             return TarCompetenciaevaluarDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getCompetenciasevaluar")
     public List<TarCompetenciaevaluarDto> getCompetenciasevaluar() {
         try {
@@ -555,7 +558,7 @@ public class EvaComUNAWs {
             return TarEvaluadorDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getEvaluadores")
     public List<TarEvaluadorDto> getEvaluadores() {
         try {
@@ -624,7 +627,7 @@ public class EvaComUNAWs {
             return TarProcesoevaluacionDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getProcesoevaluaciones")
     public List<TarProcesoevaluacionDto> getProcesoevaluaciones() {
         try {
@@ -762,7 +765,7 @@ public class EvaComUNAWs {
             return TarTrabajadorevaluarDto.class.cast(ex);//TODO
         }
     }
-    
+
     @WebMethod(operationName = "getTrabajadoresvaluar")
     public List<TarTrabajadorevaluarDto> getTrabajadoresvaluar() {
         try {
