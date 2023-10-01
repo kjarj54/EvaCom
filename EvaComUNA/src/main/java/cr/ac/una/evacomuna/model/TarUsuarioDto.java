@@ -95,7 +95,7 @@ public class TarUsuarioDto {
                 this.tarEvaluadorList.add(convertedItem);
             }
         }
-
+        this.modificado = tarUsuarioDto.isModificado();
         this.usuVersion = tarUsuarioDto.getUsuVersion();
     }
 
@@ -139,6 +139,7 @@ public class TarUsuarioDto {
         }
 
         tarUsuarioDtoSoap.setUsuVersion(this.getUsuVersion());
+        tarUsuarioDtoSoap.setModificado(this.getModificado());
         return tarUsuarioDtoSoap;
     }
 

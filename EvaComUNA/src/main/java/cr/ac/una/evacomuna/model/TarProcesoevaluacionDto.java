@@ -55,7 +55,7 @@ public class TarProcesoevaluacionDto {
         }
         
         this.proVersion = tarProcesoevaluacionDto.getProVersion();
-
+        this.modificado = tarProcesoevaluacionDto.isModificado();
     }
 
     public cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto consultas() {
@@ -79,6 +79,7 @@ public class TarProcesoevaluacionDto {
         }
         
         tarProcesoevaluacionDtoSoap.setProVersion(this.getProVersion());
+        tarProcesoevaluacionDtoSoap.setModificado(this.getModificado());
         return tarProcesoevaluacionDtoSoap;
     }
 

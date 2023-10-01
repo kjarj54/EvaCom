@@ -51,6 +51,7 @@ public class TarEvaluadorDto {
                 this.tarCompetenciaevaluarList.add(convertedItem);
             }
         }
+        this.modificado = tarEvaluadorDto.isModificado();
         this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
     }
 
@@ -71,6 +72,7 @@ public class TarEvaluadorDto {
             }
         }
         tarEvaluadorDtoSoap.setEvaluVersion(this.getEvaluVersion());
+        tarEvaluadorDtoSoap.setModificado(this.getModificado());
         return tarEvaluadorDtoSoap;
     }
 

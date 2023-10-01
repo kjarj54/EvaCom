@@ -38,6 +38,7 @@ public class TarCompetenciaevaluarDto {
             this.evaluadorDto = new TarEvaluadorDto(tarCaracteristicaDto.getEvaluadorDto());
         }
         this.coeVersion = tarCaracteristicaDto.getCoeVersion();
+        this.modficado = tarCaracteristicaDto.isModficado();
     }
 
     public cr.ac.una.evacomunaws.controller.TarCompetenciaevaluarDto consultas() {
@@ -51,6 +52,7 @@ public class TarCompetenciaevaluarDto {
             tarCompetenciaevaluarDtoSoap.setEvaluadorDto(this.evaluadorDto.consultas());
         }
         tarCompetenciaevaluarDtoSoap.setCoeVersion(this.getCoeVersion());
+        tarCompetenciaevaluarDtoSoap.setModficado(this.getModficado());
         return tarCompetenciaevaluarDtoSoap;
     }
 

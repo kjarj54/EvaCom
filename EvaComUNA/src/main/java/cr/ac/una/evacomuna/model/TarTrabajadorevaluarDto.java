@@ -52,7 +52,7 @@ public class TarTrabajadorevaluarDto {
                 this.tarEvaluadorList.add(convertedItem);
             }
         }
-        
+        this.modificado = tarTrabajadorevaluarDto.isModificado();
         this.traVersion = tarTrabajadorevaluarDto.getTraVersion();
     }
 
@@ -77,7 +77,7 @@ public class TarTrabajadorevaluarDto {
         }
         
         tarTrabajadorevaluarDtoSoap.setTraVersion(this.getTraVersion());
-
+        tarTrabajadorevaluarDtoSoap.setModificado(this.getModificado());
         return tarTrabajadorevaluarDtoSoap;
     }
 

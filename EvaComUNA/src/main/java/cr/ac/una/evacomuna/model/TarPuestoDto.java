@@ -57,6 +57,7 @@ public class TarPuestoDto {
             }
         }
 
+        this.modificado= tarPuestoDto.isModificado();
         this.pueVersion = tarPuestoDto.getPueVersion();
     }
 
@@ -93,6 +94,7 @@ public class TarPuestoDto {
             }
         }
         tarPuestoDtoSoap.setPueVersion(this.getPueVersion());
+        tarPuestoDtoSoap.setModificado(this.getModificado());
         return tarPuestoDtoSoap;
     }
 
