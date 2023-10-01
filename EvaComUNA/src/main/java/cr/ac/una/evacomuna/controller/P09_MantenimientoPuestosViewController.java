@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
@@ -150,10 +153,16 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 return new SimpleStringProperty("Inactivo");
             }
         });
+        
+        TableColumn<TarCompetenciaDto, Boolean> tbcEliminar = new TableColumn<>("Eliminar");
+        tbcEliminar.setPrefWidth(150);
+        tbcEliminar.setCellValueFactory(cd->new SimpleObjectProperty(cd.getValue() !=null));
+        tbcEliminar.setCellFactory(cd -> new ButtonCell());
 
         tbvCompetencias.getColumns().add(tbcComId);
         tbvCompetencias.getColumns().add(tbcComNombre);
         tbvCompetencias.getColumns().add(tbcComEstado);
+        tbvCompetencias.getColumns().add(tbcEliminar);
         tbvCompetencias.refresh();
 
         this.tarPuestoDto = new TarPuestoDto();
@@ -228,11 +237,12 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             if (!respuesta.getEstado()) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), respuesta.getMensaje());
             } else {
+                tbvPuestos.getItems().clear();
+                tbvPuestos.refresh();
                 unbindPuesto();
                 tarPuestoDto = (TarPuestoDto) respuesta.getResultado("Puesto");
                 bindPuesto(false);
                 nuevoCompetencia();
-                onActionBtnFiltrar(event);
                 cargarCompetencias();
                 new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Puesto", getStage(), "Puesto actualizado correctamente.");
             }
@@ -319,10 +329,9 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private void cargarCompetencias() {
         ObservableList<TarCompetenciaDto> compe = FXCollections.observableArrayList();
         compe.addAll(tarPuestoDto.getTarCompetenciaList());
+
         tbvCompetencias.getItems().clear();
-        if (tarPuestoDto.getTarCompetenciaList() != null && !tarPuestoDto.getTarCompetenciaList().isEmpty()) {
-            tbvCompetencias.setItems(compe);
-        }
+        tbvCompetencias.setItems(compe);
         tbvCompetencias.refresh();
     }
 
@@ -331,5 +340,33 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         txfBuscarCompetencia.clear();
         tbvCompetenciasBusqueda.getItems().clear();
         tbvCompetenciasBusqueda.refresh();
+    }
+    
+    private class ButtonCell extends TableCell<TarCompetenciaDto, Boolean> {
+
+        final Button cellButton = new Button();
+
+        ButtonCell() {
+            cellButton.setPrefWidth(500);
+            cellButton.setText("X");
+//            cellButton.getStyleClass().add("jfx-btnimg-tbveliminar");
+
+            cellButton.setOnAction((ActionEvent t) -> {
+                TarCompetenciaDto com = (TarCompetenciaDto) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
+                if(!com.getModificado()){
+                    tarPuestoDto.getTarCompetenciaListEliminados().add(com);
+                }
+                tbvCompetencias.getItems().remove(com);
+                tbvCompetencias.refresh();
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton);
+            }
+        }
     }
 }

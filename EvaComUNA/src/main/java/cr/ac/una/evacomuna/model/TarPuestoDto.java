@@ -72,8 +72,8 @@ public class TarPuestoDto {
             }
         }
         if (!this.tarCompetenciaList.isEmpty()) {
-            List<TarCompetenciaDto> tarCompetenciaevaluarElimimados = this.tarCompetenciaList;
-            for (TarCompetenciaDto item : tarCompetenciaevaluarElimimados) {
+            List<TarCompetenciaDto> tarCompetenciaevaluar = this.tarCompetenciaList;
+            for (TarCompetenciaDto item : tarCompetenciaevaluar) {
                 tarPuestoDtoSoap.getTarCompetenciaList().add(item.consultas());
             }
         }

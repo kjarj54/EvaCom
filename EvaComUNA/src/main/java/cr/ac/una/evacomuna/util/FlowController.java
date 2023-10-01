@@ -84,16 +84,13 @@ public class FlowController {
 //            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P01_PrincipalView.fxml"), this.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P02_LogInView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P03_1_BuscadorRegistroView.fxml"), FlowController.idioma)));
-            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P01_PrincipalView.fxml"), FlowController.idioma)));
+//            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P01_PrincipalView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P07_MantenimientoGeneralesView.fxml"), FlowController.idioma)));
-//            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P09_MantenimientoPuestosView.fxml"), FlowController.idioma)));
+            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P09_MantenimientoPuestosView.fxml"), FlowController.idioma)));
             //FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P02_LogInView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P01_PrincipalView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P07_MantenimientoGeneralesView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P11_RegistroEvaluacionesView.fxml"), FlowController.idioma)));
-
-
-
             FlowController.mainStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
