@@ -7,6 +7,7 @@ import cr.ac.una.evacomuna.model.TarPuestoDto;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarCompetenciaService;
 import cr.ac.una.evacomuna.service.TarPuestoService;
+import cr.ac.una.evacomuna.util.FlowController;
 import cr.ac.una.evacomuna.util.Formato;
 import cr.ac.una.evacomuna.util.Mensaje;
 import cr.ac.una.evacomuna.util.Respuesta;
@@ -323,6 +324,6 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
     }
-
 }

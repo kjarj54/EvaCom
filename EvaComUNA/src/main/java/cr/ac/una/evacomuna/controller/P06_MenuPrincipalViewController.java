@@ -53,10 +53,14 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
 
     @FXML
     private void onActionBtnCompetencias(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P08_MantenimientoCompetencias");
     }
 
     @FXML
     private void onActionBtnPuestos(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P09_MantenimientoPuestosView");
     }
 
     @FXML

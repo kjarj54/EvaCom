@@ -9,6 +9,7 @@ import cr.ac.una.evacomuna.model.TarParametrosDto;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarParametrosService;
 import cr.ac.una.evacomuna.service.TarUsuarioService;
+import cr.ac.una.evacomuna.util.FlowController;
 import cr.ac.una.evacomuna.util.Formato;
 import cr.ac.una.evacomuna.util.Mensaje;
 import cr.ac.una.evacomuna.util.Respuesta;
@@ -144,6 +145,7 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
     }
 
     private void cargarParametros() {

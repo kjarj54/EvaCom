@@ -2,6 +2,7 @@ package cr.ac.una.evacomuna.controller;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.evacomuna.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -77,6 +78,7 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
     }
     
 }
