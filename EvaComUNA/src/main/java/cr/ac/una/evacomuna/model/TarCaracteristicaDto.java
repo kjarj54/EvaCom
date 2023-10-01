@@ -27,19 +27,24 @@ public class TarCaracteristicaDto {
 
     public TarCaracteristicaDto(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDto) {
         this();
-        this.carId.set(tarCaracteristicaDto.getCarId().toString());
+        if (carId != null) {
+            this.carId.set(tarCaracteristicaDto.getCarId().toString());
+        }
         this.carDescripcion.set(tarCaracteristicaDto.getCarDescripcion());
-//        if (tarCaracteristicaDto.getCompetenciaDto() != null) {
-//            System.out.println(tarCaracteristicaDto.getCarId());
-//            this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
-//        }
+        if (tarCaracteristicaDto.getCompetenciaDto() != null) {
+            System.out.println(tarCaracteristicaDto.getCarId());
+            this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
+        }
         this.carVersion = tarCaracteristicaDto.getCarVersion();
         this.modificado = tarCaracteristicaDto.isModificado();
     }
 
     public cr.ac.una.evacomunaws.controller.TarCaracteristicaDto consultas() {
         cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCaracteristicaDto();
-        tarCaracteristicaDtoSoap.setCarId(this.getCarId());
+        if (this.getCarId() != null) {
+            tarCaracteristicaDtoSoap.setCarId(this.getCarId());
+        }
+
         tarCaracteristicaDtoSoap.setCarDescripcion(this.getCarDescripcion());
         if (this.getCompetenciaDto() != null) {
             tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
