@@ -27,12 +27,11 @@ public class TarCaracteristicaDto {
 
     public TarCaracteristicaDto(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto tarCaracteristicaDto) {
         this();
-        if (carId != null) {
+        if (tarCaracteristicaDto.getCarId() != null) {
             this.carId.set(tarCaracteristicaDto.getCarId().toString());
         }
         this.carDescripcion.set(tarCaracteristicaDto.getCarDescripcion());
-        if (tarCaracteristicaDto.getCompetenciaDto() != null) {
-            System.out.println(tarCaracteristicaDto.getCarId());
+        if (tarCaracteristicaDto.getCompetenciaDto().getComNombre() != null) {
             this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
         }
         this.carVersion = tarCaracteristicaDto.getCarVersion();
@@ -46,9 +45,9 @@ public class TarCaracteristicaDto {
         }
 
         tarCaracteristicaDtoSoap.setCarDescripcion(this.getCarDescripcion());
-        if (this.getCompetenciaDto() != null) {
-            tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
-        }
+//        if (this.getCompetenciaDto() != null) {
+//            tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
+//        }
         tarCaracteristicaDtoSoap.setCarVersion(this.getCarVersion());
         tarCaracteristicaDtoSoap.setModificado(this.getModificado());
         return tarCaracteristicaDtoSoap;

@@ -91,14 +91,32 @@
                <children>
                   <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <JFXTextField fx:id="txfCaracteristica" onKeyPressed="#onkeyPressedCaracteristica" promptText="Agregar característica" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="txfCaracteristica" promptText="Buscar característica" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                        <MFXButton fx:id="btnFiltrarCaracteristica" maxHeight="1.7976931348623157E308" onAction="#onActionBtnFiltrarCaracteristica" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <JFXTextField fx:id="txfCaracteristicaNueva" promptText="Agregar característica" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                        <MFXButton fx:id="btnCrearCaracteristica" maxHeight="1.7976931348623157E308" onAction="#onActionBtnCrearCaracteristica" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Crear" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="tbvCaracteristicasBusqueda" prefHeight="550.0" prefWidth="599.0" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label styleClass="labels-text" text="Caracteristicas asignadas a la Competencia" />
                         <MFXButton fx:id="btnAgregarCaracteristica" maxHeight="1.7976931348623157E308" onAction="#onActionBtnAgregarCaracteristica" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
                      </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </HBox>
-                  <Label styleClass="labels-text" text="Caracteristicas asignadas a la Competencia" />
                   <TableView fx:id="tbvCaracteristicas" prefHeight="522.0" prefWidth="630.0" />
                </children>
                <padding>

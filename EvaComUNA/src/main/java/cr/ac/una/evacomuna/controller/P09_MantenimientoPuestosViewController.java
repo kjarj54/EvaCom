@@ -257,8 +257,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     @FXML
     private void onActionBtnAgregarCompetencia(ActionEvent event) {
-        if (tarCompetenciaDto.getComId() == null || tarCompetenciaDto.getComNombre().isEmpty()) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Competencia para agregarla a la lista.");
+        if (tarCompetenciaDto.getComId() == null || tarPuestoDto.getPueId() == null) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Puesto para agregarla a la lista.");
         } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.getComNombre().equals(tarCompetenciaDto.getComNombre()))) {
             tarCompetenciaDto.setModificado(true);
             tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);

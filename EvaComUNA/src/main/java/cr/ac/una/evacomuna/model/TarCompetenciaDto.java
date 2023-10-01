@@ -69,8 +69,8 @@ public class TarCompetenciaDto {
     public cr.ac.una.evacomunaws.controller.TarCompetenciaDto consultas() {
         cr.ac.una.evacomunaws.controller.TarCompetenciaDto tarCompetenciaDtoSoap = new cr.ac.una.evacomunaws.controller.TarCompetenciaDto();
         tarCompetenciaDtoSoap.setComId(this.getComId());
-        tarCompetenciaDtoSoap.setComEstado(getComEstado());
-        tarCompetenciaDtoSoap.setComNombre(getComNombre());
+        tarCompetenciaDtoSoap.setComEstado(this.getComEstado());
+        tarCompetenciaDtoSoap.setComNombre(this.getComNombre());
         if (!this.tarCompetenciaevaluarList.isEmpty()) {
             List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList = this.tarCompetenciaevaluarList;
             for (TarCompetenciaevaluarDto item : tarCompetenciaevaluarList) {
@@ -84,16 +84,16 @@ public class TarCompetenciaDto {
             }
         }
 
-        if (!this.tarCaracteristicaList.isEmpty()) {
-            List<TarCaracteristicaDto> tarCaracteristicaList = this.tarCaracteristicaList;
-            for (TarCaracteristicaDto item : tarCaracteristicaList) {
-                tarCompetenciaDtoSoap.getTarCaracteristicaList().add(item.consultas());
-            }
-        }
         if (!this.tarCaracteristicaEliminados.isEmpty()) {
             List<TarCaracteristicaDto> tarCaracteristicaEliminados = this.tarCaracteristicaEliminados;
             for (TarCaracteristicaDto item : tarCaracteristicaEliminados) {
                 tarCompetenciaDtoSoap.getTarCaracteristicaEliminados().add(item.consultas());
+            }
+        }
+        if (!this.tarCaracteristicaList.isEmpty()) {
+            List<TarCaracteristicaDto> tarCaracteristicaList = this.tarCaracteristicaList;
+            for (TarCaracteristicaDto item : tarCaracteristicaList) {
+                tarCompetenciaDtoSoap.getTarCaracteristicaList().add(item.consultas());
             }
         }
         tarCompetenciaDtoSoap.setModificado(this.getModificado());

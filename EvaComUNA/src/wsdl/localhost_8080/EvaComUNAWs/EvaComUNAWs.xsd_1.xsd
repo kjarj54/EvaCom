@@ -401,7 +401,7 @@
 
 <xs:complexType name="eliminarUsuarioResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:tarUsuarioDto" minOccurs="0"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

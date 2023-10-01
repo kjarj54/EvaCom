@@ -70,6 +70,14 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
     @FXML
     private TableView<TarCaracteristicaDto> tbvCaracteristicas;
     @FXML
+    private MFXButton btnCrearCaracteristica;
+    @FXML
+    private MFXButton btnFiltrarCaracteristica;
+    @FXML
+    private JFXTextField txfCaracteristicaNueva;
+    @FXML
+    private TableView<TarCaracteristicaDto> tbvCaracteristicasBusqueda;
+    @FXML
     private MFXButton btnSalir;
 
     private ObservableList<TarCompetenciaDto> competencias = FXCollections.observableArrayList();
@@ -84,7 +92,8 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
     public void initialize(URL url, ResourceBundle rb) {
         txfCompetencia.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfBuscarNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
-        txfCaracteristica.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
+        txfCaracteristica.setTextFormatter(Formato.getInstance().maxLengthFormat(80));
+        txfCaracteristicaNueva.setTextFormatter(Formato.getInstance().maxLengthFormat(80));
         tbvCompetencias.getColumns().clear();
         tbvCompetencias.getItems().clear();
 
@@ -110,6 +119,21 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
         tbvCompetencias.getColumns().add(tbcNombre);
         tbvCompetencias.getColumns().add(tbcEstado);
         tbvCompetencias.refresh();
+
+        tbvCaracteristicasBusqueda.getColumns().clear();
+        tbvCaracteristicasBusqueda.getItems().clear();
+
+        TableColumn<TarCaracteristicaDto, String> tbcCarIdBus = new TableColumn<>("Id");
+        tbcCarIdBus.setPrefWidth(30);
+        tbcCarIdBus.setCellValueFactory(cd -> cd.getValue().carId);
+
+        TableColumn<TarCaracteristicaDto, String> tbcCarNombreBus = new TableColumn<>("Descripcion");
+        tbcCarNombreBus.setPrefWidth(200);
+        tbcCarNombreBus.setCellValueFactory(cd -> cd.getValue().carDescripcion);
+
+        tbvCaracteristicasBusqueda.getColumns().add(tbcCarIdBus);
+        tbvCaracteristicasBusqueda.getColumns().add(tbcCarNombreBus);
+        tbvCaracteristicasBusqueda.refresh();
 
         tbvCaracteristicas.getColumns().clear();
         tbvCaracteristicas.getItems().clear();
@@ -145,6 +169,14 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
                 nuevoCaracteristica();
             } else {
                 nuevoCompetencia();
+            }
+        });
+
+        tbvCaracteristicasBusqueda.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                tarCaracteristicaDto = newValue;
+            } else {
+                nuevoCaracteristica();
             }
         });
     }
@@ -201,6 +233,8 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
                 unbindCompetencia();
                 tarCompetenciaDto = (TarCompetenciaDto) respuesta.getResultado("Competencia");
                 bindCompetencia(false);
+                tbvCaracteristicasBusqueda.getItems().clear();
+                tbvCaracteristicasBusqueda.refresh();
                 nuevoCaracteristica();
                 cargarCaracteristicas();
                 new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Competencia", getStage(), "Competencia actualizado correctamente.");
@@ -210,42 +244,6 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
             Logger.getLogger(P08_MantenimientoCompetenciasController.class.getName()).log(Level.SEVERE, "Error guardando la Competencia.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Competencia", getStage(), "Ocurrio un error guardando la Competencia.");
         }
-    }
-
-    @FXML
-    private void onActionBtnAgregarCaracteristica(ActionEvent event) {
-        if (tarCompetenciaDto.getComId() == null) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Caracteristica", getStage(), "Es necesario cargar una Competencia para agregarla a la lista.");
-        } else if (!txfCaracteristica.getText().isEmpty() && tbvCaracteristicas.getItems() == null || !tbvCaracteristicas.getItems().stream().anyMatch(a -> a.getCarDescripcion().equals(tarCaracteristicaDto.getCarDescripcion()))) {
-            tarCaracteristicaDto.setCarDescripcion(txfCaracteristica.getText());
-            tarCaracteristicaDto.setCompetenciaDto(tarCompetenciaDto);
-            try {
-//            String invalidos = validarRequeridos();
-//            if (!invalidos.isEmpty()) {
-//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Competencia", getStage(), invalidos);
-//            } else {
-                TarCaracteristicaService service = new TarCaracteristicaService();
-                Respuesta respuesta = service.guardarTarCaracteristica(tarCaracteristicaDto.consultas());
-                if (!respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Caracteristica", getStage(), respuesta.getMensaje());
-                } else {
-                    tarCaracteristicaDto = (TarCaracteristicaDto) respuesta.getResultado("Caracteristica");
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Caracteristica", getStage(), "Caracteristica actualizado correctamente.");
-                }
-//            }
-            } catch (Exception ex) {
-                Logger.getLogger(P08_MantenimientoCompetenciasController.class.getName()).log(Level.SEVERE, "Error guardando la Caracteristica.", ex);
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Caracteristica", getStage(), "Ocurrio un error guardando la Caracteristica.");
-            }
-            tarCompetenciaDto.getTarCaracteristicaList().add(tarCaracteristicaDto);
-            tbvCaracteristicas.getItems().add(tarCaracteristicaDto);
-            tbvCaracteristicas.refresh();
-        }
-    }
-
-    @FXML
-    private void onkeyPressedCaracteristica(KeyEvent event) {
-
     }
 
     @FXML
@@ -263,6 +261,63 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
             tbvCaracteristicas.refresh();
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Competencias", getStage(), respuesta.getMensaje());
+        }
+    }
+
+    @FXML
+    private void onActionBtnAgregarCaracteristica(ActionEvent event) {
+        if (tarCompetenciaDto.getComId() == null || tarCaracteristicaDto.getCarId() == null) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Caracteristica", getStage(), "Es necesario cargar una Competencia para agregarla a la lista.");
+        } else if (tbvCaracteristicas.getItems() == null
+                || !tbvCaracteristicas.getItems().stream().anyMatch(a -> a.getCarId().equals(tarCaracteristicaDto.getCarId()))) {
+            tarCaracteristicaDto.setModificado(true);
+            tarCompetenciaDto.getTarCaracteristicaList().add(tarCaracteristicaDto);
+            tbvCaracteristicas.getItems().add(tarCaracteristicaDto);
+            tbvCaracteristicas.refresh();
+        }
+    }
+
+    @FXML
+    private void onActionBtnFiltrarCaracteristica(ActionEvent event) {
+        TarCaracteristicaService service = new TarCaracteristicaService();
+        Respuesta respuesta = service.getCaracteristicas(txfCaracteristica.getText());
+
+        if (respuesta.getEstado()) {
+            tbvCaracteristicasBusqueda.getItems().clear();
+            caracteristicas.clear();
+            caracteristicas.addAll((List<TarCaracteristicaDto>) respuesta.getResultado("Caracteristica"));
+            tbvCaracteristicasBusqueda.setItems(caracteristicas);
+            tbvCaracteristicasBusqueda.refresh();
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Caracteristicas", getStage(), respuesta.getMensaje());
+        }
+    }
+
+    @FXML
+    private void onActionBtnCrearCaracteristica(ActionEvent event) {
+        try {
+            tarCaracteristicaDto.setCarDescripcion(txfCaracteristicaNueva.getText());
+//            String invalidos = validarRequeridos();
+//            if (!invalidos.isEmpty()) {
+//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Competencia", getStage(), invalidos);
+//            } else {
+            TarCaracteristicaService service = new TarCaracteristicaService();
+            Respuesta respuesta = service.guardarTarCaracteristica(tarCaracteristicaDto.consultas());
+            if (!respuesta.getEstado()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Caracteristica", getStage(), respuesta.getMensaje());
+            } else {
+                tarCaracteristicaDto = (TarCaracteristicaDto) respuesta.getResultado("Caracteristica");
+                nuevoCaracteristica();
+                tbvCaracteristicasBusqueda.getItems().clear();
+                tbvCaracteristicas.getItems().clear();
+                tbvCaracteristicasBusqueda.refresh();
+                tbvCaracteristicas.refresh();
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Caracteristica", getStage(), "Caracteristica actualizado correctamente.");
+            }
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(P08_MantenimientoCompetenciasController.class.getName()).log(Level.SEVERE, "Error guardando la Caracteristica.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Caracteristica", getStage(), "Ocurrio un error guardando la Caracteristica.");
         }
     }
 
@@ -302,6 +357,7 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
     private void nuevoCaracteristica() {
         tarCaracteristicaDto = new TarCaracteristicaDto();
         txfCaracteristica.clear();
+        txfCaracteristicaNueva.clear();
     }
 
     private class ButtonCell extends TableCell<TarCaracteristicaDto, Boolean> {

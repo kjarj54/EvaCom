@@ -66,8 +66,11 @@ public class TarCompetenciaService {
                 }
                 if (!tarCompetenciaDto.getTarCaracteristicaList().isEmpty()) {
                     for (TarCaracteristicaDto tarCaracteristicaDto : tarCompetenciaDto.getTarCaracteristicaList()) {
-                        TarCaracteristica tarCaracteristica = em.find(TarCaracteristica.class, tarCaracteristicaDto.getCarId());
-                        competencia.getTarCaracteristicaList().add(tarCaracteristica);
+                        if (tarCaracteristicaDto.getModificado()) {
+                            TarCaracteristica tarCaracteristica = em.find(TarCaracteristica.class, tarCaracteristicaDto.getCarId());
+                            tarCaracteristica.setComId(competencia);
+                            competencia.getTarCaracteristicaList().add(tarCaracteristica);
+                        }
                     }
                 }
 

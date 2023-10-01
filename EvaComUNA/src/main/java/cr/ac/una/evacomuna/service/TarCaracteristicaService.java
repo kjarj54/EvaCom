@@ -5,6 +5,7 @@
 package cr.ac.una.evacomuna.service;
 
 import cr.ac.una.evacomuna.model.TarCaracteristicaDto;
+import cr.ac.una.evacomuna.model.TarCompetenciaDto;
 import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs_Service;
@@ -76,15 +77,16 @@ public class TarCaracteristicaService {
             // TODO process result here
             List<cr.ac.una.evacomunaws.controller.TarCaracteristicaDto> tarCaracteristicaDtosSoap = evaComUNAWs.getCaracteristicas();
             List<TarCaracteristicaDto> tarCaracteristicaDtosList = new ArrayList<>();
-            
-            for(cr.ac.una.evacomunaws.controller.TarCaracteristicaDto item : tarCaracteristicaDtosSoap){
+
+            for (cr.ac.una.evacomunaws.controller.TarCaracteristicaDto item : tarCaracteristicaDtosSoap) {
                 TarCaracteristicaDto tarCaracteristicaDto = new TarCaracteristicaDto(item);
                 tarCaracteristicaDtosList.add(tarCaracteristicaDto);
             }
-            
+
             if (descripcion != null && !descripcion.isBlank()) {
                 tarCaracteristicaDtosList = tarCaracteristicaDtosList.stream().filter((p) -> p.getCarDescripcion().toLowerCase().contains(descripcion.toLowerCase())).collect(Collectors.toList());
             }
+            tarCaracteristicaDtosList = tarCaracteristicaDtosList.stream().filter((p) -> p.getCompetenciaDto().getComId() == null).collect(Collectors.toList());
 
             return new Respuesta(true, "", "", "Caracteristica", tarCaracteristicaDtosList);
         } catch (Exception ex) {
