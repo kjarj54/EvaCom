@@ -26,6 +26,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -101,7 +103,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         tbvPuestos.getColumns().add(tbcNombre);
         tbvPuestos.getColumns().add(tbcEstado);
         tbvPuestos.refresh();
-        
+
         tbvCompetenciasBusqueda.getColumns().clear();
         tbvCompetenciasBusqueda.getItems().clear();
 
@@ -122,14 +124,14 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 return new SimpleStringProperty("Inactivo");
             }
         });
-        
+
         tbvCompetenciasBusqueda.getColumns().add(tbcComIdBus);
         tbvCompetenciasBusqueda.getColumns().add(tbcComNombreBus);
         tbvCompetenciasBusqueda.getColumns().add(tbcComEstadoBus);
         tbvCompetenciasBusqueda.refresh();
 
-        tbvCompetenciasBusqueda.getColumns().clear();
-        tbvCompetenciasBusqueda.getItems().clear();
+        tbvCompetencias.getColumns().clear();
+        tbvCompetencias.getItems().clear();
 
         TableColumn<TarCompetenciaDto, String> tbcComId = new TableColumn<>("Id");
         tbcComId.setPrefWidth(30);
@@ -148,7 +150,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 return new SimpleStringProperty("Inactivo");
             }
         });
-        
+
         tbvCompetencias.getColumns().add(tbcComId);
         tbvCompetencias.getColumns().add(tbcComNombre);
         tbvCompetencias.getColumns().add(tbcComEstado);
@@ -164,16 +166,15 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 tarPuestoDto = newValue;
                 bindPuesto(false);
                 cargarCompetencias();
+                nuevoCompetencia();
             } else {
                 nuevoPuesto();
             }
         });
-        
+
         tbvCompetenciasBusqueda.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                unbindCompetencia();
                 tarCompetenciaDto = newValue;
-                bindCompetencia(false);
             } else {
                 nuevoCompetencia();
             }
@@ -197,6 +198,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 } else {
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar Puesto", getStage(), "Puesto eliminado correctamente.");
                     nuevoPuesto();
+                    onActionBtnFiltrar(event);
                 }
             }
         } catch (Exception ex) {
@@ -209,6 +211,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private void onActionBtnLimpiarPuesto(ActionEvent event) {
         if (new Mensaje().showConfirmation("Limpiar Puesto", getStage(), "¿Esta seguro que desea limpiar el registro?")) {
             nuevoPuesto();
+            tbvCompetencias.getItems().clear();
+            tbvCompetencias.refresh();
         }
     }
 
@@ -243,12 +247,11 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private void onActionBtnAgregarCompetencia(ActionEvent event) {
         if (tarCompetenciaDto.getComId() == null || tarCompetenciaDto.getComNombre().isEmpty()) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Competencia para agregarla a la lista.");
-        } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.equals(tarCompetenciaDto))) {
+        } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.getComNombre().equals(tarCompetenciaDto.getComNombre()))) {
             tarCompetenciaDto.setModificado(true);
             tbvCompetencias.getItems().add(tarCompetenciaDto);
             tbvCompetencias.refresh();
         }
-        nuevoCompetencia();
     }
 
     @FXML
@@ -264,6 +267,18 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             tbvPuestos.refresh();
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Usuarios", getStage(), respuesta.getMensaje());
+        }
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
+    }
+
+    @FXML
+    private void onkeyPressedCompetencia(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            cargarCompetencias(txfBuscarCompetencia.getText());
         }
     }
 
@@ -291,39 +306,30 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         Respuesta respuesta = service.getCompetencias(nombre);
 
         if (respuesta.getEstado()) {
-            unbindCompetencia();
-            tarCompetenciaDto = (TarCompetenciaDto) respuesta.getResultado("TarCompetencia");
-            bindCompetencia(false);
+            tbvCompetenciasBusqueda.getItems().clear();
+            competencias.clear();
+            competencias.addAll((List<TarCompetenciaDto>) respuesta.getResultado("TarCompetencia"));
+            tbvCompetenciasBusqueda.setItems(competencias);
+            tbvCompetenciasBusqueda.refresh();
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Competencia", getStage(), respuesta.getMensaje());
         }
     }
 
     private void cargarCompetencias() {
+        ObservableList<TarCompetenciaDto> compe = FXCollections.observableArrayList();
+        compe.addAll(tarPuestoDto.getTarCompetenciaList());
         tbvCompetencias.getItems().clear();
-        if (tarPuestoDto.getTarCompetenciaList() != null) {
-            tbvCompetencias.setItems((ObservableList<TarCompetenciaDto>) tarPuestoDto.getTarCompetenciaList());
+        if (tarPuestoDto.getTarCompetenciaList() != null && !tarPuestoDto.getTarCompetenciaList().isEmpty()) {
+            tbvCompetencias.setItems(compe);
         }
         tbvCompetencias.refresh();
     }
 
     private void nuevoCompetencia() {
-        unbindCompetencia();
         tarCompetenciaDto = new TarCompetenciaDto();
-        bindCompetencia(true);
         txfBuscarCompetencia.clear();
-    }
-
-    private void bindCompetencia(Boolean nuevo) {
-        txfBuscarNombre.textProperty().bindBidirectional(this.tarCompetenciaDto.comNombre);
-    }
-
-    private void unbindCompetencia() {
-        txfBuscarNombre.textProperty().unbindBidirectional(this.tarCompetenciaDto.comNombre);
-    }
-
-    @FXML
-    private void onActionBtnSalir(ActionEvent event) {
-        FlowController.getInstance().goView("P06_MenuPrincipalView");
+        tbvCompetenciasBusqueda.getItems().clear();
+        tbvCompetenciasBusqueda.refresh();
     }
 }

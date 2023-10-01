@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -77,7 +78,11 @@ public class TarCompetenciaService {
                 TarCompetenciaDto tarCompetenciaDto= new TarCompetenciaDto(item);
                 tarCompetenciaDtoClienteList.add(tarCompetenciaDto);
             }
-
+            
+            if (nombre != null && !nombre.isBlank()) {
+                tarCompetenciaDtoClienteList = tarCompetenciaDtoClienteList.stream().filter((p) -> p.getComNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
+            }
+            
             return new Respuesta(true, "", "", "TarCompetencia",tarCompetenciaDtoClienteList);
         } catch (Exception ex) {
             Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Competencia ", ex);

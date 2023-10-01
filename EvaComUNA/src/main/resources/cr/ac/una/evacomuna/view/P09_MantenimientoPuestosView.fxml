@@ -92,7 +92,7 @@
                     <children>
                         <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
                             <children>
-                                <JFXTextField fx:id="txfBuscarCompetencia" promptText="Buscar competencia" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                <JFXTextField fx:id="txfBuscarCompetencia" onKeyPressed="#onkeyPressedCompetencia" promptText="Buscar competencia" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
                                 <MFXButton fx:id="btnAgregarCompetencia" maxHeight="1.7976931348623157E308" onAction="#onActionBtnAgregarCompetencia" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
                             </children>
                             <padding>

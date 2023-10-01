@@ -59,7 +59,7 @@ public class TarPuestoService {
             EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
             evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
 
-            TarPuestoDto puestoDto = new TarPuestoDto((cr.ac.una.evacomunaws.controller.TarPuestoDto) evaComUNAWs.eliminarPuesto(id));
+            evaComUNAWs.eliminarPuesto(id);
             return new Respuesta(true, "", "", "Puesto", "");
         } catch (Exception ex) {
             Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Puesto [" + id + "]", ex);
@@ -80,11 +80,11 @@ public class TarPuestoService {
                 tarPuestoDtoClienteList.add(tarPuestoDto);
             }
 
-            if (!nombre.isEmpty()) {
+            if (nombre != null && !nombre.isBlank()) {
                 tarPuestoDtoClienteList = tarPuestoDtoClienteList.stream().filter((p) -> p.getPueNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
             }
             
-            if ("S".equals(activas)) {
+            if (activas != null && "S".equals(activas)) {
                 tarPuestoDtoClienteList = tarPuestoDtoClienteList.stream().filter((p) -> "A".equals(p.getPueEstado())).collect(Collectors.toList());
             }
             
