@@ -99,7 +99,7 @@ public class TarUsuarioService {
                     return new Respuesta(false, CodigoRespuesta.ERROR_NOENCONTRADO, "No se encrontró el usuario a modificar.", "guardarCaracteristica NoResultException");
                 }
 
-                if (tarUsuarioDto.getPuestoDto() != null) {
+                if (tarUsuarioDto.getPuestoDto().getPueId() != null) {
                     TarPuesto puesto = em.find(TarPuesto.class, tarUsuarioDto.getPuestoDto().getPueId());
                     usuario.setPueId(puesto);
                 }
