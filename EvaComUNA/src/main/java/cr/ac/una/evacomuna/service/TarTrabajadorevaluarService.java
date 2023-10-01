@@ -8,6 +8,8 @@ import cr.ac.una.evacomuna.model.TarTrabajadorevaluarDto;
 import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs_Service;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,4 +67,26 @@ public class TarTrabajadorevaluarService {
         }
 
     }
+    
+    public Respuesta getTarTrabajadoresevaluar() {
+        try {
+            EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
+            
+            evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
+            
+            List<cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto> tarTrabajadorevaluarDtosListSoap = evaComUNAWs.getTrabajadoresvaluar();
+            
+            List<TarTrabajadorevaluarDto> tarTrabajadorevaluarDtosList = new ArrayList<>();
+            
+            for (cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto item : tarTrabajadorevaluarDtosListSoap) {
+                TarTrabajadorevaluarDto tarTrabajadorevaluarDto = new TarTrabajadorevaluarDto(item);
+                tarTrabajadorevaluarDtosList.add(tarTrabajadorevaluarDto);
+            }
+            return new Respuesta(true, "", "", "Trabajadorevaluar", tarTrabajadorevaluarDtosList);
+        } catch (Exception ex) {
+            Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Trabajadorevaluar ", ex);
+            return new Respuesta(false, "Error obteniendo el Trabajadorevaluar.", "getTarTrabajadoresevaluar" + ex.getMessage());
+        }
+    }
+    
 }

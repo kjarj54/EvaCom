@@ -8,6 +8,8 @@ import cr.ac.una.evacomuna.model.TarEvaluadorDto;
 import cr.ac.una.evacomuna.util.Respuesta;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs;
 import cr.ac.una.evacomunaws.controller.EvaComUNAWs_Service;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,5 +66,25 @@ public class TarEvaluadorService {
 
     }
     
+    public Respuesta getEvaluadores() {
+        try {
+            EvaComUNAWs_Service canchaUNAWs_service = new EvaComUNAWs_Service();
+            
+            evaComUNAWs = canchaUNAWs_service.getEvaComUNAWsPort();
+            
+            List<cr.ac.una.evacomunaws.controller.TarEvaluadorDto> tarEvaluadorDtosListSoap = evaComUNAWs.getEvaluadores();
+            
+            List<TarEvaluadorDto> tarEvaluadorDtosList = new ArrayList<>();
+            
+            for (cr.ac.una.evacomunaws.controller.TarEvaluadorDto item : tarEvaluadorDtosListSoap) {
+                TarEvaluadorDto tarEvaluadorDto = new TarEvaluadorDto(item);
+                tarEvaluadorDtosList.add(tarEvaluadorDto);
+            }
+            return new Respuesta(true, "", "", "Evaluador", tarEvaluadorDtosList);
+        } catch (Exception ex) {
+            Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error obteniendo el Evaluador ", ex);
+            return new Respuesta(false, "Error obteniendo el Evaluador.", "getEvaluadores" + ex.getMessage());
+        }
+    }
     
 }
