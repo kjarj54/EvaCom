@@ -51,6 +51,7 @@ public class TarEvaluadorDto {
                 this.tarCompetenciaevaluarList.add(convertedItem);
             }
         }
+        this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarEvaluadorDto consultas() {
@@ -69,6 +70,7 @@ public class TarEvaluadorDto {
                 tarEvaluadorDtoSoap.getTarCompetenciaevaluarListEliminados().add(item.consultas());
             }
         }
+        tarEvaluadorDtoSoap.setEvaluVersion(this.getEvaluVersion());
         return tarEvaluadorDtoSoap;
     }
 

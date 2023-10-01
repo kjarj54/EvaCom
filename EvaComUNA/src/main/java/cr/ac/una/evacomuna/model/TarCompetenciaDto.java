@@ -61,7 +61,7 @@ public class TarCompetenciaDto {
                 this.tarCompetenciaevaluarList.add(convertedItem);
             }
         }
-
+        this.comVersion = tarCaracteristicaDto.getComVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarCompetenciaDto consultas() {
@@ -94,6 +94,8 @@ public class TarCompetenciaDto {
                 tarCompetenciaDtoSoap.getTarCaracteristicaEliminados().add(item.consultas());
             }
         }
+        
+        tarCompetenciaDtoSoap.setComVersion(this.getComVersion());
 
         return tarCompetenciaDtoSoap;
     }

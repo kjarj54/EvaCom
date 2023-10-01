@@ -52,6 +52,8 @@ public class TarTrabajadorevaluarDto {
                 this.tarEvaluadorList.add(convertedItem);
             }
         }
+        
+        this.traVersion = tarTrabajadorevaluarDto.getTraVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarTrabajadorevaluarDto consultas() {
@@ -73,6 +75,8 @@ public class TarTrabajadorevaluarDto {
                 tarTrabajadorevaluarDtoSoap.getTarEvaluadorListEliminados().add(item.consultas());
             }
         }
+        
+        tarTrabajadorevaluarDtoSoap.setTraVersion(this.getTraVersion());
 
         return tarTrabajadorevaluarDtoSoap;
     }

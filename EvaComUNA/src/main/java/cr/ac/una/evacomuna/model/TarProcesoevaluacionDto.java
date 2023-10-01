@@ -53,6 +53,8 @@ public class TarProcesoevaluacionDto {
                 this.tarTrabajadorevaluarList.add(convertedItem);
             }
         }
+        
+        this.proVersion = tarProcesoevaluacionDto.getProVersion();
 
     }
 
@@ -75,6 +77,8 @@ public class TarProcesoevaluacionDto {
                 tarProcesoevaluacionDtoSoap.getTarTrabajadorevaluarListEliminados().add(item.consultas());
             }
         }
+        
+        tarProcesoevaluacionDtoSoap.setProVersion(this.getProVersion());
         return tarProcesoevaluacionDtoSoap;
     }
 

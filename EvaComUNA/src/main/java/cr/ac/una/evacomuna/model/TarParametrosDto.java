@@ -44,6 +44,7 @@ public class TarParametrosDto {
         this.parId.set(tarParametrosDto.getParId().toString());
         this.parLogo.set(tarParametrosDto.getParLogo());
         this.parNombre.set(tarParametrosDto.getParNombre());
+        this.parVersion = tarParametrosDto.getParVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarParametrosDto consultas() {
@@ -54,6 +55,7 @@ public class TarParametrosDto {
         tarParametrosDtoSoap.setParNombre(this.getParNombre());
         tarParametrosDtoSoap.setParHtml(this.getParHtml());
         tarParametrosDtoSoap.setParLogo(this.getParLogo());
+        tarParametrosDtoSoap.setParVersion(this.getParVersion());
         return tarParametrosDtoSoap;
     }
 

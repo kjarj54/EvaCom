@@ -32,7 +32,7 @@ public class TarCaracteristicaDto {
         if (tarCaracteristicaDto.getCompetenciaDto() != null) {
             this.competenciaDto = new TarCompetenciaDto(tarCaracteristicaDto.getCompetenciaDto());
         }
-
+        this.carVersion = tarCaracteristicaDto.getCarVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarCaracteristicaDto consultas() {
@@ -42,6 +42,7 @@ public class TarCaracteristicaDto {
         if (this.getCompetenciaDto() != null) {
             tarCaracteristicaDtoSoap.setCompetenciaDto(this.getCompetenciaDto().consultas());
         }
+        tarCaracteristicaDtoSoap.setCarVersion(this.getCarVersion());
         return tarCaracteristicaDtoSoap;
     }
 

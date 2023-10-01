@@ -95,6 +95,8 @@ public class TarUsuarioDto {
                 this.tarEvaluadorList.add(convertedItem);
             }
         }
+
+        this.usuVersion = tarUsuarioDto.getUsuVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarUsuarioDto consultas() {
@@ -136,6 +138,7 @@ public class TarUsuarioDto {
             }
         }
 
+        tarUsuarioDtoSoap.setUsuVersion(this.getUsuVersion());
         return tarUsuarioDtoSoap;
     }
 

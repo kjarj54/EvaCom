@@ -56,6 +56,8 @@ public class TarPuestoDto {
                 this.tarCompetenciaList.add(convertedItem);
             }
         }
+        
+        this.pueVersion = tarPuestoDto.getPueVersion();
     }
 
     public cr.ac.una.evacomunaws.controller.TarPuestoDto consultas() {
@@ -88,6 +90,7 @@ public class TarPuestoDto {
                 tarPuestoDtoSoap.getTarUsuarioListEliminados().add(item.consultas());
             }
         }
+        tarPuestoDtoSoap.setPueVersion(this.getPueVersion());
         return tarPuestoDtoSoap;
     }
 
