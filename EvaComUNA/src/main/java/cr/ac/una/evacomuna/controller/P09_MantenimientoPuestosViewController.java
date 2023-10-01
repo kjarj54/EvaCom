@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.evacomuna.model.TarCompetenciaDto;
 import cr.ac.una.evacomuna.model.TarPuestoDto;
-import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarCompetenciaService;
 import cr.ac.una.evacomuna.service.TarPuestoService;
 import cr.ac.una.evacomuna.util.FlowController;
@@ -259,6 +258,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Competencia para agregarla a la lista.");
         } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.getComNombre().equals(tarCompetenciaDto.getComNombre()))) {
             tarCompetenciaDto.setModificado(true);
+            tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);
             tbvCompetencias.getItems().add(tarCompetenciaDto);
             tbvCompetencias.refresh();
         }
@@ -271,10 +271,12 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
         if (respuesta.getEstado()) {
             tbvPuestos.getItems().clear();
+            tbvCompetencias.getItems().clear();
             puestos.clear();
             puestos.addAll((List<TarPuestoDto>) respuesta.getResultado("TarPuestos"));
             tbvPuestos.setItems(puestos);
             tbvPuestos.refresh();
+            tbvCompetencias.refresh();
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Usuarios", getStage(), respuesta.getMensaje());
         }

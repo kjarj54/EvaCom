@@ -56,7 +56,7 @@ public class TarPuestoDto {
                 this.tarCompetenciaList.add(convertedItem);
             }
         }
-        
+
         this.pueVersion = tarPuestoDto.getPueVersion();
     }
 
@@ -83,7 +83,7 @@ public class TarPuestoDto {
                 tarPuestoDtoSoap.getTarUsuarioList().add(item.consultas());
             }
         }
-        
+
         if (!this.tarUsuarioListEliminados.isEmpty()) {
             List<TarUsuarioDto> tarUsuarioDtos = this.tarUsuarioListEliminados;
             for (TarUsuarioDto item : tarUsuarioDtos) {
