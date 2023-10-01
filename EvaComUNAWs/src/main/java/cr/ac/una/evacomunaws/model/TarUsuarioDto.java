@@ -29,10 +29,10 @@ public class TarUsuarioDto {
     private String usuAdmin;
     private Long usuVersion;
     private Boolean modificado;
-    List<TarEvaluadorDto> tarEvaluadorList;
-    List<TarEvaluadorDto> tarEvaluadorListEliminados;
-    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
-    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
+    List<TarEvaluadorDto> tarEvaluadorList = new ArrayList<>();
+    List<TarEvaluadorDto> tarEvaluadorListEliminados = new ArrayList<>();
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList = new ArrayList<>();
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados = new ArrayList<>();
     private TarPuestoDto puestoDto;
     private LocalDateTime fecha;
 
@@ -42,7 +42,7 @@ public class TarUsuarioDto {
         tarEvaluadorListEliminados = new ArrayList<>();
         tarTrabajadorevaluarList = new ArrayList<>();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
-        this.fecha = LocalDateTime.now();   
+        this.fecha = LocalDateTime.now();
     }
 
     public TarUsuarioDto(TarUsuario tarUsuario) {
@@ -60,7 +60,7 @@ public class TarUsuarioDto {
         this.usuVersion = tarUsuario.getUsuVersion();
         this.usuUsu = tarUsuario.getUsuUsu();
         this.usuTempclave = tarUsuario.getUsuTempclave();
-        this.fecha = LocalDateTime.now(); 
+        this.fecha = LocalDateTime.now();
     }
 
     public Long getUsuId() {
@@ -230,7 +230,5 @@ public class TarUsuarioDto {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
-
-    
 
 }

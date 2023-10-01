@@ -18,12 +18,12 @@ public class TarCompetenciaDto {
     private String comEstado;
     private Long comVersion;
     private Boolean modificado;
-    List<TarPuestoDto> tarPuestoList;
-    List<TarPuestoDto> tarPuestoEliminados;
-    List<TarCaracteristicaDto> tarCaracteristicaList;
-    List<TarCaracteristicaDto> tarCaracteristicaEliminados;
-    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
-    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarElimimados;
+    List<TarPuestoDto> tarPuestoList = new ArrayList<>();
+    List<TarPuestoDto> tarPuestoEliminados = new ArrayList<>();
+    List<TarCaracteristicaDto> tarCaracteristicaList = new ArrayList<>();
+    List<TarCaracteristicaDto> tarCaracteristicaEliminados = new ArrayList<>();
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList = new ArrayList<>();
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarElimimados = new ArrayList<>();
 
     public TarCompetenciaDto() {
         this.modificado = false;
@@ -32,7 +32,7 @@ public class TarCompetenciaDto {
         tarPuestoList = new ArrayList<>();
         tarPuestoEliminados = new ArrayList<>();
         tarCompetenciaevaluarList = new ArrayList<>();
-        tarCompetenciaevaluarElimimados = new ArrayList<>();  
+        tarCompetenciaevaluarElimimados = new ArrayList<>();
     }
 
     public TarCompetenciaDto(TarCompetencia tarCompetencia) {
@@ -130,5 +130,4 @@ public class TarCompetenciaDto {
         this.tarCompetenciaevaluarElimimados = tarCompetenciaevaluarElimimados;
     }
 
-    
 }

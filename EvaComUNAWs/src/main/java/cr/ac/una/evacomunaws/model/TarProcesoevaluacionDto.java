@@ -14,6 +14,7 @@ import java.util.List;
  * @author kevin
  */
 public class TarProcesoevaluacionDto {
+
     private Long proId;
     private LocalDate proFini;
     private LocalDate proFfin;
@@ -21,21 +22,21 @@ public class TarProcesoevaluacionDto {
     private String proEstado;
     private Long proVersion;
     private Boolean modificado;
-    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList;
-    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados;
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarList = new ArrayList<>();
+    List<TarTrabajadorevaluarDto> tarTrabajadorevaluarListEliminados = new ArrayList<>();
     private LocalDateTime fecha;
 
     public TarProcesoevaluacionDto() {
         this.modificado = false;
         tarTrabajadorevaluarList = new ArrayList<>();
         tarTrabajadorevaluarListEliminados = new ArrayList<>();
-        this.fecha = LocalDateTime.now();    
+        this.fecha = LocalDateTime.now();
     }
-    
+
     public TarProcesoevaluacionDto(TarProcesoevaluacion tarProcesoevaluacion) {
         this.proId = tarProcesoevaluacion.getProId();
         this.proFini = tarProcesoevaluacion.getProFini();
-        if (tarProcesoevaluacion.getProFfin()!= null) {
+        if (tarProcesoevaluacion.getProFfin() != null) {
             this.proFfin = tarProcesoevaluacion.getProFfin();
         } else {
             this.proFfin = null;
@@ -125,7 +126,5 @@ public class TarProcesoevaluacionDto {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
-    
-    
-    
+
 }

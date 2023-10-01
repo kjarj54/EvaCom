@@ -12,16 +12,17 @@ import java.util.List;
  * @author kevin
  */
 public class TarPuestoDto {
+
     private Long pueId;
     private String pueNombre;
     private String pueEstado;
     private Long pueVersion;
     private Boolean modificado;
-    List<TarCompetenciaDto> tarCompetenciaList;
-    List<TarCompetenciaDto> tarCompetenciaListEliminados;
-    List<TarUsuarioDto> tarUsuarioList;
-    List<TarUsuarioDto> tarUsuarioListEliminados;
-    
+    List<TarCompetenciaDto> tarCompetenciaList = new ArrayList<>();
+    List<TarCompetenciaDto> tarCompetenciaListEliminados = new ArrayList<>();
+    List<TarUsuarioDto> tarUsuarioList = new ArrayList<>();
+    List<TarUsuarioDto> tarUsuarioListEliminados = new ArrayList<>();
+
     public TarPuestoDto() {
         this.modificado = false;
         tarCompetenciaList = new ArrayList<>();
@@ -29,7 +30,7 @@ public class TarPuestoDto {
         tarUsuarioList = new ArrayList<>();
         tarUsuarioListEliminados = new ArrayList<>();
     }
-    
+
     public TarPuestoDto(TarPuesto tarPuesto) {
         this.pueId = tarPuesto.getPueId();
         this.pueNombre = tarPuesto.getPueNombre();
@@ -108,6 +109,5 @@ public class TarPuestoDto {
     public void setTarUsuarioListEliminados(List<TarUsuarioDto> tarUsuarioListEliminados) {
         this.tarUsuarioListEliminados = tarUsuarioListEliminados;
     }
-     
-    
+
 }

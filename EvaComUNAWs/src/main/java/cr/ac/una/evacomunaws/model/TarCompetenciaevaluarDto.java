@@ -77,6 +77,4 @@ public class TarCompetenciaevaluarDto {
         this.evaluadorDto = evaluadorDto;
     }
 
-    
-
 }

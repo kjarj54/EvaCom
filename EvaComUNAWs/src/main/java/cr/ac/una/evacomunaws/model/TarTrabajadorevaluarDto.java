@@ -4,6 +4,7 @@
  */
 package cr.ac.una.evacomunaws.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,14 +17,15 @@ public class TarTrabajadorevaluarDto {
     private String traResultado;
     private Long traVersion;
     private Boolean modificado;
-    List<TarEvaluadorDto> tarEvaluadorList;
-    List<TarEvaluadorDto> tarEvaluadorListEliminados;
+    List<TarEvaluadorDto> tarEvaluadorList = new ArrayList<>();
+    List<TarEvaluadorDto> tarEvaluadorListEliminados = new ArrayList<>();
     private TarProcesoevaluacionDto procesoDto;
     private TarUsuarioDto usuarioDto;
 
     public TarTrabajadorevaluarDto() {
         this.modificado = false;
-        
+        this.tarEvaluadorList = new ArrayList<>();
+        this.tarEvaluadorListEliminados = new ArrayList<>();
     }
 
     public TarTrabajadorevaluarDto(TarTrabajadorevaluar tarTrabajadorevaluar) {

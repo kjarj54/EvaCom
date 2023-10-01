@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @author kevin
  */
 public class TarParametrosDto {
+
     private Long parId;
     private String parNombre;
     private String parEmail;
@@ -20,11 +21,11 @@ public class TarParametrosDto {
     private String parDescripcion;
     private Long parVersion;
     private Boolean modificado;
-    
+
     public TarParametrosDto() {
         this.modificado = false;
     }
-    
+
     public TarParametrosDto(TarParametros tarParametros) {
         this.parId = tarParametros.getParId();
         this.parNombre = tarParametros.getParNombre();
@@ -107,8 +108,5 @@ public class TarParametrosDto {
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
-    
-    
-    
-    
+
 }

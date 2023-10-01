@@ -19,8 +19,8 @@ public class TarEvaluadorDto {
     private Boolean modificado;
     private TarTrabajadorevaluarDto trabajadorevaluarDto;
     private TarUsuarioDto usuarioDto;
-    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList;
-    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados;
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarList = new ArrayList<>();
+    List<TarCompetenciaevaluarDto> tarCompetenciaevaluarListEliminados = new ArrayList<>();
 
     public TarEvaluadorDto() {
         this.modificado = false;

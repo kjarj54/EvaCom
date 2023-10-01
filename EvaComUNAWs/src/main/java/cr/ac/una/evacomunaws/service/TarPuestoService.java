@@ -117,7 +117,8 @@ public class TarPuestoService {
                 }
                 if (!tarPuesto.getTarCompetenciaList().isEmpty()) {
                     for (TarCompetencia tarCompetencia : tarPuesto.getTarCompetenciaList()) {
-                        tarPuestoDto.getTarCompetenciaList().add(new TarCompetenciaDto(tarCompetencia));
+                        TarCompetenciaDto tarCompetenciaDto = new TarCompetenciaDto(tarCompetencia);
+                        tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);
                     }
                 }
                 tarPuestoDtosList.add(tarPuestoDto);
