@@ -186,7 +186,7 @@ public class EvaComUNAWs {
     public Boolean recuperarClave(@WebParam(name = "correo") String correo) {
         try {
             TarParametrosDto parametrosDto;
-            parametrosDto = getParametrosClass(Long.parseLong("1"));
+            parametrosDto = getParametros().get(0);
             Respuesta res = tarUsuarioService.recuperarClave(correo, parametrosDto);
 
             if (!res.getEstado()) {
