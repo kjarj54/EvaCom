@@ -278,6 +278,21 @@ public class EvaComUNAWs {
             return TarParametrosDto.class.cast(ex);//TODO
         }
     }
+    
+    @WebMethod(operationName = "getParametros")
+    public List<TarParametrosDto> getParametros() {
+        try {
+            Respuesta res = tarParametrosService.getParametros();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarParametrosDto> tarParametrosDtos = (List<TarParametrosDto>) res.getResultado("TarParametros");
+            return tarParametrosDtos;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
+        }
+    }
 
     /**
      * *****************************************************************************************
@@ -330,6 +345,21 @@ public class EvaComUNAWs {
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarCaracteristicaDto.class.cast(ex);//TODO
+        }
+    }
+    
+    @WebMethod(operationName = "getCaracteristicas")
+    public List<TarCaracteristicaDto> getCaracteristicas() {
+        try {
+            Respuesta res = tarCaracteristicaService.getCaracteristicas();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarCaracteristicaDto> tarCaracteristicaDtos = (List<TarCaracteristicaDto>) res.getResultado("Caracteristica");
+            return tarCaracteristicaDtos;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
         }
     }
 
@@ -456,6 +486,21 @@ public class EvaComUNAWs {
             return TarCompetenciaevaluarDto.class.cast(ex);//TODO
         }
     }
+    
+    @WebMethod(operationName = "getCompetenciasevaluar")
+    public List<TarCompetenciaevaluarDto> getCompetenciasevaluar() {
+        try {
+            Respuesta res = tarCompetenciaevaluarService.getCompetenciasEvaluar();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarCompetenciaevaluarDto> tarCompetenciaevaluarDtos = (List<TarCompetenciaevaluarDto>) res.getResultado("TarParametros");
+            return tarCompetenciaevaluarDtos;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
+        }
+    }
 
     /**
      * *****************************************************************************************
@@ -510,6 +555,21 @@ public class EvaComUNAWs {
             return TarEvaluadorDto.class.cast(ex);//TODO
         }
     }
+    
+    @WebMethod(operationName = "getEvaluadores")
+    public List<TarEvaluadorDto> getEvaluadores() {
+        try {
+            Respuesta res = tarEvaluadorService.getEvaluadores();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarEvaluadorDto> tarEvaluadorDtos = (List<TarEvaluadorDto>) res.getResultado("Evaluadores");
+            return tarEvaluadorDtos;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
+        }
+    }
 
     /**
      * *****************************************************************************************
@@ -562,6 +622,21 @@ public class EvaComUNAWs {
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarProcesoevaluacionDto.class.cast(ex);//TODO
+        }
+    }
+    
+    @WebMethod(operationName = "getProcesoevaluaciones")
+    public List<TarProcesoevaluacionDto> getProcesoevaluaciones() {
+        try {
+            Respuesta res = tarProcesoevaluacionService.getProcesosEvaluacion();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarProcesoevaluacionDto> tarProcesoevaluacionDtos = (List<TarProcesoevaluacionDto>) res.getResultado("TarProcesoevaluaciones");
+            return tarProcesoevaluacionDtos;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
         }
     }
 
@@ -685,6 +760,21 @@ public class EvaComUNAWs {
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
             return TarTrabajadorevaluarDto.class.cast(ex);//TODO
+        }
+    }
+    
+    @WebMethod(operationName = "getTrabajadoresvaluar")
+    public List<TarTrabajadorevaluarDto> getTrabajadoresvaluar() {
+        try {
+            Respuesta res = tarTrabajadorevaluarService.getTrabajadoresEvaluar();
+            if (!res.getEstado()) {
+                return new ArrayList<>().getClass().cast(res);//TODO
+            }
+            List<TarTrabajadorevaluarDto> tarTrabajadorevaluarDtos = (List<TarTrabajadorevaluarDto>) res.getResultado("TrabajadorEvaluares");
+            return tarTrabajadorevaluarDtos;//TODO
+        } catch (Exception ex) {
+            Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>().getClass().cast(ex);//TODO
         }
     }
 
