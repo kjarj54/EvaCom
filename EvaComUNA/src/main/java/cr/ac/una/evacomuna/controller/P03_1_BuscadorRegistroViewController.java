@@ -3,6 +3,7 @@ package cr.ac.una.evacomuna.controller;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarUsuarioService;
+import cr.ac.una.evacomuna.util.FlowController;
 import cr.ac.una.evacomuna.util.Mensaje;
 import cr.ac.una.evacomuna.util.Respuesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -45,6 +46,7 @@ public class P03_1_BuscadorRegistroViewController extends Controller implements 
 
     private EventHandler<KeyEvent> keyEnter;
     private ObservableList<TarUsuarioDto> usuarios = FXCollections.observableArrayList();
+
     Object resultado;
 
     /**
@@ -67,7 +69,7 @@ public class P03_1_BuscadorRegistroViewController extends Controller implements 
         tbcNombre.setPrefWidth(100);
         tbcNombre.setCellValueFactory(cd -> cd.getValue().usuNombre);
 
-        TableColumn<TarUsuarioDto, String> tbcApellido = new TableColumn<>("Primer Apellido");
+        TableColumn<TarUsuarioDto, String> tbcApellido = new TableColumn<>("Apellidos");
         tbcApellido.setPrefWidth(150);
         tbcApellido.setCellValueFactory(cd -> cd.getValue().usuApellido);
 
@@ -98,6 +100,8 @@ public class P03_1_BuscadorRegistroViewController extends Controller implements 
     @FXML
     private void onActionBtnAceptar(ActionEvent event) {
         resultado = tbvResultados.getSelectionModel().getSelectedItem();
+        P03_RegistroViewController registroController = (P03_RegistroViewController) FlowController.getInstance().getController("P03_RegistroView");
+        registroController.bindBuscar();
         getStage().close();
     }
 
@@ -121,6 +125,10 @@ public class P03_1_BuscadorRegistroViewController extends Controller implements 
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Usuarios", getStage(), respuesta.getMensaje());
         }
+    }
+    
+    public Object getSeleccionado() {
+        return resultado;
     }
 
 }

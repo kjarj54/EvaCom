@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -26,6 +27,10 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
     private MFXButton btnPuestos;
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private AnchorPane root;
+    @FXML
+    private MFXButton btnEvaluaciones;
 
     /**
      * Initializes the controller class.
@@ -67,6 +72,10 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
     private void onActionBtnSalir(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         FlowController.getInstance().salir();
+    }
+
+    @FXML
+    private void onActionBtnEvaluaciones(ActionEvent event) {
     }
 
 }

@@ -165,6 +165,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
     @FXML
     private void onActionBtnLimpiarCampos(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        nuevoUsuario();
     }
     
      @FXML
@@ -198,6 +199,9 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfContrasena.textProperty().bindBidirectional(tarUsuarioDto.usuClave);
         txfTelefono.textProperty().bindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().bindBidirectional(tarUsuarioDto.usuCelular);
+        chkAdministrador.selectedProperty().bindBidirectional(tarUsuarioDto.usuAdmin);
+        cboxPuesto.valueProperty().bindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
+
     }
 
     private void unbindEmpleado() {
@@ -209,6 +213,8 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfContrasena.textProperty().unbindBidirectional(tarUsuarioDto.usuClave);
         txfTelefono.textProperty().unbindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().unbindBidirectional(tarUsuarioDto.usuCelular);
+        chkAdministrador.selectedProperty().unbindBidirectional(tarUsuarioDto.usuAdmin);
+        cboxPuesto.valueProperty().unbindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
     }
 
     public String validarRequeridos() {
@@ -252,16 +258,29 @@ public class P03_RegistroViewController extends Controller implements Initializa
         }
     }
     
+    public void bindBuscar() {
+        P03_1_BuscadorRegistroViewController buscadorRegistroController = (P03_1_BuscadorRegistroViewController) FlowController.getInstance().getController("P03_1_BuscadorRegistroView");
+        unbindEmpleado();
+        tarUsuarioDto = (TarUsuarioDto) buscadorRegistroController.getSeleccionado();
+        bindEmpleado(false);
+
+    }
+    
     public void cargarInterfaz() {
         String padre = (String) AppContext.getInstance().get("Padre");
+        TarUsuarioDto usuario = (TarUsuarioDto) AppContext.getInstance().get("UsuarioClass");
+        
+        
         if ("LogInView".equals(padre)) {
+            root.setPrefWidth(600);
+            root.getStyleClass().add("fondo-registro");
             chkAdministrador.setVisible(false);
             btnBuscar.setVisible(false);
             btnEliminar.setVisible(false);
             btnLimpiarCampos.setVisible(false);
             btnSalir.setVisible(false);
             cboxPuesto.setVisible(false);
-        } else {
+        } else if (usuario.getUsuAdmin().equals("S")){
             root.setPrefWidth(1280);
             root.getStyleClass().add("fondo-registro-completa");
             btnRegistrar.setText("Registrar/Actualizar");
@@ -271,6 +290,18 @@ public class P03_RegistroViewController extends Controller implements Initializa
             btnLimpiarCampos.setVisible(true);
             btnSalir.setVisible(true);
             cboxPuesto.setVisible(true);
+        } else{
+            tarUsuarioDto = usuario;
+            bindEmpleado(false);
+            root.setPrefWidth(1280);
+            root.getStyleClass().add("fondo-registro-completa");
+            btnRegistrar.setText("Registrar/Actualizar");
+            chkAdministrador.setDisable(true);
+            btnBuscar.setDisable(true);
+            btnEliminar.setDisable(true);
+            btnLimpiarCampos.setVisible(true);
+            btnSalir.setVisible(true);
+            cboxPuesto.setDisable(true);
         }
     }
 

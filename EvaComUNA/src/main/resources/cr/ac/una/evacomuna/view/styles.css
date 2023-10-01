@@ -218,6 +218,12 @@
     -fx-text-fill: #000000; /* Color del texto */
     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
 }
+
+.labels-text-minus{
+    -fx-font: 15px "Arial Rounded MT Bold";
+    -fx-text-fill: #000000; /* Color del texto */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
 /*-----------------------------------------------------------------------------------------------------------------*/
 .jfx-check-box {
     -fx-font: 15px "Arial Rounded MT Bold";
@@ -264,7 +270,28 @@
     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
 }
 /*-----------------------------------------------------------------------------------------------------------------*/
+.jfx-date-picker {
+    -jfx-default-color: #cc00cc;
+    -fx-font: 15px "Arial Rounded MT Bold";
+    -fx-prompt-text-fill: #000000;
+    -jfx-focus-color: #000000;
+    -fx-text-fill: #ffffff;
+}
+
+.jfx-date-picker:focused{
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
+
 /*-----------------------------------------------------------------------------------------------------------------*/
+.jfx-combo-box {
+    -jfx-focus-color: #cc00cc;
+    -fx-font: 15px "Arial Rounded MT Bold";
+    -jfx-unfocus-color: #000000;
+    -fx-prompt-text-fill: #000000;
+}
+.jfx-combo-box:focused {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 1), 10, 0.5, 0.0, 0.0);
+}
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------------------*/

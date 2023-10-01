@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="cr.ac.una.evacomuna.controller.P06_MenuPrincipalViewController">
+<AnchorPane id="AnchorPane" fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="fondo-mantenimiento" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P06_MenuPrincipalViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -18,8 +18,9 @@
                <children>
                   <MFXButton fx:id="btnEmpleados" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEmpleados" styleClass="mfx-button-menu" text="Mantenimiento Empleados" />
                   <MFXButton fx:id="btnGenerales" maxWidth="1.7976931348623157E308" onAction="#onActionBtnGenerales" styleClass="mfx-button-menu" text="Mantenimiento Generales" />
-                  <MFXButton fx:id="btnCompetencias" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCompetencias" styleClass="mfx-button-menu" text="Mantenimiento competencias a evaluar" />
+                  <MFXButton fx:id="btnCompetencias" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCompetencias" styleClass="mfx-button-menu" text="Mant. competencias a evaluar" />
                   <MFXButton fx:id="btnPuestos" maxWidth="1.7976931348623157E308" onAction="#onActionBtnPuestos" styleClass="mfx-button-menu" text="Mantenimiento de puestos" />
+                  <MFXButton fx:id="btnEvaluaciones" layoutX="10.0" layoutY="595.0" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEvaluaciones" styleClass="mfx-button-menu" text="Evaluaciones" />
                   <MFXButton fx:id="btnSalir" maxWidth="1.7976931348623157E308" onAction="#onActionBtnSalir" styleClass="mfx-button-salir" text="Salir" />
                </children>
             </VBox>

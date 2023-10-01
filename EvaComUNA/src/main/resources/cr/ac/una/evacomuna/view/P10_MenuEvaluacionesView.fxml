@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="fondo-mantenimiento" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="cr.ac.una.evacomuna.controller.P10_MenuEvaluacionesViewController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+     <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="BOTTOM_LEFT" prefHeight="400.0" prefWidth="400.0" spacing="15.0">
+               <children>
+                  <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" styleClass="mfx-button-Image-salir" text="Salir">
+                     <graphic>
+                        <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/media/icons/Back_Icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MFXButton>
+                  <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <MFXButton fx:id="btnCrearEvaluacion" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCrearEvaluacion" styleClass="mfx-button-menu" text="Crear Evaluación" />
+                  <MFXButton fx:id="btnRegistroEvaluaciones" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegistroEvaluaciones" styleClass="mfx-button-menu" text="Registro de evaluaciones" />
+                  <MFXButton fx:id="btnRevision" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRevision" styleClass="mfx-button-menu" text="Revisión y finalización" />
+                  <MFXButton fx:id="btnResumen" maxWidth="1.7976931348623157E308" onAction="#onActionBtnResumen" styleClass="mfx-button-menu" text="Resumen de resultados" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
