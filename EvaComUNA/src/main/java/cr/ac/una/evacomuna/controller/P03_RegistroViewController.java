@@ -81,14 +81,11 @@ public class P03_RegistroViewController extends Controller implements Initializa
     private MFXButton btnLimpiarCampos;
     @FXML
     private JFXComboBox<String> cboxPuesto;
-    
 
     // Para cargar la imagen
     File file;
     TarUsuarioDto tarUsuarioDto;
     List<Node> requeridos = new ArrayList<>();
-    
-    
 
     /**
      * Initializes the controller class.
@@ -100,7 +97,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
-        
+
         // Crear una lista de elementos
         ObservableList<String> elementos = FXCollections.observableArrayList(
                 "Opción 1",
@@ -121,7 +118,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfCelular.setTextFormatter(Formato.getInstance().integerFormat());
         this.tarUsuarioDto = new TarUsuarioDto();
         nuevoUsuario();
-//        indicarRequeridos();
+        indicarRequeridos();
         cargarInterfaz();
         loadSounds();
     }
@@ -130,49 +127,66 @@ public class P03_RegistroViewController extends Controller implements Initializa
     public void initialize() {
         cargarInterfaz();
     }
-    
+
     @FXML
     private void onActionBtnRegistrar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         try {
-//            String invalidos = validarRequeridos();
-//            if (!invalidos.isEmpty()) {
-//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), invalidos);
-//            } else {
-            TarUsuarioService empleadoService = new TarUsuarioService();
-            Respuesta respuesta = empleadoService.guardarUsuario(tarUsuarioDto.consultas());
-            if (!respuesta.getEstado()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Usuario", getStage(), respuesta.getMensaje());
+            String invalidos = validarRequeridos();
+            if (!invalidos.isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), invalidos);
             } else {
-                unbindEmpleado();
-                this.tarUsuarioDto = (TarUsuarioDto) respuesta.getResultado("TarUsuario");
-                bindEmpleado(false);
-                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Usuario", getStage(), "Usuario actualizado correctamente.");
+                TarUsuarioService empleadoService = new TarUsuarioService();
+                Respuesta respuesta = empleadoService.guardarUsuario(tarUsuarioDto.consultas());
+                if (!respuesta.getEstado()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Usuario", getStage(), respuesta.getMensaje());
+                } else {
+                    unbindEmpleado();
+                    this.tarUsuarioDto = (TarUsuarioDto) respuesta.getResultado("TarUsuario");
+                    bindEmpleado();
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Usuario", getStage(), "Usuario actualizado correctamente.");
+                }
             }
-//            }
         } catch (Exception ex) {
             Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, "Error guardando el Usuario.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Usuario", getStage(), "Ocurrio un error guardando el Usuario.");
         }
     }
-    
+
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         FlowController.getInstance().goViewInWindowModal("P03_1_BuscadorRegistroView", stage, false);
     }
-    
+
     @FXML
     private void onActionBtnLimpiarCampos(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         nuevoUsuario();
     }
-    
-     @FXML
+
+    @FXML
     private void onActionBtnEliminarUsuario(ActionEvent event) {
         SoundUtil.mouseEnterSound();
+        try {
+            if (tarUsuarioDto.getUsuId()== null) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar empleado", getStage(), "Debe cargar el empleado que desea eliminar.");
+            } else {
+                TarUsuarioService service = new TarUsuarioService();
+                Respuesta respuesta = service.eliminarUsuario(tarUsuarioDto.getUsuId());
+                if (!respuesta.getEstado()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar empleado", getStage(), respuesta.getMensaje());
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar empleado", getStage(), "Empleado eliminado correctamente.");
+                    nuevoUsuario();
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, "Error eliminando el empleado", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar empleado", getStage(), "Ocurrio un error eliminando el empleado.");
+        }
     }
-    
+
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
         SoundUtil.mouseEnterSound();
@@ -187,10 +201,10 @@ public class P03_RegistroViewController extends Controller implements Initializa
     private void nuevoUsuario() {
         unbindEmpleado();
         this.tarUsuarioDto = new TarUsuarioDto();
-        bindEmpleado(true);
+        bindEmpleado();
     }
 
-    private void bindEmpleado(Boolean nuevo) {
+    private void bindEmpleado() {
         txfNombre.textProperty().bindBidirectional(tarUsuarioDto.usuNombre);
         txfApellidos.textProperty().bindBidirectional(tarUsuarioDto.usuApellido);
         txfCedula.textProperty().bindBidirectional(tarUsuarioDto.usuCedula);
@@ -225,28 +239,28 @@ public class P03_RegistroViewController extends Controller implements Initializa
                 if (validos) {
                     invalidos += ((JFXTextField) node).getPromptText();
                 } else {
-                    invalidos += "," + ((JFXTextField) node).getPromptText();
+                    invalidos += ", " + ((JFXTextField) node).getPromptText();
                 }
                 validos = false;
             } else if (node instanceof JFXPasswordField && (((JFXPasswordField) node).getText() == null || ((JFXPasswordField) node).getText().isBlank())) {
                 if (validos) {
                     invalidos += ((JFXPasswordField) node).getPromptText();
                 } else {
-                    invalidos += "," + ((JFXPasswordField) node).getPromptText();
+                    invalidos += ", " + ((JFXPasswordField) node).getPromptText();
                 }
                 validos = false;
             } else if (node instanceof JFXDatePicker && ((JFXDatePicker) node).getValue() == null) {
                 if (validos) {
                     invalidos += ((JFXDatePicker) node).getAccessibleText();
                 } else {
-                    invalidos += "," + ((JFXDatePicker) node).getAccessibleText();
+                    invalidos += ", " + ((JFXDatePicker) node).getAccessibleText();
                 }
                 validos = false;
             } else if (node instanceof JFXComboBox && ((JFXComboBox) node).getSelectionModel().getSelectedIndex() < 0) {
                 if (validos) {
                     invalidos += ((JFXComboBox) node).getPromptText();
                 } else {
-                    invalidos += "," + ((JFXComboBox) node).getPromptText();
+                    invalidos += ", " + ((JFXComboBox) node).getPromptText();
                 }
                 validos = false;
             }
@@ -257,20 +271,19 @@ public class P03_RegistroViewController extends Controller implements Initializa
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
         }
     }
-    
+
     public void bindBuscar() {
         P03_1_BuscadorRegistroViewController buscadorRegistroController = (P03_1_BuscadorRegistroViewController) FlowController.getInstance().getController("P03_1_BuscadorRegistroView");
         unbindEmpleado();
         tarUsuarioDto = (TarUsuarioDto) buscadorRegistroController.getSeleccionado();
-        bindEmpleado(false);
+        bindEmpleado();
 
     }
-    
+
     public void cargarInterfaz() {
         String padre = (String) AppContext.getInstance().get("Padre");
         TarUsuarioDto usuario = (TarUsuarioDto) AppContext.getInstance().get("UsuarioClass");
-        
-        
+
         if ("LogInView".equals(padre)) {
             root.setPrefWidth(600);
             root.getStyleClass().add("fondo-registro");
@@ -280,7 +293,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
             btnLimpiarCampos.setVisible(false);
             btnSalir.setVisible(false);
             cboxPuesto.setVisible(false);
-        } else if (usuario.getUsuAdmin().equals("S")){
+        } else if (usuario.getUsuAdmin().equals("S")) {
             root.setPrefWidth(1280);
             root.getStyleClass().add("fondo-registro-completa");
             btnRegistrar.setText("Registrar/Actualizar");
@@ -290,9 +303,9 @@ public class P03_RegistroViewController extends Controller implements Initializa
             btnLimpiarCampos.setVisible(true);
             btnSalir.setVisible(true);
             cboxPuesto.setVisible(true);
-        } else{
+        } else {
             tarUsuarioDto = usuario;
-            bindEmpleado(false);
+            bindEmpleado();
             root.setPrefWidth(1280);
             root.getStyleClass().add("fondo-registro-completa");
             btnRegistrar.setText("Registrar/Actualizar");
@@ -370,7 +383,6 @@ public class P03_RegistroViewController extends Controller implements Initializa
         FileInputStream fiStream = new FileInputStream(file.getAbsolutePath());
         byte[] imageInBytes = IOUtils.toByteArray(fiStream);
         return imageInBytes;
-    }    
+    }
 
-   
 }

@@ -70,8 +70,12 @@ public class TarUsuarioDto {
         this.usuApellido.set(tarUsuarioDto.getUsuApellido());
         this.usuCedula.set(tarUsuarioDto.getUsuCedula());
         this.usuCorreo.set(tarUsuarioDto.getUsuCorreo());
-        this.usuTelefono.set(tarUsuarioDto.getUsuTelefono().toString());
-        this.usuCelular.set(tarUsuarioDto.getUsuCelular().toString());
+        if (tarUsuarioDto.getUsuTelefono() != null) {
+            this.usuTelefono.set(tarUsuarioDto.getUsuTelefono().toString());
+        }
+        if (tarUsuarioDto.getUsuCelular() != null) {
+            this.usuCelular.set(tarUsuarioDto.getUsuCelular().toString());
+        }
         this.usuFoto.set(tarUsuarioDto.getUsuFoto());
         this.usuClave.set(tarUsuarioDto.getUsuClave());
         this.usuTempclave.set(tarUsuarioDto.getUsuTempclave());
