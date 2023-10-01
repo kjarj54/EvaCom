@@ -97,6 +97,7 @@ public class P02_LogInViewController extends Controller implements Initializable
                 if (respuesta.getEstado()) {
                     TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) respuesta.getResultado("TarUsuario");
                     AppContext.getInstance().set("UsuarioId", tarUsuarioDto.getUsuId());
+                    AppContext.getInstance().set("UsuarioClass", tarUsuarioDto);                   
                     if (tarUsuarioDto.getUsuClave().equals(tarUsuarioDto.getUsuTempclave())) {
                         new Mensaje().showModal(Alert.AlertType.WARNING, "Validación de usuario", getStage(), "Es necesario cambiar la clave para ingresar al sistema.");
                         FlowController.getInstance().goViewInWindowModal("P05_CambioClaveView", stage, false);
