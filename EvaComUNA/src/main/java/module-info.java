@@ -8,7 +8,6 @@ module cr.ac.una.evacomuna {
     requires jakarta.xml.bind;
     requires jakarta.xml.soap;
     requires jakarta.xml.ws;
-    requires java.xml.ws;
     requires MaterialFX;
     requires org.apache.commons.compress;
    
