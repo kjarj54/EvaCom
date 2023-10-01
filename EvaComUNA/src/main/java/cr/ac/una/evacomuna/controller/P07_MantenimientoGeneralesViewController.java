@@ -84,7 +84,6 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
         txfClave.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
         this.tarParametrosDto = new TarParametrosDto();
         cargarParametros();
-//        indicarRequeridos();
         onActionsBotones();
     }
 
@@ -126,6 +125,7 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
 //            if (!invalidos.isEmpty()) {
 //                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), invalidos);
 //            } else {
+//            }
             TarParametrosService parametrosService = new TarParametrosService();
             Respuesta respuesta = parametrosService.guardarTarParametros(tarParametrosDto.consultas());
             if (!respuesta.getEstado()) {
@@ -137,7 +137,7 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
                 new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Parametros", getStage(), "Parametros actualizados correctamente.");
                 initialize(null, null);
             }
-//            }
+
         } catch (Exception ex) {
             Logger.getLogger(P03_RegistroViewController.class.getName()).log(Level.SEVERE, "Error guardando los Parametros.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Parametros", getStage(), "Ocurrio un error guardando los Parametros.");
@@ -277,9 +277,8 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
             try {
                 BufferedImage bufferedImage = ImageIO.read(file_);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                
+
                 imgview.setImage(image);
-//                System.out.println(file_.toString());
             } catch (IOException ex) {
                 new Mensaje().show(Alert.AlertType.ERROR, "Imagen", "Error cargando imagen");
             }

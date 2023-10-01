@@ -41,7 +41,9 @@ public class TarParametrosDto {
         this.parDescripcion.set(tarParametrosDto.getParDescripcion());
         this.parEmail.set(tarParametrosDto.getParEmail());
         this.parHtml.set(tarParametrosDto.getParHtml());
-        this.parId.set(tarParametrosDto.getParId().toString());
+        if (tarParametrosDto.getParId() != null) {
+            this.parId.set(tarParametrosDto.getParId().toString());
+        }
         this.parLogo.set(tarParametrosDto.getParLogo());
         this.parNombre.set(tarParametrosDto.getParNombre());
         this.parVersion = tarParametrosDto.getParVersion();
@@ -50,7 +52,9 @@ public class TarParametrosDto {
 
     public cr.ac.una.evacomunaws.controller.TarParametrosDto consultas() {
         cr.ac.una.evacomunaws.controller.TarParametrosDto tarParametrosDtoSoap = new cr.ac.una.evacomunaws.controller.TarParametrosDto();
-        tarParametrosDtoSoap.setParId(this.getParId());
+        if (this.getParId() != null) {
+            tarParametrosDtoSoap.setParId(this.getParId());
+        }
         tarParametrosDtoSoap.setParClave(this.getParClave());
         tarParametrosDtoSoap.setParDescripcion(this.getParDescripcion());
         tarParametrosDtoSoap.setParEmail(this.getParEmail());
