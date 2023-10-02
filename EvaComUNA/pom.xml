@@ -310,8 +310,8 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>com.sun.xml.ws</groupId>
-                        <artifactId>jaxws-rt</artifactId>
+                        <groupId>jakarta.xml.bind</groupId>
+                        <artifactId>jakarta.xml.bind-api</artifactId>
                         <version>4.0.1</version>
                     </dependency>
                 </dependencies>
