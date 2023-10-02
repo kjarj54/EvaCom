@@ -6,6 +6,11 @@
 
 }
 
+@font-face {
+    font-family: "Arial Rounded MT Bold"; /* Nombre de la fuente que deseas utilizar */
+    src: url("../resources/fonts/Arial Rounded MT Bold.ttf"); /* Ruta de la fuente descargada */
+}
+
 .mfx-ripple-generator{
     -mfx-animation-speed: 0;
     -mfx-background-opacity: 0;
