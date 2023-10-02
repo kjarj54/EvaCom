@@ -88,8 +88,10 @@ public class FlowController {
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P07_MantenimientoGeneralesView.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P08_MantenimientoCompetencias.fxml"), FlowController.idioma)));
 //            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P09_MantenimientoPuestosView.fxml"), FlowController.idioma)));
-            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P11_RegistroEvaluacionesView.fxml"), FlowController.idioma)));
-            FlowController.mainStage.show();
+//            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P11_RegistroEvaluacionesView.fxml"), FlowController.idioma)));
+             FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/P12_AplicarEvaluacionView.fxml"), FlowController.idioma)));
+          
+FlowController.mainStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }

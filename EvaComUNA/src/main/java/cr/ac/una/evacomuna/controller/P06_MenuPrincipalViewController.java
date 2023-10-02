@@ -75,17 +75,21 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
     }
 
     @FXML
-    private void onActionBtnSalir(ActionEvent event) {
-        SoundUtil.mouseEnterSound();
-        FlowController.getInstance().salir();
-    }
-
-    @FXML
     private void onActionBtnEvaluaciones(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P10_MenuEvaluacionesView");
     }
 
     @FXML
     private void onActionBtnCerrarSesion(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P02_LogInView");
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().salir();
     }
 
 }

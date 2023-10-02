@@ -4,6 +4,8 @@
  */
 package cr.ac.una.evacomuna.controller;
 
+import cr.ac.una.evacomuna.util.FlowController;
+import cr.ac.una.evacomuna.util.SoundUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,14 +50,20 @@ public class P10_MenuEvaluacionesViewController extends Controller implements In
     }
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P06_MenuPrincipalView");
     }
 
     @FXML
     private void onActionBtnCrearEvaluacion(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P11_RegistroEvaluacionesView");
     }
 
     @FXML
     private void onActionBtnRegistroEvaluaciones(ActionEvent event) {
+        SoundUtil.mouseEnterSound();
+        FlowController.getInstance().goView("P12_AplicarEvaluacionView");
     }
 
     @FXML
