@@ -67,13 +67,13 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private MFXButton btnSalir;
     @FXML
     private MFXButton btnFiltrarCompetencia;
+    @FXML
+    private MFXButton btnActualizarPuesto;
 
     private ObservableList<TarPuestoDto> puestos = FXCollections.observableArrayList();
     private ObservableList<TarCompetenciaDto> competencias = FXCollections.observableArrayList();
     TarPuestoDto tarPuestoDto;
     TarCompetenciaDto tarCompetenciaDto;
-    @FXML
-    private MFXButton btnActualizarPuesto;
 
     /**
      * Initializes the controller class.

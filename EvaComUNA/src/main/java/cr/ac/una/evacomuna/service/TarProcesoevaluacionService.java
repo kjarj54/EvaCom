@@ -30,8 +30,8 @@ public class TarProcesoevaluacionService {
             TarProcesoevaluacionDto procesoevaluacionDto = new TarProcesoevaluacionDto((cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto) evaComUNAWs.guardarProcesoevaluacion(tarProcesoevaluacionDto));
             return new Respuesta(true, "", "", "Procesoevaluacion", procesoevaluacionDto);
         } catch (Exception ex) {
-            Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error guardando el Procesoevaluacion.", ex);
-            return new Respuesta(false, "Error guardando el Procesoevaluacion.", "guardarTarProcesoevaluacion " + ex.getMessage());
+            Logger.getLogger(TarTrabajadorevaluarService.class.getName()).log(Level.SEVERE, "Error guardando el Proceso de Evaluacion.", ex);
+            return new Respuesta(false, "Error guardando el Proceso de Evaluacion.", "guardarTarProcesoevaluacion " + ex.getMessage());
         }
 
     }

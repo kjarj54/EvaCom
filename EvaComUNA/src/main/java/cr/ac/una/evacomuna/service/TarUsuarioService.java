@@ -102,19 +102,15 @@ public class TarUsuarioService {
             }
             
             if (!cedula.isEmpty()) {
-                System.out.println("-" + cedula + "-");
                 tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getUsuCedula().contains(cedula)).collect(Collectors.toList());
             }
             if (!nombre.isEmpty()) {
-                System.out.println("-" + nombre + "-");
                 tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getUsuNombre().toLowerCase().contains(nombre.toLowerCase())).collect(Collectors.toList());
             }
             if (!usuario.isEmpty()) {
-                System.out.println("-" + usuario + "-");
                 tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getUsuUsu().toLowerCase().contains(usuario.toLowerCase())).collect(Collectors.toList());
             }
             if (!puesto.isEmpty()) {
-                System.out.println("-" + puesto + "-");
                 tarUsuarioDtosList = tarUsuarioDtosList.stream().filter((p) -> p.getPuestoDto()!= null && p.getPuestoDto().getPueNombre().toLowerCase().contains(puesto.toLowerCase())).collect(Collectors.toList());
             }
             
