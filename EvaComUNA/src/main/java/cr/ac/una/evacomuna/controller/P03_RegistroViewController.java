@@ -5,13 +5,16 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.evacomuna.model.TarCompetenciaDto;
 import cr.ac.una.evacomuna.model.TarParametrosDto;
+import cr.ac.una.evacomuna.model.TarPuestoDto;
 import cr.ac.una.evacomuna.util.FlowController;
 import cr.ac.una.evacomuna.util.Formato;
 import cr.ac.una.evacomuna.util.Mensaje;
 import cr.ac.una.evacomuna.util.SoundUtil;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
 import cr.ac.una.evacomuna.service.TarParametrosService;
+import cr.ac.una.evacomuna.service.TarPuestoService;
 import cr.ac.una.evacomuna.service.TarUsuarioService;
 import cr.ac.una.evacomuna.util.AppContext;
 import cr.ac.una.evacomuna.util.Respuesta;
@@ -29,6 +32,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -101,16 +105,21 @@ public class P03_RegistroViewController extends Controller implements Initializa
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
 
-        // Crear una lista de elementos
-        ObservableList<String> elementos = FXCollections.observableArrayList(
-                "Opción 1",
-                "Opción 2",
-                "Opción 3"
-        );
+        cargarPuestos();
 
-        // Agregar la lista de elementos al ComboBox
-        cboxPuesto.setItems(elementos);
+        //--------------------------revisar ComboBox
+        cargarPuestos();
 
+//
+//        // Crear una lista de elementos
+//        ObservableList<String> elementos = FXCollections.observableArrayList(
+//                "Opción 1",
+//                "Opción 2",
+//                "Opción 3"
+//        );
+//
+//        // Agregar la lista de elementos al ComboBox
+//        cboxPuesto.setItems(elementos);
         txfNombre.setTextFormatter(Formato.getInstance().letrasFormat(25));
         txfApellidos.setTextFormatter(Formato.getInstance().letrasFormat(35));
         txfCedula.setTextFormatter(Formato.getInstance().cedulaFormat(30));
@@ -216,6 +225,19 @@ public class P03_RegistroViewController extends Controller implements Initializa
         bindEmpleado();
     }
 
+    private void cargarPuestos() {
+        TarPuestoService service = new TarPuestoService();
+        Respuesta respuesta = service.getListaPuestos();
+
+        if (respuesta.getEstado()) {
+            ObservableList<TarPuestoDto> elementos = FXCollections.observableArrayList();
+            elementos.addAll((List<TarPuestoDto>) respuesta.getResultado("TarPuestos"));
+            //cboxPuesto.setItems(elementos);
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Puestos", getStage(), respuesta.getMensaje());
+        }
+    }
+
     private void bindEmpleado() {
         txfNombre.textProperty().bindBidirectional(tarUsuarioDto.usuNombre);
         txfApellidos.textProperty().bindBidirectional(tarUsuarioDto.usuApellido);
@@ -226,7 +248,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfTelefono.textProperty().bindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().bindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().bindBidirectional(tarUsuarioDto.usuAdmin);
-        cboxPuesto.valueProperty().bindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
+        // cboxPuesto.valueProperty().bindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
         if (this.tarUsuarioDto.getUsuFoto() != null) {
             imvFotoPerfil.setImage(byteToImage(this.tarUsuarioDto.getUsuFoto()));
         }
@@ -242,7 +264,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfTelefono.textProperty().unbindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().unbindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().unbindBidirectional(tarUsuarioDto.usuAdmin);
-        cboxPuesto.valueProperty().unbindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
+        //  cboxPuesto.valueProperty().unbindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
         file = new File("src/main/resources/cr/ac/una/evacomuna/resources/media/icons/userIcon.png");
         loadImages(imvFotoPerfil, file);
     }

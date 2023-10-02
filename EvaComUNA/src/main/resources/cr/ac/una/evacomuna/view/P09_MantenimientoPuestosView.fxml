@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.evacomuna.controller.P09_MantenimientoPuestosViewController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -48,18 +48,6 @@
                         </HBox>
                         <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
                             <children>
-                                <MFXButton fx:id="btnEliminarPuesto" onAction="#onActionBtnEliminarPuesto" styleClass="mfx-button-Image">
-                                    <graphic>
-                                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../resources/media/icons/Delete1.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                    <tooltip>
-                                        <Tooltip text="Eliminar competencia" />
-                                    </tooltip>
-                                </MFXButton>
                                 <MFXButton fx:id="btnLimpiarPuesto" layoutX="290.0" layoutY="10.0" onAction="#onActionBtnLimpiarPuesto" styleClass="mfx-button-Image">
                                     <graphic>
                                         <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">

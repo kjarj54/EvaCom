@@ -40,7 +40,9 @@ public class TarPuestoDto {
     public TarPuestoDto(cr.ac.una.evacomunaws.controller.TarPuestoDto tarPuestoDto) {
         this();
         this.pueEstado.set(tarPuestoDto.getPueEstado().equals("A"));
-        this.pueId.set(tarPuestoDto.getPueId().toString());
+        if (tarPuestoDto.getPueId() != null) {
+            this.pueId.set(tarPuestoDto.getPueId().toString());
+        }
         this.pueNombre.set(tarPuestoDto.getPueNombre());
         if (!tarPuestoDto.getTarUsuarioList().isEmpty()) {
             List<cr.ac.una.evacomunaws.controller.TarUsuarioDto> usuarioDtos = tarPuestoDto.getTarUsuarioList();
@@ -57,7 +59,7 @@ public class TarPuestoDto {
             }
         }
 
-        this.modificado= tarPuestoDto.isModificado();
+        this.modificado = tarPuestoDto.isModificado();
         this.pueVersion = tarPuestoDto.getPueVersion();
     }
 
