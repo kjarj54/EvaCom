@@ -104,7 +104,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
-        
+
         txfNombre.setTextFormatter(Formato.getInstance().letrasFormat(25));
         txfApellidos.setTextFormatter(Formato.getInstance().letrasFormat(35));
         txfCedula.setTextFormatter(Formato.getInstance().cedulaFormat(30));
@@ -143,6 +143,9 @@ public class P03_RegistroViewController extends Controller implements Initializa
                 FlowController.getInstance().goViewInWindowModal("P07_MantenimientoGeneralesView", stage, false);
             } else {
                 TarUsuarioService empleadoService = new TarUsuarioService();
+                if (cboxPuesto.getValue() != null) {
+                    tarUsuarioDto.puestoDto = cboxPuesto.getValue();
+                }
                 Respuesta respuesta = empleadoService.guardarUsuario(tarUsuarioDto.consultas());
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Usuario", getStage(), respuesta.getMensaje());
@@ -170,6 +173,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
     private void onActionBtnLimpiarCampos(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         nuevoUsuario();
+        cargarPuestos();
     }
 
     @FXML
@@ -216,11 +220,22 @@ public class P03_RegistroViewController extends Controller implements Initializa
         Respuesta respuesta = service.getListaPuestos();
 
         if (respuesta.getEstado()) {
+            cboxPuesto.getSelectionModel().clearSelection();
+            cboxPuesto.getItems().clear();
             ObservableList<TarPuestoDto> elementos = FXCollections.observableArrayList();
             elementos.addAll((List<TarPuestoDto>) respuesta.getResultado("TarPuestos"));
             cboxPuesto.setItems(elementos);
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Puestos", getStage(), respuesta.getMensaje());
+        }
+    }
+
+    private void seleccionarPuestoPorNombre(String nombrePuesto) {
+        for (TarPuestoDto puesto : cboxPuesto.getItems()) {
+            if (puesto.getPueNombre().equals(nombrePuesto)) {
+                cboxPuesto.getSelectionModel().select(puesto);
+                break; // Termina el bucle una vez que se encuentra una coincidencia.
+            }
         }
     }
 
@@ -234,10 +249,11 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfTelefono.textProperty().bindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().bindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().bindBidirectional(tarUsuarioDto.usuAdmin);
-//        if (tarUsuarioDto.puestoDto != null) {
-//            cboxPuesto.getSelectionModel().select(tarUsuarioDto.puestoDto);
-//            System.out.println(cboxPuesto.getSelectionModel().getSelectedItem().pueNombre);
-//        }
+        cargarPuestos();
+        if (tarUsuarioDto.puestoDto.getPueNombre() != null) {
+            seleccionarPuestoPorNombre(tarUsuarioDto.puestoDto.getPueNombre());
+            System.out.println("Bind " + cboxPuesto.getValue().getPueNombre());
+        }
         // cboxPuesto.valueProperty().bindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
         if (this.tarUsuarioDto.getUsuFoto() != null) {
             imvFotoPerfil.setImage(byteToImage(this.tarUsuarioDto.getUsuFoto()));
@@ -254,11 +270,6 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfTelefono.textProperty().unbindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().unbindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().unbindBidirectional(tarUsuarioDto.usuAdmin);
-        if (cboxPuesto.getSelectionModel().getSelectedItem() != null) {
-            tarUsuarioDto.puestoDto = cboxPuesto.getSelectionModel().getSelectedItem();
-            System.out.println(tarUsuarioDto.puestoDto.pueNombre);
-        }
-        cboxPuesto.getSelectionModel().clearSelection();
         //  cboxPuesto.valueProperty().unbindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
         file = new File("src/main/resources/cr/ac/una/evacomuna/resources/media/icons/userIcon.png");
         loadImages(imvFotoPerfil, file);
