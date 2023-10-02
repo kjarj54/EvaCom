@@ -44,7 +44,9 @@ public class TarCompetenciaDto {
 
     public TarCompetenciaDto(cr.ac.una.evacomunaws.controller.TarCompetenciaDto tarCaracteristicaDto) {
         this();
-        this.comId.set(tarCaracteristicaDto.getComId().toString());
+        if (tarCaracteristicaDto.getComId() != null) {
+            this.comId.set(tarCaracteristicaDto.getComId().toString());
+        }
         this.comEstado.set(tarCaracteristicaDto.getComEstado().equals("A"));
         this.comNombre.set(tarCaracteristicaDto.getComNombre());
         if (!tarCaracteristicaDto.getTarCaracteristicaList().isEmpty()) {

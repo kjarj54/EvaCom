@@ -31,6 +31,8 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
     private AnchorPane root;
     @FXML
     private MFXButton btnEvaluaciones;
+    @FXML
+    private MFXButton btnCerrarSesion;
 
     /**
      * Initializes the controller class.
@@ -76,6 +78,10 @@ public class P06_MenuPrincipalViewController extends Controller implements Initi
 
     @FXML
     private void onActionBtnEvaluaciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnCerrarSesion(ActionEvent event) {
     }
 
 }

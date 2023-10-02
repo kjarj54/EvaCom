@@ -21,6 +21,7 @@
                   <MFXButton fx:id="btnCompetencias" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCompetencias" styleClass="mfx-button-menu" text="Mant. competencias a evaluar" />
                   <MFXButton fx:id="btnPuestos" maxWidth="1.7976931348623157E308" onAction="#onActionBtnPuestos" styleClass="mfx-button-menu" text="Mantenimiento de puestos" />
                   <MFXButton fx:id="btnEvaluaciones" layoutX="10.0" layoutY="595.0" maxWidth="1.7976931348623157E308" onAction="#onActionBtnEvaluaciones" styleClass="mfx-button-menu" text="Evaluaciones" />
+                  <MFXButton fx:id="btnCerrarSesion" layoutX="10.0" layoutY="595.0" maxWidth="1.7976931348623157E308" onAction="#onActionBtnCerrarSesion" styleClass="mfx-button-menu" text="Cerrar sesión" />
                   <MFXButton fx:id="btnSalir" maxWidth="1.7976931348623157E308" onAction="#onActionBtnSalir" styleClass="mfx-button-salir" text="Salir" />
                </children>
             </VBox>

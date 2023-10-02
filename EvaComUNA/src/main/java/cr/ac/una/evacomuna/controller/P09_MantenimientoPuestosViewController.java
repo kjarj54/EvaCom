@@ -25,10 +25,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -64,11 +62,11 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     @FXML
     private JFXTextField txfBuscarCompetencia;
     @FXML
-    private MFXButton btnAgregarCompetencia;
-    @FXML
     private TableView<TarPuestoDto> tbvPuestos;
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private MFXButton btnFiltrarCompetencia;
 
     private ObservableList<TarPuestoDto> puestos = FXCollections.observableArrayList();
     private ObservableList<TarCompetenciaDto> competencias = FXCollections.observableArrayList();
@@ -86,38 +84,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
         cargarTablaPuestos();
         cargarTablaCompetenciasBusqueda();
+        cargarTablaCompetenciasAsignadas();
         disableNodes(true);
-
-        tbvCompetencias.getColumns().clear();
-        tbvCompetencias.getItems().clear();
-
-        TableColumn<TarCompetenciaDto, String> tbcComId = new TableColumn<>("Id");
-        tbcComId.setPrefWidth(30);
-        tbcComId.setCellValueFactory(cd -> cd.getValue().comId);
-
-        TableColumn<TarCompetenciaDto, String> tbcComNombre = new TableColumn<>("Nombre");
-        tbcComNombre.setPrefWidth(100);
-        tbcComNombre.setCellValueFactory(cd -> cd.getValue().comNombre);
-
-        TableColumn<TarCompetenciaDto, String> tbcComEstado = new TableColumn<>("Estado");
-        tbcComEstado.setPrefWidth(50);
-        tbcComEstado.setCellValueFactory(cd -> {
-            if ("A".equals(cd.getValue().getComEstado())) {
-                return new SimpleStringProperty("Activo");
-            } else {
-                return new SimpleStringProperty("Inactivo");
-            }
-        });
-
-//        TableColumn<TarCompetenciaDto, Boolean> tbcEliminar = new TableColumn<>("Eliminar");
-//        tbcEliminar.setPrefWidth(150);
-//        tbcEliminar.setCellValueFactory(cd -> new SimpleObjectProperty(cd.getValue() != null));
-//         tbcEliminar.setCellFactory((TableColumn<TarUsuarioDto, Boolean> p) -> new ButtonCell());
-        tbvCompetencias.getColumns().add(tbcComId);
-        tbvCompetencias.getColumns().add(tbcComNombre);
-        tbvCompetencias.getColumns().add(tbcComEstado);
-//        tbvCompetencias.getColumns().add(tbcEliminar);
-        tbvCompetencias.refresh();
 
         this.tarPuestoDto = new TarPuestoDto();
         this.tarCompetenciaDto = new TarCompetenciaDto();
@@ -167,16 +135,12 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         }
     }
 
-    @FXML
-    private void onActionBtnAgregarCompetencia(ActionEvent event) {
-        if (tarCompetenciaDto.getComId() == null || tarPuestoDto.getPueId() == null) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Puesto para agregarla a la lista.");
-        } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.getComNombre().equals(tarCompetenciaDto.getComNombre()))) {
-            tarCompetenciaDto.setModificado(true);
-            tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);
-            tbvCompetencias.getItems().add(tarCompetenciaDto);
-            tbvCompetencias.refresh();
-        }
+
+    private void agregarCompetencia() {
+        tarCompetenciaDto.setModificado(true);
+        tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);
+        tbvCompetencias.getItems().add(tarCompetenciaDto);
+        tbvCompetencias.refresh();
     }
 
     @FXML
@@ -241,8 +205,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 bindPuesto();
                 disableNodes(false);
 
-                cargarCompetencias();
-                nuevoCompetencia();
+                cargarCompetencias("");
+                //nuevoCompetencia();
             } else {
                 nuevoPuesto();
             }
@@ -258,11 +222,11 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         tbcComIdBus.setCellValueFactory(cd -> cd.getValue().comId);
 
         TableColumn<TarCompetenciaDto, String> tbcComNombreBus = new TableColumn<>("Nombre");
-        tbcComNombreBus.setPrefWidth(100);
+        tbcComNombreBus.setPrefWidth(300);
         tbcComNombreBus.setCellValueFactory(cd -> cd.getValue().comNombre);
 
         TableColumn<TarCompetenciaDto, String> tbcComEstadoBus = new TableColumn<>("Estado");
-        tbcComEstadoBus.setPrefWidth(50);
+        tbcComEstadoBus.setPrefWidth(70);
         tbcComEstadoBus.setCellValueFactory(cd -> {
             if ("A".equals(cd.getValue().getComEstado())) {
                 return new SimpleStringProperty("Activo");
@@ -271,9 +235,15 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             }
         });
 
+        TableColumn<TarCompetenciaDto, Boolean> tbcAgregar = new TableColumn<>("Agregar");
+        tbcAgregar.setPrefWidth(130);
+        tbcAgregar.setCellValueFactory((TableColumn.CellDataFeatures<TarCompetenciaDto, Boolean> p) -> new SimpleBooleanProperty(p.getValue() != null));
+        tbcAgregar.setCellFactory((TableColumn<TarCompetenciaDto, Boolean> p) -> new ButtonCell2());
+
         tbvCompetenciasBusqueda.getColumns().add(tbcComIdBus);
         tbvCompetenciasBusqueda.getColumns().add(tbcComNombreBus);
         tbvCompetenciasBusqueda.getColumns().add(tbcComEstadoBus);
+        tbvCompetenciasBusqueda.getColumns().add(tbcAgregar);
         tbvCompetenciasBusqueda.refresh();
 
         tbvCompetenciasBusqueda.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -283,6 +253,39 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 nuevoCompetencia();
             }
         });
+    }
+
+    private void cargarTablaCompetenciasAsignadas() {
+        tbvCompetencias.getColumns().clear();
+        tbvCompetencias.getItems().clear();
+
+        TableColumn<TarCompetenciaDto, String> tbcComId = new TableColumn<>("Id");
+        tbcComId.setPrefWidth(30);
+        tbcComId.setCellValueFactory(cd -> cd.getValue().comId);
+
+        TableColumn<TarCompetenciaDto, String> tbcComNombre = new TableColumn<>("Nombre");
+        tbcComNombre.setPrefWidth(300);
+        tbcComNombre.setCellValueFactory(cd -> cd.getValue().comNombre);
+
+        TableColumn<TarCompetenciaDto, String> tbcComEstado = new TableColumn<>("Estado");
+        tbcComEstado.setPrefWidth(70);
+        tbcComEstado.setCellValueFactory(cd -> {
+            if ("A".equals(cd.getValue().getComEstado())) {
+                return new SimpleStringProperty("Activo");
+            } else {
+                return new SimpleStringProperty("Inactivo");
+            }
+        });
+
+        TableColumn<TarCompetenciaDto, Boolean> tbcEliminar = new TableColumn<>("Eliminar");
+        tbcEliminar.setPrefWidth(100);
+        tbcEliminar.setCellValueFactory(cd -> new SimpleObjectProperty(cd.getValue() != null));
+        tbcEliminar.setCellFactory((TableColumn<TarCompetenciaDto, Boolean> p) -> new ButtonCell3());
+        tbvCompetencias.getColumns().add(tbcComId);
+        tbvCompetencias.getColumns().add(tbcComNombre);
+        tbvCompetencias.getColumns().add(tbcComEstado);
+        tbvCompetencias.getColumns().add(tbcEliminar);
+        tbvCompetencias.refresh();
     }
 
     private void cargarPuestosAutomatico() {
@@ -343,9 +346,13 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     private void disableNodes(Boolean activo) {
         txfBuscarCompetencia.setDisable(activo);
-        btnAgregarCompetencia.setDisable(activo);
         tbvCompetenciasBusqueda.setDisable(activo);
         tbvCompetencias.setDisable(activo);
+    }
+
+    @FXML
+    private void onActionBtnFiltrarCompetencia(ActionEvent event) {
+        cargarCompetencias(txfBuscarCompetencia.getText());
     }
 
     @FXML
@@ -357,7 +364,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     private void cargarCompetencias(String nombre) {
         TarCompetenciaService service = new TarCompetenciaService();
-        Respuesta respuesta = service.getCompetencias(nombre, "");
+        Respuesta respuesta = service.getCompetencias(nombre, "S");
 
         if (respuesta.getEstado()) {
             tbvCompetenciasBusqueda.getItems().clear();
@@ -393,14 +400,13 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         ButtonCell() {
             cellButton.setPrefWidth(100);
             cellButton.getStyleClass().add("mfx-button-menuSalir");
-//            cellButton.setDisable(true);
 
             cellButton.setOnAction((ActionEvent t) -> {
                 int index = ButtonCell.this.getIndex();
                 tarPuestoDto = (TarPuestoDto) ButtonCell.this.getTableView().getItems().get(index);
                 eliminarPuesto();
-                tbvCompetencias.getItems().remove(tarPuestoDto);
-                tbvCompetencias.refresh();
+                tbvPuestos.getItems().remove(tarPuestoDto);
+                tbvPuestos.refresh();
             });
         }
 
@@ -409,6 +415,59 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             super.updateItem(t, empty);
             if (!empty) {
                 setGraphic(cellButton);
+            }
+        }
+    }
+
+    private class ButtonCell2 extends TableCell<TarCompetenciaDto, Boolean> {
+
+        final MFXButton cellButton2 = new MFXButton("Agregar");
+
+        ButtonCell2() {
+            cellButton2.setPrefWidth(120);
+            cellButton2.getStyleClass().add("mfx-button-menuSalir");
+
+            cellButton2.setOnAction((ActionEvent t) -> {
+                int index = ButtonCell2.this.getIndex();
+                tarCompetenciaDto = (TarCompetenciaDto) ButtonCell2.this.getTableView().getItems().get(index);
+                agregarCompetencia();
+                //eliminarPuesto();
+
+                tbvCompetenciasBusqueda.refresh();
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton2);
+            }
+        }
+    }
+
+    private class ButtonCell3 extends TableCell<TarCompetenciaDto, Boolean> {
+
+        final MFXButton cellButton3 = new MFXButton("X");
+
+        ButtonCell3() {
+            cellButton3.setPrefWidth(100);
+            cellButton3.getStyleClass().add("mfx-button-menuSalir");
+
+            cellButton3.setOnAction((ActionEvent t) -> {
+                int index = ButtonCell3.this.getIndex();
+                // tarPuestoDto = (TarPuestoDto) ButtonCell3.this.getTableView().getItems().get(index);
+                //eliminarPuesto();
+                tbvCompetencias.getItems().remove(index);
+                tbvCompetencias.refresh();
+            });
+        }
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if (!empty) {
+                setGraphic(cellButton3);
             }
         }
     }

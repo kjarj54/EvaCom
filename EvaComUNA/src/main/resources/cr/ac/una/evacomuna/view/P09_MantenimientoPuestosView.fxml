@@ -80,8 +80,8 @@
                     <children>
                         <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
                             <children>
-                                <JFXTextField fx:id="txfBuscarCompetencia" onKeyPressed="#onkeyPressedCompetencia" promptText="Buscar competencia" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
-                                <MFXButton fx:id="btnAgregarCompetencia" maxHeight="1.7976931348623157E308" onAction="#onActionBtnAgregarCompetencia" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
+                                <JFXTextField fx:id="txfBuscarCompetencia" minHeight="-Infinity" onKeyPressed="#onkeyPressedCompetencia" prefHeight="40.0" promptText="Buscar competencia" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                        <MFXButton fx:id="btnFiltrarCompetencia" onAction="#onActionBtnFiltrarCompetencia" prefHeight="45.0" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
                             </children>
                             <padding>
                                 <Insets left="10.0" />
@@ -99,12 +99,12 @@
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                              <TableView fx:id="tbvCompetencias" VBox.vgrow="ALWAYS" />
+                              <TableView fx:id="tbvCompetencias" prefWidth="601.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                     </children>
                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                     </padding>
                 </VBox>
             </children>
