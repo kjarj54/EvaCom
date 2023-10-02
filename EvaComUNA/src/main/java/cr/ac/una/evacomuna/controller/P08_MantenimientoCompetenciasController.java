@@ -170,7 +170,7 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
             if (newValue != null) {
                 unbindCompetencia();
                 tarCompetenciaDto = newValue;
-                bindCompetencia(false);
+                bindCompetencia();
                 cargarCaracteristicas();
                 nuevoCaracteristica();
             } else {
@@ -238,7 +238,7 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
                 tbvCompetencias.refresh();
                 unbindCompetencia();
                 tarCompetenciaDto = (TarCompetenciaDto) respuesta.getResultado("Competencia");
-                bindCompetencia(false);
+                bindCompetencia();
                 tbvCaracteristicasBusqueda.getItems().clear();
                 tbvCaracteristicasBusqueda.refresh();
                 nuevoCaracteristica();
@@ -335,13 +335,13 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
     private void nuevoCompetencia() {
         unbindCompetencia();
         tarCompetenciaDto = new TarCompetenciaDto();
-        bindCompetencia(true);
+        bindCompetencia();
         nuevoCaracteristica();
         txfCompetencia.clear();
         txfCompetencia.requestFocus();
     }
 
-    private void bindCompetencia(Boolean nuevo) {
+    private void bindCompetencia() {
         txfCompetencia.textProperty().bindBidirectional(tarCompetenciaDto.comNombre);
         chkActiva.selectedProperty().bindBidirectional(tarCompetenciaDto.comEstado);
     }

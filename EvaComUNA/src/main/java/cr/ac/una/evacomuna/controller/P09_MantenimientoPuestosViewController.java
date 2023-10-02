@@ -78,12 +78,12 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         AnchorPane.setTopAnchor(root, 0.0);
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
-        
+
         txfPuesto.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfBuscarNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfBuscarCompetencia.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
@@ -140,7 +140,6 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             cargarPuestosAutomatico();
         }
     }
-
 
     private void agregarCompetencia() {
         tarCompetenciaDto.setModificado(true);
@@ -212,7 +211,9 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 disableNodes(false);
 
                 cargarCompetencias("");
-                //nuevoCompetencia();
+                cargarCompetencias();
+
+                nuevoCompetencia();
             } else {
                 nuevoPuesto();
             }
@@ -395,8 +396,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private void nuevoCompetencia() {
         tarCompetenciaDto = new TarCompetenciaDto();
         txfBuscarCompetencia.clear();
-        tbvCompetenciasBusqueda.getItems().clear();
-        tbvCompetenciasBusqueda.refresh();
+//        tbvCompetenciasBusqueda.getItems().clear();
+//        tbvCompetenciasBusqueda.refresh();
     }
 
     private class ButtonCell extends TableCell<TarPuestoDto, Boolean> {
@@ -437,7 +438,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 int index = ButtonCell2.this.getIndex();
                 tarCompetenciaDto = (TarCompetenciaDto) ButtonCell2.this.getTableView().getItems().get(index);
                 agregarCompetencia();
-                
+
                 tbvCompetenciasBusqueda.refresh();
             });
         }
