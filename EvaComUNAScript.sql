@@ -1,6 +1,6 @@
 /*
 Created: 18/08/2023
-Modified: 08/09/2023
+Modified: 02/10/2023
 Model: EvaCom
 Database: Oracle 18c
 */
@@ -12,63 +12,63 @@ Database: Oracle 18c
 
 CREATE SEQUENCE TAR_USUARIO_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_PARAMETROS_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_PUESTO_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_COMPETENCIA_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_CARACTERISTICA_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_COMPETENCIAEVALUAR_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_EVALUADOR_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_TRABAJOREVALUAR_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
 
 CREATE SEQUENCE TAR_PROCESOEVALUACION_SEQ01
  INCREMENT BY 1
- START WITH 1
+ START WITH 0
  NOMAXVALUE
  NOCACHE
 ;
@@ -170,7 +170,13 @@ COMMENT ON COLUMN TAR_USUARIO.usu_celular IS 'Celular del usaurio'
 ;
 COMMENT ON COLUMN TAR_USUARIO.usu_foto IS 'Foto del usaurio'
 ;
+COMMENT ON COLUMN TAR_USUARIO.usu_usu IS 'Usuario con el que accedera el usuario
+'
+;
 COMMENT ON COLUMN TAR_USUARIO.usu_clave IS 'Clave del usuario'
+;
+COMMENT ON COLUMN TAR_USUARIO.usu_tempclave IS 'Clave temporal que se le asignara al usuario para recuperacion e inicio
+'
 ;
 COMMENT ON COLUMN TAR_USUARIO.usu_activo IS 'Estado del usuario (A:Activo, I:Inactivo)'
 ;
@@ -314,6 +320,7 @@ CREATE TABLE TAR_EVALUADOR(
   evalu_id Number NOT NULL,
   evalu_retroalimentacion Char(200 ),
   evalu_version Number NOT NULL,
+  evalu_calificacion Varchar2(15 ),
   usu_id Number,
   tra_id Number
 )
@@ -339,6 +346,8 @@ COMMENT ON COLUMN TAR_EVALUADOR.evalu_id IS 'id del evaluador'
 COMMENT ON COLUMN TAR_EVALUADOR.evalu_retroalimentacion IS 'retroalimentacion realizada por el evaluador'
 ;
 COMMENT ON COLUMN TAR_EVALUADOR.evalu_version IS 'version del registro del evaluador'
+;
+COMMENT ON COLUMN TAR_EVALUADOR.evalu_calificacion IS 'Calificacion asignada por evaluador'
 ;
 
 -- Table TAR_TRABAJADOREVALUAR
@@ -406,6 +415,7 @@ COMMENT ON COLUMN TAR_COMPETENCIAEVALUAR.coe_calificacion IS 'calificacion de la
 ;
 COMMENT ON COLUMN TAR_COMPETENCIAEVALUAR.coe_version IS 'Version del registro de la competencia a evaluar'
 ;
+
 
 -- Trigger for sequence TAR_PARAMETROS_SEQ01 for column par_id in table TAR_PARAMETROS ---------
 CREATE OR REPLACE TRIGGER TAR_PARAMETROS_TGR01 BEFORE INSERT
