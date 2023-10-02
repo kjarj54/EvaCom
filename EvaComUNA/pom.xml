@@ -46,12 +46,6 @@
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-rt</artifactId>
             <version>4.0.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.xml.bind</groupId>
-                    <artifactId>jakarta.xml.bind-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!--Extra-->
         <dependency>
@@ -94,12 +88,6 @@
             <artifactId>commons-compress</artifactId>
             <version>1.24.0</version>
             <type>jar</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.xml.bind</groupId>
-                    <artifactId>jakarta.xml.bind-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         
         <dependency>
@@ -322,9 +310,9 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>jakarta.xml.bind</groupId>
-                        <artifactId>jakarta.xml.bind-api</artifactId>
-                        <version>3.0.0</version>
+                        <groupId>com.sun.xml.ws</groupId>
+                        <artifactId>jaxws-rt</artifactId>
+                        <version>4.0.1</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -334,8 +322,7 @@
                     <extension>true</extension>
                     <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
                 </configuration>
-            </plugin>
-           
+            </plugin>          
         </plugins>
     </build>
 </project>
