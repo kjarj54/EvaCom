@@ -106,13 +106,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarUsuarioService.validarUsuario(usuario, clave);
             if (!res.getEstado()) {
-                return TarUsuarioDto.class.cast(res);
+                return (TarUsuarioDto) res.getResultado("Usuario");
             }
             TarUsuarioDto pruebaDto = (TarUsuarioDto) res.getResultado("Usuario");
             return pruebaDto;
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarUsuarioDto.class.cast(ex);
+            return null;
         }
     }
 
@@ -121,13 +121,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarUsuarioService.getUsuario(id);
             if (!res.getEstado()) {
-                return TarUsuarioDto.class.cast(res);//TODO
+                return (TarUsuarioDto) res.getResultado("Usuario");//TODO
             }
             TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("Usuario");
             return tarUsuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarUsuarioDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -151,7 +151,7 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarUsuarioService.guardarUsuario(usuarioDto);
             if (!res.getEstado()) {
-                return TarUsuarioDto.class.cast(res);//TODO
+                return (TarUsuarioDto) res.getResultado("TarUsuario");//TODO
             }
             TarParametrosDto parametrosDto;
             parametrosDto = getParametros().get(0);
@@ -163,7 +163,7 @@ public class EvaComUNAWs {
             return usuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarUsuarioDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -174,7 +174,7 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return res.toString();//TODO
             }
-           //TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("");
+            //TarUsuarioDto tarUsuarioDto = (TarUsuarioDto) res.getResultado("");
             return "Usuario eliminado correctamente";//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,12 +190,12 @@ public class EvaComUNAWs {
             Respuesta res = tarUsuarioService.recuperarClave(correo, parametrosDto);
 
             if (!res.getEstado()) {
-                return TarUsuarioDto.class.cast(res).getModificado();//TODO
+                return res.getEstado();//TODO
             }
             return true;
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarUsuarioDto.class.cast(ex).getModificado();//TODO
+            return null;//TODO
         }
     }
 
@@ -204,12 +204,12 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarUsuarioService.activacionCuenta(usuId);
             if (!res.getEstado()) {
-                return TarUsuarioDto.class.cast(res).toString();//TODO
+                return res.toString();//TODO
             }
             return "<html><body><h1>Activation Successful</h1></body></html>";
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarUsuarioDto.class.cast(ex).toString();//TODO
+            return ex.toString();//TODO
         }
     }
 
@@ -218,13 +218,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarUsuarioService.getUsuarios();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarUsuarioDto>) res.getResultado("Usuario");//TODO
             }
             List<TarUsuarioDto> tarUsuarioDto = (List<TarUsuarioDto>) res.getResultado("Usuario");
             return tarUsuarioDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -245,10 +245,11 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return TarParametrosDto.class.cast(res);//TODO
             }
+            tarParametrosDto = (TarParametrosDto) res.getResultado("TarParametros");
             return tarParametrosDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarParametrosDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -257,13 +258,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarParametrosService.getParametro(id);
             if (!res.getEstado()) {
-                return TarParametrosDto.class.cast(res);//TODO
+                return (TarParametrosDto) res.getResultado("TarParametros");//TODO
             }
             TarParametrosDto tarParametrosDto = (TarParametrosDto) res.getResultado("TarParametros");
             return tarParametrosDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarParametrosDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -272,13 +273,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarParametrosService.eliminarParametros(id);
             if (!res.getEstado()) {
-                return TarParametrosDto.class.cast(res);//TODO
+                return (TarParametrosDto) res.getResultado("");//TODO
             }
             TarParametrosDto tarParametrosDto = (TarParametrosDto) res.getResultado("");
             return tarParametrosDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarParametrosDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -287,13 +288,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarParametrosService.getParametros();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarParametrosDto>) res.getResultado("TarParametros");//TODO
             }
             List<TarParametrosDto> tarParametrosDtos = (List<TarParametrosDto>) res.getResultado("TarParametros");
             return tarParametrosDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -312,12 +313,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCaracteristicaService.guardarCaracteristica(tarCaracteristicaDto);
             if (!res.getEstado()) {
-                return TarCaracteristicaDto.class.cast(res);//TODO
+                return (TarCaracteristicaDto) res.getResultado("Caracteristica");//TODO
             }
+            tarCaracteristicaDto = (TarCaracteristicaDto) res.getResultado("Caracteristica");
             return tarCaracteristicaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCaracteristicaDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -326,13 +328,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCaracteristicaService.getCaracteristica(id);
             if (!res.getEstado()) {
-                return TarCaracteristicaDto.class.cast(res);//TODO
+                return (TarCaracteristicaDto) res.getResultado("Caracteristica");//TODO
             }
             TarCaracteristicaDto tarCaracteristicaDto = (TarCaracteristicaDto) res.getResultado("Caracteristica");
             return tarCaracteristicaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCaracteristicaDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -341,13 +343,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCaracteristicaService.eliminarCaracteristica(id);
             if (!res.getEstado()) {
-                return TarCaracteristicaDto.class.cast(res);//TODO
+                return (TarCaracteristicaDto) res.getResultado("");//TODO
             }
             TarCaracteristicaDto tarCaracteristicaDto = (TarCaracteristicaDto) res.getResultado("");
             return tarCaracteristicaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCaracteristicaDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -356,13 +358,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCaracteristicaService.getCaracteristicas();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarCaracteristicaDto>) res.getResultado("Caracteristica");//TODO
             }
             List<TarCaracteristicaDto> tarCaracteristicaDtos = (List<TarCaracteristicaDto>) res.getResultado("Caracteristica");
             return tarCaracteristicaDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -382,12 +384,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaService.guardarCompetencia(tarCompetenciaDto);
             if (!res.getEstado()) {
-                return TarCompetenciaDto.class.cast(res);//TODO
+                return (TarCompetenciaDto) res.getResultado("Competencia");//TODO
             }
+            tarCompetenciaDto = (TarCompetenciaDto) res.getResultado("Competencia");
             return tarCompetenciaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCompetenciaDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -396,13 +399,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaService.getCompetencia(id);
             if (!res.getEstado()) {
-                return TarCompetenciaDto.class.cast(res);//TODO
+                return (TarCompetenciaDto) res.getResultado("Competencia");//TODO
             }
             TarCompetenciaDto tarCompetenciaDto = (TarCompetenciaDto) res.getResultado("Competencia");
             return tarCompetenciaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCompetenciaDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -411,13 +414,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaService.eliminarCompetencia(id);
             if (!res.getEstado()) {
-                return TarCompetenciaDto.class.cast(res);//TODO
+                return (TarCompetenciaDto) res.getResultado("");//TODO
             }
             TarCompetenciaDto tarCompetenciaDto = (TarCompetenciaDto) res.getResultado("");
             return tarCompetenciaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCompetenciaDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -426,13 +429,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaService.getCompetencias();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarCompetenciaDto>) res.getResultado("Competencia");//TODO
             }
             List<TarCompetenciaDto> tarPuestoDtos = (List<TarCompetenciaDto>) res.getResultado("Competencia");
             return tarPuestoDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -453,10 +456,11 @@ public class EvaComUNAWs {
             if (!res.getEstado()) {
                 return TarCompetenciaevaluarDto.class.cast(res);//TODO
             }
+            tarCompetenciaevaluarDto = (TarCompetenciaevaluarDto) res.getResultado("CompetenciaEvaluar");
             return tarCompetenciaevaluarDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCompetenciaevaluarDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -465,13 +469,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaevaluarService.getCompetenciaEvaluar(id);
             if (!res.getEstado()) {
-                return TarCompetenciaevaluarDto.class.cast(res);//TODO
+                return (TarCompetenciaevaluarDto) res.getResultado("CompetenciaEvaluar");//TODO
             }
             TarCompetenciaevaluarDto tarCompetenciaevaluarDto = (TarCompetenciaevaluarDto) res.getResultado("CompetenciaEvaluar");
             return tarCompetenciaevaluarDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCompetenciaevaluarDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -480,13 +484,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaevaluarService.eliminarCompetenciaEvaluar(id);
             if (!res.getEstado()) {
-                return TarCompetenciaevaluarDto.class.cast(res);//TODO
+                return (TarCompetenciaevaluarDto) res.getResultado("");//TODO
             }
             TarCompetenciaevaluarDto tarCompetenciaevaluarDto = (TarCompetenciaevaluarDto) res.getResultado("");
             return tarCompetenciaevaluarDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarCompetenciaevaluarDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -495,13 +499,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarCompetenciaevaluarService.getCompetenciasEvaluar();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarCompetenciaevaluarDto>) res.getResultado("TarParametros");//TODO
             }
             List<TarCompetenciaevaluarDto> tarCompetenciaevaluarDtos = (List<TarCompetenciaevaluarDto>) res.getResultado("TarParametros");
             return tarCompetenciaevaluarDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -520,12 +524,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarEvaluadorService.guardarEvaluador(tarEvaluadorDto);
             if (!res.getEstado()) {
-                return TarEvaluadorDto.class.cast(res);//TODO
+                return (TarEvaluadorDto) res.getResultado("Evaluador");//TODO
             }
+            tarEvaluadorDto = (TarEvaluadorDto) res.getResultado("Evaluador");
             return tarEvaluadorDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarEvaluadorDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -534,13 +539,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarEvaluadorService.getEvaluador(id);
             if (!res.getEstado()) {
-                return TarEvaluadorDto.class.cast(res);//TODO
+                return (TarEvaluadorDto) res.getResultado("Evaluador");//TODO
             }
             TarEvaluadorDto tarEvaluadorDto = (TarEvaluadorDto) res.getResultado("Evaluador");
             return tarEvaluadorDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarEvaluadorDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -549,13 +554,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarEvaluadorService.eliminarEvaluador(id);
             if (!res.getEstado()) {
-                return TarEvaluadorDto.class.cast(res);//TODO
+                return (TarEvaluadorDto) res.getResultado("");//TODO
             }
             TarEvaluadorDto tarEvaluadorDto = (TarEvaluadorDto) res.getResultado("");
             return tarEvaluadorDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarEvaluadorDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -564,13 +569,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarEvaluadorService.getEvaluadores();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarEvaluadorDto>) res.getResultado("Evaluadores");//TODO
             }
             List<TarEvaluadorDto> tarEvaluadorDtos = (List<TarEvaluadorDto>) res.getResultado("Evaluadores");
             return tarEvaluadorDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -589,12 +594,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarProcesoevaluacionService.guardarProcesoEvaluacion(tarProcesoevaluacionDto);
             if (!res.getEstado()) {
-                return TarProcesoevaluacionDto.class.cast(res);//TODO
+                return (TarProcesoevaluacionDto) res.getResultado("TarProcesoevaluacion");//TODO
             }
+            tarProcesoevaluacionDto = (TarProcesoevaluacionDto) res.getResultado("TarProcesoevaluacion");
             return tarProcesoevaluacionDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarProcesoevaluacionDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -603,13 +609,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarProcesoevaluacionService.getProcesoEvaluacion(id);
             if (!res.getEstado()) {
-                return TarProcesoevaluacionDto.class.cast(res);//TODO
+                return (TarProcesoevaluacionDto) res.getResultado("TarProcesoevaluacion");//TODO
             }
             TarProcesoevaluacionDto tarProcesoevaluacionDto = (TarProcesoevaluacionDto) res.getResultado("TarProcesoevaluacion");
             return tarProcesoevaluacionDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarProcesoevaluacionDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -618,13 +624,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarProcesoevaluacionService.eliminarProcesoEvaluacion(id);
             if (!res.getEstado()) {
-                return TarProcesoevaluacionDto.class.cast(res);//TODO
+                return (TarProcesoevaluacionDto) res.getResultado("");//TODO
             }
             TarProcesoevaluacionDto tarProcesoevaluacionDto = (TarProcesoevaluacionDto) res.getResultado("");
             return tarProcesoevaluacionDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarProcesoevaluacionDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -633,13 +639,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarProcesoevaluacionService.getProcesosEvaluacion();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarProcesoevaluacionDto>) res.getResultado("TarProcesoevaluaciones");//TODO
             }
             List<TarProcesoevaluacionDto> tarProcesoevaluacionDtos = (List<TarProcesoevaluacionDto>) res.getResultado("TarProcesoevaluaciones");
             return tarProcesoevaluacionDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -658,12 +664,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarPuestoService.guardarPuesto(tarPuestoDto);
             if (!res.getEstado()) {
-                return TarPuestoDto.class.cast(res);//TODO
+                return (TarPuestoDto) res.getResultado("Puesto");//TODO
             }
+            tarPuestoDto = (TarPuestoDto) res.getResultado("Puesto");
             return tarPuestoDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarPuestoDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -672,13 +679,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarPuestoService.getPuesto(id);
             if (!res.getEstado()) {
-                return TarPuestoDto.class.cast(res);//TODO
+                return (TarPuestoDto) res.getResultado("Puesto");//TODO
             }
             TarPuestoDto tarCaracteristicaDto = (TarPuestoDto) res.getResultado("Puesto");
             return tarCaracteristicaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarPuestoDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -687,13 +694,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarPuestoService.eliminarPuesto(id);
             if (!res.getEstado()) {
-                return TarPuestoDto.class.cast(res);//TODO
+                return (TarPuestoDto) res.getResultado("");//TODO
             }
             TarPuestoDto tarPuestoDto = (TarPuestoDto) res.getResultado("");
             return tarPuestoDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarPuestoDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -702,13 +709,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarPuestoService.getPuestos();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarPuestoDto>) res.getResultado("Puesto");//TODO
             }
             List<TarPuestoDto> tarPuestoDtos = (List<TarPuestoDto>) res.getResultado("Puesto");
             return tarPuestoDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -727,12 +734,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarTrabajadorevaluarService.guardarTrabajadorEvaluar(tarTrabajadorevaluarDto);
             if (!res.getEstado()) {
-                return TarTrabajadorevaluarDto.class.cast(res);//TODO
+                return (TarTrabajadorevaluarDto) res.getResultado("TrabajadorEvaluar");//TODO
             }
+            tarTrabajadorevaluarDto = (TarTrabajadorevaluarDto) res.getResultado("TrabajadorEvaluar");
             return tarTrabajadorevaluarDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarTrabajadorevaluarDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -741,13 +749,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarTrabajadorevaluarService.getTrabajadorEvaluar(id);
             if (!res.getEstado()) {
-                return TarTrabajadorevaluarDto.class.cast(res);//TODO
+                return (TarTrabajadorevaluarDto) res.getResultado("");//TODO
             }
             TarTrabajadorevaluarDto tarCaracteristicaDto = (TarTrabajadorevaluarDto) res.getResultado("");
             return tarCaracteristicaDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarTrabajadorevaluarDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -756,13 +764,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarTrabajadorevaluarService.eliminarTrabajadorEvaluar(id);
             if (!res.getEstado()) {
-                return TarTrabajadorevaluarDto.class.cast(res);//TODO
+                return (TarTrabajadorevaluarDto) res.getResultado("TrabajadorEvaluar");//TODO
             }
             TarTrabajadorevaluarDto tarTrabajadorevaluarDto = (TarTrabajadorevaluarDto) res.getResultado("TrabajadorEvaluar");
             return tarTrabajadorevaluarDto;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return TarTrabajadorevaluarDto.class.cast(ex);//TODO
+            return null;//TODO
         }
     }
 
@@ -771,13 +779,13 @@ public class EvaComUNAWs {
         try {
             Respuesta res = tarTrabajadorevaluarService.getTrabajadoresEvaluar();
             if (!res.getEstado()) {
-                return new ArrayList<>().getClass().cast(res);//TODO
+                return (List<TarTrabajadorevaluarDto>) res.getResultado("TrabajadorEvaluares");//TODO
             }
             List<TarTrabajadorevaluarDto> tarTrabajadorevaluarDtos = (List<TarTrabajadorevaluarDto>) res.getResultado("TrabajadorEvaluares");
             return tarTrabajadorevaluarDtos;//TODO
         } catch (Exception ex) {
             Logger.getLogger(EvaComUNAWs.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<>().getClass().cast(ex);//TODO
+            return null;//TODO
         }
     }
 
