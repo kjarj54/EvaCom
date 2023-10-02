@@ -72,6 +72,8 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
     private ObservableList<TarCompetenciaDto> competencias = FXCollections.observableArrayList();
     TarPuestoDto tarPuestoDto;
     TarCompetenciaDto tarCompetenciaDto;
+    @FXML
+    private MFXButton btnActualizarPuesto;
 
     /**
      * Initializes the controller class.
@@ -106,30 +108,12 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
 
     @FXML
     private void onActionBtnAgregarPuesto(ActionEvent event) {
-        try {
-            if (btnAgregarPuesto.getText().isBlank() || btnAgregarPuesto.getText().isEmpty()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar puesto", getStage(), "Campo de texto de nombre de puesto vacia");
-            } else {
-                TarPuestoService service = new TarPuestoService();
-                Respuesta respuesta = service.guardarTarPuesto(tarPuestoDto.consultas());
-                if (!respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), respuesta.getMensaje());
-                } else {
-                    tbvPuestos.getItems().clear();
-                    tbvPuestos.refresh();
-                    unbindPuesto();
-                    tarPuestoDto = (TarPuestoDto) respuesta.getResultado("Puesto");
-                    bindPuesto();
-                    cargarPuestosAutomatico();
-                    nuevoCompetencia();
-                    cargarCompetencias();
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Puesto", getStage(), "Puesto guardado/actualizado correctamente.");
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(P09_MantenimientoPuestosViewController.class.getName()).log(Level.SEVERE, "Error guardando el Puesto.", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), "Ocurrio un error guardando el Puesto.");
-        }
+        crearActualizarPuesto();
+    }
+
+    @FXML
+    private void onActionBtnActualizarPuesto(ActionEvent event) {
+        crearActualizarPuesto();
     }
 
     @FXML
@@ -139,13 +123,6 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
             disableNodes(true);
             cargarPuestosAutomatico();
         }
-    }
-
-    private void agregarCompetencia() {
-        tarCompetenciaDto.setModificado(true);
-        tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);
-        tbvCompetencias.getItems().add(tarCompetenciaDto);
-        tbvCompetencias.refresh();
     }
 
     @FXML
@@ -194,6 +171,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         });
 
         TableColumn<TarPuestoDto, Boolean> tbcEliminar = new TableColumn<>("Eliminar");
+        tbcEliminar.setPrefWidth(100);
         tbcEliminar.setCellValueFactory((TableColumn.CellDataFeatures<TarPuestoDto, Boolean> p) -> new SimpleBooleanProperty(p.getValue() != null));
         tbcEliminar.setCellFactory((TableColumn<TarPuestoDto, Boolean> p) -> new ButtonCell());
 
@@ -312,6 +290,33 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         }
     }
 
+    private void crearActualizarPuesto() {
+        try {
+            if (txfPuesto.getText().isBlank() || txfPuesto.getText().isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar puesto", getStage(), "Campo de texto de nombre de puesto vacia");
+            } else {
+                TarPuestoService service = new TarPuestoService();
+                Respuesta respuesta = service.guardarTarPuesto(tarPuestoDto.consultas());
+                if (!respuesta.getEstado()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), respuesta.getMensaje());
+                } else {
+                    tbvPuestos.getItems().clear();
+                    tbvPuestos.refresh();
+                    unbindPuesto();
+                    tarPuestoDto = (TarPuestoDto) respuesta.getResultado("Puesto");
+                    bindPuesto();
+                    cargarPuestosAutomatico();
+                    nuevoCompetencia();
+                    cargarCompetencias("");
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar Puesto", getStage(), "Puesto guardado/actualizado correctamente.");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(P09_MantenimientoPuestosViewController.class.getName()).log(Level.SEVERE, "Error guardando el Puesto.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar Puesto", getStage(), "Ocurrio un error guardando el Puesto.");
+        }
+    }
+
     private void eliminarPuesto() {
         if (new Mensaje().showConfirmation("Eliminar Puesto", getStage(), "¿Esta seguro que desea eliminar el registro?")) {
             try {
@@ -357,6 +362,18 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         tbvCompetencias.setDisable(activo);
     }
 
+    private void agregarCompetencia() {
+        if (tarCompetenciaDto.getComId() == null || tarPuestoDto.getPueId() == null) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Agregar Competencia", getStage(), "Es necesario cargar una Puesto para agregarla a la lista.");
+        } else if (tbvCompetencias.getItems() == null || !tbvCompetencias.getItems().stream().anyMatch(a -> a.getComNombre().equals(tarCompetenciaDto.getComNombre()))) {
+
+            tarCompetenciaDto.setModificado(true);
+            tarPuestoDto.getTarCompetenciaList().add(tarCompetenciaDto);
+            tbvCompetencias.getItems().add(tarCompetenciaDto);
+            tbvCompetencias.refresh();
+        }
+    }
+
     @FXML
     private void onActionBtnFiltrarCompetencia(ActionEvent event) {
         cargarCompetencias(txfBuscarCompetencia.getText());
@@ -392,7 +409,6 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
         tbvCompetencias.setItems(compe);
         tbvCompetencias.refresh();
     }
-
     private void nuevoCompetencia() {
         tarCompetenciaDto = new TarCompetenciaDto();
         txfBuscarCompetencia.clear();

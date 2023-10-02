@@ -87,9 +87,9 @@ public class P02_LogInViewController extends Controller implements Initializable
     private void onActionBtnIngresar(ActionEvent event) {
         SoundUtil.mouseEnterSound();
         try {
-            if (txfCorreo.getText() == null || txfContrasena.getText().isEmpty()) {
+            if (txfCorreo.getText() == null || txfCorreo.getText().isEmpty()) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario digitar un correo o usuario para ingresar al sistema.");
-            } else if (txfCorreo.getText() == null || txfContrasena.getText().isEmpty()) {
+            } else if (txfContrasena.getText() == null || txfContrasena.getText().isEmpty()) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario digitar la clave para ingresar al sistema.");
             } else {
                 TarUsuarioService tarUsuarioService = new TarUsuarioService();
@@ -109,6 +109,8 @@ public class P02_LogInViewController extends Controller implements Initializable
                             new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Es necesario que su cuenta este activada.");
                         }
                     }
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", getStage(), "Usuario incorrecto.");
                 }
             }
         } catch (Exception ex) {

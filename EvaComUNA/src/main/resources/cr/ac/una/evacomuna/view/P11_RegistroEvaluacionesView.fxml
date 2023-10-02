@@ -7,6 +7,8 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -20,114 +22,177 @@
         <URL value="@styles.css" />
     </stylesheets>
    <children>
-      <HBox alignment="CENTER" layoutX="421.0" layoutY="151.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="726.0" spacing="10.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
-               <children>
-                  <HBox prefWidth="200.0">
+      <TabPane fx:id="tapPaneEvaluacion" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab1" text="Página 1/2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" styleClass="mfx-button-Image-salir">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/media/icons/Back_Icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </MFXButton>
-                     </children>
-                  </HBox>
-                  <HBox prefWidth="200.0">
-                     <children>
-                        <JFXTextField fx:id="txfTituloEvaluacion" minHeight="-Infinity" prefHeight="40.0" promptText="Título de la evaluación" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin></JFXTextField>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="15.0">
-                     <children>
-                        <VBox layoutX="10.0" layoutY="10.0" prefWidth="195.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label alignment="BOTTOM_LEFT" contentDisplay="BOTTOM" prefHeight="30.0" styleClass="labels-text-minus" text="Periodo de evaluación:" />
-                              <Label alignment="BOTTOM_LEFT" prefHeight="30.0" styleClass="labels-text-minus" text="Fecha de aplicación:" />
+                              <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="726.0" spacing="10.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <MFXButton fx:id="btnSalir" onAction="#onActionBtnSalir" styleClass="mfx-button-Image-salir">
+                                             <graphic>
+                                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../resources/media/icons/Back_Icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </MFXButton>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <JFXTextField fx:id="txfTituloEvaluacion" minHeight="-Infinity" prefHeight="40.0" promptText="Título de la evaluación" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets top="10.0" />
+                                             </HBox.margin>
+                                          </JFXTextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="15.0">
+                                       <children>
+                                          <VBox layoutX="10.0" layoutY="10.0" prefWidth="195.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label alignment="BOTTOM_LEFT" contentDisplay="BOTTOM" prefHeight="30.0" styleClass="labels-text-minus" text="Periodo de evaluación:" />
+                                                <Label alignment="BOTTOM_LEFT" prefHeight="30.0" styleClass="labels-text-minus" text="Fecha de aplicación:" />
+                                             </children>
+                                          </VBox>
+                                          <VBox spacing="10.0">
+                                             <children>
+                                                <JFXDatePicker fx:id="dtpFechaInicio" defaultColor="BLACK" promptText="Fecha de inicio" styleClass="jfx-date-picker" />
+                                                <JFXDatePicker fx:id="dtpFechaAplicar" promptText="Seleccionar" styleClass="jfx-date-picker" />
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="192.0" layoutY="10.0" spacing="10.0">
+                                             <children>
+                                                <JFXDatePicker fx:id="dtpFechaFinaliza" promptText="Fecha de Conclusión" styleClass="jfx-date-picker" />
+                                                <JFXComboBox fx:id="cboxEstado" maxWidth="1.7976931348623157E308" prefHeight="30.0" promptText="Estado" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <MFXButton fx:id="btnLimpiarEvaluacion" layoutX="290.0" layoutY="10.0" onAction="#onActionBtnLimpiarEvaluacion" styleClass="mfx-button-Image">
+                                             <graphic>
+                                                <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../resources/media/icons/clearIcon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <tooltip>
+                                                <Tooltip text="Limpiar campos" />
+                                             </tooltip>
+                                          </MFXButton>
+                                          <MFXButton fx:id="btnAgregarEvaluacion" onAction="#onActionBtnAgregarEvaluacion" prefHeight="45.0" prefWidth="208.0" styleClass="mfx-button-menuPrincipal" text="Agregar evaluación" wrapText="true" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="tbvEvaluaciones" prefHeight="232.0" prefWidth="599.0" VBox.vgrow="ALWAYS" />
+                                    <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <JFXTextField fx:id="txfBuscarEvaluacion" promptText="Buscar evaluaciones por nombre" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnFiltrarEvaluacion" maxHeight="1.7976931348623157E308" onAction="#onActionBtnFiltrarEvaluacion" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="720.0" prefWidth="726.0" spacing="10.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <JFXTextField fx:id="txfBuscarPuestosAEvaluar" promptText="Buscar puestos a evaluar" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnFiltroPuestosAEvaluar" maxHeight="1.7976931348623157E308" onAction="#onActionBtnFiltroPuestosAEvaluar" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="tbvPuestosFiltro" VBox.vgrow="ALWAYS" />
+                                    <VBox alignment="TOP_RIGHT" prefWidth="100.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="labels-text" text="Puestos asignados a la evaluación" VBox.vgrow="ALWAYS" />
+                                          <TableView fx:id="tbvPuestosAsignados" VBox.vgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnActualizarEvaluacionPuestos" maxHeight="1.7976931348623157E308" minHeight="-Infinity" onAction="#onActionBtnActualizarEvaluacionPuestos" prefHeight="40.0" prefWidth="250.0" styleClass="mfx-button-menuPrincipal" text="Actualizar evaluación" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                 </padding>
+                              </VBox>
                            </children>
-                        </VBox>
-                        <VBox spacing="10.0">
+                           <padding>
+                              <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tab2" onSelectionChanged="#onSelectionTab2" text="Página 2/2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <JFXDatePicker fx:id="dtpFechaInicio" defaultColor="BLACK" promptText="Fecha de inicio" styleClass="jfx-date-picker" />
-                              <JFXDatePicker fx:id="dtpFechaAplicar" promptText="Seleccionar" styleClass="jfx-date-picker" />
+                              <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="720.0" prefWidth="726.0" spacing="10.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <JFXTextField fx:id="txfBuscarTrabajadorAEvaluar" promptText="Buscar trabajadores a evaluar" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnFiltrarTrabajadorAEvaluar" maxHeight="1.7976931348623157E308" onAction="#onActionBtnFiltrarTrabajadorAEvaluar" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="tbvTrabajadorAEvaluarFiltro" VBox.vgrow="ALWAYS" />
+                                    <VBox alignment="TOP_RIGHT" prefWidth="100.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="labels-text" text="Trabajadores asignados a la evaluación" VBox.vgrow="ALWAYS" />
+                                          <TableView fx:id="tbvTrabajadorAEvaluar" VBox.vgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnActualizarEvaluacionTrabEvaluados" maxHeight="1.7976931348623157E308" minHeight="-Infinity" onAction="#onActionBtnActualizarEvaluacionTrabEvaluados" prefHeight="40.0" prefWidth="250.0" styleClass="mfx-button-menuPrincipal" text="Actualizar evaluación" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="30.0" prefHeight="720.0" prefWidth="726.0" spacing="10.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <JFXTextField fx:id="txfBuscarTrabajadorARealizarEva" promptText="Buscar trabajadores a realizar evaluación" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnFitrarTrabajadorARealizarEva" maxHeight="1.7976931348623157E308" onAction="#onActionBtnFitrarTrabajadorARealizarEva" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Filtrar" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="tbvtnTrabajadorARealizarEvaFiltro" VBox.vgrow="ALWAYS" />
+                                    <VBox alignment="TOP_RIGHT" prefWidth="100.0" spacing="10.0">
+                                       <children>
+                                          <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="labels-text" text="Trabajadores a realizar evaluación" VBox.vgrow="ALWAYS" />
+                                          <TableView fx:id="tbvtnTrabajadorARealizarEva" VBox.vgrow="ALWAYS" />
+                                          <MFXButton fx:id="btnActualizarEvaluacionRealizaEva" maxHeight="1.7976931348623157E308" minHeight="-Infinity" onAction="#onActionBtnActualizarEvaluacionRealizaEva" prefHeight="40.0" prefWidth="250.0" styleClass="mfx-button-menuPrincipal" text="Actualizar evaluación" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                 </padding>
+                              </VBox>
                            </children>
-                        </VBox>
-                        <VBox layoutX="192.0" layoutY="10.0" spacing="10.0">
-                           <children>
-                              <JFXDatePicker fx:id="dtpFechaFinaliza" promptText="Fecha de Conclusión" styleClass="jfx-date-picker" />
-                              <JFXComboBox fx:id="cboxEstado" maxWidth="1.7976931348623157E308" prefHeight="30.0" promptText="Estado" />
-                           </children>
-                        </VBox>
+                           <padding>
+                              <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                           </padding>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <MFXButton fx:id="btnEliminarEvaluacion" onAction="#onActionBtnEliminarEvaluacion" styleClass="mfx-button-Image">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/media/icons/Delete1.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Eliminar evaluación" />
-                           </tooltip>
-                        </MFXButton>
-                        <MFXButton fx:id="btnLimpiarEvaluacion" layoutX="290.0" layoutY="10.0" onAction="#onActionBtnLimpiarEvaluacion" styleClass="mfx-button-Image">
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/media/icons/clearIcon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <tooltip>
-                              <Tooltip text="Limpiar campos" />
-                           </tooltip>
-                        </MFXButton>
-                        <MFXButton fx:id="btnAgregarEvaluacion" onAction="#onActionBtnAgregarEvaluacion" prefHeight="45.0" prefWidth="208.0" styleClass="mfx-button-menuPrincipal" text="Agregar o Guardar" wrapText="true" />
-                     </children>
-                  </HBox>
-                  <Label styleClass="labels-text" text="Puestos a evaluar" />
-                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <JFXTextField fx:id="txfBuscarPuesto" onKeyPressed="#onkeyPressedCompetencia" promptText="Buscar puesto" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
-                        <MFXButton fx:id="btnAgregarPuesto" maxHeight="1.7976931348623157E308" onAction="#onActionBtnAgregarPuesto" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
-                     </children>
-                  </HBox>
-                  <TableView prefHeight="232.0" prefWidth="599.0" VBox.vgrow="ALWAYS" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
-            <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="720.0" prefWidth="726.0" spacing="10.0" styleClass="panel-transparencia" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label styleClass="labels-text" text="Trabajadores a evaluar" />
-                  <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <JFXTextField fx:id="txfBuscarTrabajador" onKeyPressed="#onkeyPressedCompetencia" promptText="Buscar Trabajador" styleClass="jfx-text-field-edit" HBox.hgrow="ALWAYS" />
-                        <MFXButton fx:id="btnAgregarTrabajador" maxHeight="1.7976931348623157E308" onAction="#onActionBtnAgregarTrabajador" prefWidth="150.0" styleClass="mfx-button-menuPrincipal" text="Agregar" />
-                     </children>
-                  </HBox>
-                  <TableView fx:id="tbvTrabajadores" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-               </padding>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-         </padding>
-      </HBox>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

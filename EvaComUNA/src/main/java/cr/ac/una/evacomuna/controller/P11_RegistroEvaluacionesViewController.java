@@ -4,28 +4,18 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.evacomuna.model.TarUsuarioDto;
-import cr.ac.una.evacomuna.service.TarUsuarioService;
-import cr.ac.una.evacomuna.util.Mensaje;
-import cr.ac.una.evacomuna.util.Respuesta;
-import cr.ac.una.evacomunaws.controller.TarProcesoevaluacionDto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -48,26 +38,58 @@ public class P11_RegistroEvaluacionesViewController extends Controller implement
     @FXML
     private JFXComboBox<String> cboxEstado;
     @FXML
-    private MFXButton btnEliminarEvaluacion;
-    @FXML
     private MFXButton btnLimpiarEvaluacion;
     @FXML
     private MFXButton btnAgregarEvaluacion;
-    @FXML
-    private JFXTextField txfBuscarPuesto;
-    @FXML
-    private MFXButton btnAgregarPuesto;
-    @FXML
     private JFXTextField txfBuscarTrabajador;
-    @FXML
-    private MFXButton btnAgregarTrabajador;
-    @FXML
     private TableView<TarUsuarioDto> tbvTrabajadores;
 
-    
     private ObservableList<TarUsuarioDto> usuarios = FXCollections.observableArrayList();
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private TabPane tapPaneEvaluacion;
+    @FXML
+    private Tab tab1;
+    @FXML
+    private TableView<?> tbvEvaluaciones;
+    @FXML
+    private JFXTextField txfBuscarEvaluacion;
+    @FXML
+    private MFXButton btnFiltrarEvaluacion;
+    @FXML
+    private JFXTextField txfBuscarPuestosAEvaluar;
+    @FXML
+    private MFXButton btnFiltroPuestosAEvaluar;
+    @FXML
+    private TableView<?> tbvPuestosFiltro;
+    @FXML
+    private TableView<?> tbvPuestosAsignados;
+    @FXML
+    private MFXButton btnActualizarEvaluacionPuestos;
+    @FXML
+    private Tab tab2;
+    @FXML
+    private JFXTextField txfBuscarTrabajadorAEvaluar;
+    @FXML
+    private MFXButton btnFiltrarTrabajadorAEvaluar;
+    @FXML
+    private TableView<?> tbvTrabajadorAEvaluarFiltro;
+    @FXML
+    private TableView<?> tbvTrabajadorAEvaluar;
+    @FXML
+    private MFXButton btnActualizarEvaluacionTrabEvaluados;
+    @FXML
+    private JFXTextField txfBuscarTrabajadorARealizarEva;
+    @FXML
+    private MFXButton btnFitrarTrabajadorARealizarEva;
+    @FXML
+    private TableView<?> tbvtnTrabajadorARealizarEvaFiltro;
+    @FXML
+    private TableView<?> tbvtnTrabajadorARealizarEva;
+    @FXML
+    private MFXButton btnActualizarEvaluacionRealizaEva;
+
     /**
      * Initializes the controller class.
      */
@@ -78,69 +100,44 @@ public class P11_RegistroEvaluacionesViewController extends Controller implement
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
-        
+
+        // Metodos para las tablas
+        cargarTablaEvaluacion();
+        cargarTablaFiltroPuestos();
+        cargarTablaPuestosAsignados();
+        cargarTablaTrabajadoresAEvaluarFiltro();
+        cargarTablaTrabajadoresAEvaluar();
+        cargarTablaTrabajadoresRealizaEvaFiltro();
+        cargarTablaTrabajadoresRealizaEva();
+
         estadosEvaluacion();
-        
-        tbvTrabajadores.getColumns().clear();
-        tbvTrabajadores.getItems().clear();
 
-        TableColumn<TarUsuarioDto, String> tbcId = new TableColumn<>("Id");
-        tbcId.setPrefWidth(25);
-        tbcId.setCellValueFactory(cd -> cd.getValue().usuId);
-
-        TableColumn<TarUsuarioDto, String> tbcCedula = new TableColumn<>("Cedula");
-        tbcCedula.setPrefWidth(75);
-        tbcCedula.setCellValueFactory(cd -> cd.getValue().usuCedula);
-
-        TableColumn<TarUsuarioDto, String> tbcNombre = new TableColumn<>("Nombre");
-        tbcNombre.setPrefWidth(100);
-        tbcNombre.setCellValueFactory(cd -> cd.getValue().usuNombre);
-
-        TableColumn<TarUsuarioDto, String> tbcApellido = new TableColumn<>("Apellidos");
-        tbcApellido.setPrefWidth(150);
-        tbcApellido.setCellValueFactory(cd -> cd.getValue().usuApellido);
-        
-        TableColumn<TarUsuarioDto, Boolean> tbcEliminar = new TableColumn<>("Eliminar");
-        tbcEliminar.setCellValueFactory((TableColumn.CellDataFeatures<TarUsuarioDto, Boolean> p) -> new SimpleBooleanProperty(p.getValue() != null));
-        tbcEliminar.setCellFactory((TableColumn<TarUsuarioDto, Boolean> p) -> new ButtonCell());
-        
-        TableColumn<TarUsuarioDto, String> comboBoxColumn = new TableColumn<>("relacion");
-        comboBoxColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        
-        // Crear el ComboBox y establecer los valores
-        comboBoxColumn.setCellFactory(param -> {
-            ComboBox<String> comboBox = new ComboBox<>();
-            comboBox.getItems().addAll("Cliente", "Compañero", "Jefatura");
-            return new TableCell<TarUsuarioDto, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        comboBox.getSelectionModel().select(item);
-                        setGraphic(comboBox);
-                    }
-                }
-            };
-        });
-
-
-        tbvTrabajadores.getColumns().add(tbcId);
-        tbvTrabajadores.getColumns().add(tbcCedula);
-        tbvTrabajadores.getColumns().add(tbcNombre);
-        tbvTrabajadores.getColumns().add(tbcApellido);
-        tbvTrabajadores.getColumns().add(comboBoxColumn);
-        tbvTrabajadores.getColumns().add(tbcEliminar);
-        tbvTrabajadores.refresh();
-    }    
+        // Crear el ComboBox y establecer los valores para la tabla
+//        comboBoxColumn.setCellFactory(param -> {
+//            ComboBox<String> comboBox = new ComboBox<>();
+//            comboBox.getItems().addAll("Cliente", "Compañero", "Jefatura");
+//            return new TableCell<TarUsuarioDto, String>() {
+//                @Override
+//                protected void updateItem(String item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    if (empty) {
+//                        setGraphic(null);
+//                    } else {
+//                        comboBox.getSelectionModel().select(item);
+//                        setGraphic(comboBox);
+//                    }
+//                }
+//            };
+//        });
+    }
 
     @Override
     public void initialize() {
     }
 
     @FXML
-    private void onActionBtnEliminarEvaluacion(ActionEvent event) {
+    private void onActionBtnAgregarEvaluacion(ActionEvent event) {
+        crearActualizarEvaluacion();
     }
 
     @FXML
@@ -148,26 +145,111 @@ public class P11_RegistroEvaluacionesViewController extends Controller implement
     }
 
     @FXML
-    private void onActionBtnAgregarEvaluacion(ActionEvent event) {
+    private void onActionBtnFiltrarEvaluacion(ActionEvent event) {
+    }
+
+    //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    // Crear metodo para cargar las evaluaciones
+    private void cargarTablaEvaluacion() {
+    }
+
+    // Crear metodo para crear/actualizar las evaluaciones se llama en varios botones
+    private void crearActualizarEvaluacion() {
+    }
+
+    // Crear Metodo para eliminar Evaluacion despues se llama en el boton de la celda
+    private void eliminarEvaluacion() {
+    }
+
+    private void nuevoEvaluacion() {
+    }
+
+    private void bindEvaluacion() {
+    }
+
+    private void unbindEvaluacion() {
+    }
+
+    //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    @FXML
+    private void onActionBtnFiltroPuestosAEvaluar(ActionEvent event) {
     }
 
     @FXML
-    private void onkeyPressedCompetencia(KeyEvent event) {
+    private void onActionBtnActualizarEvaluacionPuestos(ActionEvent event) {
+        crearActualizarEvaluacion();
+    }
+
+    //222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+    // Crear metodo para cargar el FILTRO de puestos
+    private void cargarTablaFiltroPuestos() {
+    }
+
+    // Crear metodo para cargar los puestos asignados a la evaluacion
+    private void cargarTablaPuestosAsignados() {
+    }
+
+    // Crear Metodo para eliminar Evaluacion despues se llama en el boton de la celda
+    private void eliminarPuestos() {
+    }
+    //2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+
+    @FXML
+    private void onActionBtnFiltrarTrabajadorAEvaluar(ActionEvent event) {
     }
 
     @FXML
-    private void onActionBtnAgregarPuesto(ActionEvent event) {
+    private void onActionBtnActualizarEvaluacionTrabEvaluados(ActionEvent event) {
+        crearActualizarEvaluacion();
+    }
+
+    //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+    // Crear metodo para cargar el FILTRO de los trabajadorea a evaluar
+    private void cargarTablaTrabajadoresAEvaluarFiltro() {
+    }
+
+    // Crear metodo para cargar los trabajadorea a evaluar
+    private void cargarTablaTrabajadoresAEvaluar() {
+    }
+
+    // Crear Metodo para eliminar Evaluacion despues se llama en el boton de la celda
+    private void eliminarTrabajadorAEvaluar() {
+    }
+    //-33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+
+    @FXML
+    private void onActionBtnFitrarTrabajadorARealizarEva(ActionEvent event) {
     }
 
     @FXML
-    private void onActionBtnAgregarTrabajador(ActionEvent event) {
-        String cedula = txfBuscarTrabajador.getText();
-
-
-        cargarUsuarios(cedula, "", "", "");
+    private void onActionBtnActualizarEvaluacionRealizaEva(ActionEvent event) {
+        crearActualizarEvaluacion();
     }
-    
-    private void estadosEvaluacion(){
+
+    //444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+    // Crear metodo para cargar el FILTRO de los trabajadorea que realizan evaluacion
+    private void cargarTablaTrabajadoresRealizaEvaFiltro() {
+    }
+
+    // Crear metodo para cargar los trabajadorea que realizan evaluacion
+    private void cargarTablaTrabajadoresRealizaEva() {
+
+    }
+
+    // Crear Metodo para eliminar Evaluacion despues se llama en el boton de la celda
+    private void eliminarTTrabajadorARealizarEva() {
+    }
+    //4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+
+    @FXML
+    private void onSelectionTab2(Event event) {
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
+    }
+
+    private void estadosEvaluacion() {
         // Crear una lista de elementos
         ObservableList<String> elementos = FXCollections.observableArrayList(
                 "En construcción",
@@ -179,48 +261,29 @@ public class P11_RegistroEvaluacionesViewController extends Controller implement
         // Agregar la lista de elementos al ComboBox
         cboxEstado.setItems(elementos);
     }
-    
-     private void cargarUsuarios(String cedula, String nombre, String usuario, String puesto) {
-        TarUsuarioService service = new TarUsuarioService();
-        Respuesta respuesta = service.getUsuarios(cedula.toUpperCase(), nombre.toUpperCase(), usuario.toUpperCase(), puesto.toUpperCase());
 
-        if (respuesta.getEstado()) {
-            tbvTrabajadores.getItems().clear();
-            usuarios.clear();
-            usuarios.addAll((List<TarUsuarioDto>) respuesta.getResultado("TarUsuario"));
-            tbvTrabajadores.setItems(usuarios);
-            tbvTrabajadores.refresh();
-        } else {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Usuarios", getStage(), respuesta.getMensaje());
-        }
-    }
-
-    @FXML
-    private void onActionBtnSalir(ActionEvent event) {
-    }
-    
-    private class ButtonCell extends TableCell<TarUsuarioDto, Boolean> {
-
-        final MFXButton cellButton = new MFXButton();
-
-        ButtonCell() {
-            cellButton.setPrefWidth(500);
-            cellButton.setText("Eliminar");
-            cellButton.getStyleClass().add("mfx-button-menuSalir");
-
-            cellButton.setOnAction((ActionEvent t) -> {
-                TarUsuarioDto emp = (TarUsuarioDto) ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex());
-                tbvTrabajadores.getItems().remove(emp);
-                tbvTrabajadores.refresh();
-            });
-        }
-
-        @Override
-        protected void updateItem(Boolean t, boolean empty) {
-            super.updateItem(t, empty);
-            if (!empty) {
-                setGraphic(cellButton);
-            }
-        }
-    }
+//    private class ButtonCellEliminarEvaluacion extends TableCell<TarProcesoevaluacionDto, Boolean> {
+//
+//        final MFXButton cellButton = new MFXButton();
+//
+//        ButtonCellEliminarEvaluacion() {
+//            cellButton.setPrefWidth(500);
+//            cellButton.setText("Eliminar");
+//            cellButton.getStyleClass().add("mfx-button-menuSalir");
+//
+//            cellButton.setOnAction((ActionEvent t) -> {
+//                TarProcesoevaluacionDto emp = (TarProcesoevaluacionDto) ButtonCellEliminarEvaluacion.this.getTableView().getItems().get(ButtonCellEliminarEvaluacion.this.getIndex());
+//                //tbvTrabajadores.getItems().remove(emp);
+//                tbvTrabajadores.refresh();
+//            });
+//        }
+//
+//        @Override
+//        protected void updateItem(Boolean t, boolean empty) {
+//            super.updateItem(t, empty);
+//            if (!empty) {
+//                setGraphic(cellButton);
+//            }
+//        }
+//    }
 }
