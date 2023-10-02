@@ -39,6 +39,7 @@ public class P04_RecuperarClaveViewController extends Controller implements Init
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
         loadSounds();
     }
 

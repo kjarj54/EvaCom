@@ -37,6 +37,10 @@ public class P10_MenuEvaluacionesViewController extends Controller implements In
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
     }
 
     @Override

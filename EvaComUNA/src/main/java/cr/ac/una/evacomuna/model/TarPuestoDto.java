@@ -174,4 +174,8 @@ public class TarPuestoDto {
         this.tarUsuarioListEliminados = tarUsuarioListEliminados;
     }
 
+    @Override
+    public String toString() {
+        return pueNombre.get();
+    }
 }

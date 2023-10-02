@@ -90,6 +90,12 @@ public class P08_MantenimientoCompetenciasController extends Controller implemen
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        
         txfCompetencia.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfBuscarNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfCaracteristica.setTextFormatter(Formato.getInstance().maxLengthFormat(80));

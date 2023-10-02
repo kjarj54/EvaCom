@@ -77,6 +77,11 @@ public class P07_MantenimientoGeneralesViewController extends Controller impleme
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
 
         txfNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(20));
         txaInformacion.setTextFormatter(Formato.getInstance().maxLengthFormat(30));

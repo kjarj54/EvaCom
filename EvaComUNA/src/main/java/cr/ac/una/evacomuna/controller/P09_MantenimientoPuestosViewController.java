@@ -78,6 +78,12 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        
         txfPuesto.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfBuscarNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
         txfBuscarCompetencia.setTextFormatter(Formato.getInstance().maxLengthFormat(30));
@@ -431,8 +437,7 @@ public class P09_MantenimientoPuestosViewController extends Controller implement
                 int index = ButtonCell2.this.getIndex();
                 tarCompetenciaDto = (TarCompetenciaDto) ButtonCell2.this.getTableView().getItems().get(index);
                 agregarCompetencia();
-                //eliminarPuesto();
-
+                
                 tbvCompetenciasBusqueda.refresh();
             });
         }

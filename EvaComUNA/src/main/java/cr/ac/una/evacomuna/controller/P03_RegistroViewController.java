@@ -87,7 +87,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
     @FXML
     private MFXButton btnLimpiarCampos;
     @FXML
-    private JFXComboBox<String> cboxPuesto;
+    private JFXComboBox<TarPuestoDto> cboxPuesto;
 
     // Para cargar la imagen
     File file;
@@ -104,22 +104,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         AnchorPane.setBottomAnchor(root, 0.0);
-
-        cargarPuestos();
-
-        //--------------------------revisar ComboBox
-        cargarPuestos();
-
-//
-//        // Crear una lista de elementos
-//        ObservableList<String> elementos = FXCollections.observableArrayList(
-//                "Opción 1",
-//                "Opción 2",
-//                "Opción 3"
-//        );
-//
-//        // Agregar la lista de elementos al ComboBox
-//        cboxPuesto.setItems(elementos);
+        
         txfNombre.setTextFormatter(Formato.getInstance().letrasFormat(25));
         txfApellidos.setTextFormatter(Formato.getInstance().letrasFormat(35));
         txfCedula.setTextFormatter(Formato.getInstance().cedulaFormat(30));
@@ -132,6 +117,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         nuevoUsuario();
         indicarRequeridos();
         cargarInterfaz();
+        cargarPuestos();
         loadSounds();
     }
 
@@ -232,7 +218,7 @@ public class P03_RegistroViewController extends Controller implements Initializa
         if (respuesta.getEstado()) {
             ObservableList<TarPuestoDto> elementos = FXCollections.observableArrayList();
             elementos.addAll((List<TarPuestoDto>) respuesta.getResultado("TarPuestos"));
-            //cboxPuesto.setItems(elementos);
+            cboxPuesto.setItems(elementos);
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar Puestos", getStage(), respuesta.getMensaje());
         }
@@ -248,6 +234,10 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfTelefono.textProperty().bindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().bindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().bindBidirectional(tarUsuarioDto.usuAdmin);
+//        if (tarUsuarioDto.puestoDto != null) {
+//            cboxPuesto.getSelectionModel().select(tarUsuarioDto.puestoDto);
+//            System.out.println(cboxPuesto.getSelectionModel().getSelectedItem().pueNombre);
+//        }
         // cboxPuesto.valueProperty().bindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
         if (this.tarUsuarioDto.getUsuFoto() != null) {
             imvFotoPerfil.setImage(byteToImage(this.tarUsuarioDto.getUsuFoto()));
@@ -264,6 +254,11 @@ public class P03_RegistroViewController extends Controller implements Initializa
         txfTelefono.textProperty().unbindBidirectional(tarUsuarioDto.usuTelefono);
         txfCelular.textProperty().unbindBidirectional(tarUsuarioDto.usuCelular);
         chkAdministrador.selectedProperty().unbindBidirectional(tarUsuarioDto.usuAdmin);
+        if (cboxPuesto.getSelectionModel().getSelectedItem() != null) {
+            tarUsuarioDto.puestoDto = cboxPuesto.getSelectionModel().getSelectedItem();
+            System.out.println(tarUsuarioDto.puestoDto.pueNombre);
+        }
+        cboxPuesto.getSelectionModel().clearSelection();
         //  cboxPuesto.valueProperty().unbindBidirectional(tarUsuarioDto.puestoDto.pueNombre);
         file = new File("src/main/resources/cr/ac/una/evacomuna/resources/media/icons/userIcon.png");
         loadImages(imvFotoPerfil, file);
