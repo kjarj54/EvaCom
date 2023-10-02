@@ -17,6 +17,7 @@ public class TarEvaluadorDto {
 
     public SimpleStringProperty evaluId;
     public SimpleStringProperty evaluRetroalimentacion;
+    public SimpleStringProperty evaluCalificacion;
     private Long evaluVersion;
     private Boolean modificado;
     public TarTrabajadorevaluarDto trabajadorevaluarDto;
@@ -51,6 +52,7 @@ public class TarEvaluadorDto {
                 this.tarCompetenciaevaluarList.add(convertedItem);
             }
         }
+        this.evaluCalificacion.set(tarEvaluadorDto.getEvaluCalificacion());
         this.modificado = tarEvaluadorDto.isModificado();
         this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
     }
@@ -73,6 +75,7 @@ public class TarEvaluadorDto {
         }
         tarEvaluadorDtoSoap.setEvaluVersion(this.getEvaluVersion());
         tarEvaluadorDtoSoap.setModificado(this.getModificado());
+        tarEvaluadorDtoSoap.setEvaluCalificacion(this.getEvaluCalificacion());
         return tarEvaluadorDtoSoap;
     }
 
@@ -144,4 +147,14 @@ public class TarEvaluadorDto {
         this.tarCompetenciaevaluarListEliminados = tarCompetenciaevaluarListEliminados;
     }
 
+    public String getEvaluCalificacion() {
+        return evaluCalificacion.get();
+    }
+
+    public void setEvaluCalificacion(String evaluCalificacion) {
+        this.evaluCalificacion.set(evaluCalificacion);
+    }
+    
+    
+    
 }

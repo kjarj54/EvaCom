@@ -16,6 +16,7 @@ public class TarEvaluadorDto {
     private Long evaluId;
     private String evaluRetroalimentacion;
     private Long evaluVersion;
+    private String evaluCalificacion;
     private Boolean modificado;
     private TarTrabajadorevaluarDto trabajadorevaluarDto;
     private TarUsuarioDto usuarioDto;
@@ -34,6 +35,7 @@ public class TarEvaluadorDto {
         this.evaluId = tarEvaluador.getEvaluId();
         this.evaluRetroalimentacion = tarEvaluador.getEvaluRetroalimentacion();
         this.evaluVersion = tarEvaluador.getEvaluVersion();
+        this.evaluCalificacion = tarEvaluador.getEvaluCalificacion();
     }
 
     public Long getEvaluId() {
@@ -100,4 +102,13 @@ public class TarEvaluadorDto {
         this.tarCompetenciaevaluarListEliminados = tarCompetenciaevaluarListEliminados;
     }
 
+    public String getEvaluCalificacion() {
+        return evaluCalificacion;
+    }
+
+    public void setEvaluCalificacion(String evaluCalificacion) {
+        this.evaluCalificacion = evaluCalificacion;
+    }
+
+    
 }

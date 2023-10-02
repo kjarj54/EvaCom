@@ -45,6 +45,8 @@ public class TarEvaluador implements Serializable {
     private Long evaluId;
     @Column(name = "EVALU_RETROALIMENTACION")
     private String evaluRetroalimentacion;
+    @Column(name = "EVALU_CALIFICACION")
+    private String evaluCalificacion;
     @Version
     @Basic(optional = false)
     @Column(name = "EVALU_VERSION")
@@ -72,6 +74,7 @@ public class TarEvaluador implements Serializable {
     public void actualizar(TarEvaluadorDto tarEvaluadorDto){
         this.evaluRetroalimentacion = tarEvaluadorDto.getEvaluRetroalimentacion();
         this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
+        this.evaluCalificacion = tarEvaluadorDto.getEvaluCalificacion();
     }
 
     public Long getEvaluId() {
@@ -122,6 +125,14 @@ public class TarEvaluador implements Serializable {
         this.tarCompetenciaevaluarList = tarCompetenciaevaluarList;
     }
 
+    public String getEvaluCalificacion() {
+        return evaluCalificacion;
+    }
+
+    public void setEvaluCalificacion(String evaluCalificacion) {
+        this.evaluCalificacion = evaluCalificacion;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
