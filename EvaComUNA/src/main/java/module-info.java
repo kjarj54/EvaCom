@@ -1,4 +1,4 @@
-module cr.ac.una.evacomuna {
+module evacomuna {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;

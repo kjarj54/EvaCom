@@ -15,7 +15,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <mainClass>cr.ac.una.evacomuna.App</mainClass>
-        <moduleName>cr.ac.una.evacomuna</moduleName>
+        <moduleName>evacomuna</moduleName>
     </properties>
     <dependencies>
         <dependency>
@@ -195,7 +195,7 @@
                     <launcher>evacomuna</launcher>
                     <jlinkImageName>evacomuna</jlinkImageName>
                     <jlinkZipName>evacomunazip</jlinkZipName>
-                    <mainClass>cr.ac.una.evacomuna.App</mainClass>
+                    <mainClass>evacomuna/cr.ac.una.evacomuna.App</mainClass>
                     <options>
                         <option>--add-exports</option>
                         <option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
