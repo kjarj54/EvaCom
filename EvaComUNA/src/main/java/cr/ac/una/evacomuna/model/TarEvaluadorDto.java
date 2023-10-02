@@ -52,7 +52,7 @@ public class TarEvaluadorDto {
                 this.tarCompetenciaevaluarList.add(convertedItem);
             }
         }
-        this.evaluCalificacion.set(tarEvaluadorDto.getEvaluCalificacion());
+//        this.evaluCalificacion.set(tarEvaluadorDto.getEvaluCalificacion());
         this.modificado = tarEvaluadorDto.isModificado();
         this.evaluVersion = tarEvaluadorDto.getEvaluVersion();
     }
@@ -75,7 +75,7 @@ public class TarEvaluadorDto {
         }
         tarEvaluadorDtoSoap.setEvaluVersion(this.getEvaluVersion());
         tarEvaluadorDtoSoap.setModificado(this.getModificado());
-        tarEvaluadorDtoSoap.setEvaluCalificacion(this.getEvaluCalificacion());
+        //tarEvaluadorDtoSoap.setEvaluCalificacion(this.getEvaluCalificacion());
         return tarEvaluadorDtoSoap;
     }
 
